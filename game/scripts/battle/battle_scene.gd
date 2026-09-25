@@ -40,6 +40,8 @@ var inventory: Dictionary = {}
 var techs: Array[DualTechData] = []
 var aether_factor := 1.0
 var play_music := false
+## Replaces the alternating battle themes (bosses, story fights).
+var music_override: AudioStream
 ## Item ids won in the last victory.
 var drops: Array[StringName] = []
 
@@ -76,9 +78,10 @@ func start(heroes: Array[CombatantData], foes: Array[CombatantData], center: Vec
 
 ## Battle with the persistent party; on victory HP/MP/Aether and XP are written back.
 func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], center: Vector2,
-		initiative := false, rng: RandomNumberGenerator = null, ambush := false) -> void:
+		initiative := false, rng: RandomNumberGenerator = null, ambush := false, end_after_turns := {}) -> void:
 	y_sort_enabled = true
 	battle = Battle.new(rng)
+	battle.end_after_turns = end_after_turns
 	battle.inventory = inventory
 	battle.aether_factor = aether_factor
 	battle.start_with_party(members, foes, initiative, ambush)
@@ -87,7 +90,10 @@ func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], c
 	for unit in battle.reserves:
 		_add_view(unit, center + HERO_OFFSETS[0]).hide()
 	for i in battle.enemies.size():
-		var view := _add_view(battle.enemies[i], center + ENEMY_OFFSETS[i % ENEMY_OFFSETS.size()])
+		var offset := battle.enemies[i].data.formation_offset
+		if offset == Vector2.ZERO:
+			offset = ENEMY_OFFSETS[i % ENEMY_OFFSETS.size()]
+		var view := _add_view(battle.enemies[i], center + offset)
 		_tags[battle.enemies[i]] = _make_tag(view)
 	_ui = BattleUI.new()
 	add_child(_ui)
@@ -106,7 +112,7 @@ func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], c
 	_cursor.hide()
 	add_child(_cursor)
 	if play_music:
-		AudioManager.push_music(next_battle_track())
+		AudioManager.push_music(music_override if music_override else next_battle_track())
 	if initiative:
 		_ui.show_message("Ataque surpresa!")
 	elif ambush:
@@ -240,6 +246,13 @@ func _enemy_action(unit: BattleUnit) -> Dictionary:
 
 func _show_turn_start(t: Battle.TurnStart) -> void:
 	var view := view_of(t.unit)
+	if t.escaped:
+		_ui.show_message("%s fugiu com o que roubou!" % t.unit.display_name())
+		var tween := create_tween()
+		tween.tween_property(view, "modulate:a", 0.0, 0.4)
+		await _wait(0.9)
+		_ui.show_message("")
+		return
 	if t.damage > 0:
 		_ui.popup_number(view.head_position(), str(t.damage), NUMBER_DAMAGE, self)
 		await view.hurt()
@@ -423,6 +436,9 @@ func _show_results(results: Array[Battle.ActionResult]) -> void:
 			hurt_views.append(view)
 			if r.knocked_out:
 				ko_views.append(view)
+		if r.stolen_item != &"":
+			var loot := DataRegistry.item(r.stolen_item)
+			_ui.popup_number(view.head_position() + Vector2(0, -24), "Roubou " + (loot.display_name if loot else ""), NUMBER_STATUS, self)
 		if r.no_effect:
 			_ui.popup_number(view.head_position() + Vector2(0, -12), "Sem efeito", BattleUI.DIM, self)
 		for id in r.statuses_added:
@@ -482,7 +498,9 @@ func _finish(outcome: Battle.Outcome) -> void:
 			_ui.show_message("Derrota...\nConfirmar: tentar de novo")
 		Battle.Outcome.FLED:
 			pass
-	if outcome != Battle.Outcome.FLED:
+		Battle.Outcome.SCRIPTED:
+			battle.finish_victory(battle.defeated_xp())  # soldiers beaten still count
+	if outcome != Battle.Outcome.FLED and outcome != Battle.Outcome.SCRIPTED:
 		_mode = Mode.RESULT
 		if auto_timing < 0:
 			await _result_confirmed
@@ -512,7 +530,7 @@ func _root_entries() -> Array:
 	entries.append({"text": "Técnicas", "id": "skills"})
 	entries.append({"text": "Itens", "id": "items", "enabled": not battle.usable_items().is_empty()})
 	entries.append({"text": "Defender", "id": "defend"})
-	if not battle.swappable_reserves().is_empty():
+	if not battle.swappable_reserves().is_empty() and not _actor.data.guest:
 		entries.append({"text": "Trocar", "id": "swap", "enabled": not _swapped_this_turn})
 	entries.append({"text": "Fugir", "id": "flee", "enabled": battle.flee_chance() > 0.0})
 	return entries

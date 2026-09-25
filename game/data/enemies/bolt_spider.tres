@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_6umq8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_bolt_spider.png" id="2_6umq8"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_yw7g0"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="4_bte8l"]
+[ext_resource type="Resource" path="res://data/skills/rat_bite.tres" id="5_6nkde"]
+[ext_resource type="Resource" path="res://data/skills/spider_sting.tres" id="6_jmftv"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_66e34"]
+
+[resource]
+script = ExtResource("3_yw7g0")
+id = &"bolt_spider"
+display_name = "Aranha-Parafuso"
+battle_sheet = ExtResource("2_6umq8")
+frame_size = Vector2i(52, 36)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 56
+weapon_power = 5
+defense = 8
+spirit = 4
+speed = 18
+luck = 4
+skills = Array[ExtResource("4_bte8l")]([ExtResource("5_6nkde"), ExtResource("6_jmftv")])
+ai_weights = Array[int]([40, 60])
+mechanical = true
+status_immunities = Array[int]([0, 1])
+field_comment = "Cuidado com o veneno. Tem antídoto na bolsa?"
+field_comment_by = &"gerd"
+affinities = {
+2: 1
+}
+xp_reward = 16
+money_reward = 12
+ap_reward = 3
+drops = {
+&"antidote": 35.0
+}

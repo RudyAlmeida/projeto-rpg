@@ -1,0 +1,284 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_fndou"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="2_7iipg"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_71ir0"]
+[ext_resource type="Resource" path="res://data/characters/kael.tres" id="4_gby44"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="5_eebse"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="6_7jgmu"]
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="7_n6r61"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="8_exeek"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="9_hjsqa"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="10_6oyan"]
+[ext_resource type="Script" path="res://scripts/world/map_object.gd" id="11_qyasx"]
+[ext_resource type="Texture2D" path="res://assets/tilesets/til_vila_caldeira.png" id="12_vorns"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="13_gmsxp"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="14_8j577"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="15_0imko"]
+[ext_resource type="Resource" path="res://data/cutscenes/p8_morning.tres" id="16_k6k1k"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="17_fcq8k"]
+[ext_resource type="Script" path="res://scripts/world/npc.gd" id="18_rdvxn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="19_sq0dt"]
+[ext_resource type="Resource" path="res://data/dialogue/p_gerd_morning.tres" id="20_wwxib"]
+[ext_resource type="Resource" path="res://data/dialogue/p_gerd_evening.tres" id="21_38wxm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/eco/chr_eco_ref.png" id="22_qdkgr"]
+[ext_resource type="Resource" path="res://data/dialogue/p_eco_home.tres" id="23_u21ss"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="24_ha32u"]
+[ext_resource type="Resource" path="res://data/dialogue/p_pip.tres" id="25_777e4"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="26_kl4du"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="27_jhk5h"]
+[ext_resource type="Resource" path="res://data/cutscenes/p1_morning.tres" id="28_dn8tw"]
+[ext_resource type="Resource" path="res://data/cutscenes/p7_dinner.tres" id="29_th1y4"]
+[ext_resource type="Resource" path="res://data/cutscenes/p9_farewell.tres" id="30_mqobi"]
+
+[sub_resource type="Resource" id="Resource_dfh28"]
+script = ExtResource("13_gmsxp")
+speaker = "Kael"
+portrait = ExtResource("15_0imko")
+text = "A fornalha da oficina. O mestre diz que ela é mais velha que ele. Ela concorda."
+
+[sub_resource type="Resource" id="Resource_fmsvv"]
+script = ExtResource("13_gmsxp")
+speaker = "Kael"
+portrait = ExtResource("15_0imko")
+text = "A bancada. Ainda tem a marca da minha testa de hoje de manhã."
+
+[sub_resource type="Resource" id="Resource_krukg"]
+script = ExtResource("13_gmsxp")
+text = "Sobre a caixa, uma foto antiga: um Gerd jovem, de uniforme imperial, ao lado de uma máquina enorme."
+
+[sub_resource type="Resource" id="Resource_b1dap"]
+script = ExtResource("13_gmsxp")
+speaker = "Kael"
+portrait = ExtResource("15_0imko")
+text = "Nunca vi o velho sorrir assim."
+
+[sub_resource type="Resource" id="Resource_5ppex"]
+script = ExtResource("13_gmsxp")
+speaker = "Kael"
+portrait = ExtResource("15_0imko")
+text = "Um relógio desmontado. As engrenagens reclamam de saudade dos ponteiros."
+
+[sub_resource type="Resource" id="Resource_v4s42"]
+script = ExtResource("13_gmsxp")
+speaker = "Kael"
+portrait = ExtResource("15_0imko")
+text = "Ainda é cedo pra dormir. O mestre ia me acordar com um balde."
+
+[sub_resource type="Resource" id="Resource_v3guo"]
+script = ExtResource("13_gmsxp")
+text = "Kael se deita. Lá embaixo, Eco observa a fornalha a noite inteira."
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3swy6"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb322"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw21e"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bn82k"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qguva"]
+size = Vector2(16, 16)
+
+[node name="Oficina" type="Node2D" unique_id=990570323]
+y_sort_enabled = true
+script = ExtResource("1_fndou")
+music = ExtResource("2_7iipg")
+party = Array[ExtResource("3_71ir0")]([ExtResource("4_gby44")])
+starting_items = {
+&"potion": 2
+}
+starting_money = 50
+starting_weapons = {
+&"kael": &"wrench"
+}
+tint = Color(0.5, 0.55, 0.85, 1)
+tint_show_if = &"boss_beaten"
+tint_hide_if = &"slept"
+
+[node name="Map" type="TileMapLayer" parent="." unique_id=719143777]
+script = ExtResource("5_eebse")
+legend = "vila"
+layout = "################
+##W####W####W###
+#c___K________g#
+#______________#
+#______________#
+#______________D
+#_______xx_____#
+#______________#
+#______________#
+#o____________x#
+#######D########"
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1705231684 instance=ExtResource("6_7jgmu")]
+motion_mode = 1
+script = ExtResource("7_n6r61")
+idle_sheet = ExtResource("8_exeek")
+walk_sheet = ExtResource("9_hjsqa")
+
+[node name="Spawns" type="Node2D" parent="." unique_id=1579759996]
+
+[node name="start" type="Marker2D" parent="Spawns" unique_id=1450048442]
+position = Vector2(72, 56)
+script = ExtResource("10_6oyan")
+facing = 2
+
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1360590170]
+position = Vector2(120, 152)
+script = ExtResource("10_6oyan")
+facing = 2
+
+[node name="back" type="Marker2D" parent="Spawns" unique_id=2001490091]
+position = Vector2(232, 88)
+script = ExtResource("10_6oyan")
+facing = 1
+
+[node name="dinner" type="Marker2D" parent="Spawns" unique_id=711861196]
+position = Vector2(104, 104)
+script = ExtResource("10_6oyan")
+facing = 3
+
+[node name="Furnace" type="StaticBody2D" parent="." unique_id=779846543]
+position = Vector2(40, 40)
+script = ExtResource("11_qyasx")
+texture = ExtResource("12_vorns")
+tile = Vector2i(4, 3)
+lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_dfh28")])
+
+[node name="Anvil" type="StaticBody2D" parent="." unique_id=990493582]
+position = Vector2(72, 40)
+script = ExtResource("11_qyasx")
+texture = ExtResource("12_vorns")
+tile = Vector2i(6, 4)
+lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_fmsvv")])
+
+[node name="Photo" type="StaticBody2D" parent="." unique_id=1510883667]
+position = Vector2(200, 40)
+script = ExtResource("11_qyasx")
+texture = ExtResource("12_vorns")
+tile = Vector2i(0, 4)
+lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_krukg"), SubResource("Resource_b1dap")])
+
+[node name="Clock" type="StaticBody2D" parent="." unique_id=1418882003]
+position = Vector2(216, 120)
+script = ExtResource("11_qyasx")
+texture = ExtResource("12_vorns")
+tile = Vector2i(2, 4)
+lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_5ppex")])
+
+[node name="Bed" type="StaticBody2D" parent="." unique_id=1648540372]
+position = Vector2(184, 72)
+script = ExtResource("11_qyasx")
+texture = ExtResource("12_vorns")
+tile = Vector2i(1, 5)
+lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_v4s42")])
+hide_if_flag = &"dinner_done"
+
+[node name="BedRest" type="StaticBody2D" parent="." unique_id=507005420]
+position = Vector2(184, 72)
+script = ExtResource("11_qyasx")
+kind = 2
+texture = ExtResource("12_vorns")
+tile = Vector2i(1, 5)
+lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_v3guo")])
+cutscene = ExtResource("16_k6k1k")
+show_if_flag = &"dinner_done"
+hide_if_flag = &"slept"
+
+[node name="GerdMorning" type="StaticBody2D" parent="." unique_id=718535279 instance=ExtResource("17_fcq8k")]
+position = Vector2(152, 72)
+script = ExtResource("18_rdvxn")
+idle_sheet = ExtResource("19_sq0dt")
+facing = 1
+dialogue_set = ExtResource("20_wwxib")
+display_name = "Mestre Gerd"
+hide_if_flag = &"gerd_joined"
+
+[node name="GerdEvening" type="StaticBody2D" parent="." unique_id=1341776764 instance=ExtResource("17_fcq8k")]
+position = Vector2(136, 88)
+script = ExtResource("18_rdvxn")
+idle_sheet = ExtResource("19_sq0dt")
+dialogue_set = ExtResource("21_38wxm")
+display_name = "Mestre Gerd"
+show_if_flag = &"boss_beaten"
+hide_if_flag = &"gerd_out"
+
+[node name="EcoHome" type="StaticBody2D" parent="." unique_id=477037523 instance=ExtResource("17_fcq8k")]
+position = Vector2(168, 120)
+script = ExtResource("18_rdvxn")
+idle_sheet = ExtResource("22_qdkgr")
+facing = 1
+dialogue_set = ExtResource("23_u21ss")
+display_name = "Eco"
+show_if_flag = &"boss_beaten"
+hide_if_flag = &"gerd_out"
+
+[node name="Pip" type="StaticBody2D" parent="." unique_id=587970746 instance=ExtResource("17_fcq8k")]
+position = Vector2(120, 152)
+script = ExtResource("18_rdvxn")
+idle_sheet = ExtResource("24_ha32u")
+facing = 2
+dialogue_set = ExtResource("25_777e4")
+display_name = "Pip"
+show_if_flag = &"slept"
+hide_if_flag = &"gerd_out"
+
+[node name="GerdFarewell" type="StaticBody2D" parent="." unique_id=57877751 instance=ExtResource("17_fcq8k")]
+position = Vector2(136, 104)
+script = ExtResource("18_rdvxn")
+idle_sheet = ExtResource("19_sq0dt")
+display_name = "Mestre Gerd"
+show_if_flag = &"voss_fought"
+hide_if_flag = &"escaped"
+
+[node name="Door" type="Area2D" parent="." unique_id=6774474]
+position = Vector2(120, 168)
+script = ExtResource("26_kl4du")
+target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
+target_spawn = "from_oficina"
+
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1040167948]
+shape = SubResource("RectangleShape2D_3swy6")
+
+[node name="BackDoor" type="Area2D" parent="." unique_id=935624768]
+position = Vector2(248, 88)
+script = ExtResource("26_kl4du")
+target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
+target_spawn = "back_door"
+
+[node name="Shape" type="CollisionShape2D" parent="BackDoor" unique_id=1942826766]
+shape = SubResource("RectangleShape2D_jb322")
+
+[node name="Morning" type="Area2D" parent="." unique_id=1252620211]
+position = Vector2(72, 56)
+script = ExtResource("27_jhk5h")
+cutscene = ExtResource("28_dn8tw")
+autostart = true
+
+[node name="Shape" type="CollisionShape2D" parent="Morning" unique_id=1565840984]
+shape = SubResource("RectangleShape2D_yw21e")
+
+[node name="Dinner" type="Area2D" parent="." unique_id=844746537]
+position = Vector2(104, 104)
+script = ExtResource("27_jhk5h")
+cutscene = ExtResource("29_th1y4")
+autostart = true
+show_if_flag = &"boss_beaten"
+
+[node name="Shape" type="CollisionShape2D" parent="Dinner" unique_id=790447028]
+shape = SubResource("RectangleShape2D_bn82k")
+
+[node name="Farewell" type="Area2D" parent="." unique_id=1942947809]
+position = Vector2(120, 152)
+script = ExtResource("27_jhk5h")
+cutscene = ExtResource("30_mqobi")
+autostart = true
+show_if_flag = &"voss_fought"
+
+[node name="Shape" type="CollisionShape2D" parent="Farewell" unique_id=1641694167]
+shape = SubResource("RectangleShape2D_qguva")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_is5mt"]
+
+[resource]
+script = ExtResource("1_is5mt")
+id = &"gerd_bomb"
+display_name = "Bomba de Oficina"
+kind = 1
+target = 3
+weight = 4
+mp_cost = 5
+power = 16
+element = 1
+description = "Uma lata de parafusos e pólvora. Fogo em todos os inimigos."

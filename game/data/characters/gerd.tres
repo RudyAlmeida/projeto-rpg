@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_ad58v"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="2_sjmul"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="3_b0k1c"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="4_ipstb"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="5_aq5ke"]
+[ext_resource type="Resource" path="res://data/skills/attack.tres" id="6_qx3lo"]
+[ext_resource type="Resource" path="res://data/skills/gerd_bomb.tres" id="7_5d8sl"]
+[ext_resource type="Resource" path="res://data/skills/gerd_patch.tres" id="8_nqx50"]
+[ext_resource type="Resource" path="res://data/skills/defend.tres" id="9_f6ess"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="10_ja0je"]
+
+[resource]
+script = ExtResource("4_ipstb")
+id = &"gerd"
+display_name = "Gerd"
+battle_sheet = ExtResource("2_sjmul")
+portrait = ExtResource("3_b0k1c")
+max_hp = 190
+max_mp = 30
+strength = 13
+weapon_power = 9
+magic = 11
+defense = 12
+spirit = 10
+speed = 16
+luck = 8
+evasion = 4
+skills = Array[ExtResource("5_aq5ke")]([ExtResource("6_qx3lo"), ExtResource("7_5d8sl"), ExtResource("8_nqx50"), ExtResource("9_f6ess")])
+guest = true

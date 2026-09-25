@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_pda1n"]
+[ext_resource type="Resource" path="res://data/skills/lamp_glow.tres" id="2_731cy"]
+[ext_resource type="Resource" path="res://data/skills/lamp_bolt.tres" id="3_6q6vh"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_wander_lamp.png" id="4_pda1n"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="5_7245c"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="6_uuu1o"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_uggag"]
+
+[sub_resource type="Resource" id="Resource_731cy"]
+script = ExtResource("1_pda1n")
+priority = 2
+condition = 4
+value = 3.0
+skill = ExtResource("2_731cy")
+target_mode = 4
+tell = "A lâmpada brilha forte..."
+
+[sub_resource type="Resource" id="Resource_6q6vh"]
+script = ExtResource("1_pda1n")
+skill = ExtResource("3_6q6vh")
+
+[resource]
+script = ExtResource("5_7245c")
+id = &"wander_lamp"
+display_name = "Lâmpada Errante"
+battle_sheet = ExtResource("4_pda1n")
+frame_size = Vector2i(45, 48)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 42
+max_mp = 40
+strength = 5
+weapon_power = 2
+magic = 12
+defense = 4
+spirit = 12
+speed = 22
+luck = 6
+evasion = 8
+skills = Array[ExtResource("6_uuu1o")]([ExtResource("3_6q6vh"), ExtResource("2_731cy")])
+ai_rules = Array[ExtResource("1_pda1n")]([SubResource("Resource_731cy"), SubResource("Resource_6q6vh")])
+field_comment = "Éter vazado criando vida própria... Isso não é natural, Kael."
+field_comment_by = &"gerd"
+affinities = {
+2: 1,
+3: 4
+}
+xp_reward = 18
+money_reward = 20
+ap_reward = 4
+drops = {
+&"ether": 25.0
+}

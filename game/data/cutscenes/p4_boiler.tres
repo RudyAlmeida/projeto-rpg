@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_0wrx4"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_j58y8"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_acokd"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_mjmmn"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_sqlhu"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="6_c3rb6"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="7_lvqtn"]
+
+[sub_resource type="Resource" id="Resource_s03tc"]
+script = ExtResource("4_mjmmn")
+speaker = "Kael"
+portrait = ExtResource("6_c3rb6")
+text = "(Ela tá... cansada. Como se alguém tivesse esquecido de desligar ela há anos.)"
+
+[sub_resource type="Resource" id="Resource_aolmp"]
+script = ExtResource("4_mjmmn")
+speaker = "Mestre Gerd"
+portrait = ExtResource("7_lvqtn")
+text = "Kael? Tá falando sozinho de novo?"
+
+[sub_resource type="Resource" id="Resource_d5blc"]
+script = ExtResource("4_mjmmn")
+speaker = "Kael"
+portrait = ExtResource("6_c3rb6")
+text = "Tô falando com a caldeira. É diferente."
+
+[sub_resource type="Resource" id="Resource_6jus4"]
+script = ExtResource("4_mjmmn")
+speaker = "Dica"
+text = "Caldeiras antigas são pontos de salvamento: recuperam o grupo e salvam o jogo."
+
+[sub_resource type="Resource" id="Resource_cuum0"]
+script = ExtResource("2_j58y8")
+lines = Array[ExtResource("4_mjmmn")]([SubResource("Resource_s03tc"), SubResource("Resource_aolmp"), SubResource("Resource_d5blc"), SubResource("Resource_6jus4")])
+
+[resource]
+script = ExtResource("1_0wrx4")
+id = &"p4_boiler"
+once_flag = &"boiler_talk"
+steps = Array[ExtResource("2_j58y8")]([SubResource("Resource_cuum0")])

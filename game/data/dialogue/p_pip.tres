@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_1j667"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_ujdr3"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_ngeme"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_1fjwl"]
+
+[sub_resource type="Resource" id="Resource_cjltw"]
+script = ExtResource("2_ujdr3")
+speaker = "Pip"
+text = "Eu vi! O senhor Gerd empurrando um carrinho cheio de barris pro lado da praça!"
+
+[sub_resource type="Resource" id="Resource_wrxds"]
+script = ExtResource("1_1j667")
+require_flags = Array[StringName]([&"empire_arrived"])
+lines = Array[ExtResource("2_ujdr3")]([SubResource("Resource_cjltw")])
+
+[sub_resource type="Resource" id="Resource_gfk2x"]
+script = ExtResource("2_ujdr3")
+speaker = "Pip"
+text = "Você foi no Ferro-Velho?! E achou um ROBÔ?! Me leva da próxima vez!"
+
+[sub_resource type="Resource" id="Resource_8j15i"]
+script = ExtResource("1_1j667")
+require_flags = Array[StringName]([&"eco_awake"])
+lines = Array[ExtResource("2_ujdr3")]([SubResource("Resource_gfk2x")])
+
+[sub_resource type="Resource" id="Resource_jnqmd"]
+script = ExtResource("2_ujdr3")
+speaker = "Pip"
+text = "Você viu o dirigível ontem à noite? Era ENORME! Tinha uma bandeira azul com uma engrenagem!"
+
+[sub_resource type="Resource" id="Resource_ig5c4"]
+script = ExtResource("1_1j667")
+lines = Array[ExtResource("2_ujdr3")]([SubResource("Resource_jnqmd")])
+
+[resource]
+script = ExtResource("4_1fjwl")
+id = &"p_pip"
+branches = Array[ExtResource("1_1j667")]([SubResource("Resource_wrxds"), SubResource("Resource_8j15i"), SubResource("Resource_ig5c4")])

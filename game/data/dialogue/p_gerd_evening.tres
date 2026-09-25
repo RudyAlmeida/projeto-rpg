@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_ncqkr"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_bkvio"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_c4ulm"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="4_gkwor"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="5_o6a8b"]
+
+[sub_resource type="Resource" id="Resource_730bh"]
+script = ExtResource("2_bkvio")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_gkwor")
+text = "Vai dormir, garoto. A cama não vai se deitar sozinha."
+
+[sub_resource type="Resource" id="Resource_gnjb3"]
+script = ExtResource("1_ncqkr")
+lines = Array[ExtResource("2_bkvio")]([SubResource("Resource_730bh")])
+
+[resource]
+script = ExtResource("5_o6a8b")
+id = &"p_gerd_evening"
+branches = Array[ExtResource("1_ncqkr")]([SubResource("Resource_gnjb3")])

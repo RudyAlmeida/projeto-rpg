@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_tyjjt"]
+[ext_resource type="Resource" path="res://data/skills/claw_crush.tres" id="2_wnmqs"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_oil_slime.png" id="3_usgib"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="4_ftvad"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="5_njkcl"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="6_p1q2w"]
+
+[sub_resource type="Resource" id="Resource_tyjjt"]
+script = ExtResource("1_tyjjt")
+skill = ExtResource("2_wnmqs")
+tell = "A garra inferior se ergue..."
+
+[resource]
+script = ExtResource("4_ftvad")
+id = &"crusher_claw_down"
+display_name = "Garra Inferior"
+battle_sheet = ExtResource("3_usgib")
+frame_size = Vector2i(56, 48)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 110
+strength = 15
+weapon_power = 8
+defense = 12
+speed = 13
+skills = Array[ExtResource("5_njkcl")]([ExtResource("2_wnmqs")])
+ai_rules = Array[ExtResource("1_tyjjt")]([SubResource("Resource_tyjjt")])
+mechanical = true
+status_immunities = Array[int]([0, 1, 5])
+is_boss = true
+formation_offset = Vector2(72, 50)
+affinities = {
+3: 1
+}

@@ -1,0 +1,118 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_fityb"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_doocl"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_llabv"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_mgkhn"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_8x5qo"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_8mbv2"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="7_81qs1"]
+
+[sub_resource type="Resource" id="Resource_sxnni"]
+script = ExtResource("2_doocl")
+type = 3
+seconds = 0.4
+
+[sub_resource type="Resource" id="Resource_e0cde"]
+script = ExtResource("4_mgkhn")
+speaker = "Eco"
+text = "Pergunta: por que humanos se sentam juntos para abastecer?"
+
+[sub_resource type="Resource" id="Resource_lb3bq"]
+script = ExtResource("4_mgkhn")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_8mbv2")
+text = "Porque comer sozinho é triste, lata velha."
+
+[sub_resource type="Resource" id="Resource_53ylo"]
+script = ExtResource("2_doocl")
+lines = Array[ExtResource("4_mgkhn")]([SubResource("Resource_e0cde"), SubResource("Resource_lb3bq")])
+
+[sub_resource type="Resource" id="Resource_oao5e"]
+script = ExtResource("4_mgkhn")
+text = "Gerd fica em silêncio e olha para a foto antiga na prateleira."
+
+[sub_resource type="Resource" id="Resource_agt2m"]
+script = ExtResource("5_8x5qo")
+text = "\"Triste é quando falta alguém na mesa.\""
+affinity = {
+&"eco": 2
+}
+response = Array[ExtResource("4_mgkhn")]([SubResource("Resource_oao5e")])
+
+[sub_resource type="Resource" id="Resource_rn1le"]
+script = ExtResource("4_mgkhn")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_8mbv2")
+text = "Hah! Hahaha! Engraçadinho. ...Passa o sal."
+
+[sub_resource type="Resource" id="Resource_4p278"]
+script = ExtResource("5_8x5qo")
+text = "\"Triste é sopa sem sal. Né, mestre?\""
+affinity = {
+&"gerd": 1
+}
+response = Array[ExtResource("4_mgkhn")]([SubResource("Resource_rn1le")])
+
+[sub_resource type="Resource" id="Resource_brw3k"]
+script = ExtResource("4_mgkhn")
+speaker = "Eco"
+text = "Amanhã. Registrado."
+
+[sub_resource type="Resource" id="Resource_4jq6w"]
+script = ExtResource("5_8x5qo")
+text = "\"Eu te explico amanhã, Eco.\""
+response = Array[ExtResource("4_mgkhn")]([SubResource("Resource_brw3k")])
+
+[sub_resource type="Resource" id="Resource_umjjx"]
+script = ExtResource("4_mgkhn")
+speaker = "Eco"
+text = "Registrando: \"triste\". Pedido de definição."
+choices = Array[ExtResource("5_8x5qo")]([SubResource("Resource_agt2m"), SubResource("Resource_4p278"), SubResource("Resource_4jq6w")])
+
+[sub_resource type="Resource" id="Resource_3jfm7"]
+script = ExtResource("2_doocl")
+lines = Array[ExtResource("4_mgkhn")]([SubResource("Resource_umjjx")])
+
+[sub_resource type="Resource" id="Resource_m7y2l"]
+script = ExtResource("4_mgkhn")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_8mbv2")
+text = "Kael... se um dia aparecer alguém perguntando por essa máquina, você não sabe de nada. Entendeu?"
+
+[sub_resource type="Resource" id="Resource_v62pl"]
+script = ExtResource("4_mgkhn")
+speaker = "Kael"
+portrait = ExtResource("7_81qs1")
+text = "Por quê? O senhor sabe o que ele é?"
+
+[sub_resource type="Resource" id="Resource_ao6m0"]
+script = ExtResource("4_mgkhn")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_8mbv2")
+text = "Sei que é tarde. Vai dormir."
+
+[sub_resource type="Resource" id="Resource_hkrmo"]
+script = ExtResource("4_mgkhn")
+speaker = "Dica"
+text = "Durma na cama do mezanino para descansar e salvar."
+
+[sub_resource type="Resource" id="Resource_q4mga"]
+script = ExtResource("2_doocl")
+lines = Array[ExtResource("4_mgkhn")]([SubResource("Resource_m7y2l"), SubResource("Resource_v62pl"), SubResource("Resource_ao6m0"), SubResource("Resource_hkrmo")])
+
+[sub_resource type="Resource" id="Resource_shfe7"]
+script = ExtResource("2_doocl")
+type = 24
+id = &"q_prologue:return_home"
+
+[sub_resource type="Resource" id="Resource_aehyq"]
+script = ExtResource("2_doocl")
+type = 25
+id = &"q_prologue"
+
+[resource]
+script = ExtResource("1_fityb")
+id = &"p7_dinner"
+once_flag = &"dinner_done"
+steps = Array[ExtResource("2_doocl")]([SubResource("Resource_sxnni"), SubResource("Resource_53ylo"), SubResource("Resource_3jfm7"), SubResource("Resource_q4mga"), SubResource("Resource_shfe7"), SubResource("Resource_aehyq")])

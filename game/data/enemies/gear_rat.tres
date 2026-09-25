@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_4jbn8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_gear_rat.png" id="2_f6vh5"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_va1c1"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="4_hlj2h"]
+[ext_resource type="Resource" path="res://data/skills/rat_bite.tres" id="5_35iu4"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="6_6lcw4"]
+
+[resource]
+script = ExtResource("3_va1c1")
+id = &"gear_rat"
+display_name = "Rato-Engrenagem"
+battle_sheet = ExtResource("2_f6vh5")
+frame_size = Vector2i(52, 28)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 38
+strength = 8
+weapon_power = 3
+defense = 4
+spirit = 3
+speed = 34
+luck = 4
+evasion = 10
+skills = Array[ExtResource("4_hlj2h")]([ExtResource("5_35iu4")])
+mechanical = true
+field_comment = "Ratos comendo cobre. Até a praga daqui é mecânica."
+field_comment_by = &"gerd"
+xp_reward = 9
+money_reward = 6
+ap_reward = 2
+drops = {
+&"brass_spring": 45.0
+}

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_brua0"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_e6hff"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_e5at8"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_b4url"]
+
+[sub_resource type="Resource" id="Resource_42w3j"]
+script = ExtResource("2_e6hff")
+speaker = "Velha Ilse"
+text = "Um autômato dos Antigos... Minha avó dizia que eles cantavam. Você ouviu ele cantar, menino?"
+
+[sub_resource type="Resource" id="Resource_wl2s8"]
+script = ExtResource("1_brua0")
+require_flags = Array[StringName]([&"eco_awake"])
+lines = Array[ExtResource("2_e6hff")]([SubResource("Resource_42w3j")])
+
+[sub_resource type="Resource" id="Resource_7dg0i"]
+script = ExtResource("2_e6hff")
+speaker = "Velha Ilse"
+text = "Minha avó dizia que o canal brilhava à noite. Hoje só brilha quando derramam Éter nele."
+
+[sub_resource type="Resource" id="Resource_ckjgm"]
+script = ExtResource("1_brua0")
+lines = Array[ExtResource("2_e6hff")]([SubResource("Resource_7dg0i")])
+
+[resource]
+script = ExtResource("4_b4url")
+id = &"p_ilse"
+branches = Array[ExtResource("1_brua0")]([SubResource("Resource_wl2s8"), SubResource("Resource_ckjgm")])

@@ -27,6 +27,8 @@ enum Element { NONE, FIRE, ICE, THUNDER, WATER, EARTH, WIND, LIGHT, DARK }
 @export var cures: Array[int] = []
 ## Only affects mechanical targets (e.g. Kael's Resonance).
 @export var mechanical_only := false
+## Takes a random consumable from the party's inventory on hit (Scrap Crow).
+@export var steals := false
 
 @export_group("Revive")
 ## Revives KO'd allies with this share of max HP (Target.ALLY_KO).

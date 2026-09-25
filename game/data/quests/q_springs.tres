@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://scripts/core/quest_data.gd" id="1_6ny0b"]
+
+[resource]
+script = ExtResource("1_6ny0b")
+id = &"q_springs"
+title = "Peças para o Relojoeiro"
+description = "O Sr. Anselmo precisa de três Molas de Latão (os Ratos-Engrenagem roem as molas do ferro-velho)."
+objective_ids = Array[StringName]([&"bring_springs"])
+objective_texts = Array[String](["Entregar 3 Molas de Latão"])
+reward_money = 60
+reward_xp = 20
+reward_items = {
+&"gear_amulet": 1
+}

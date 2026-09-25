@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://scripts/core/quest_data.gd" id="1_d612x"]
+
+[resource]
+script = ExtResource("1_d612x")
+id = &"q_cat"
+title = "O Gato da Dona Berta"
+description = "Fuligem, o gato da estalajadeira, fugiu para o Ferro-Velho do Sul."
+objective_ids = Array[StringName]([&"find_cat"])
+objective_texts = Array[String](["Encontrar Fuligem no galpão da esteira"])
+reward_xp = 20
+reward_items = {
+&"phoenix_feather": 1
+}

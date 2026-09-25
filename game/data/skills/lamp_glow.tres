@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_lkbk0"]
+
+[resource]
+script = ExtResource("1_lkbk0")
+id = &"lamp_glow"
+display_name = "Brilhar"
+kind = 4
+target = 2
+inflicts = {
+9: 100
+}
+status_turns = 2

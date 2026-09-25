@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_hj5kt"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="2_aq3km"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="3_ovfto"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="4_jmice"]
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="5_bb78t"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="6_7uj0f"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="7_l86sp"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_g1yy3"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="9_e85cb"]
+[ext_resource type="Script" path="res://scripts/world/npc.gd" id="10_khjny"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="11_wk5gp"]
+[ext_resource type="Resource" path="res://data/dialogue/p_tobias.tres" id="12_se2p2"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="13_mbnbd"]
+[ext_resource type="Resource" path="res://data/items/potion.tres" id="14_y654k"]
+[ext_resource type="Resource" path="res://data/items/ether.tres" id="15_ootve"]
+[ext_resource type="Resource" path="res://data/items/antidote.tres" id="16_6162x"]
+[ext_resource type="Resource" path="res://data/items/phoenix_feather.tres" id="17_fqk7n"]
+[ext_resource type="Resource" path="res://data/items/smelling_salts.tres" id="18_gddk7"]
+[ext_resource type="Resource" path="res://data/items/brass_blade.tres" id="19_7wliw"]
+[ext_resource type="Resource" path="res://data/items/aviator_coat.tres" id="20_jb45h"]
+[ext_resource type="Resource" path="res://data/items/eco_plating.tres" id="21_ker0q"]
+[ext_resource type="Resource" path="res://data/items/brass_amulet.tres" id="22_3cvbo"]
+[ext_resource type="Resource" path="res://data/items/gem_ice.tres" id="23_lqtt6"]
+[ext_resource type="Resource" path="res://data/items/gem_heal.tres" id="24_dc4ht"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="25_twwwu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w046s"]
+size = Vector2(12, 12)
+
+[node name="Loja" type="Node2D" unique_id=1557792149]
+y_sort_enabled = true
+script = ExtResource("1_hj5kt")
+music = ExtResource("2_aq3km")
+
+[node name="Map" type="TileMapLayer" parent="." unique_id=928088554]
+script = ExtResource("3_ovfto")
+legend = "vila"
+layout = "HHHHHHHHHHHH
+HHWHHHHHHWHH
+Ho________oH
+H__________H
+H___xx_xx__H
+H__________H
+H__________H
+Hg________cH
+HHHHHHDHHHHH"
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1710808958 instance=ExtResource("4_jmice")]
+motion_mode = 1
+script = ExtResource("5_bb78t")
+idle_sheet = ExtResource("6_7uj0f")
+walk_sheet = ExtResource("7_l86sp")
+
+[node name="Spawns" type="Node2D" parent="." unique_id=1098978756]
+
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=409623547]
+position = Vector2(104, 120)
+script = ExtResource("8_g1yy3")
+facing = 2
+
+[node name="Tobias" type="StaticBody2D" parent="." unique_id=1009699821 instance=ExtResource("9_e85cb")]
+position = Vector2(104, 56)
+script = ExtResource("10_khjny")
+idle_sheet = ExtResource("11_wk5gp")
+dialogue_set = ExtResource("12_se2p2")
+role = 1
+shop_stock = Array[ExtResource("13_mbnbd")]([ExtResource("14_y654k"), ExtResource("15_ootve"), ExtResource("16_6162x"), ExtResource("17_fqk7n"), ExtResource("18_gddk7"), ExtResource("19_7wliw"), ExtResource("20_jb45h"), ExtResource("21_ker0q"), ExtResource("22_3cvbo"), ExtResource("23_lqtt6"), ExtResource("24_dc4ht")])
+display_name = "Engrenagem Dourada"
+
+[node name="Door" type="Area2D" parent="." unique_id=2040408255]
+position = Vector2(104, 136)
+script = ExtResource("25_twwwu")
+target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
+target_spawn = "from_loja"
+
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1374951420]
+shape = SubResource("RectangleShape2D_w046s")

@@ -13,8 +13,15 @@ signal battle_finished(outcome: Battle.Outcome)
 ## Items (id -> count) and money for a game that starts on this map (dev start).
 @export var starting_items: Dictionary = {}
 @export var starting_money := 0
+## Dev start: character id -> weapon item id equipped instead of their default (the
+## prologue's Kael starts with a wrench and earns his blade from the boss).
+@export var starting_weapons: Dictionary = {}
 ## Regional Aether factor for magic (GDD 5.6): 0.7 drained, 1.0 normal, 1.2 pristine.
 @export_range(0.5, 1.5, 0.05) var aether_factor := 1.0
+## Night / mood tint while the FlagGate (show_if / hide_if) is open, e.g. the dinner scene.
+@export var tint := Color(1, 1, 1)
+@export var tint_show_if: StringName
+@export var tint_hide_if: StringName
 
 ## Tests / accessibility: forwarded to BattleScene.auto_timing.
 var battle_auto_timing := -1
@@ -33,9 +40,20 @@ func _ready() -> void:
 		GameState.new_game(party, starting_money)
 		for id: StringName in starting_items:
 			GameState.add_item(id, int(starting_items[id]))  # gems go to the gem bag
+		for member in GameState.party:
+			if starting_weapons.has(member.data.id):
+				member.equip(DataRegistry.item(StringName(starting_weapons[member.data.id])))
 	_place_player(SceneManager.take_pending_spawn())
 	player.set_camera_limits(camera_rect(map.pixel_rect(), get_viewport_rect().size))
 	AudioManager.play_music(music)
+	if tint != Color(1, 1, 1):
+		var modulate_node := CanvasModulate.new()
+		modulate_node.name = "Tint"
+		add_child(modulate_node)
+		var update := func(_flag: StringName = &"") -> void:
+			modulate_node.color = tint if FlagGate.passes(tint_show_if, tint_hide_if) else Color(1, 1, 1)
+		GameState.flag_changed.connect(update)
+		update.call()
 	for enemy: FieldEnemy in find_children("*", "FieldEnemy", true, false):
 		enemy.touched_player.connect(start_battle)
 
@@ -52,9 +70,27 @@ func start_battle(enemy: FieldEnemy) -> void:
 		return
 	var approach := encounter_type(player.global_position, Player.facing_vector(player.facing),
 		enemy.global_position, enemy.facing_vector())
+	enemy.freeze()
+	await _first_sight_comments(enemy.enemies)
+	var outcome := await fight(enemy.enemies, approach, enemy.music)
+	if outcome == Battle.Outcome.FLED:
+		enemy.resume()
+	else:
+		if enemy.quest_objective != "":
+			var parts := enemy.quest_objective.split(":")
+			GameState.complete_objective(StringName(parts[0]), StringName(parts[1]))
+		if enemy.defeat_flag != &"":
+			GameState.set_flag(enemy.defeat_flag)
+		enemy.queue_free()
+
+
+## Runs a battle against `foes` (field encounters and cutscenes). Defeat retries; story
+## fights with `end_after_turns` (enemy id -> turns) end as SCRIPTED instead.
+func fight(foes: Array[CombatantData], approach := Encounter.NORMAL, music_override: AudioStream = null,
+		end_after_turns := {}) -> Battle.Outcome:
+	var was_locked := player.locked
 	player.locked = true
 	player.hide()
-	enemy.freeze()
 	var outcome := Battle.Outcome.DEFEAT
 	while outcome == Battle.Outcome.DEFEAT:
 		_battle = BattleScene.new()
@@ -63,10 +99,11 @@ func start_battle(enemy: FieldEnemy) -> void:
 		_battle.techs = DataRegistry.all_techs()
 		_battle.aether_factor = aether_factor
 		_battle.play_music = battle_music
+		_battle.music_override = music_override
 		_battle.timing_window_scale = Settings.timing_window()
 		add_child(_battle)
-		_battle.start_with_party(GameState.party, enemy.enemies, player.camera_center(),
-			approach == Encounter.INITIATIVE, null, approach == Encounter.AMBUSH)
+		_battle.start_with_party(GameState.party, foes, player.camera_center(),
+			approach == Encounter.INITIATIVE, null, approach == Encounter.AMBUSH, end_after_turns)
 		battle_started.emit(_battle)
 		outcome = await _battle.battle_ended
 		if outcome == Battle.Outcome.VICTORY:
@@ -74,16 +111,27 @@ func start_battle(enemy: FieldEnemy) -> void:
 		_battle.queue_free()
 		_battle = null
 		approach = Encounter.NORMAL  # a retry starts even
-	if outcome == Battle.Outcome.FLED:
-		enemy.resume()
-	else:
-		if enemy.quest_objective != "":
-			var parts := enemy.quest_objective.split(":")
-			GameState.complete_objective(StringName(parts[0]), StringName(parts[1]))
-		enemy.queue_free()
 	player.show()
-	player.locked = false
+	player.locked = was_locked
 	battle_finished.emit(outcome)
+	return outcome
+
+
+## A party member comments on an enemy type the first time it is met (Gerd in the
+## prologue): CombatantData.field_comment, said by field_comment_by if they are in the party.
+func _first_sight_comments(foes: Array[CombatantData]) -> void:
+	for data in foes:
+		var seen_flag := StringName("seen_enemy_" + data.id)
+		if data.field_comment == "" or GameState.get_flag(seen_flag):
+			continue
+		var speaker: PartyMember = null
+		for member in GameState.party:
+			if member.data.id == data.field_comment_by:
+				speaker = member
+		if speaker == null:
+			continue
+		GameState.set_flag(seen_flag)
+		await DialogueManager.play([DialogueLine.make(speaker.data.display_name, data.field_comment, speaker.data.portrait)] as Array[DialogueLine])
 
 
 enum Encounter { NORMAL, INITIATIVE, AMBUSH }

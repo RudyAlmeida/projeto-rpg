@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_35ql0"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_3lw53"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_ikj74"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_3e102"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_jwrlv"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_f3gpv"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="7_b3d5r"]
+
+[sub_resource type="Resource" id="Resource_dojve"]
+script = ExtResource("2_3lw53")
+type = 3
+seconds = 0.6
+
+[sub_resource type="Resource" id="Resource_iin74"]
+script = ExtResource("4_3e102")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_f3gpv")
+text = "Kael! Se você ficar mais um minuto roncando em cima dessa válvula, ela vai aprender a roncar também."
+
+[sub_resource type="Resource" id="Resource_idlor"]
+script = ExtResource("4_3e102")
+speaker = "Kael"
+portrait = ExtResource("7_b3d5r")
+text = "Hm... eu não tava dormindo. Tava... escutando."
+
+[sub_resource type="Resource" id="Resource_f8gjl"]
+script = ExtResource("4_3e102")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_f3gpv")
+text = "Escutando. Claro. E o que ela disse?"
+
+[sub_resource type="Resource" id="Resource_eespx"]
+script = ExtResource("4_3e102")
+speaker = "Kael"
+portrait = ExtResource("7_b3d5r")
+text = "Que a rosca tá espanada e que o senhor apertou com força demais."
+
+[sub_resource type="Resource" id="Resource_hnn5s"]
+script = ExtResource("4_3e102")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_f3gpv")
+text = "...Hmpf. Vai lavar a cara. Tenho uma entrega pra você."
+
+[sub_resource type="Resource" id="Resource_w5kpg"]
+script = ExtResource("4_3e102")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_f3gpv")
+text = "Leva essa caixa de engrenagens pro Tobias, na loja. E não aceita menos de 80 moedas, ouviu? Aquele pão-duro vai chorar miséria."
+
+[sub_resource type="Resource" id="Resource_imguc"]
+script = ExtResource("4_3e102")
+text = "Kael recebeu: Caixa de Engrenagens."
+
+[sub_resource type="Resource" id="Resource_t1bjf"]
+script = ExtResource("4_3e102")
+speaker = "Dica"
+text = "Mova-se com as setas ou o analógico. Converse e examine com Z / Enter (A no controle). O menu abre com C / Tab (Y)."
+
+[sub_resource type="Resource" id="Resource_hgc6e"]
+script = ExtResource("2_3lw53")
+lines = Array[ExtResource("4_3e102")]([SubResource("Resource_iin74"), SubResource("Resource_idlor"), SubResource("Resource_f8gjl"), SubResource("Resource_eespx"), SubResource("Resource_hnn5s"), SubResource("Resource_w5kpg"), SubResource("Resource_imguc"), SubResource("Resource_t1bjf")])
+
+[sub_resource type="Resource" id="Resource_0ys2t"]
+script = ExtResource("2_3lw53")
+type = 8
+id = &"gear_box"
+
+[sub_resource type="Resource" id="Resource_egowr"]
+script = ExtResource("2_3lw53")
+type = 7
+id = &"q_prologue"
+
+[resource]
+script = ExtResource("1_35ql0")
+id = &"p1_morning"
+once_flag = &"prologue_started"
+steps = Array[ExtResource("2_3lw53")]([SubResource("Resource_dojve"), SubResource("Resource_hgc6e"), SubResource("Resource_0ys2t"), SubResource("Resource_egowr")])

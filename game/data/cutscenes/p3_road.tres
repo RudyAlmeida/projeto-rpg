@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_urh5e"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_roquf"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_0efnp"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_2324d"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_vxtug"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_tkrh8"]
+[ext_resource type="Resource" path="res://data/enemies/oil_slime.tres" id="7_bvea5"]
+
+[sub_resource type="Resource" id="Resource_nv737"]
+script = ExtResource("4_2324d")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_tkrh8")
+text = "Olha ali na estrada. Slimes de óleo. Vazou alguma coisa do ferro-velho de novo."
+
+[sub_resource type="Resource" id="Resource_obecb"]
+script = ExtResource("2_roquf")
+lines = Array[ExtResource("4_2324d")]([SubResource("Resource_nv737")])
+
+[sub_resource type="Resource" id="Resource_w7tv8"]
+script = ExtResource("4_2324d")
+speaker = "Dica"
+text = "No topo da tela fica a fila de turnos: quem é mais rápido age mais vezes."
+
+[sub_resource type="Resource" id="Resource_lnap5"]
+script = ExtResource("4_2324d")
+speaker = "Dica"
+text = "Ao atacar, aperte Z / A quando o anel dourado fechar sobre o alvo: golpe Perfeito!"
+
+[sub_resource type="Resource" id="Resource_x20kj"]
+script = ExtResource("4_2324d")
+speaker = "Dica"
+text = "Na vez do inimigo, aperte no momento do impacto para se defender e receber menos dano."
+
+[sub_resource type="Resource" id="Resource_tofd2"]
+script = ExtResource("2_roquf")
+lines = Array[ExtResource("4_2324d")]([SubResource("Resource_w7tv8"), SubResource("Resource_lnap5"), SubResource("Resource_x20kj")])
+
+[sub_resource type="Resource" id="Resource_mqy2d"]
+script = ExtResource("2_roquf")
+type = 12
+enemies = Array[ExtResource("3_0efnp")]([ExtResource("7_bvea5"), ExtResource("7_bvea5")])
+
+[sub_resource type="Resource" id="Resource_p5wn8"]
+script = ExtResource("4_2324d")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_tkrh8")
+text = "Bom reflexo. Quando o anel fechar, é aí que a máquina quer que você bata. Escuta ela."
+
+[sub_resource type="Resource" id="Resource_60tre"]
+script = ExtResource("2_roquf")
+lines = Array[ExtResource("4_2324d")]([SubResource("Resource_p5wn8")])
+
+[resource]
+script = ExtResource("1_urh5e")
+id = &"p3_road"
+once_flag = &"road_tutorial"
+steps = Array[ExtResource("2_roquf")]([SubResource("Resource_obecb"), SubResource("Resource_tofd2"), SubResource("Resource_mqy2d"), SubResource("Resource_60tre")])

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ipjt0"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_g4r2g"]
+
+[resource]
+script = ExtResource("2_g4r2g")
+id = &"wrench"
+display_name = "Chave de Oficina"
+kind = 1
+icon_index = 4
+description = "A chave inglesa de Kael. Serve para apertar parafusos... e cabeças."
+battle_usable = false
+field_usable = false
+attack = 6
+equippable_by = Array[StringName]([&"kael"])
+gem_slots = 1

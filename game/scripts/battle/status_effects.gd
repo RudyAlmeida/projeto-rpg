@@ -3,7 +3,7 @@ extends RefCounted
 ## Status catalogue (GDD_Combate, section 6). Durations count the affected unit's own turns.
 
 enum Id { POISON, SLEEP, SILENCE, BLIND, PARALYSIS, CONFUSION, PETRIFY, HASTE, SLOW, PROTECT,
-	BARRIER, REGEN, OVERHEAT, DISMANTLED }
+	BARRIER, REGEN, OVERHEAT, DISMANTLED, STUCK }
 
 ## name: shown in the UI; tag: 3-letter badge; negative: removable by cures / resisted by
 ## Spirit; turns: default duration (-1 = until cured / end of battle).
@@ -22,6 +22,7 @@ const INFO := {
 	Id.REGEN: {"name": "Regeneração", "tag": "REG", "negative": false, "turns": 5},
 	Id.OVERHEAT: {"name": "Sobreaquecido", "tag": "SOB", "negative": true, "turns": 2},
 	Id.DISMANTLED: {"name": "Desmontado", "tag": "DES", "negative": true, "turns": -1},
+	Id.STUCK: {"name": "Preso", "tag": "PRE", "negative": true, "turns": 2},
 }
 
 const POISON_PERCENT := 6.0
@@ -51,4 +52,4 @@ static func default_turns(id: Id) -> int:
 
 ## Statuses that stop the unit from choosing actions.
 static func blocks_action(id: Id) -> bool:
-	return id == Id.SLEEP or id == Id.PARALYSIS or id == Id.PETRIFY
+	return id == Id.SLEEP or id == Id.PARALYSIS or id == Id.PETRIFY or id == Id.STUCK

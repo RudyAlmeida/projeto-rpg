@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_rs0le"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_b06j5"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_4hdg2"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_mkchh"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_pk3dh"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_pcevm"]
+
+[sub_resource type="Resource" id="Resource_n7k72"]
+script = ExtResource("4_mkchh")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_pcevm")
+text = "Espera, garoto. Esses bichos daqui de baixo são mais cascudos."
+
+[sub_resource type="Resource" id="Resource_fltim"]
+script = ExtResource("4_mkchh")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_pcevm")
+text = "Eu seguro, você corta. Igual na oficina, só que o parafuso morde de volta."
+
+[sub_resource type="Resource" id="Resource_qmcfy"]
+script = ExtResource("4_mkchh")
+speaker = "Dica"
+text = "Técnica combinada liberada: Faísca e Ferro (Kael + Gerd). Use pelo menu Técnicas quando os dois puderem agir."
+
+[sub_resource type="Resource" id="Resource_rwss0"]
+script = ExtResource("2_b06j5")
+lines = Array[ExtResource("4_mkchh")]([SubResource("Resource_n7k72"), SubResource("Resource_fltim"), SubResource("Resource_qmcfy")])
+
+[resource]
+script = ExtResource("1_rs0le")
+id = &"p4_tech"
+once_flag = &"gerd_tech_taught"
+steps = Array[ExtResource("2_b06j5")]([SubResource("Resource_rwss0")])

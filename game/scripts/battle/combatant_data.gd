@@ -64,6 +64,21 @@ const STATS: Array[StringName] = [&"max_hp", &"max_mp", &"strength", &"magic", &
 @export var status_immunities: Array[int] = []
 ## Bosses cannot be fled from.
 @export var is_boss := false
+## Guest heroes (Gerd in the prologue) fight but don't level, equip or leave the front line.
+@export var guest := false
+## Boss parts: while any enemy with one of these ids stands, this unit takes
+## `guarded_damage_mult` of the damage (the Triturador core behind its claws).
+@export var guarded_by: Array[StringName] = []
+@export var guarded_damage_mult := 0.25
+## Enemies: fixed place relative to the battle centre (Vector2.ZERO = default slots).
+@export var formation_offset := Vector2.ZERO
+## Thieves: once holding stolen items, they flee at the start of a turn after this many
+## turns (0 = never).
+@export var escape_after_turns := 0
+## Said on the field the first time this enemy is met, by the party member with id
+## `field_comment_by` (if present).
+@export var field_comment := ""
+@export var field_comment_by: StringName
 
 @export_group("Affinities")
 ## SkillData.Element -> DamageFormula.Affinity. Missing elements are NORMAL.

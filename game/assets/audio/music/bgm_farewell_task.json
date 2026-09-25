@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "cc39850b-0431-4e63-8fe8-673bd562cc20",
+  "trace_id": "ae460825-ff87-475f-b8a7-c6524567f445",
+  "data": [
+    {
+      "id": "420c2155-2fc9-4c62-b8ae-d2cf0c3ecf0b",
+      "title": "Adeus",
+      "image_url": "https://cdn2.suno.ai/image_420c2155-2fc9-4c62-b8ae-d2cf0c3ecf0b.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_420c2155-2fc9-4c62-b8ae-d2cf0c3ecf0b.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/420c2155-2fc9-4c62-b8ae-d2cf0c3ecf0b.mp3",
+      "video_url": "https://cdn1.suno.ai/420c2155-2fc9-4c62-b8ae-d2cf0c3ecf0b.mp4",
+      "created_at": "2026-09-25T12:32:43.092Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG sad farewell theme, emotional and tender, solo piano melody with soft string pad, gentle music box, slow rubato, major key turning bittersweet, builds to a brief swelling string climax then fades, 70 BPM, like Aerith's theme or To Zanarkand in SNES style",
+      "duration": 55.16
+    },
+    {
+      "id": "db63471d-0bc9-4fbf-984d-b9ca32ccd5c4",
+      "title": "Adeus",
+      "image_url": "https://cdn2.suno.ai/image_db63471d-0bc9-4fbf-984d-b9ca32ccd5c4.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_db63471d-0bc9-4fbf-984d-b9ca32ccd5c4.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/db63471d-0bc9-4fbf-984d-b9ca32ccd5c4.mp3",
+      "video_url": "https://cdn1.suno.ai/db63471d-0bc9-4fbf-984d-b9ca32ccd5c4.mp4",
+      "created_at": "2026-09-25T12:32:43.092Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG sad farewell theme, emotional and tender, solo piano melody with soft string pad, gentle music box, slow rubato, major key turning bittersweet, builds to a brief swelling string climax then fades, 70 BPM, like Aerith's theme or To Zanarkand in SNES style",
+      "duration": 59.56
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

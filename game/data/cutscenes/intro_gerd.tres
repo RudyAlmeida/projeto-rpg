@@ -1,72 +1,73 @@
 [gd_resource type="Resource" script_class="Cutscene" format=3]
 
-[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_qlycm"]
-[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_pkq6u"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="3_oo12y"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="4_vn1g2"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="5_1ju83"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="6_7beuh"]
-
-[sub_resource type="Resource" id="Resource_3mfh4"]
-script = ExtResource("3_oo12y")
-speaker = "Mestre Gerd"
-portrait = ExtResource("5_1ju83")
-text = "Ei, Kael! Espere aí!"
-
-[sub_resource type="Resource" id="Resource_nt3on"]
-script = ExtResource("2_pkq6u")
-lines = Array[ExtResource("3_oo12y")]([SubResource("Resource_3mfh4")])
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_pkq6u"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_oo12y"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_vn1g2"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_1ju83"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_7beuh"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_3mfh4"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="7_nt3on"]
 
 [sub_resource type="Resource" id="Resource_2oqqs"]
-script = ExtResource("2_pkq6u")
+script = ExtResource("4_1ju83")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_3mfh4")
+text = "Ei, Kael! Espere aí!"
+
+[sub_resource type="Resource" id="Resource_kug8c"]
+script = ExtResource("2_oo12y")
+lines = Array[ExtResource("4_1ju83")]([SubResource("Resource_2oqqs")])
+
+[sub_resource type="Resource" id="Resource_rs02x"]
+script = ExtResource("2_oo12y")
 type = 1
 actor = NodePath("Gerd")
 position = Vector2(330, 232)
 speed = 70.0
 
-[sub_resource type="Resource" id="Resource_kug8c"]
-script = ExtResource("2_pkq6u")
+[sub_resource type="Resource" id="Resource_cjbdg"]
+script = ExtResource("2_oo12y")
 type = 2
 actor = NodePath("Player")
 facing = 3
 
-[sub_resource type="Resource" id="Resource_rs02x"]
-script = ExtResource("3_oo12y")
+[sub_resource type="Resource" id="Resource_btw8q"]
+script = ExtResource("4_1ju83")
 speaker = "Mestre Gerd"
-portrait = ExtResource("5_1ju83")
+portrait = ExtResource("6_3mfh4")
 text = "Antes de sair por aí, pegue estas poções. Ninguém da minha oficina anda desprevenido."
 
-[sub_resource type="Resource" id="Resource_cjbdg"]
-script = ExtResource("3_oo12y")
+[sub_resource type="Resource" id="Resource_0tisl"]
+script = ExtResource("4_1ju83")
 speaker = "Kael"
-portrait = ExtResource("6_7beuh")
+portrait = ExtResource("7_nt3on")
 text = "Valeu, mestre!"
 
-[sub_resource type="Resource" id="Resource_btw8q"]
-script = ExtResource("2_pkq6u")
-lines = Array[ExtResource("3_oo12y")]([SubResource("Resource_rs02x"), SubResource("Resource_cjbdg")])
+[sub_resource type="Resource" id="Resource_b025c"]
+script = ExtResource("2_oo12y")
+lines = Array[ExtResource("4_1ju83")]([SubResource("Resource_btw8q"), SubResource("Resource_0tisl")])
 
-[sub_resource type="Resource" id="Resource_0tisl"]
-script = ExtResource("2_pkq6u")
+[sub_resource type="Resource" id="Resource_ymd6a"]
+script = ExtResource("2_oo12y")
 type = 8
 id = &"potion"
 amount = 2
 
-[sub_resource type="Resource" id="Resource_b025c"]
-script = ExtResource("2_pkq6u")
+[sub_resource type="Resource" id="Resource_wn7qv"]
+script = ExtResource("2_oo12y")
 type = 1
 actor = NodePath("Gerd")
 position = Vector2(424, 232)
 speed = 70.0
 
-[sub_resource type="Resource" id="Resource_ymd6a"]
-script = ExtResource("2_pkq6u")
+[sub_resource type="Resource" id="Resource_vl0e8"]
+script = ExtResource("2_oo12y")
 type = 2
 actor = NodePath("Gerd")
 facing = 1
 
 [resource]
-script = ExtResource("1_qlycm")
+script = ExtResource("1_pkq6u")
 id = &"intro_gerd"
 once_flag = &"intro_seen"
-steps = Array[ExtResource("2_pkq6u")]([SubResource("Resource_nt3on"), SubResource("Resource_2oqqs"), SubResource("Resource_kug8c"), SubResource("Resource_btw8q"), SubResource("Resource_0tisl"), SubResource("Resource_b025c"), SubResource("Resource_ymd6a")])
+steps = Array[ExtResource("2_oo12y")]([SubResource("Resource_kug8c"), SubResource("Resource_rs02x"), SubResource("Resource_cjbdg"), SubResource("Resource_b025c"), SubResource("Resource_ymd6a"), SubResource("Resource_wn7qv"), SubResource("Resource_vl0e8")])

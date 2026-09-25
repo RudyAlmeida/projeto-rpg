@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_xvrxd"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_w1okx"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_3wbef"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_u5nc2"]
+
+[sub_resource type="Resource" id="Resource_2utan"]
+script = ExtResource("2_w1okx")
+speaker = "Soldado Imperial"
+text = "Circulando! Ordem do General Voss."
+
+[sub_resource type="Resource" id="Resource_yonic"]
+script = ExtResource("1_xvrxd")
+lines = Array[ExtResource("2_w1okx")]([SubResource("Resource_2utan")])
+
+[resource]
+script = ExtResource("4_u5nc2")
+id = &"p_soldier"
+branches = Array[ExtResource("1_xvrxd")]([SubResource("Resource_yonic")])

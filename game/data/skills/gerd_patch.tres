@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_hc07d"]
+
+[resource]
+script = ExtResource("1_hc07d")
+id = &"gerd_patch"
+display_name = "Remendo"
+kind = 3
+target = 1
+mp_cost = 4
+power = 26
+description = "Gerd remenda um aliado."

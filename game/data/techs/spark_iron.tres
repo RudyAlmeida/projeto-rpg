@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DualTechData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/dual_tech_data.gd" id="1_whq4p"]
+[ext_resource type="Resource" path="res://data/skills/tech_spark_iron.tres" id="2_jgv07"]
+
+[resource]
+script = ExtResource("1_whq4p")
+id = &"spark_iron"
+display_name = "Faísca e Ferro"
+participants = Array[StringName]([&"kael", &"gerd"])
+skill = ExtResource("2_jgv07")
+description = "Kael + Gerd: \"Eu seguro, você corta.\""

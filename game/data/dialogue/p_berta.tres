@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_kn5y8"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_gt5xf"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_mqce5"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="4_kmptg"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="5_r4vn0"]
+
+[sub_resource type="Resource" id="Resource_2hp2o"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "Fuligem! Meu menino! Onde você se meteu, seu ingrato?"
+
+[sub_resource type="Resource" id="Resource_qg2yt"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "Obrigada, Kael. Tome, é uma pena de fênix que meu falecido guardava. Deve servir mais pra você."
+
+[sub_resource type="Resource" id="Resource_ma5ei"]
+script = ExtResource("2_gt5xf")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_kmptg")
+text = "Você tem jeito com bicho arisco. Puxou a mim."
+
+[sub_resource type="Resource" id="Resource_yv171"]
+script = ExtResource("1_kn5y8")
+require_quest_state = "q_cat=ready"
+lines = Array[ExtResource("2_gt5xf")]([SubResource("Resource_2hp2o"), SubResource("Resource_qg2yt"), SubResource("Resource_ma5ei")])
+finish_quest = &"q_cat"
+affinity = {
+&"gerd": 1
+}
+
+[sub_resource type="Resource" id="Resource_8ysh2"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "Nenhum sinal do Fuligem? Ele adora se esconder atrás de máquinas quentes..."
+
+[sub_resource type="Resource" id="Resource_m3tar"]
+script = ExtResource("1_kn5y8")
+require_quest_state = "q_cat=active"
+lines = Array[ExtResource("2_gt5xf")]([SubResource("Resource_8ysh2")])
+
+[sub_resource type="Resource" id="Resource_k8ml4"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "Os soldados levaram o Olavo... Kael, tome cuidado, pelo amor de tudo."
+
+[sub_resource type="Resource" id="Resource_6hpj1"]
+script = ExtResource("1_kn5y8")
+require_flags = Array[StringName]([&"empire_arrived"])
+lines = Array[ExtResource("2_gt5xf")]([SubResource("Resource_k8ml4")])
+
+[sub_resource type="Resource" id="Resource_0oes8"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "Fuligem está dormindo em cima da caldeira de novo. Nunca vi gato gostar tanto de vapor."
+
+[sub_resource type="Resource" id="Resource_ngjmp"]
+script = ExtResource("1_kn5y8")
+require_quest_state = "q_cat=done"
+lines = Array[ExtResource("2_gt5xf")]([SubResource("Resource_0oes8")])
+
+[sub_resource type="Resource" id="Resource_o03av"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "O Éter subiu de novo. Daqui a pouco uma lamparina vai custar mais que um jantar."
+
+[sub_resource type="Resource" id="Resource_wqx8i"]
+script = ExtResource("2_gt5xf")
+speaker = "Dona Berta"
+text = "E pra piorar, meu gato Fuligem fugiu pro Ferro-Velho! Se você passar por lá, traz ele pra mim?"
+
+[sub_resource type="Resource" id="Resource_r03le"]
+script = ExtResource("1_kn5y8")
+lines = Array[ExtResource("2_gt5xf")]([SubResource("Resource_o03av"), SubResource("Resource_wqx8i")])
+start_quest = &"q_cat"
+
+[resource]
+script = ExtResource("5_r4vn0")
+id = &"p_berta"
+branches = Array[ExtResource("1_kn5y8")]([SubResource("Resource_yv171"), SubResource("Resource_m3tar"), SubResource("Resource_6hpj1"), SubResource("Resource_ngjmp"), SubResource("Resource_r03le")])

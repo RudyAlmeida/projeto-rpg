@@ -1,0 +1,144 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_skl6a"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_ttflp"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_c734k"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_3hes4"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_lqbaq"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="6_ovvpm"]
+[ext_resource type="Resource" path="res://data/enemies/imperial_soldier.tres" id="7_xe6tn"]
+[ext_resource type="Resource" path="res://data/enemies/voss.tres" id="8_4hnhu"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_empire_a.mp3" id="9_n0byg"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="10_uvkre"]
+
+[sub_resource type="Resource" id="Resource_2slkc"]
+script = ExtResource("2_ttflp")
+type = 18
+actor = NodePath("Eco")
+position = Vector2(536, 264)
+facing = 1
+
+[sub_resource type="Resource" id="Resource_fvcgs"]
+script = ExtResource("2_ttflp")
+type = 1
+actor = NodePath("Player")
+position = Vector2(488, 248)
+speed = 60.0
+
+[sub_resource type="Resource" id="Resource_vyetf"]
+script = ExtResource("2_ttflp")
+type = 2
+actor = NodePath("Player")
+facing = 1
+
+[sub_resource type="Resource" id="Resource_nw2h1"]
+script = ExtResource("2_ttflp")
+type = 1
+actor = NodePath("Eco")
+position = Vector2(504, 264)
+speed = 60.0
+
+[sub_resource type="Resource" id="Resource_28jba"]
+script = ExtResource("4_3hes4")
+speaker = "General Voss"
+text = "Uma máquina foi ativada no Ferro-Velho ontem. Os medidores de Brasaforte registraram o pulso daqui."
+
+[sub_resource type="Resource" id="Resource_2ori2"]
+script = ExtResource("4_3hes4")
+speaker = "General Voss"
+text = "Entreguem-na, e ninguém se machuca."
+
+[sub_resource type="Resource" id="Resource_h7eq5"]
+script = ExtResource("4_3hes4")
+speaker = "Eco"
+text = "Declaração: sou a máquina."
+
+[sub_resource type="Resource" id="Resource_lspgt"]
+script = ExtResource("4_3hes4")
+speaker = "Kael"
+portrait = ExtResource("6_ovvpm")
+text = "Eco!"
+
+[sub_resource type="Resource" id="Resource_vvj7s"]
+script = ExtResource("4_3hes4")
+speaker = "General Voss"
+text = "...Um aetheliano funcionando. Então o velho Brunor mentiu esse tempo todo. Peguem."
+
+[sub_resource type="Resource" id="Resource_06hpc"]
+script = ExtResource("2_ttflp")
+lines = Array[ExtResource("4_3hes4")]([SubResource("Resource_28jba"), SubResource("Resource_2ori2"), SubResource("Resource_h7eq5"), SubResource("Resource_lspgt"), SubResource("Resource_vvj7s")])
+
+[sub_resource type="Resource" id="Resource_sp876"]
+script = ExtResource("2_ttflp")
+type = 12
+music = ExtResource("9_n0byg")
+enemies = Array[ExtResource("3_c734k")]([ExtResource("7_xe6tn"), ExtResource("8_4hnhu"), ExtResource("7_xe6tn")])
+end_after_turns = {
+&"voss": 4
+}
+
+[sub_resource type="Resource" id="Resource_o5k37"]
+script = ExtResource("4_3hes4")
+speaker = "General Voss"
+text = "Coragem. Falta de juízo, mas coragem. Algemas."
+
+[sub_resource type="Resource" id="Resource_nd7w5"]
+script = ExtResource("2_ttflp")
+lines = Array[ExtResource("4_3hes4")]([SubResource("Resource_o5k37")])
+
+[sub_resource type="Resource" id="Resource_f8rsx"]
+script = ExtResource("2_ttflp")
+type = 15
+seconds = 0.6
+color = Color(1, 0.6, 0.25, 1)
+
+[sub_resource type="Resource" id="Resource_gu83n"]
+script = ExtResource("2_ttflp")
+type = 14
+seconds = 1.0
+strength = 6.0
+
+[sub_resource type="Resource" id="Resource_gc6v8"]
+script = ExtResource("2_ttflp")
+type = 18
+actor = NodePath("GerdSquare")
+position = Vector2(472, 280)
+facing = 2
+
+[sub_resource type="Resource" id="Resource_20edt"]
+script = ExtResource("4_3hes4")
+text = "Um carrinho de oficina em chamas atravessa a praça e explode entre os soldados!"
+
+[sub_resource type="Resource" id="Resource_6mr7n"]
+script = ExtResource("4_3hes4")
+speaker = "Mestre Gerd"
+portrait = ExtResource("10_uvkre")
+text = "Pela oficina! Porta dos fundos! AGORA!"
+
+[sub_resource type="Resource" id="Resource_7wo28"]
+script = ExtResource("2_ttflp")
+lines = Array[ExtResource("4_3hes4")]([SubResource("Resource_20edt"), SubResource("Resource_6mr7n")])
+
+[sub_resource type="Resource" id="Resource_3tyy4"]
+script = ExtResource("2_ttflp")
+type = 11
+id = &"gerd"
+
+[sub_resource type="Resource" id="Resource_bybn0"]
+script = ExtResource("2_ttflp")
+type = 20
+
+[sub_resource type="Resource" id="Resource_30dgy"]
+script = ExtResource("4_3hes4")
+speaker = "Dica"
+text = "Corra para a oficina Brunor, a leste da praça!"
+
+[sub_resource type="Resource" id="Resource_vbon4"]
+script = ExtResource("2_ttflp")
+lines = Array[ExtResource("4_3hes4")]([SubResource("Resource_30dgy")])
+
+[resource]
+script = ExtResource("1_skl6a")
+id = &"p8_voss"
+once_flag = &"voss_fought"
+steps = Array[ExtResource("2_ttflp")]([SubResource("Resource_2slkc"), SubResource("Resource_fvcgs"), SubResource("Resource_vyetf"), SubResource("Resource_nw2h1"), SubResource("Resource_06hpc"), SubResource("Resource_sp876"), SubResource("Resource_nd7w5"), SubResource("Resource_f8rsx"), SubResource("Resource_gu83n"), SubResource("Resource_gc6v8"), SubResource("Resource_7wo28"), SubResource("Resource_3tyy4"), SubResource("Resource_bybn0"), SubResource("Resource_vbon4")])

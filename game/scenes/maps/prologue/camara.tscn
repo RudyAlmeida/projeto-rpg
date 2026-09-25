@@ -1,0 +1,92 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_iw5b7"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_junkyard_a.mp3" id="2_juipc"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="3_2cl0c"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="4_mj5us"]
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="5_uk8wo"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="6_mkpsc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="7_b00n3"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_bbfm2"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="9_2fpin"]
+[ext_resource type="Script" path="res://scripts/world/npc.gd" id="10_xjkq2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/eco/chr_eco_ref.png" id="11_c7y7q"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="12_8dcoy"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="13_18gix"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="14_ovha5"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="15_yey6l"]
+[ext_resource type="Resource" path="res://data/cutscenes/p5_eco.tres" id="16_t2ag2"]
+
+[sub_resource type="Resource" id="Resource_cktiw"]
+script = ExtResource("12_8dcoy")
+text = "Uma figura de pedra clara e latão, coberta de musgo, sentada como se dormisse."
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unnv3"]
+size = Vector2(28, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xi5n"]
+size = Vector2(16, 16)
+
+[node name="Camara" type="Node2D" unique_id=216870983]
+y_sort_enabled = true
+script = ExtResource("1_iw5b7")
+music = ExtResource("2_juipc")
+aether_factor = 1.2
+
+[node name="Map" type="TileMapLayer" parent="." unique_id=159513825]
+script = ExtResource("3_2cl0c")
+legend = "junkyard"
+layout = "RRRRRRQRRRRRRRRRRQRRRRRR
+RRRRRRRRRRR::RRRRRRRRRRR
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+Q::::i::::::::::::i::::Q
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+Q::::::::::::::::::::::Q
+R::::i::::::::::::i::::R
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+R::::::::::::::::::::::R
+RRRRRRRRRRRRRRRRRRRRRRRR"
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2050979630 instance=ExtResource("4_mj5us")]
+motion_mode = 1
+script = ExtResource("5_uk8wo")
+idle_sheet = ExtResource("6_mkpsc")
+walk_sheet = ExtResource("7_b00n3")
+
+[node name="Spawns" type="Node2D" parent="." unique_id=279917619]
+
+[node name="from_north" type="Marker2D" parent="Spawns" unique_id=1595680361]
+position = Vector2(200, 40)
+script = ExtResource("8_bbfm2")
+
+[node name="EcoSleeping" type="StaticBody2D" parent="." unique_id=1606505514 instance=ExtResource("9_2fpin")]
+position = Vector2(200, 152)
+script = ExtResource("10_xjkq2")
+idle_sheet = ExtResource("11_c7y7q")
+dialogue = Array[ExtResource("12_8dcoy")]([SubResource("Resource_cktiw")])
+display_name = "???"
+hide_if_flag = &"eco_awake"
+
+[node name="Up" type="Area2D" parent="." unique_id=1825164389]
+position = Vector2(192, 8)
+script = ExtResource("14_ovha5")
+target_scene = "res://scenes/maps/prologue/ferro_velho_3.tscn"
+target_spawn = "from_below"
+
+[node name="Shape" type="CollisionShape2D" parent="Up" unique_id=1574358407]
+shape = SubResource("RectangleShape2D_unnv3")
+
+[node name="Awakening" type="Area2D" parent="." unique_id=62455007]
+position = Vector2(200, 40)
+script = ExtResource("15_yey6l")
+cutscene = ExtResource("16_t2ag2")
+autostart = true
+
+[node name="Shape" type="CollisionShape2D" parent="Awakening" unique_id=940545239]
+shape = SubResource("RectangleShape2D_4xi5n")

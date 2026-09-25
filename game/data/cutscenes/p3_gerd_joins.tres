@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_g51kv"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_5ewy0"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_ry4j4"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_grch8"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_kxv8c"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_22r3g"]
+
+[sub_resource type="Resource" id="Resource_juruh"]
+script = ExtResource("2_5ewy0")
+type = 10
+id = &"gerd"
+
+[sub_resource type="Resource" id="Resource_hssq2"]
+script = ExtResource("2_5ewy0")
+type = 24
+id = &"q_prologue:deliver_box"
+
+[sub_resource type="Resource" id="Resource_r8oyp"]
+script = ExtResource("4_grch8")
+text = "Gerd entrou no grupo como convidado."
+
+[sub_resource type="Resource" id="Resource_5e65x"]
+script = ExtResource("4_grch8")
+speaker = "Dica"
+text = "Convidados lutam com você, mas não usam equipamento nem saem da linha de frente."
+
+[sub_resource type="Resource" id="Resource_8libd"]
+script = ExtResource("4_grch8")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_22r3g")
+text = "Portão sul, garoto. E não conta pro Olavo."
+
+[sub_resource type="Resource" id="Resource_nm3ir"]
+script = ExtResource("2_5ewy0")
+lines = Array[ExtResource("4_grch8")]([SubResource("Resource_r8oyp"), SubResource("Resource_5e65x"), SubResource("Resource_8libd")])
+
+[resource]
+script = ExtResource("1_g51kv")
+id = &"p3_gerd_joins"
+once_flag = &"gerd_joined"
+steps = Array[ExtResource("2_5ewy0")]([SubResource("Resource_juruh"), SubResource("Resource_hssq2"), SubResource("Resource_nm3ir")])

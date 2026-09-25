@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_nt5k2"]
+
+[resource]
+script = ExtResource("1_nt5k2")
+id = &"voss_order"
+display_name = "Ordem de Captura"
+kind = 4
+target = 2
+weight = 2

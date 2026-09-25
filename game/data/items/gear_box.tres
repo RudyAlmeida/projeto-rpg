@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_kfrly"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_0woqf"]
+
+[resource]
+script = ExtResource("2_0woqf")
+id = &"gear_box"
+display_name = "Caixa de Engrenagens"
+kind = 5
+icon_index = 15
+description = "Encomenda do mestre Gerd para o Tobias. Pesada e barulhenta."
+battle_usable = false
+field_usable = false

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_gubmr"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_scrap_crow.png" id="2_gubmr"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_peln5"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="4_w13hn"]
+[ext_resource type="Resource" path="res://data/skills/crow_peck.tres" id="5_x2jpt"]
+[ext_resource type="Resource" path="res://data/skills/crow_snatch.tres" id="6_0on56"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_larha"]
+
+[resource]
+script = ExtResource("3_peln5")
+id = &"scrap_crow"
+display_name = "Corvo de Sucata"
+battle_sheet = ExtResource("2_gubmr")
+frame_size = Vector2i(48, 40)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 44
+strength = 9
+weapon_power = 4
+speed = 28
+luck = 8
+precision = 11
+evasion = 14
+skills = Array[ExtResource("4_w13hn")]([ExtResource("5_x2jpt"), ExtResource("6_0on56")])
+ai_weights = Array[int]([55, 45])
+escape_after_turns = 3
+field_comment = "Esses bichos roubam parafuso até do meu bolso. Acerta antes que ele fuja!"
+field_comment_by = &"gerd"
+affinities = {
+6: 1
+}
+xp_reward = 12
+money_reward = 14
+ap_reward = 3
+drops = {
+&"potion": 30.0
+}

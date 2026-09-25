@@ -1,0 +1,127 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_6bkj7"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="2_1650y"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="3_n21yo"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="4_hlmh4"]
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="5_obs60"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="6_5545e"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="7_gj6ll"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_xww4f"]
+[ext_resource type="Script" path="res://scripts/world/map_object.gd" id="9_8p23s"]
+[ext_resource type="Texture2D" path="res://assets/tilesets/til_junkyard.png" id="10_ahn16"]
+[ext_resource type="PackedScene" path="res://scenes/characters/field_enemy.tscn" id="11_l7ke6"]
+[ext_resource type="Script" path="res://scripts/world/field_enemy.gd" id="12_k7bgv"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="13_ivm3g"]
+[ext_resource type="Resource" path="res://data/enemies/oil_slime.tres" id="14_e1x6c"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="15_6ksqt"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="16_ln6sj"]
+[ext_resource type="Resource" path="res://data/cutscenes/p3_road.tres" id="17_pdltt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mj6n6"]
+size = Vector2(60, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8ffg"]
+size = Vector2(60, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w15rs"]
+size = Vector2(64, 16)
+
+[node name="EstradaSul" type="Node2D" unique_id=1633838229]
+y_sort_enabled = true
+script = ExtResource("1_6bkj7")
+music = ExtResource("2_1650y")
+
+[node name="Map" type="TileMapLayer" parent="." unique_id=1834512885]
+script = ExtResource("3_n21yo")
+legend = "vila"
+layout = "TTTTTTTTTT,,,,TTTTTTTTTT
+T.........,,,,.........T
+T.........,,,,.........T
+T.........,,,,.ss......T
+T..T......,,,,.........T
+T.........,,,,.........T
+T.........,,,,.....T...T
+T.........,,,,.........T
+T........f,,,,f........T
+T....T...f,,,,f........T
+T........f,,,,f........T
+T........f,,,,f........T
+T........f,,,,f........T
+T.....ss..,,,,.......k.T
+T.........,,,,..xx.....T
+T.k.......,,,,..o......T
+T.........,,,,.........T
+T.........,,,,.........T
+T......k..,,,,.........T
+T.........,,,,.........T
+T.........,,,,......T..T
+T.........,,,,.........T
+T...T.....,,,,...s.....T
+T.........,,,,.........T
+T.........,,,,.........T
+T.........,,,,....T....T
+T.....T...,,,,.........T
+T.........,,,,.........T
+T.........,,,,.........T
+TTTTTTTTTT,,,,TTTTTTTTTT"
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=994578958 instance=ExtResource("4_hlmh4")]
+motion_mode = 1
+script = ExtResource("5_obs60")
+idle_sheet = ExtResource("6_5545e")
+walk_sheet = ExtResource("7_gj6ll")
+
+[node name="Spawns" type="Node2D" parent="." unique_id=185431158]
+
+[node name="from_vila" type="Marker2D" parent="Spawns" unique_id=2028107339]
+position = Vector2(192, 24)
+script = ExtResource("8_xww4f")
+
+[node name="from_junkyard" type="Marker2D" parent="Spawns" unique_id=1797985490]
+position = Vector2(192, 456)
+script = ExtResource("8_xww4f")
+facing = 2
+
+[node name="HiddenChest" type="StaticBody2D" parent="." unique_id=1608410369]
+position = Vector2(296, 248)
+script = ExtResource("9_8p23s")
+kind = 1
+texture = ExtResource("10_ahn16")
+tile = Vector2i(5, 4)
+tile_used = Vector2i(6, 4)
+flag = &"chest_road"
+item_id = &"potion"
+money = 50
+
+[node name="Slimes" type="Area2D" parent="." unique_id=1433658766 instance=ExtResource("11_l7ke6")]
+position = Vector2(200, 328)
+script = ExtResource("12_k7bgv")
+enemies = Array[ExtResource("13_ivm3g")]([ExtResource("14_e1x6c"), ExtResource("14_e1x6c")])
+patrol_distance = 20.0
+
+[node name="ToVila" type="Area2D" parent="." unique_id=665229455]
+position = Vector2(192, 8)
+script = ExtResource("15_6ksqt")
+target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
+target_spawn = "from_south"
+
+[node name="Shape" type="CollisionShape2D" parent="ToVila" unique_id=829222965]
+shape = SubResource("RectangleShape2D_mj6n6")
+
+[node name="ToJunkyard" type="Area2D" parent="." unique_id=1666874614]
+position = Vector2(192, 472)
+script = ExtResource("15_6ksqt")
+target_scene = "res://scenes/maps/prologue/ferro_velho_1.tscn"
+target_spawn = "from_north"
+
+[node name="Shape" type="CollisionShape2D" parent="ToJunkyard" unique_id=506447165]
+shape = SubResource("RectangleShape2D_a8ffg")
+
+[node name="RoadTutorial" type="Area2D" parent="." unique_id=1240147039]
+position = Vector2(192, 72)
+script = ExtResource("16_ln6sj")
+cutscene = ExtResource("17_pdltt")
+
+[node name="Shape" type="CollisionShape2D" parent="RoadTutorial" unique_id=1019302602]
+shape = SubResource("RectangleShape2D_w15rs")

@@ -54,6 +54,8 @@ skills = Array[ExtResource("7_uyvsj")]([ExtResource("4_uyut7"), ExtResource("3_m
 ai_rules = Array[ExtResource("1_6bsvc")]([SubResource("Resource_6bsvc"), SubResource("Resource_iail0"), SubResource("Resource_mtxig")])
 mechanical = true
 status_immunities = Array[int]([0, 1])
+field_comment = "Uma Sentinela imperial?! Aqui? Quando ela esquentar o canhão, se protege!"
+field_comment_by = &"gerd"
 affinities = {
 1: 2,
 3: 1

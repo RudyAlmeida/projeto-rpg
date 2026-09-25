@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_e7dwl"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_2osa0"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_fk52k"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_enmlg"]
+
+[sub_resource type="Resource" id="Resource_dvav8"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Três molas, perfeitas! Bem... roídas, mas perfeitas."
+
+[sub_resource type="Resource" id="Resource_nbod7"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Engraçado... meus relógios pararam todos às 3 da manhã, ontem. Todos ao mesmo tempo."
+
+[sub_resource type="Resource" id="Resource_48lcj"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Fique com este amuleto. Uma engrenagem que nunca para. Ao contrário dos meus relógios."
+
+[sub_resource type="Resource" id="Resource_dp0ma"]
+script = ExtResource("1_e7dwl")
+require_quest_state = "q_springs=active"
+require_items = {
+&"brass_spring": 3
+}
+lines = Array[ExtResource("2_2osa0")]([SubResource("Resource_dvav8"), SubResource("Resource_nbod7"), SubResource("Resource_48lcj")])
+finish_quest = &"q_springs"
+take_items = {
+&"brass_spring": 3
+}
+
+[sub_resource type="Resource" id="Resource_taqn7"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Tique, taque... Ainda preciso daquelas três Molas de Latão. Os ratos do ferro-velho vivem roendo."
+
+[sub_resource type="Resource" id="Resource_ym8tx"]
+script = ExtResource("1_e7dwl")
+require_quest_state = "q_springs=active"
+lines = Array[ExtResource("2_2osa0")]([SubResource("Resource_taqn7")])
+
+[sub_resource type="Resource" id="Resource_8klq0"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Os relógios voltaram a andar. Mas atrasam um minuto sempre que aquele dirigível passa."
+
+[sub_resource type="Resource" id="Resource_fvr6b"]
+script = ExtResource("1_e7dwl")
+require_quest_state = "q_springs=done"
+lines = Array[ExtResource("2_2osa0")]([SubResource("Resource_8klq0")])
+
+[sub_resource type="Resource" id="Resource_lp0w3"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Kael! Preciso de três Molas de Latão pra consertar a torre do relógio."
+
+[sub_resource type="Resource" id="Resource_ggi2i"]
+script = ExtResource("2_2osa0")
+speaker = "Sr. Anselmo"
+text = "Os Ratos-Engrenagem do ferro-velho vivem roendo molas. Se conseguir três, pago bem."
+
+[sub_resource type="Resource" id="Resource_wdhth"]
+script = ExtResource("1_e7dwl")
+lines = Array[ExtResource("2_2osa0")]([SubResource("Resource_lp0w3"), SubResource("Resource_ggi2i")])
+start_quest = &"q_springs"
+
+[resource]
+script = ExtResource("4_enmlg")
+id = &"p_anselmo"
+branches = Array[ExtResource("1_e7dwl")]([SubResource("Resource_dp0ma"), SubResource("Resource_ym8tx"), SubResource("Resource_fvr6b"), SubResource("Resource_wdhth")])

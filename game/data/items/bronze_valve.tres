@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_c7ad4"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_qlvif"]
+
+[resource]
+script = ExtResource("2_qlvif")
+id = &"bronze_valve"
+display_name = "Válvula de Bronze"
+kind = 5
+icon_index = 15
+description = "Válvula antiga para a caldeira da estalagem."
+battle_usable = false
+field_usable = false

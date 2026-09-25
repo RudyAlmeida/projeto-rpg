@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "bdbaa534-8520-4a3d-928f-f4cd77cb4c66",
+  "trace_id": "9237a194-094a-4b3b-ab00-f9bba8df3a3a",
+  "data": [
+    {
+      "id": "759a654a-f3c9-4fb2-ba9f-538e8231f9f5",
+      "title": "Ferro-Velho do Sul",
+      "image_url": "https://cdn2.suno.ai/image_759a654a-f3c9-4fb2-ba9f-538e8231f9f5.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_759a654a-f3c9-4fb2-ba9f-538e8231f9f5.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/759a654a-f3c9-4fb2-ba9f-538e8231f9f5.mp3",
+      "video_url": "https://cdn1.suno.ai/759a654a-f3c9-4fb2-ba9f-538e8231f9f5.mp4",
+      "created_at": "2026-09-25T12:32:46.792Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG dungeon theme, mysterious and slightly playful, industrial steampunk junkyard, clanking metallic percussion, anvil hits, ticking clockwork, low marimba and bassoon ostinato, muted brass, distant steam hiss textures, a hint of ancient magic with a soft glassy celesta motif, minor key, 100 BPM, seamless loop, like Chrono Trigger dungeon music",
+      "duration": 89.8
+    },
+    {
+      "id": "9693d326-7070-46ae-89d5-c62c52e9ad35",
+      "title": "Ferro-Velho do Sul",
+      "image_url": "https://cdn2.suno.ai/image_9693d326-7070-46ae-89d5-c62c52e9ad35.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_9693d326-7070-46ae-89d5-c62c52e9ad35.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/9693d326-7070-46ae-89d5-c62c52e9ad35.mp3",
+      "video_url": "https://cdn1.suno.ai/9693d326-7070-46ae-89d5-c62c52e9ad35.mp4",
+      "created_at": "2026-09-25T12:32:46.792Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG dungeon theme, mysterious and slightly playful, industrial steampunk junkyard, clanking metallic percussion, anvil hits, ticking clockwork, low marimba and bassoon ostinato, muted brass, distant steam hiss textures, a hint of ancient magic with a soft glassy celesta motif, minor key, 100 BPM, seamless loop, like Chrono Trigger dungeon music",
+      "duration": 89.96
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

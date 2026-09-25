@@ -1,0 +1,68 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_c56b4"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="2_wtqnx"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="3_8d2l1"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="4_2tep8"]
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="5_vycil"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="6_p35r0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="7_s4b87"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_l8fc7"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="9_2o08j"]
+[ext_resource type="Script" path="res://scripts/world/npc.gd" id="10_r0nq6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="11_74jyd"]
+[ext_resource type="Resource" path="res://data/dialogue/p_berta.tres" id="12_44lo1"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="13_4pxh8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esam0"]
+size = Vector2(12, 12)
+
+[node name="Estalagem" type="Node2D" unique_id=1362432944]
+y_sort_enabled = true
+script = ExtResource("1_c56b4")
+music = ExtResource("2_wtqnx")
+
+[node name="Map" type="TileMapLayer" parent="." unique_id=1951097209]
+script = ExtResource("3_8d2l1")
+legend = "vila"
+layout = "##############
+##W##W###W##W#
+#o===========#
+#============#
+#====xx=xx===#
+#============#
+#=B========B=#
+#============#
+#=v========v=#
+#######D######"
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=492387858 instance=ExtResource("4_2tep8")]
+motion_mode = 1
+script = ExtResource("5_vycil")
+idle_sheet = ExtResource("6_p35r0")
+walk_sheet = ExtResource("7_s4b87")
+
+[node name="Spawns" type="Node2D" parent="." unique_id=258665606]
+
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1167863166]
+position = Vector2(120, 136)
+script = ExtResource("8_l8fc7")
+facing = 2
+
+[node name="Berta" type="StaticBody2D" parent="." unique_id=923737783 instance=ExtResource("9_2o08j")]
+position = Vector2(120, 56)
+script = ExtResource("10_r0nq6")
+idle_sheet = ExtResource("11_74jyd")
+sheet_row = 1
+dialogue_set = ExtResource("12_44lo1")
+role = 2
+display_name = "Dona Berta"
+
+[node name="Door" type="Area2D" parent="." unique_id=2083657218]
+position = Vector2(120, 152)
+script = ExtResource("13_4pxh8")
+target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
+target_spawn = "from_estalagem"
+
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1660889204]
+shape = SubResource("RectangleShape2D_esam0")

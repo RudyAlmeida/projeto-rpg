@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "d147fe81-b47a-49ba-908f-28341a2046fe",
+  "trace_id": "84417ba6-2391-401d-b330-042875b73b55",
+  "data": [
+    {
+      "id": "83714499-066b-4c7b-b45e-f18d211e6947",
+      "title": "Tema do Império",
+      "image_url": "https://cdn2.suno.ai/image_83714499-066b-4c7b-b45e-f18d211e6947.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_83714499-066b-4c7b-b45e-f18d211e6947.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/83714499-066b-4c7b-b45e-f18d211e6947.mp3",
+      "video_url": "https://cdn1.suno.ai/83714499-066b-4c7b-b45e-f18d211e6947.mp4",
+      "created_at": "2026-09-25T12:34:48.936Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG imperial army theme, cold militaristic march, snare drum march pattern, low brass and tuba melody, steam organ, heavy footsteps percussion, ominous and authoritative, minor key, 90 BPM, seamless loop, like the Gestahlian Empire theme of Final Fantasy VI",
+      "duration": 89.96
+    },
+    {
+      "id": "49885807-9b39-425e-8669-77d7996620d1",
+      "title": "Tema do Império",
+      "image_url": "https://cdn2.suno.ai/image_49885807-9b39-425e-8669-77d7996620d1.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_49885807-9b39-425e-8669-77d7996620d1.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/49885807-9b39-425e-8669-77d7996620d1.mp3",
+      "video_url": "https://cdn1.suno.ai/49885807-9b39-425e-8669-77d7996620d1.mp4",
+      "created_at": "2026-09-25T12:34:48.936Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG imperial army theme, cold militaristic march, snare drum march pattern, low brass and tuba melody, steam organ, heavy footsteps percussion, ominous and authoritative, minor key, 90 BPM, seamless loop, like the Gestahlian Empire theme of Final Fantasy VI",
+      "duration": 89.56
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

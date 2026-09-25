@@ -1,13 +1,14 @@
 // Generates music with Suno through the "suno-music" MCP server (AceDataCloud) configured in
 // ~/.claude.json, waits for the task and downloads every variant.
-// Usage: node suno_gen.mjs <args.json> <outDir> <baseName>
+// Usage: node suno_gen.mjs <args.json> <outDir> <baseName> [taskId]
+//   taskId: resume polling an already submitted task (no new credits spent).
 //   -> <outDir>/<baseName>_a.mp3, _b.mp3 ... and <outDir>/<baseName>_task.json
 // The bearer token is read from the local config at runtime and never printed.
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-const [, , argsFile, outDir, baseName] = process.argv;
+const [, , argsFile, outDir, baseName, resumeTask] = process.argv;
 if (!argsFile || !outDir || !baseName) {
   console.error('usage: node suno_gen.mjs <args.json> <outDir> <baseName>');
   process.exit(1);
@@ -40,14 +41,18 @@ async function tool(name, args) {
 await rpc('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'rpg-suno-gen', version: '1.0' } });
 await rpc('notifications/initialized', undefined, true);
 
-const submitted = await tool('suno_generate_custom_music', JSON.parse(fs.readFileSync(argsFile, 'utf8')));
-const taskId = submitted.task_id;
+const taskId = resumeTask || (await tool('suno_generate_custom_music', JSON.parse(fs.readFileSync(argsFile, 'utf8')))).task_id;
 console.log('task', taskId);
 
 let task;
 for (let i = 0; i < 60; i++) {
   await new Promise(r => setTimeout(r, 15000));
-  task = await tool('suno_get_task', { task_id: taskId });
+  try {
+    task = await tool('suno_get_task', { task_id: taskId });
+  } catch (e) {
+    console.log('poll failed, retrying:', e.message.slice(0, 80));  // the API has transient internal errors
+    continue;
+  }
   const items = task.response?.data || [];
   if (items.length && items.every(d => d.state === 'succeeded' && d.audio_url)) break;
   if (items.some(d => d.state === 'failed') || task.response?.success === false) throw new Error('task failed');

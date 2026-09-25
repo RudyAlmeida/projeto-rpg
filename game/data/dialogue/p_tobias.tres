@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_84xed"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_lkjm6"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_6egcu"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="4_kkblt"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="5_t2tv6"]
+
+[sub_resource type="Resource" id="Resource_2er6h"]
+script = ExtResource("2_lkjm6")
+speaker = "Tobias"
+text = "Ah, a encomenda do Gerd! Sessenta moedas, e isso é um favor que eu faço."
+
+[sub_resource type="Resource" id="Resource_q6f84"]
+script = ExtResource("2_lkjm6")
+speaker = "Kael"
+portrait = ExtResource("4_kkblt")
+text = "Ele disse que o senhor ia chorar miséria."
+
+[sub_resource type="Resource" id="Resource_ck832"]
+script = ExtResource("2_lkjm6")
+speaker = "Tobias"
+text = "...Oitenta. Mas diz pra ele que eu não chorei."
+
+[sub_resource type="Resource" id="Resource_8wkcb"]
+script = ExtResource("2_lkjm6")
+text = "Kael recebeu 80 moedas."
+
+[sub_resource type="Resource" id="Resource_3rgb5"]
+script = ExtResource("2_lkjm6")
+speaker = "Dica"
+text = "Na loja você compra e vende itens. Leve algumas Poções antes de sair da vila!"
+
+[sub_resource type="Resource" id="Resource_ggp7i"]
+script = ExtResource("1_84xed")
+require_items = {
+&"gear_box": 1
+}
+lines = Array[ExtResource("2_lkjm6")]([SubResource("Resource_2er6h"), SubResource("Resource_q6f84"), SubResource("Resource_ck832"), SubResource("Resource_8wkcb"), SubResource("Resource_3rgb5")])
+set_flags = Array[StringName]([&"delivered"])
+give_money = 80
+take_items = {
+&"gear_box": 1
+}
+
+[sub_resource type="Resource" id="Resource_pggps"]
+script = ExtResource("2_lkjm6")
+speaker = "Tobias"
+text = "Soldados na praça, na minha vila! Leva o que precisar, garoto. Hoje é por conta... não, espera. Metade."
+
+[sub_resource type="Resource" id="Resource_qdm2e"]
+script = ExtResource("1_84xed")
+require_flags = Array[StringName]([&"empire_arrived"])
+lines = Array[ExtResource("2_lkjm6")]([SubResource("Resource_pggps")])
+
+[sub_resource type="Resource" id="Resource_me6sv"]
+script = ExtResource("2_lkjm6")
+speaker = "Tobias"
+text = "Bem-vindo à Engrenagem Dourada! Poções, peças e gemas — tudo com garantia de latão."
+
+[sub_resource type="Resource" id="Resource_hx71o"]
+script = ExtResource("1_84xed")
+lines = Array[ExtResource("2_lkjm6")]([SubResource("Resource_me6sv")])
+
+[resource]
+script = ExtResource("5_t2tv6")
+id = &"p_tobias"
+branches = Array[ExtResource("1_84xed")]([SubResource("Resource_ggp7i"), SubResource("Resource_qdm2e"), SubResource("Resource_hx71o")])

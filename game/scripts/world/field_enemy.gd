@@ -12,6 +12,10 @@ const BOB_TIME := 0.45
 @export var enemies: Array[CombatantData] = []
 ## Quest objective completed by defeating this encounter, as "quest_id:objective_id".
 @export var quest_objective := ""
+## Flag set when this encounter is beaten (story encounters, bosses).
+@export var defeat_flag: StringName
+## Battle theme for this encounter (bosses); empty = the alternating battle themes.
+@export var music: AudioStream
 @export var patrol_distance := 24.0
 @export var patrol_speed := 14.0
 

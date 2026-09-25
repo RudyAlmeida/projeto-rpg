@@ -5,6 +5,7 @@ extends Node
 signal money_changed(amount: int)
 signal inventory_changed
 signal quest_changed(id: StringName)
+signal flag_changed(name: StringName)
 
 var party: Array[PartyMember] = []
 var money := 0
@@ -102,7 +103,8 @@ func finish_quest(id: StringName) -> void:
 		for item_id: StringName in quest.reward_items:
 			add_item(item_id, int(quest.reward_items[item_id]))
 		for member in party:
-			member.gain_xp(quest.reward_xp)
+			if not member.data.guest:
+				member.gain_xp(quest.reward_xp)
 	_sync_quest(id)
 
 
@@ -113,6 +115,7 @@ static func _early_flag(id: StringName, objective: StringName) -> StringName:
 func _sync_quest(id: StringName) -> void:
 	flags[StringName("quest_" + id)] = quest_state(id)
 	quest_changed.emit(id)
+	flag_changed.emit(StringName("quest_" + id))
 
 
 # ---------- money / items ----------
@@ -207,6 +210,7 @@ func add_ap(amount: int) -> Array[GemInstance]:
 
 func set_flag(name: StringName, value: Variant = true) -> void:
 	flags[name] = value
+	flag_changed.emit(name)
 
 
 func get_flag(name: StringName, default: Variant = false) -> Variant:

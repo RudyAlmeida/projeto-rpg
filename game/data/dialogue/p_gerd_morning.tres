@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_wbwle"]
+[ext_resource type="Resource" path="res://data/cutscenes/p3_gerd_joins.tres" id="2_om0nq"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="3_76sv4"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="4_moax3"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="5_1cus5"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="6_bi18j"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="7_kkjnu"]
+
+[sub_resource type="Resource" id="Resource_4qrcu"]
+script = ExtResource("3_76sv4")
+speaker = "Mestre Gerd"
+portrait = ExtResource("5_1cus5")
+text = "Oitenta? Hah! Aprendeu alguma coisa comigo, afinal."
+
+[sub_resource type="Resource" id="Resource_twkgp"]
+script = ExtResource("3_76sv4")
+speaker = "Mestre Gerd"
+portrait = ExtResource("5_1cus5")
+text = "Agora o serviço de verdade: a caldeira da estalagem precisa de uma válvula de bronze antiga. Só tem no Ferro-Velho do Sul."
+
+[sub_resource type="Resource" id="Resource_bh5cg"]
+script = ExtResource("3_76sv4")
+speaker = "Kael"
+portrait = ExtResource("6_bi18j")
+text = "O Ferro-Velho? O guarda disse que é proibido."
+
+[sub_resource type="Resource" id="Resource_ca5fw"]
+script = ExtResource("3_76sv4")
+speaker = "Mestre Gerd"
+portrait = ExtResource("5_1cus5")
+text = "O guarda também disse que a esposa dele cozinha bem. ...Eu vou junto. Minhas costas reclamam, mas este braço aqui ainda funciona."
+
+[sub_resource type="Resource" id="Resource_ys02s"]
+script = ExtResource("1_wbwle")
+require_flags = Array[StringName]([&"delivered"])
+lines = Array[ExtResource("3_76sv4")]([SubResource("Resource_4qrcu"), SubResource("Resource_twkgp"), SubResource("Resource_bh5cg"), SubResource("Resource_ca5fw")])
+cutscene = ExtResource("2_om0nq")
+
+[sub_resource type="Resource" id="Resource_7icpe"]
+script = ExtResource("3_76sv4")
+speaker = "Mestre Gerd"
+portrait = ExtResource("5_1cus5")
+text = "A caixa, Kael. Pro Tobias. Oitenta moedas, nem uma a menos."
+
+[sub_resource type="Resource" id="Resource_pd6py"]
+script = ExtResource("1_wbwle")
+lines = Array[ExtResource("3_76sv4")]([SubResource("Resource_7icpe")])
+
+[resource]
+script = ExtResource("7_kkjnu")
+id = &"p_gerd_morning"
+branches = Array[ExtResource("1_wbwle")]([SubResource("Resource_ys02s"), SubResource("Resource_pd6py")])

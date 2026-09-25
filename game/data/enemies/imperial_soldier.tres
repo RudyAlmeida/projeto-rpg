@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_sv5e3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_oil_slime.png" id="2_8nmvw"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_b8alg"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="4_ykqo1"]
+[ext_resource type="Resource" path="res://data/skills/soldier_shot.tres" id="5_vqkjc"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="6_48fq4"]
+
+[resource]
+script = ExtResource("3_b8alg")
+id = &"imperial_soldier"
+display_name = "Soldado Imperial"
+battle_sheet = ExtResource("2_8nmvw")
+frame_size = Vector2i(56, 48)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 70
+strength = 12
+weapon_power = 8
+defense = 10
+spirit = 6
+precision = 12
+skills = Array[ExtResource("4_ykqo1")]([ExtResource("5_vqkjc")])
+xp_reward = 20
+money_reward = 15
+ap_reward = 3

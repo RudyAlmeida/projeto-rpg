@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_6kl8x"]
+
+[resource]
+script = ExtResource("1_6kl8x")
+id = &"spider_sting"
+display_name = "Ferrão"
+inflicts = {
+0: 60
+}

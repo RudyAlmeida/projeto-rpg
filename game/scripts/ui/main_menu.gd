@@ -14,6 +14,7 @@ const STAT_LABELS := {&"max_hp": "HP", &"max_mp": "MP", &"strength": "FOR", &"ma
 	&"spirit": "ESP", &"speed": "VEL", &"luck": "SOR", &"precision": "PRE", &"evasion": "EVA"}
 
 var _screen := Screen.ROOT
+var _save_only := false
 var _commands: ListMenu
 var _content: Panel
 var _list: ListMenu
@@ -32,6 +33,14 @@ var _options: OptionsPanel
 static func open(tree: SceneTree) -> MainMenu:
 	var menu := MainMenu.new()
 	tree.root.add_child(menu)
+	return menu
+
+
+## Save points: the menu opens straight on the save slots and closes when leaving them.
+static func open_save(tree: SceneTree) -> MainMenu:
+	var menu := open(tree)
+	menu._save_only = true
+	menu._show_save()
 	return menu
 
 
@@ -96,7 +105,10 @@ func _pick_member(action: String) -> void:
 	_clear_content()
 	_list = ListMenu.create(_content, Rect2(8, 8, 452, 120), "Quem?")
 	_list.set_entries(GameState.party.map(func(m: PartyMember) -> Dictionary:
-		return {"text": "%s  Nv. %d" % [m.data.display_name, m.level], "member": m, "note": "HP %d/%d" % [m.hp, m.max_hp()]}))
+		# Guests (Gerd in the prologue) only show their status.
+		var guest_locked := m.data.guest and action != "status"
+		return {"text": "%s  Nv. %d" % [m.data.display_name, m.level], "member": m, "enabled": not guest_locked,
+			"note": "convidado" if m.data.guest else "HP %d/%d" % [m.hp, m.max_hp()]}))
 
 
 func _show_items() -> void:
@@ -304,7 +316,8 @@ func _show_formation() -> void:
 	for i in GameState.party.size():
 		var m := GameState.party[i]
 		entries.append({"text": ("● " if i == _formation_first else "") + m.data.display_name,
-			"note": "ativo" if i < Battle.ACTIVE_MAX else "reserva"})
+			"note": "convidado" if m.data.guest else ("ativo" if i < Battle.ACTIVE_MAX else "reserva"),
+			"enabled": not m.data.guest})
 	_list.set_entries(entries, true)
 	_detail = _detail_label(Rect2(8, 144, 452, 60))
 	_detail.text = "Escolha dois personagens para trocar de posição."
@@ -424,6 +437,9 @@ func _on_cursor_moved() -> void:
 
 
 func _back() -> void:
+	if _save_only:
+		close()
+		return
 	match _screen:
 		Screen.ROOT:
 			close()
@@ -459,6 +475,8 @@ func _confirm() -> void:
 				"close":
 					close()
 		Screen.MEMBER:
+			if not _list.is_enabled():
+				return
 			_member = _list.current()["member"]
 			match _member_action:
 				"equip":
@@ -504,6 +522,8 @@ func _confirm() -> void:
 			if _list.current().has("node") and _member.learn((_list.current()["node"] as SkillTreeNode).id):
 				_show_tree()
 		Screen.FORMATION:
+			if not _list.is_enabled():
+				return
 			if _formation_first < 0:
 				_formation_first = _list.index
 			else:

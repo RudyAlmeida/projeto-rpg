@@ -1,0 +1,87 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_jdk0l"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_fwwic"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_4r0rt"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_22rww"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_4g6bb"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="6_682u6"]
+
+[sub_resource type="Resource" id="Resource_iohj4"]
+script = ExtResource("2_fwwic")
+type = 3
+seconds = 0.8
+
+[sub_resource type="Resource" id="Resource_1or17"]
+script = ExtResource("2_fwwic")
+type = 15
+seconds = 1.2
+color = Color(1, 0.55, 0.2, 1)
+
+[sub_resource type="Resource" id="Resource_y8elx"]
+script = ExtResource("2_fwwic")
+type = 14
+seconds = 1.4
+strength = 7.0
+
+[sub_resource type="Resource" id="Resource_3cg7h"]
+script = ExtResource("4_22rww")
+text = "A oficina Brunor explode numa coluna de vapor e fogo."
+
+[sub_resource type="Resource" id="Resource_rrm23"]
+script = ExtResource("4_22rww")
+speaker = "Kael"
+portrait = ExtResource("6_682u6")
+text = "MESTRE!"
+
+[sub_resource type="Resource" id="Resource_pa3l0"]
+script = ExtResource("4_22rww")
+speaker = "Eco"
+text = "...Registrando: \"triste\"."
+
+[sub_resource type="Resource" id="Resource_xi1yl"]
+script = ExtResource("2_fwwic")
+lines = Array[ExtResource("4_22rww")]([SubResource("Resource_3cg7h"), SubResource("Resource_rrm23"), SubResource("Resource_pa3l0")])
+
+[sub_resource type="Resource" id="Resource_372vt"]
+script = ExtResource("2_fwwic")
+type = 4
+
+[sub_resource type="Resource" id="Resource_2nfa3"]
+script = ExtResource("2_fwwic")
+type = 18
+actor = NodePath("Player")
+position = Vector2(392, 40)
+
+[sub_resource type="Resource" id="Resource_qwuem"]
+script = ExtResource("2_fwwic")
+type = 5
+
+[sub_resource type="Resource" id="Resource_k7nn4"]
+script = ExtResource("2_fwwic")
+type = 3
+seconds = 1.2
+
+[sub_resource type="Resource" id="Resource_qy4kd"]
+script = ExtResource("2_fwwic")
+type = 2
+actor = NodePath("Player")
+facing = 2
+
+[sub_resource type="Resource" id="Resource_nvggr"]
+script = ExtResource("2_fwwic")
+type = 3
+seconds = 0.8
+
+[sub_resource type="Resource" id="Resource_47ybk"]
+script = ExtResource("2_fwwic")
+type = 19
+text = "Fim do Prólogo
+
+A Máquina que Sabia meu Nome"
+
+[resource]
+script = ExtResource("1_jdk0l")
+id = &"p9_escape"
+once_flag = &"prologue_done"
+steps = Array[ExtResource("2_fwwic")]([SubResource("Resource_iohj4"), SubResource("Resource_1or17"), SubResource("Resource_y8elx"), SubResource("Resource_xi1yl"), SubResource("Resource_372vt"), SubResource("Resource_2nfa3"), SubResource("Resource_qwuem"), SubResource("Resource_k7nn4"), SubResource("Resource_qy4kd"), SubResource("Resource_nvggr"), SubResource("Resource_47ybk")])

@@ -3,7 +3,8 @@ extends Node2D
 
 const BACKGROUND := preload("res://assets/ui/bg_title.png")
 const MUSIC := preload("res://assets/audio/music/bgm_title_b.mp3")
-const FIRST_MAP := "res://scenes/maps/test_map.tscn"
+const FIRST_MAP := "res://scenes/maps/prologue/oficina.tscn"
+const FIRST_SPAWN := "start"
 
 var _menu: ListMenu
 var _slots: ListMenu
@@ -42,7 +43,7 @@ static func menu_entries() -> Array:
 
 func new_game() -> void:
 	GameState.party.clear()  # the first map starts a fresh game with its party
-	SceneManager.change_scene(FIRST_MAP)
+	SceneManager.change_scene(FIRST_MAP, FIRST_SPAWN)
 
 
 func _unhandled_input(event: InputEvent) -> void:

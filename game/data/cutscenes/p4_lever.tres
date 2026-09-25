@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Cutscene" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_nm7l0"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_7bh3n"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_mwlsd"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_pxqi8"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="5_x0i7p"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="6_5popn"]
+
+[sub_resource type="Resource" id="Resource_6251o"]
+script = ExtResource("2_7bh3n")
+type = 14
+seconds = 0.8
+strength = 3.0
+
+[sub_resource type="Resource" id="Resource_onsie"]
+script = ExtResource("4_pxqi8")
+text = "A esteira range, estala... e empurra o bloco de sucata para fora do caminho!"
+
+[sub_resource type="Resource" id="Resource_0dr6a"]
+script = ExtResource("4_pxqi8")
+speaker = "Mestre Gerd"
+portrait = ExtResource("6_5popn")
+text = "Hah! Ainda tem vida nessa lata."
+
+[sub_resource type="Resource" id="Resource_vt338"]
+script = ExtResource("2_7bh3n")
+lines = Array[ExtResource("4_pxqi8")]([SubResource("Resource_onsie"), SubResource("Resource_0dr6a")])
+
+[resource]
+script = ExtResource("1_nm7l0")
+id = &"p4_lever"
+steps = Array[ExtResource("2_7bh3n")]([SubResource("Resource_6251o"), SubResource("Resource_vt338")])

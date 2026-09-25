@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_2euxi"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_vx0d8"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_kvsam"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_hpu3s"]
+
+[sub_resource type="Resource" id="Resource_nwgfe"]
+script = ExtResource("2_vx0d8")
+speaker = "Guarda Olavo"
+text = "Voltaram inteiros? Ótimo. Eu não vi nada. Eu nunca vejo nada."
+
+[sub_resource type="Resource" id="Resource_v1x04"]
+script = ExtResource("1_2euxi")
+require_flags = Array[StringName]([&"gerd_joined"])
+lines = Array[ExtResource("2_vx0d8")]([SubResource("Resource_nwgfe")])
+
+[sub_resource type="Resource" id="Resource_h2xjc"]
+script = ExtResource("2_vx0d8")
+speaker = "Guarda Olavo"
+text = "Ordem da capital: ninguém entra no Ferro-Velho sem autorização. ...Mas eu almoço ao meio-dia, se é que me entende."
+
+[sub_resource type="Resource" id="Resource_bgmyx"]
+script = ExtResource("1_2euxi")
+lines = Array[ExtResource("2_vx0d8")]([SubResource("Resource_h2xjc")])
+
+[resource]
+script = ExtResource("4_hpu3s")
+id = &"p_olavo"
+branches = Array[ExtResource("1_2euxi")]([SubResource("Resource_v1x04"), SubResource("Resource_bgmyx")])

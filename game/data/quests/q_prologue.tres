@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://scripts/core/quest_data.gd" id="1_noamk"]
+
+[resource]
+script = ExtResource("1_noamk")
+id = &"q_prologue"
+title = "A Válvula de Bronze"
+description = "Serviços do mestre Gerd para a oficina Brunor."
+main_story = true
+objective_ids = Array[StringName]([&"deliver_box", &"fetch_valve", &"return_home"])
+objective_texts = Array[String](["Entregar a caixa de engrenagens ao Tobias", "Buscar a válvula de bronze no Ferro-Velho do Sul", "Voltar para a oficina"])
+reward_xp = 30

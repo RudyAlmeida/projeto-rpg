@@ -1,0 +1,8 @@
+{
+  "title": "Adeus",
+  "style": "16-bit SNES-era JRPG sad farewell theme, emotional and tender, solo piano melody with soft string pad, gentle music box, slow rubato, major key turning bittersweet, builds to a brief swelling string climax then fades, 70 BPM, like Aerith's theme or To Zanarkand in SNES style",
+  "negative_tags": "vocals, singing, lyrics, drums, EDM, trap, lo-fi",
+  "model": "chirp-v5-5",
+  "instrumental": true,
+  "duration": 60
+}

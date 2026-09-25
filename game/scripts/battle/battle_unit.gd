@@ -18,6 +18,10 @@ var aether := 0
 ## Damage dealt to the other side, for "highest threat" enemy targeting.
 var threat := 0
 var turns_taken := 0
+## Thieves (Scrap Crow): item ids taken from the party; given back if the thief falls.
+var stolen: Array[StringName] = []
+## The thief left the battle with its loot (not a KO: no rewards).
+var escaped := false
 
 
 func _init(p_data: CombatantData, p_is_player: bool, p_member: PartyMember = null) -> void:
@@ -53,7 +57,7 @@ func max_mp() -> int:
 
 
 func is_alive() -> bool:
-	return hp > 0
+	return hp > 0 and not escaped
 
 
 func display_name() -> String:

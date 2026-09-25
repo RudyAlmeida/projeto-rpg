@@ -4,7 +4,8 @@ extends RefCounted
 ## (DamageFormula + statuses), enemy AI, party swaps, Dual Techs and the outcome.
 ## BattleScene drives it and animates the results.
 
-enum Outcome { ONGOING, VICTORY, DEFEAT, FLED }
+## SCRIPTED: a story fight ended (turn limit reached or the party fell) — no game over.
+enum Outcome { ONGOING, VICTORY, DEFEAT, FLED, SCRIPTED }
 
 const ACTIVE_MAX := 3
 ## GDD 7: Aether gained per hero press and when an ally falls.
@@ -34,6 +35,7 @@ class ActionResult:
 	var revived := false
 	var no_effect := false   # e.g. Resonance on a non-mechanical target
 	var overheated_self := false
+	var stolen_item: StringName
 	var statuses_added: Array[int] = []
 	var statuses_removed: Array[int] = []
 	var resisted: Array[int] = []
@@ -48,6 +50,7 @@ class TurnStart:
 	var damage := 0           # poison
 	var heal := 0             # regen
 	var knocked_out := false
+	var escaped := false      # a thief ran off with its loot
 	var expired: Array[int] = []
 
 
@@ -62,6 +65,9 @@ var aether_factor := 1.0
 ## Item id -> count. Pass GameState.inventory to consume real items.
 var inventory: Dictionary = {}
 var fled := false
+## Story fights: enemy id -> number of its turns after which the battle ends (SCRIPTED).
+## Such fights also end as SCRIPTED instead of DEFEAT when the party falls.
+var end_after_turns: Dictionary = {}
 
 
 func _init(p_rng: RandomNumberGenerator = null, p_balance: CombatBalance = null) -> void:
@@ -113,6 +119,12 @@ func next_turn() -> BattleUnit:
 func begin_turn(unit: BattleUnit) -> TurnStart:
 	var t := TurnStart.new()
 	t.unit = unit
+	if not unit.is_player and unit.data.escape_after_turns > 0 and not unit.stolen.is_empty() 			and unit.turns_taken > unit.data.escape_after_turns:
+		unit.escaped = true
+		queue.remove(unit)
+		t.escaped = true
+		t.skip = true
+		return t
 	var max_hp := unit.max_hp()
 	if unit.has_status(StatusEffects.Id.POISON):
 		t.damage = unit.take_damage(maxi(1, roundi(max_hp * StatusEffects.POISON_PERCENT / 100.0)))
@@ -174,7 +186,10 @@ func outcome() -> Outcome:
 	if alive(enemies).is_empty():
 		return Outcome.VICTORY
 	if alive(party).is_empty():
-		return Outcome.DEFEAT
+		return Outcome.SCRIPTED if not end_after_turns.is_empty() else Outcome.DEFEAT
+	for unit in enemies:
+		if end_after_turns.has(unit.data.id) and unit.turns_taken >= int(end_after_turns[unit.data.id]):
+			return Outcome.SCRIPTED
 	return Outcome.ONGOING
 
 
@@ -388,7 +403,26 @@ func _apply_skill(actor: BattleUnit, skill: SkillData, target: BattleUnit,
 			_apply_statuses(r)
 		SkillData.Kind.ATTACK, SkillData.Kind.MAGIC:
 			_resolve_offense(r, bonus)
+	if skill.steals and r.hit and actor.is_alive() and not actor.is_player:
+		r.stolen_item = _steal(actor)
 	return r
+
+
+## Takes one random consumable from the party's inventory for `thief`.
+func _steal(thief: BattleUnit) -> StringName:
+	var options: Array[StringName] = []
+	for id: StringName in inventory:
+		var item := DataRegistry.item(id)
+		if int(inventory[id]) > 0 and item and item.kind == ItemData.Kind.CONSUMABLE:
+			options.append(id)
+	if options.is_empty():
+		return &""
+	var id := options[rng.randi_range(0, options.size() - 1)]
+	inventory[id] = int(inventory[id]) - 1
+	if int(inventory[id]) <= 0:
+		inventory.erase(id)
+	thief.stolen.append(id)
+	return id
 
 
 func _resolve_offense(r: ActionResult, bonus: float) -> void:
@@ -438,6 +472,8 @@ func _resolve_offense(r: ActionResult, bonus: float) -> void:
 		other *= StatusEffects.PROTECT_MULT
 	if target.has_status(StatusEffects.Id.OVERHEAT):
 		other *= StatusEffects.OVERHEAT_TAKEN_MULT
+	if is_guarded(target):
+		other *= target.data.guarded_damage_mult
 	if physical and actor.has_status(StatusEffects.Id.OVERHEAT):
 		other *= StatusEffects.OVERHEAT_ATTACK_MULT
 
@@ -487,6 +523,10 @@ func _apply_statuses(r: ActionResult) -> void:
 		r.no_effect = true
 		return
 	for id: int in skill.inflicts:
+		# Eco's Protection keeps allies from being dragged in (Triturador's Compact).
+		if id == StatusEffects.Id.STUCK and target.has_status(StatusEffects.Id.PROTECT):
+			r.resisted.append(id)
+			continue
 		var chance := float(skill.inflicts[id])
 		# GDD 6: Spirit resists negative statuses — except machine-only effects (Kael hears
 		# the machine; there is no will to resist).
@@ -522,6 +562,9 @@ func _revive(target: BattleUnit, percent: float) -> void:
 
 
 func _on_knock_out(unit: BattleUnit) -> void:
+	for id in unit.stolen:
+		inventory[id] = int(inventory.get(id, 0)) + 1  # the loot falls back to the party
+	unit.stolen.clear()
 	unit.statuses.clear()
 	unit.defending = false
 	queue.remove(unit)
@@ -529,6 +572,14 @@ func _on_knock_out(unit: BattleUnit) -> void:
 		unit.aether = 0
 		for hero in alive(party):
 			hero.add_aether(AETHER_ALLY_DOWN)
+
+
+## Boss parts: true while a guarding part (`guarded_by`) is still standing.
+func is_guarded(unit: BattleUnit) -> bool:
+	if unit.data.guarded_by.is_empty():
+		return false
+	var mates := enemies if not unit.is_player else party
+	return mates.any(func(u: BattleUnit) -> bool: return u != unit and u.is_alive() and u.data.id in unit.data.guarded_by)
 
 
 # ---------- AI ----------
@@ -619,21 +670,28 @@ func _rule_target(unit: BattleUnit, rule: AIRule) -> BattleUnit:
 # ---------- rewards ----------
 
 func total_xp() -> int:
-	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + u.data.xp_reward, 0)
+	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + (0 if u.escaped else u.data.xp_reward), 0)
+
+
+## XP of the enemies actually knocked out (story fights that end early).
+func defeated_xp() -> int:
+	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + (0 if u.is_alive() or u.escaped else u.data.xp_reward), 0)
 
 
 func total_money() -> int:
-	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + u.data.money_reward, 0)
+	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + (0 if u.escaped else u.data.money_reward), 0)
 
 
 func total_ap() -> int:
-	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + u.data.ap_reward, 0)
+	return enemies.reduce(func(sum: int, u: BattleUnit) -> int: return sum + (0 if u.escaped else u.data.ap_reward), 0)
 
 
 ## Rolls every enemy's drop table. Returns the item ids won (may repeat).
 func roll_drops() -> Array[StringName]:
 	var won: Array[StringName] = []
 	for e in enemies:
+		if e.escaped:
+			continue
 		for id: StringName in e.data.drops:
 			if rng.randf() * 100.0 < float(e.data.drops[id]):
 				won.append(id)
@@ -643,13 +701,18 @@ func roll_drops() -> Array[StringName]:
 ## Writes HP/MP/Aether back to the party and shares the XP (GDD 8.3: reserves 75%,
 ## KO'd heroes 50%). Returns one entry per hero: {member, xp, levels}. KO'd heroes come
 ## back with 1 HP (prototype rule until revive items and inns exist).
-func finish_victory() -> Array[Dictionary]:
+func finish_victory(xp := -1) -> Array[Dictionary]:
 	var results: Array[Dictionary] = []
-	var xp := total_xp()
+	if xp < 0:
+		xp = total_xp()
 	for unit in party + reserves:
 		var member := unit.member
 		if member == null:
 			continue
+		if member.data.guest:
+			member.hp = maxi(unit.hp, 1)
+			member.mp = unit.mp
+			continue  # guests keep a fixed level
 		member.hp = maxi(unit.hp, 1)
 		member.mp = unit.mp
 		member.aether = unit.aether

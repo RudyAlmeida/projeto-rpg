@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_g1s4o"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_ikipl"]
+
+[resource]
+script = ExtResource("2_ikipl")
+id = &"brass_spring"
+display_name = "Mola de Latão"
+kind = 5
+icon_index = 15
+description = "Mola roída por um Rato-Engrenagem. O Sr. Anselmo precisa de três."
+battle_usable = false
+field_usable = false

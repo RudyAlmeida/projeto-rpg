@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "247ef9d9-a48a-49f1-a5a4-019ca6f0af92",
+  "trace_id": "4a84eee5-396f-4a4d-9fdd-217d01830ca7",
+  "data": [
+    {
+      "id": "4ef5a335-a1c3-44dc-8a73-ad7a26da903e",
+      "title": "O Triturador (chefe)",
+      "image_url": "https://cdn2.suno.ai/image_4ef5a335-a1c3-44dc-8a73-ad7a26da903e.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_4ef5a335-a1c3-44dc-8a73-ad7a26da903e.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/4ef5a335-a1c3-44dc-8a73-ad7a26da903e.mp3",
+      "video_url": "https://cdn1.suno.ai/4ef5a335-a1c3-44dc-8a73-ad7a26da903e.mp4",
+      "created_at": "2026-09-25T12:32:42.426Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG boss battle theme, intense and heavy, pounding timpani and taiko, aggressive low brass riffs, fast strings, pipe organ stabs, grinding industrial metallic percussion, steampunk machine menace, minor key with dramatic chromatic bass, 160 BPM, seamless loop, like Final Fantasy VI boss music",
+      "duration": 89.96
+    },
+    {
+      "id": "10219bd3-2936-4f4e-8747-3ea407778b3a",
+      "title": "O Triturador (chefe)",
+      "image_url": "https://cdn2.suno.ai/image_10219bd3-2936-4f4e-8747-3ea407778b3a.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_10219bd3-2936-4f4e-8747-3ea407778b3a.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/10219bd3-2936-4f4e-8747-3ea407778b3a.mp3",
+      "video_url": "https://cdn1.suno.ai/10219bd3-2936-4f4e-8747-3ea407778b3a.mp4",
+      "created_at": "2026-09-25T12:32:42.426Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG boss battle theme, intense and heavy, pounding timpani and taiko, aggressive low brass riffs, fast strings, pipe organ stabs, grinding industrial metallic percussion, steampunk machine menace, minor key with dramatic chromatic bass, 160 BPM, seamless loop, like Final Fantasy VI boss music",
+      "duration": 89.64
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

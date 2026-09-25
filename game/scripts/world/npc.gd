@@ -18,6 +18,9 @@ const INN_TEXT := "Um quarto e uma refeição quente por %d moedas?"
 @export var shop_stock: Array[ItemData] = []
 @export var inn_price := 20
 @export var display_name := ""
+## Story gating (FlagGate): present only when `show_if_flag` is set and `hide_if_flag` is not.
+@export var show_if_flag: StringName
+@export var hide_if_flag: StringName
 
 @onready var _sprite: Sprite2D = $Sprite
 
@@ -25,6 +28,9 @@ const INN_TEXT := "Um quarto e uma refeição quente por %d moedas?"
 func _ready() -> void:
 	_sprite.texture = idle_sheet
 	_show_facing(facing)
+	if show_if_flag != &"" or hide_if_flag != &"":
+		GameState.flag_changed.connect(func(_name: StringName) -> void: FlagGate.apply(self, show_if_flag, hide_if_flag))
+		FlagGate.apply(self, show_if_flag, hide_if_flag)
 
 
 func interact(player: Node2D) -> void:
@@ -35,6 +41,8 @@ func interact(player: Node2D) -> void:
 		await DialogueManager.play(lines)
 	if branch:
 		branch.apply()
+		if branch.cutscene:
+			await branch.cutscene.play(get_parent())
 	match role:
 		Role.SHOP:
 			await _open_shop(player)
