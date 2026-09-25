@@ -10,3 +10,4 @@ desktop.ini
 .DS_Store
 .~lock.*#
 tools/docs/node_modules/
+tools/art/node_modules/

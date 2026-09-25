@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '0.4 — história aprovada'],
+    ['Versão do documento', '0.5 — guia de estilo'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -193,7 +193,8 @@ children.push(
     ['Codex CLI 0.156.1', 'Geração de imagens (gpt-5.5 + image_gen embutido)', 'tools\\codex-cli, via tools\\gen_image.ps1 (sem MCP)'],
     ['Git + GitHub', 'Controle de versão', 'github.com/RudyAlmeida/projeto-rpg (branch main)'],
     ['GUT ou gdUnit4', 'Testes automatizados', 'Escolher na Fase 0'],
-    ['Aseprite / Krita (opcional)', 'Ajustes manuais em sprites', 'Opcional'],
+    ['tools/art/pixelize.mjs', 'Converte imagem do Codex em sprite (fundo, grade, paleta)', 'Node + @napi-rs/canvas'],
+    ['Aseprite / Krita (opcional)', 'Ajustes manuais em sprites', 'Opcional; paleta velmora32.hex'],
   ], [22, 43, 35]),
 );
 
@@ -305,7 +306,7 @@ children.push(
   table(['Especificação', 'Valor'], [
     ['Resolução base', '640×360, escala inteira, filtro Nearest'],
     ['Tiles', '16×16 px'],
-    ['Personagens (mapa/batalha)', '~32×48 px'],
+    ['Personagens (mapa/batalha)', '~32×56 px em célula 64×64 (ver Guia de Estilo)'],
     ['Retratos de diálogo', 'a definir no guia de estilo (ex.: 64×64)'],
     ['Paleta', 'limitada e fixa, definida no guia de estilo'],
     ['Contorno / luz', 'contorno escuro, luz vinda de cima à esquerda'],
@@ -441,7 +442,7 @@ children.push(...phase(0, 'Pré-produção',
     ['Escolher framework de testes (GUT / gdUnit4)', 'Claude', ''],
     ['Testar geração de imagem via Codex', 'Claude', 'codex_test_01.png via Codex CLI (MCP incompatível)', DONE],
     ['Escolher ferramenta de IA de áudio', 'Diretor + Claude', 'Verificar uso comercial'],
-    ['Criar Guia de Estilo + prompt-base', 'Claude + Diretor', ''],
+    ['Criar Guia de Estilo + prompt-base', 'Claude + Diretor', 'v0.1 aguardando aprovação: docs/Guia_de_Estilo.docx', WIP],
     ['Esboçar história em atos e o grupo principal', 'Diretor + Claude', 'Bíblia da história v0.2 aprovada (H-01 a H-06)', DONE],
     ['Escrever GDD do sistema de combate', 'Claude', 'Fórmulas de dano, turnos CTB, timing, status'],
   ],
@@ -561,8 +562,8 @@ children.push(
   P('Registro de cada imagem gerada. Adicionar linhas conforme a produção avança.'),
   table(['ID', 'Arquivo', 'Tipo', 'Fase', 'Status', 'Obs.'], [
     ['A-001', 'assets/_tests/codex_test_01.png', 'Teste de estilo', 'F0', DONE, 'Herói, 4 poses, 2056×765; precisa de tratamento de grade/paleta'],
-    ['A-002', '', '', '', '☐ Pendente', ''],
-    ['A-003', '', '', '', '☐ Pendente', ''],
+    ['A-002', 'assets/_source/chr_kael_ref_raw_v1.png', 'Referência (bruta)', 'F0', DONE, 'Kael oficial, 4 poses, fundo transparente'],
+    ['A-003', 'assets/sprites/characters/kael/chr_kael_ref.png', 'Sprite', 'F0', WIP, '4 quadros 64×64, velmora32; rosto da pose de combate pede retoque'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -604,6 +605,7 @@ children.push(
     ['0.2', today, 'Decisões D-01 a D-09 registradas (premissa: O Coração de Éter); projeto Godot, Git/GitHub e teste de imagem concluídos; seções de combate, progressão, arte e áudio atualizadas.'],
     ['0.3', today, 'Bíblia da história v0.1 criada (docs/Historia_O_Coracao_de_Eter.docx); sumário estático (compatível com LibreOffice); tabelas e títulos não se separam mais entre páginas.'],
     ['0.4', today, 'História aprovada (bíblia v0.2): morte simulada de Gerd, triângulo Kael–Lyra–Isolde; sistema de afinidade e matriz de finais adicionados.'],
+    ['0.5', today, 'Guia de Estilo v0.1 (paleta Velmora 32, tamanhos, prompt-base, pipeline); referência oficial do Kael; ferramenta pixelize.mjs.'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),

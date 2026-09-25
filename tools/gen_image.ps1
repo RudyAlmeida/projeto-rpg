@@ -9,7 +9,9 @@ $game = Join-Path $PSScriptRoot "..\game" | Resolve-Path
 $task = @"
 Use your built-in image generation tool (imagegen skill, built-in mode) to create ONE image, then copy the generated PNG to exactly:
 $OutPath
-(relative to the current working directory). Do not overwrite an existing file; do not modify any other files.
+(relative to the current working directory). Copy the file byte-for-byte with a plain file copy: do NOT edit, recolor, re-encode,
+flatten, remove or replace the background, or post-process the image in any way, even if the background is transparent instead
+of magenta. Do not overwrite an existing file; do not modify any other files.
 
 $Prompt
 
