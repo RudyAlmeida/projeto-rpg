@@ -36,11 +36,6 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
-[internationalization]
-
-locale/translations=PackedStringArray("res://i18n/ui.pt_BR.translation", "res://i18n/ui.en.translation")
-locale/fallback="pt_BR"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
@@ -133,6 +128,11 @@ pause={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ])
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/ui.pt_BR.translation", "res://i18n/ui.en.translation")
+locale/fallback="pt_BR"
 
 [rendering]
 

@@ -392,7 +392,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_on_cursor_moved()
 		return
-	if event.is_action_pressed(&"cancel") or (event.is_action_pressed(&"menu") and _screen == Screen.ROOT):
+	if UIKit.is_back(event) or (event.is_action_pressed(&"menu") and _screen == Screen.ROOT):
 		get_viewport().set_input_as_handled()
 		_back()
 	elif event.is_action_pressed(&"confirm"):

@@ -81,3 +81,10 @@ func test_timing_windows() -> void:
 	assert_eq(TimingPrompt.evaluate(0.2), DamageFormula.Timing.MISS)
 	assert_eq(TimingPrompt.evaluate(INF), DamageFormula.Timing.MISS, "no press")
 	assert_eq(TimingPrompt.evaluate(0.2, 2.0), DamageFormula.Timing.GOOD, "easy mode doubles windows")
+
+
+func test_battle_themes_alternate() -> void:
+	var first := BattleScene.next_battle_track()
+	var second := BattleScene.next_battle_track()
+	assert_ne(first, second, "consecutive fights use different themes")
+	assert_eq(BattleScene.next_battle_track(), first, "and then come back to the first")

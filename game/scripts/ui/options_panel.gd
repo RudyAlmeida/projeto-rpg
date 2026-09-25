@@ -1,7 +1,7 @@
 class_name OptionsPanel
 extends Control
 ## Options screen shared by the title and the pause menu. ↑↓ picks a row, ←→ changes it,
-## cancel saves and emits `closed`.
+## back (Esc / X / Backspace, pad B / Start) or the Voltar row saves and emits `closed`.
 
 signal closed
 
@@ -14,10 +14,10 @@ var _help: Label
 
 
 func _ready() -> void:
-	_list = ListMenu.create(self, Rect2(120, 70, 400, 136), "Opções")
-	var help_panel := UIKit.panel(self, Rect2(120, 212, 400, 44))
+	_list = ListMenu.create(self, Rect2(120, 60, 400, 150), "Opções")
+	var help_panel := UIKit.panel(self, Rect2(120, 214, 400, 80))
 	_help = UIKit.label(help_panel, Vector2(10, 4), "", UIKit.DIM)
-	_help.size = Vector2(380, 36)
+	_help.size = Vector2(380, 72)
 	_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_refresh()
 
@@ -34,12 +34,25 @@ func _refresh() -> void:
 			"help": "Alterna entre janela e tela cheia."},
 		{"text": "Idioma", "note": LANGUAGE_NAMES[Settings.language], "id": "language",
 			"help": "O inglês cobre só os menus por enquanto."},
+		{"text": "Voltar", "id": "back", "help": "Salva as opções e volta."},
 	], true)
-	_help.text = _list.current().get("help", "")
+	_update_help()
+
+
+func _update_help() -> void:
+	_help.text = "%s\n←→ alterar    Esc / X / B: voltar" % _list.current().get("help", "")
+
+
+## Saves and leaves (Voltar row, Esc / X / Backspace, pad B / Start).
+func close() -> void:
+	Settings.save_settings()
+	closed.emit()
 
 
 func change(id: String, step: int) -> void:
 	match id:
+		"back":
+			return
 		"volume":
 			Settings.music_volume = clampf(snappedf(Settings.music_volume + 0.1 * step, 0.1), 0.0, 1.0)
 		"text":
@@ -62,14 +75,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_visible_in_tree():
 		return
 	if _list.handle_navigation(event):
-		_help.text = _list.current().get("help", "")
+		_update_help()
+	elif event.is_action_pressed(&"confirm") and _list.current()["id"] == "back":
+		close()
 	elif event.is_action_pressed(&"move_right") or event.is_action_pressed(&"confirm"):
 		change(_list.current()["id"], 1)
 	elif event.is_action_pressed(&"move_left"):
 		change(_list.current()["id"], -1)
-	elif event.is_action_pressed(&"cancel"):
-		Settings.save_settings()
-		closed.emit()
+	elif UIKit.is_back(event):
+		close()
 	else:
 		return
 	get_viewport().set_input_as_handled()

@@ -2,7 +2,7 @@ extends Node2D
 ## Title screen: key art, logo, New game / Continue / Options / Quit.
 
 const BACKGROUND := preload("res://assets/ui/bg_title.png")
-const MUSIC := preload("res://assets/audio/music/bgm_title_a.mp3")
+const MUSIC := preload("res://assets/audio/music/bgm_title_b.mp3")
 const FIRST_MAP := "res://scenes/maps/test_map.tscn"
 
 var _menu: ListMenu
@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var active := _slots if _slots else _menu
 	if active.handle_navigation(event):
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed(&"cancel") and _slots:
+	elif UIKit.is_back(event) and _slots:
 		get_viewport().set_input_as_handled()
 		_slots.queue_free()
 		_slots = null

@@ -73,3 +73,8 @@ static func clear(node: Node) -> void:
 
 static func pressed(event: InputEvent, action: StringName) -> bool:
 	return event.is_action_pressed(action, false)
+
+
+## "Back" in every menu: cancel (X, Backspace, pad B) or pause (Esc, pad Start).
+static func is_back(event: InputEvent) -> bool:
+	return event.is_action_pressed(&"cancel") or event.is_action_pressed(&"pause")

@@ -224,6 +224,38 @@ func test_options_cycle_and_apply() -> void:
 	assert_almost_eq(AudioManager.music_volume, Settings.music_volume, 0.001)
 
 
+func _action(action: StringName) -> InputEventAction:
+	var e := InputEventAction.new()
+	e.action = action
+	e.pressed = true
+	return e
+
+
+func test_options_close_with_esc_cancel_and_back_row() -> void:
+	for how in [&"pause", &"cancel", &"row"]:
+		var panel := OptionsPanel.new()
+		add_child_autofree(panel)
+		watch_signals(panel)
+		if how == &"row":
+			for i in 5:
+				panel._unhandled_input(_action(&"move_down"))
+			assert_eq(panel._list.current()["id"], "back")
+			panel._unhandled_input(_action(&"confirm"))
+		else:
+			panel._unhandled_input(_action(how))  # Esc / pad Start, or X / Backspace / pad B
+		assert_signal_emitted(panel, "closed", "options close via %s" % how)
+
+
+func test_main_menu_closes_with_esc() -> void:
+	var menu := MainMenu.open(get_tree())
+	await wait_process_frames(1)
+	watch_signals(menu)
+	menu._unhandled_input(_action(&"pause"))
+	assert_signal_emitted(menu, "closed")
+	await wait_process_frames(1)
+	assert_false(get_tree().paused)
+
+
 func test_title_menu_entries() -> void:
 	var ids: Array = TitleScreenScript.menu_entries().map(func(e: Dictionary) -> String: return e["id"])
 	assert_eq(ids, ["new", "continue", "options", "quit"])

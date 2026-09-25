@@ -22,7 +22,11 @@ const NUMBER_DAMAGE := Color(0.909804, 0.894118, 0.862745)
 const NUMBER_HEAL := Color(0.713725, 0.85098, 0.478431)
 const NUMBER_MP := Color(0.309804, 0.878431, 0.815686)
 const NUMBER_STATUS := Color(0.74902, 0.658824, 0.478431)
-const BATTLE_MUSIC := preload("res://assets/audio/music/bgm_battle_a.mp3")
+## Battle themes, alternated from one fight to the next.
+const BATTLE_TRACKS: Array[AudioStream] = [
+	preload("res://assets/audio/music/bgm_battle_a.mp3"),
+	preload("res://assets/audio/music/bgm_battle_b.mp3"),
+]
 const VICTORY_MUSIC := preload("res://assets/audio/music/bgm_victory_a.mp3")
 
 var battle: Battle
@@ -38,6 +42,8 @@ var aether_factor := 1.0
 var play_music := false
 ## Item ids won in the last victory.
 var drops: Array[StringName] = []
+
+static var _next_track := 0
 
 var _views := {}  # BattleUnit -> BattlerView
 var _tags := {}   # enemy BattleUnit -> Label (status badges)
@@ -100,12 +106,19 @@ func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], c
 	_cursor.hide()
 	add_child(_cursor)
 	if play_music:
-		AudioManager.push_music(BATTLE_MUSIC)
+		AudioManager.push_music(next_battle_track())
 	if initiative:
 		_ui.show_message("Ataque surpresa!")
 	elif ambush:
 		_ui.show_message("Emboscada!")
 	_run.call_deferred()
+
+
+## The theme for the next fight; each call switches to the other track.
+static func next_battle_track() -> AudioStream:
+	var track := BATTLE_TRACKS[_next_track % BATTLE_TRACKS.size()]
+	_next_track += 1
+	return track
 
 
 func view_of(unit: BattleUnit) -> BattlerView:
@@ -550,7 +563,7 @@ func _list_input(event: InputEvent) -> void:
 		_list_index = wrapi(_list_index + step, 0, _list_entries.size())
 		_ui.show_list(_menu_title(), _list_entries, _list_index)
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed(&"cancel") and _mode != Mode.ROOT:
+	elif UIKit.is_back(event) and _mode != Mode.ROOT:
 		get_viewport().set_input_as_handled()
 		_open_root()
 	elif event.is_action_pressed(&"confirm"):
@@ -648,7 +661,7 @@ func _target_input(event: InputEvent) -> void:
 		_pending["targets"] = _targets.duplicate() if _target_all else [_targets[_target_index]]
 		_ui.show_message("")
 		submit_action(_pending)
-	elif event.is_action_pressed(&"cancel"):
+	elif UIKit.is_back(event):
 		get_viewport().set_input_as_handled()
 		_cursor.hide()
 		_ui.show_message("")

@@ -104,7 +104,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_update_info()
 		return
-	if event.is_action_pressed(&"cancel"):
+	if UIKit.is_back(event):
 		get_viewport().set_input_as_handled()
 		if _mode == Mode.TOP:
 			closed.emit()
