@@ -3,11 +3,13 @@
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
 [ext_resource type="Resource" path="res://data/skills/slime_tackle.tres" id="2_tackle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_oil_slime.png" id="3_sheet"]
 
 [resource]
 script = ExtResource("1_data")
 display_name = "Slime de Óleo"
-frame_size = Vector2i(48, 48)
+battle_sheet = ExtResource("3_sheet")
+frame_size = Vector2i(56, 48)
 idle_frame = 0
 attack_frame = 2
 hurt_frame = 3

@@ -19,6 +19,8 @@ const INTERACT_REACH := 20.0
 @export var walk_sheet: Texture2D
 
 var facing := Facing.DOWN
+## Set by gameplay systems (battles, cutscenes) to freeze the player.
+var locked := false
 
 var _anim_time := 0.0
 var _moving := false
@@ -51,9 +53,16 @@ func _physics_process(delta: float) -> void:
 	_update_frame()
 
 
-## False while a conversation or a scene transition is running.
+## False while a conversation, a scene transition or a battle is running.
 func can_move() -> bool:
-	return not DialogueManager.is_active and not SceneManager.is_transitioning
+	return not locked and not DialogueManager.is_active and not SceneManager.is_transitioning
+
+
+## Where the camera is looking, after skipping any smoothing still in progress.
+func camera_center() -> Vector2:
+	_camera.reset_smoothing()
+	_camera.force_update_scroll()
+	return _camera.get_screen_center_position()
 
 
 func _unhandled_input(event: InputEvent) -> void:

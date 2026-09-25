@@ -4,10 +4,12 @@
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
 [ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
 [ext_resource type="Resource" path="res://data/skills/defend.tres" id="4_defend"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/brann/chr_brann_ref.png" id="2_sheet"]
 
 [resource]
 script = ExtResource("1_data")
 display_name = "Brann"
+battle_sheet = ExtResource("2_sheet")
 idle_frame = 3
 flip_h = true
 max_hp = 170
