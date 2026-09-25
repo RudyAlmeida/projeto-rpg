@@ -106,7 +106,7 @@ func _room(w: int, h: int, wall: String, floor_ch: String, door_x: int, windows:
 	_fill(0, 1, w - 1, 1, wall)
 	for x: int in windows:
 		_cell_set(x, 1, "W")
-	_cell_set(door_x, h - 1, "D")
+	_cell_set(door_x, h - 1, "d")
 	return Vector2i(door_x, h - 1)
 
 
@@ -291,7 +291,7 @@ const VOSS_SHEET := "res://assets/sprites/characters/voss/chr_voss_map.png"
 
 func _oficina() -> void:
 	_room(16, 11, "#", "_", 7, [2, 7, 12])
-	_cell_set(15, 5, "D")  # back door
+	_cell_set(15, 5, "d")  # back door
 	_put("5,2:K 1,9:o 14,9:x 1,2:c 14,2:g 8,6:q 9,6:q")
 	_begin("Oficina", "vila", MUSIC_VILA)
 	# New game (title screen): Kael alone, a little money and two potions.

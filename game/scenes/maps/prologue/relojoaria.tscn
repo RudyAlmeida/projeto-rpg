@@ -17,12 +17,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bomwp"]
 size = Vector2(12, 12)
 
-[node name="Relojoaria" type="Node2D" unique_id=1262749051]
+[node name="Relojoaria" type="Node2D" unique_id=1726978569]
 y_sort_enabled = true
 script = ExtResource("1_pwowq")
 music = ExtResource("2_nusxg")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=1214068403]
+[node name="Map" type="TileMapLayer" parent="." unique_id=1446751431]
 script = ExtResource("3_5i165")
 legend = "vila"
 layout = "HHHHHHHHHH
@@ -32,22 +32,22 @@ H________H
 H__qq_q__H
 H________H
 HK_______H
-HHHHHDHHHH"
+HHHHHdHHHH"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=437542034 instance=ExtResource("4_eg0ig")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1174326165 instance=ExtResource("4_eg0ig")]
 motion_mode = 1
 script = ExtResource("5_vb3qi")
 idle_sheet = ExtResource("6_10dx3")
 walk_sheet = ExtResource("7_1d2it")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=989909822]
+[node name="Spawns" type="Node2D" parent="." unique_id=894881301]
 
-[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1323025559]
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1293348204]
 position = Vector2(88, 104)
 script = ExtResource("8_eftbd")
 facing = 2
 
-[node name="Anselmo" type="StaticBody2D" parent="." unique_id=531621099 instance=ExtResource("9_2a5ui")]
+[node name="Anselmo" type="StaticBody2D" parent="." unique_id=911131349 instance=ExtResource("9_2a5ui")]
 position = Vector2(88, 56)
 script = ExtResource("10_2iedu")
 idle_sheet = ExtResource("11_ikaje")
@@ -55,11 +55,11 @@ sheet_row = 3
 dialogue_set = ExtResource("12_an01j")
 display_name = "Sr. Anselmo"
 
-[node name="Door" type="Area2D" parent="." unique_id=1503879070]
+[node name="Door" type="Area2D" parent="." unique_id=1435273797]
 position = Vector2(88, 120)
 script = ExtResource("13_fr5nn")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "from_relojoaria"
 
-[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=720363099]
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1475248514]
 shape = SubResource("RectangleShape2D_bomwp")

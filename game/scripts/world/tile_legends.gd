@@ -45,7 +45,9 @@ const VILA := {
 		"#": {"tile": Vector2i(0, 2), "solid": true},
 		"b": {"tile": Vector2i(1, 2), "solid": true},
 		"H": {"tile": Vector2i(2, 2), "solid": true},
-		"D": {"tile": Vector2i(3, 2)},
+		# building door: a big (2×) walkable door on the facade; "d" = small door (room exits)
+		"D": {"tile": Vector2i(3, 2), "decor": true, "big": true},
+		"d": {"tile": Vector2i(3, 2)},
 		"W": {"tile": Vector2i(4, 2), "solid": true},
 		"O": {"tile": Vector2i(5, 2), "solid": true},
 		"f": {"tile": Vector2i(6, 2), "solid": true, "decor": true},

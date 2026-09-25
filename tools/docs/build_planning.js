@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '2.3 — Fase 3: visual e áudio do prólogo completos; correções do playtest'],
+    ['Versão do documento', '2.4 — Fase 3: escala de objetos e personagens ajustada pelo Diretor'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -604,6 +604,7 @@ children.push(
     ['A-039', 'assets/vfx/vfx_battle.png', 'VFX', 'F3', DONE, '8 efeitos × 4 quadros (células de 48 px)'],
     ['A-040', 'assets/ui/ui_window.png, ui_cursor.png', 'UI', 'F3', DONE, 'Moldura de latão 9-slice e cursor de mão'],
     ['A-041', 'assets/sprites/objects/obj_airship.png, obj_workshop_ruins.png', 'Sprite', 'F3', DONE, 'Dirigível imperial sobre a praça e ruínas da oficina após a explosão'],
+    ['A-042', 'sprites de mapa (Kael, Gerd, Eco, moradores, soldados, Voss)', 'Sprite', 'F3', DONE, 'Reconvertidos a 78% (Kael 44 px) para combinar com os objetos de cenário em 2×; portas das fachadas em 2×'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -658,6 +659,7 @@ children.push(
     ['2.1', today, 'Fase 2 aprovada pelo Diretor (músicas: título B, vitória B, batalha A e B alternadas; menus fecham com Esc/Start e X/B). Fase 3 iniciada: roteiro do prólogo v0.1 (docs/Roteiro_Prologo.docx) e tileset da Vila Caldeira (158 testes).'],
     ['2.2', today, 'Prólogo jogável do início ao fim: 10 mapas (vila, 3 interiores, estrada, ferro-velho em 3 áreas, câmara), 12 cutscenes, Gerd convidado, Eco, chefe em partes, corvo ladrão, luta roteirizada com Voss, missões do gato e das molas, cena de fim de capítulo. Novos sistemas: objetos de mapa (baú, alavanca, bloco, ponto de salvamento), portões por flag, tint noturno. 4 músicas novas (171 testes).'],
     ['2.3', today, 'Escolhas do Diretor aplicadas (músicas, SFX de banco CC0, fonte). Poses de batalha de Kael, Eco e Gerd; efeitos visuais; moldura e cursor de latão; dirigível e ruínas. Correções do playtest: retorno do uso de itens no menu, saída da câmara do Eco, fonte dos diálogos (172 testes).'],
+    ['2.4', today, 'Pedido do Diretor após o teste: objetos de cenário e interativos (baús, caldeira de salvar, cama, alavanca, caixas, lampiões, árvores, máquinas) em 2×; personagens do mapa a 78%; portas das casas em 2× (173 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),

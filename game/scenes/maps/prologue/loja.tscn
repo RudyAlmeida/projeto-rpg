@@ -29,12 +29,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w046s"]
 size = Vector2(12, 12)
 
-[node name="Loja" type="Node2D" unique_id=321260352]
+[node name="Loja" type="Node2D" unique_id=1360302814]
 y_sort_enabled = true
 script = ExtResource("1_hj5kt")
 music = ExtResource("2_aq3km")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=2113584513]
+[node name="Map" type="TileMapLayer" parent="." unique_id=481345644]
 script = ExtResource("3_ovfto")
 legend = "vila"
 layout = "HHHHHHHHHHHH
@@ -45,22 +45,22 @@ H___qq_qq__H
 H__________H
 H__________H
 Hg________cH
-HHHHHHDHHHHH"
+HHHHHHdHHHHH"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1904290418 instance=ExtResource("4_jmice")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=650740336 instance=ExtResource("4_jmice")]
 motion_mode = 1
 script = ExtResource("5_bb78t")
 idle_sheet = ExtResource("6_7uj0f")
 walk_sheet = ExtResource("7_l86sp")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=1817341726]
+[node name="Spawns" type="Node2D" parent="." unique_id=1177660113]
 
-[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1615273258]
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=957864666]
 position = Vector2(104, 120)
 script = ExtResource("8_g1yy3")
 facing = 2
 
-[node name="Tobias" type="StaticBody2D" parent="." unique_id=2126694163 instance=ExtResource("9_e85cb")]
+[node name="Tobias" type="StaticBody2D" parent="." unique_id=2036404368 instance=ExtResource("9_e85cb")]
 position = Vector2(104, 56)
 script = ExtResource("10_khjny")
 idle_sheet = ExtResource("11_wk5gp")
@@ -69,11 +69,11 @@ role = 1
 shop_stock = Array[ExtResource("13_mbnbd")]([ExtResource("14_y654k"), ExtResource("15_ootve"), ExtResource("16_6162x"), ExtResource("17_fqk7n"), ExtResource("18_gddk7"), ExtResource("19_7wliw"), ExtResource("20_jb45h"), ExtResource("21_ker0q"), ExtResource("22_3cvbo"), ExtResource("23_lqtt6"), ExtResource("24_dc4ht")])
 display_name = "Engrenagem Dourada"
 
-[node name="Door" type="Area2D" parent="." unique_id=845082710]
+[node name="Door" type="Area2D" parent="." unique_id=2003556613]
 position = Vector2(104, 136)
 script = ExtResource("25_twwwu")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "from_loja"
 
-[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=815113526]
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=296867682]
 shape = SubResource("RectangleShape2D_w046s")
