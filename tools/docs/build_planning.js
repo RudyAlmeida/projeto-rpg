@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '0.7 — base técnica concluída'],
+    ['Versão do documento', '0.8 — referências e áudio'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -190,7 +190,9 @@ children.push(
     ['Godot (console)', 'Execução headless, testes e exportação por linha de comando', 'D:\\Godot\\Godot_v4.7.2-stable_win64_console.exe'],
     ['GDScript', 'Linguagem principal (tipagem estática)', '—'],
     ['Claude Code', 'Desenvolvimento e automação', 'Pasta D:\\Projeto RPG'],
-    ['Codex CLI 0.156.1', 'Geração de imagens (gpt-5.5 + image_gen embutido)', 'tools\\codex-cli, via tools\\gen_image.ps1 (sem MCP)'],
+    ['Codex CLI 0.156.1', 'Geração de imagens (gpt-5.5 + image_gen embutido)', 'tools\\codex-cli, via tools\\gen_image.ps1'],
+    ['Codex MCP (ponte nova)', 'Geração de imagens pelo Codex App Server', 'servidor "codex" (adapter.cjs); testado com o Eco'],
+    ['Suno MCP (AceDataCloud)', 'Música e efeitos por IA', 'servidor "suno-music"; token validado'],
     ['Git + GitHub', 'Controle de versão', 'github.com/RudyAlmeida/projeto-rpg (branch main)'],
     ['GUT 9.7.1', 'Testes automatizados', 'game/addons/gut; rodar com tools\\run_tests.ps1'],
     ['tools/art/pixelize.mjs', 'Converte imagem do Codex em sprite (fundo, grade, paleta)', 'Node + @napi-rs/canvas'],
@@ -441,7 +443,7 @@ children.push(...phase(0, 'Pré-produção',
     ['Configurar input map (teclado + gamepad)', 'Claude', '12 ações via game/tools/setup_input_map.gd', DONE],
     ['Escolher framework de testes (GUT / gdUnit4)', 'Claude', 'GUT 9.7.1; tools/run_tests.ps1', DONE],
     ['Testar geração de imagem via Codex', 'Claude', 'codex_test_01.png via Codex CLI (MCP incompatível)', DONE],
-    ['Escolher ferramenta de IA de áudio', 'Diretor + Claude', 'Verificar uso comercial'],
+    ['Escolher ferramenta de IA de áudio', 'Diretor + Claude', 'Suno via MCP da AceDataCloud conectado e testado; falta confirmar licença de uso comercial', WIP],
     ['Criar Guia de Estilo + prompt-base', 'Claude + Diretor', 'Guia de Estilo v1.0 aprovado', DONE],
     ['Esboçar história em atos e o grupo principal', 'Diretor + Claude', 'Bíblia da história v0.2 aprovada (H-01 a H-06)', DONE],
     ['Escrever GDD do sistema de combate', 'Claude', 'GDD v1.0 aprovado: docs/GDD_Combate.docx', DONE],
@@ -564,6 +566,10 @@ children.push(
     ['A-001', 'assets/_tests/codex_test_01.png', 'Teste de estilo', 'F0', DONE, 'Herói, 4 poses, 2056×765; precisa de tratamento de grade/paleta'],
     ['A-002', 'assets/_source/chr_kael_ref_raw_v1.png', 'Referência (bruta)', 'F0', DONE, 'Kael oficial, 4 poses, fundo transparente'],
     ['A-003', 'assets/sprites/characters/kael/chr_kael_ref.png', 'Sprite', 'F0', WIP, '4 quadros 64×64, velmora32; rosto da pose de combate pede retoque'],
+    ['A-004', 'assets/_source/chr_eco_ref_raw_v1.png', 'Referência (bruta)', 'F0', DONE, 'Eco; gerado pela ponte MCP do Codex'],
+    ['A-005', 'assets/sprites/characters/eco/chr_eco_ref.png', 'Sprite', 'F0', DONE, '4 quadros 64×64; pedra levemente pêssego'],
+    ['A-006', 'assets/_source/chr_lyra_ref_raw_v1.png', 'Referência (bruta)', 'F0', DONE, 'Lyra; gerada pelo gen_image.ps1'],
+    ['A-007', 'assets/sprites/characters/lyra/chr_lyra_ref.png', 'Sprite', 'F0', DONE, '4 quadros 64×64'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -592,8 +598,8 @@ children.push(
     ['D-05', 'Progressão', 'Tabuleiro / Gemas / Híbrido', 'Híbrido: níveis + árvore + gemas', today],
     ['D-06', 'Viagem no tempo', 'Sim / Não / Parcial', 'Não', today],
     ['D-07', 'Resolução base', '640×360 / 1280×720 / 1920×1080', '640×360 (escala inteira)', today],
-    ['D-08', 'Fonte de áudio', 'Livre / pago / compositor / IA', 'IA (ferramenta a escolher)', today],
-    ['D-09', 'Integração com o Codex', 'MCP / CLI direto', 'Codex CLI 0.156.1 via tools/gen_image.ps1 (a ponte MCP 0.114 é incompatível com os modelos da conta)', today],
+    ['D-08', 'Fonte de áudio', 'Livre / pago / compositor / IA', 'IA: Suno via MCP da AceDataCloud (licença comercial a confirmar)', today],
+    ['D-09', 'Integração com o Codex', 'MCP / CLI direto', 'Os dois funcionam: CLI (tools/gen_image.ps1) e a nova ponte MCP (adapter.cjs → Codex App Server)', today],
   ], [9, 22, 38, 19, 12]),
 );
 
@@ -608,6 +614,7 @@ children.push(
     ['0.5', today, 'Guia de Estilo v0.1 (paleta Velmora 32, tamanhos, prompt-base, pipeline); referência oficial do Kael; ferramenta pixelize.mjs.'],
     ['0.6', today, 'Guia de Estilo aprovado (v1.0); GDD do combate híbrido v0.1 criado (docs/GDD_Combate.docx).'],
     ['0.7', today, 'GDD do combate aprovado (v1.0); input map com 12 ações (teclado + gamepad); GUT 9.7.1 instalado com testes rodando.'],
+    ['0.8', today, 'Referências oficiais do Eco e da Lyra (3 personagens no total); ponte MCP do Codex testada; Suno MCP conectado e token validado.'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),

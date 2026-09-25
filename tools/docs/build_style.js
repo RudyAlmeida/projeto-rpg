@@ -193,7 +193,27 @@ children.push(
   ...image(RAW, 600, 'Imagem bruta gerada pelo Codex (fundo transparente)'),
   ...image(PREVIEW, 600, 'Após a conversão: 4 quadros de 64×64 na paleta Velmora 32 (prévia ampliada 6×)'),
   ...image(path.join(GAME, 'assets/_source/godot_kael_preview.png'), 600, 'No Godot, tela de 640×360: acima ampliado 2×, abaixo no tamanho real do jogo'),
+);
+
+// Additional official references (same pipeline), shown when their files exist.
+const EXTRA_REFS = [
+  ['eco', 'Eco', 'autômato antigo — gerado pela ponte MCP do Codex'],
+  ['lyra', 'Lyra', 'druida de Sylvaran — gerada pelo gen_image.ps1'],
+];
+for (const [id, name, note] of EXTRA_REFS) {
+  const preview = path.join(GAME, `assets/sprites/characters/${id}/chr_${id}_ref_preview.png`);
+  if (!fs.existsSync(preview)) continue;
+  children.push(
+    H2(`Referência oficial: ${name}`),
+    P(`${name}, ${note}. Mesmo prompt-base e mesma conversão do Kael.`, undefined, true),
+    ...image(path.join(GAME, `assets/_source/chr_${id}_ref_raw_v1.png`), 600, `${name} — imagem bruta`),
+    ...image(preview, 600, `${name} — após a conversão (prévia ampliada 6×)`),
+  );
+}
+children.push(
+  ...image(path.join(GAME, 'assets/_source/godot_party_preview.png'), 600, 'Os três no Godot (640×360): à esquerda no tamanho real, à direita ampliados 2×'),
   H2('Limitações conhecidas'),
+  B('Pedra clara (Eco) cai na rampa de pele e fica levemente pêssego: se incomodar, trocar uma cor por um bege-pedra neutro.'),
   B('A conversão automática não "desenha": detalhes menores que um pixel nativo somem. Na pose de combate o rosto do Kael fica escuro e pede retoque manual.'),
   B('Poses de animação (andar, atacar) vão exigir geração quadro a quadro com a mesma referência, ou retoque manual.'),
   H2('Aprovação'),
