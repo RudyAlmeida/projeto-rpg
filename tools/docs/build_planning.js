@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '2.2 — Fase 3: prólogo jogável (aguardando teste do Diretor)'],
+    ['Versão do documento', '2.3 — Fase 3: visual e áudio do prólogo completos; correções do playtest'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -505,8 +505,8 @@ children.push(...phase(3, 'Vertical slice',
     ['Arte final dos 3 personagens iniciais', 'Claude (Codex)', 'Kael, Eco e Gerd: referência, retratos e 6 poses de batalha (parado, ataque, técnica, dano, KO, vitória)', DONE],
     ['Tilesets da cidade e da dungeon', 'Claude (Codex)', 'Vila Caldeira e Ferro-Velho do Sul (48 tiles cada, tiles.mjs); 10 mapas gerados por build_maps.gd', DONE],
     ['6–8 inimigos + 1 chefe', 'Claude (Codex + código)', '7 comuns (Slime, Rato, Corvo ladrão, Aranha, Sentinela, Lâmpada, Soldado), chefe Triturador em 3 partes, luta roteirizada com Voss', DONE],
-    ['UI final (molduras, ícones, fonte)', 'Claude (Codex)', 'Fonte dos números trocada (Press Start 2P); moldura de latão e cursor em produção', WIP],
-    ['Efeitos visuais de batalha', 'Claude', 'Sistema BattleVFX pronto (corte, impacto, fogo, gelo, raio, cura, vapor, explosão); folha de efeitos em produção', WIP],
+    ['UI final (molduras, ícones, fonte)', 'Claude (Codex)', 'Moldura de latão (9-slice) e cursor de mão em menus, listas, diálogo e batalha; texto em Jersey 10 (20 px), números em Press Start 2P', DONE],
+    ['Efeitos visuais de batalha', 'Claude', '8 efeitos animados (corte, impacto, fogo, gelo, raio, cura, vapor, explosão) ligados às ações; dirigível imperial e ruínas da oficina no mapa', DONE],
     ['Músicas e SFX do trecho', 'Claude (IA de áudio)', 'Músicas escolhidas pelo Diretor (Ferro-Velho A, Chefe A, Império B, Adeus B); 32 efeitos sonoros CC0 (Kenney) em menus, batalha, mapa e cutscenes', DONE],
     ['Cutscenes do prólogo', 'Claude', '12 cenas do roteiro (manhã, entrega, estrada, ferro-velho, despertar de Eco, chefe, jantar com escolha, Voss, despedida, fuga)', DONE],
     ['Balanceamento do trecho', 'Claude + Diretor', ''],
@@ -600,6 +600,10 @@ children.push(
     ['A-035', 'assets/sprites/characters/{kael,eco,gerd}/chr_*_battle.png', 'Sprite', 'F3', DONE, 'Poses de batalha dos heróis do prólogo (grade 2 × 3), geradas com a referência anexada'],
     ['A-036', 'assets/audio/sfx/*.ogg', 'SFX', 'F3', DONE, 'Kenney (CC0): interface, RPG, impactos e sci-fi — licença em assets/audio/sfx/LICENSE_Kenney_CC0.txt'],
     ['A-037', 'assets/fonts/PressStart2P-Regular.ttf', 'Fonte', 'F3', DONE, 'Números (HP, dano, preços), licença OFL; decisão do Diretor'],
+    ['A-038', 'assets/fonts/Jersey10-Regular.ttf', 'Fonte', 'F3', DONE, 'Texto da interface e diálogos a 20 px (2× a grade), licença OFL — substitui Pixelify, que desenhava "fi" como "A"'],
+    ['A-039', 'assets/vfx/vfx_battle.png', 'VFX', 'F3', DONE, '8 efeitos × 4 quadros (células de 48 px)'],
+    ['A-040', 'assets/ui/ui_window.png, ui_cursor.png', 'UI', 'F3', DONE, 'Moldura de latão 9-slice e cursor de mão'],
+    ['A-041', 'assets/sprites/objects/obj_airship.png, obj_workshop_ruins.png', 'Sprite', 'F3', DONE, 'Dirigível imperial sobre a praça e ruínas da oficina após a explosão'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -653,11 +657,12 @@ children.push(
     ['2.0', today, 'Fase 2 implementada em 4 blocos. A: GameState, níveis/XP, salvar. B: combate completo (status, itens, Barra de Éter, especiais, timing por personagem, IA por regras, troca, técnicas combinadas, fuga, iniciativa). C: equipamento, gemas, árvores. D: menu principal, loja, estalagem, diálogo com escolhas/afinidade, missões, cutscenes, opções, idioma, tela de título (155 testes).'],
     ['2.1', today, 'Fase 2 aprovada pelo Diretor (músicas: título B, vitória B, batalha A e B alternadas; menus fecham com Esc/Start e X/B). Fase 3 iniciada: roteiro do prólogo v0.1 (docs/Roteiro_Prologo.docx) e tileset da Vila Caldeira (158 testes).'],
     ['2.2', today, 'Prólogo jogável do início ao fim: 10 mapas (vila, 3 interiores, estrada, ferro-velho em 3 áreas, câmara), 12 cutscenes, Gerd convidado, Eco, chefe em partes, corvo ladrão, luta roteirizada com Voss, missões do gato e das molas, cena de fim de capítulo. Novos sistemas: objetos de mapa (baú, alavanca, bloco, ponto de salvamento), portões por flag, tint noturno. 4 músicas novas (171 testes).'],
+    ['2.3', today, 'Escolhas do Diretor aplicadas (músicas, SFX de banco CC0, fonte). Poses de batalha de Kael, Eco e Gerd; efeitos visuais; moldura e cursor de latão; dirigível e ruínas. Correções do playtest: retorno do uso de itens no menu, saída da câmara do Eco, fonte dos diálogos (172 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
-  N('Diretor: jogar o prólogo (Novo jogo) e avaliar ritmo, dificuldade, mapas e as 4 músicas novas (A/B).', 'next'),
-  N('Claude: poses de batalha dedicadas, UI final, efeitos visuais, SFX, balanceamento com o feedback do Diretor; depois playtest externo.', 'next'),
+  N('Diretor: jogar de novo o prólogo (fonte nova, poses, efeitos, sons) e dar o aval do vertical slice.', 'next'),
+  N('Playtest externo (2–3 pessoas) e ajustes finais de balanceamento; depois revisar o escopo do jogo completo.', 'next'),
 );
 
 // ---------- document ----------

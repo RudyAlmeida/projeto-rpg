@@ -434,8 +434,13 @@ func _vila() -> void:
 	_npc("GerdSquare", Vector2(-4, -4), GERD_SHEET, 0, F.LEFT, {"display_name": "Mestre Gerd",
 		"show_if_flag": &"empire_arrived", "hide_if_flag": &"voss_fought"})
 	# The imperial airship hovers over the square; the workshop lies in ruins after the escape.
-	_gated_sprite("Airship", "res://assets/sprites/objects/obj_airship.png", Vector2(28, 7), &"empire_arrived", &"prologue_done", 2.0, 30)
+	_gated_sprite("Airship", "res://assets/sprites/objects/obj_airship.png", Vector2(28, 5), &"empire_arrived", &"prologue_done", 2.0, 30)
 	_gated_sprite("WorkshopRuins", "res://assets/sprites/objects/obj_workshop_ruins.png", Vector2(40, 13.5), &"escaped", &"", 0.0, 0)
+	var ruins: GatedSprite = _root.get_node_or_null("WorkshopRuins")
+	if ruins:  # grass over the old building (cells 36..44 × 9..13)
+		ruins.backdrop_texture = load(TIL_VILA)
+		ruins.backdrop_cell = Vector2i(0, 0)
+		ruins.backdrop_rect = Rect2(Vector2(36 * 16, 9 * 16) - ruins.position, Vector2(9 * 16, 5 * 16))
 	_trigger("VossScene", Vector2(34, 14), Vector2(1, 13), "p8_voss", empire)
 	_trigger("Escape", Vector2(45, 12), Vector2(1, 1), "p9_escape", {"autostart": true, "show_if_flag": &"escaped"})
 	_finish("vila_caldeira")

@@ -1,74 +1,76 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_xaie2"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="2_80vd3"]
-[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="3_akcrr"]
-[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="4_xdcfx"]
-[ext_resource type="Script" path="res://scripts/world/player.gd" id="5_r6vvl"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="6_abiik"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="7_f8xh6"]
-[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_f1c5v"]
-[ext_resource type="Script" path="res://scripts/world/warp.gd" id="9_oia6a"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="10_630mc"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="11_aha3c"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="12_kdyk0"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="13_nw2er"]
-[ext_resource type="Script" path="res://scripts/world/npc.gd" id="14_o8xkn"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers2.png" id="15_utamp"]
-[ext_resource type="Resource" path="res://data/dialogue/p_pip.tres" id="16_aek8d"]
-[ext_resource type="Resource" path="res://data/dialogue/p_olavo.tres" id="17_3757x"]
-[ext_resource type="Resource" path="res://data/dialogue/p_ilse.tres" id="18_mc5x0"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/voss/chr_voss_map.png" id="19_2clgh"]
-[ext_resource type="Resource" path="res://data/dialogue/p_soldier.tres" id="20_wu6xe"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/eco/chr_eco_ref.png" id="21_prgs3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="22_fkx7j"]
-[ext_resource type="Texture2D" path="res://assets/sprites/objects/obj_airship.png" id="23_xawn6"]
-[ext_resource type="Script" path="res://scripts/world/gated_sprite.gd" id="24_u5wf2"]
-[ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="25_ijtnr"]
-[ext_resource type="Resource" path="res://data/cutscenes/p8_voss.tres" id="26_b1cg0"]
-[ext_resource type="Resource" path="res://data/cutscenes/p9_escape.tres" id="27_3bbm7"]
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_akcrr"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="2_xdcfx"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="3_r6vvl"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="4_abiik"]
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="5_f8xh6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="6_f1c5v"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_walk.png" id="7_oia6a"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_630mc"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="9_aha3c"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="10_kdyk0"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="11_nw2er"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="12_o8xkn"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="13_utamp"]
+[ext_resource type="Script" path="res://scripts/world/npc.gd" id="14_aek8d"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers2.png" id="15_3757x"]
+[ext_resource type="Resource" path="res://data/dialogue/p_pip.tres" id="16_mc5x0"]
+[ext_resource type="Resource" path="res://data/dialogue/p_olavo.tres" id="17_2clgh"]
+[ext_resource type="Resource" path="res://data/dialogue/p_ilse.tres" id="18_wu6xe"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/voss/chr_voss_map.png" id="19_prgs3"]
+[ext_resource type="Resource" path="res://data/dialogue/p_soldier.tres" id="20_fkx7j"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/eco/chr_eco_ref.png" id="21_xawn6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="22_u5wf2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/objects/obj_airship.png" id="23_ijtnr"]
+[ext_resource type="Script" path="res://scripts/world/gated_sprite.gd" id="24_b1cg0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/objects/obj_workshop_ruins.png" id="25_3bbm7"]
+[ext_resource type="Texture2D" path="res://assets/tilesets/til_vila_caldeira.png" id="26_hlg7c"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="27_mehhy"]
+[ext_resource type="Resource" path="res://data/cutscenes/p8_voss.tres" id="28_8gcqi"]
+[ext_resource type="Resource" path="res://data/cutscenes/p9_escape.tres" id="29_u3iia"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlg7c"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ommn4"]
 size = Vector2(12, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mehhy"]
-size = Vector2(12, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gcqi"]
-size = Vector2(12, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3iia"]
-size = Vector2(12, 12)
-
-[sub_resource type="Resource" id="Resource_ommn4"]
-script = ExtResource("10_630mc")
-speaker = "Kael"
-portrait = ExtResource("12_kdyk0")
-text = "(Melhor terminar a entrega do mestre antes de sair da vila.)"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmpb6"]
-size = Vector2(28, 12)
+size = Vector2(12, 12)
 
-[sub_resource type="Resource" id="Resource_3gold"]
-script = ExtResource("10_630mc")
-text = "O portão norte está trancado desde que o Império fechou a estrada da floresta."
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gold"]
+size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6oqwq"]
-size = Vector2(28, 12)
+size = Vector2(12, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuhv0"]
-size = Vector2(16, 208)
+[sub_resource type="Resource" id="Resource_xuhv0"]
+script = ExtResource("10_kdyk0")
+speaker = "Kael"
+portrait = ExtResource("12_o8xkn")
+text = "(Melhor terminar a entrega do mestre antes de sair da vila.)"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drymy"]
+size = Vector2(28, 12)
+
+[sub_resource type="Resource" id="Resource_8apij"]
+script = ExtResource("10_kdyk0")
+text = "O portão norte está trancado desde que o Império fechou a estrada da floresta."
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27msk"]
+size = Vector2(28, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4opym"]
+size = Vector2(16, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tiklp"]
 size = Vector2(16, 16)
 
-[node name="VilaCaldeira" type="Node2D" unique_id=468381958]
+[node name="VilaCaldeira" type="Node2D" unique_id=744660699]
 y_sort_enabled = true
-script = ExtResource("1_xaie2")
-music = ExtResource("2_80vd3")
+script = ExtResource("1_akcrr")
+music = ExtResource("2_xdcfx")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=892681260]
-script = ExtResource("3_akcrr")
+[node name="Map" type="TileMapLayer" parent="." unique_id=698612798]
+script = ExtResource("3_r6vvl")
 legend = "vila"
 layout = "TTTTTTTTTTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTTTTT
 T.......................::.......................T
@@ -103,232 +105,242 @@ T.~~~~~~~~~~~~~~~~~...t.::.......................T
 T.......................::.......................T
 TTTTTTTTTTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTTTTT"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1039601250 instance=ExtResource("4_xdcfx")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=218955928 instance=ExtResource("4_abiik")]
 motion_mode = 1
-script = ExtResource("5_r6vvl")
-idle_sheet = ExtResource("6_abiik")
-walk_sheet = ExtResource("7_f8xh6")
+script = ExtResource("5_f8xh6")
+idle_sheet = ExtResource("6_f1c5v")
+walk_sheet = ExtResource("7_oia6a")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=675975854]
+[node name="Spawns" type="Node2D" parent="." unique_id=13435142]
 
-[node name="from_oficina" type="Marker2D" parent="Spawns" unique_id=1202849957]
+[node name="from_oficina" type="Marker2D" parent="Spawns" unique_id=1455794231]
 position = Vector2(648, 232)
-script = ExtResource("8_f1c5v")
+script = ExtResource("8_630mc")
 
-[node name="from_loja" type="Marker2D" parent="Spawns" unique_id=1902333178]
+[node name="from_loja" type="Marker2D" parent="Spawns" unique_id=1341966242]
 position = Vector2(152, 152)
-script = ExtResource("8_f1c5v")
+script = ExtResource("8_630mc")
 
-[node name="from_estalagem" type="Marker2D" parent="Spawns" unique_id=1055782798]
+[node name="from_estalagem" type="Marker2D" parent="Spawns" unique_id=1931307674]
 position = Vector2(536, 136)
-script = ExtResource("8_f1c5v")
+script = ExtResource("8_630mc")
 
-[node name="from_relojoaria" type="Marker2D" parent="Spawns" unique_id=550495876]
+[node name="from_relojoaria" type="Marker2D" parent="Spawns" unique_id=1273311564]
 position = Vector2(152, 408)
-script = ExtResource("8_f1c5v")
+script = ExtResource("8_630mc")
 
-[node name="from_south" type="Marker2D" parent="Spawns" unique_id=1568124031]
+[node name="from_south" type="Marker2D" parent="Spawns" unique_id=1229003093]
 position = Vector2(392, 472)
-script = ExtResource("8_f1c5v")
+script = ExtResource("8_630mc")
 facing = 2
 
-[node name="back_door" type="Marker2D" parent="Spawns" unique_id=1656228949]
+[node name="back_door" type="Marker2D" parent="Spawns" unique_id=555289746]
 position = Vector2(728, 200)
-script = ExtResource("8_f1c5v")
+script = ExtResource("8_630mc")
 facing = 1
 
-[node name="OficinaDoor" type="Area2D" parent="." unique_id=150019286]
+[node name="OficinaDoor" type="Area2D" parent="." unique_id=158499315]
 position = Vector2(648, 216)
-script = ExtResource("9_oia6a")
+script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/oficina.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="OficinaDoor" unique_id=1208913898]
-shape = SubResource("RectangleShape2D_hlg7c")
+[node name="Shape" type="CollisionShape2D" parent="OficinaDoor" unique_id=2008970568]
+shape = SubResource("RectangleShape2D_ommn4")
 
-[node name="LojaDoor" type="Area2D" parent="." unique_id=1802562862]
+[node name="LojaDoor" type="Area2D" parent="." unique_id=693988281]
 position = Vector2(152, 136)
-script = ExtResource("9_oia6a")
+script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/loja.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="LojaDoor" unique_id=40188552]
-shape = SubResource("RectangleShape2D_mehhy")
+[node name="Shape" type="CollisionShape2D" parent="LojaDoor" unique_id=586927299]
+shape = SubResource("RectangleShape2D_tmpb6")
 
-[node name="EstalagemDoor" type="Area2D" parent="." unique_id=1266869856]
+[node name="EstalagemDoor" type="Area2D" parent="." unique_id=612027583]
 position = Vector2(536, 120)
-script = ExtResource("9_oia6a")
+script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/estalagem.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="EstalagemDoor" unique_id=210132793]
-shape = SubResource("RectangleShape2D_8gcqi")
+[node name="Shape" type="CollisionShape2D" parent="EstalagemDoor" unique_id=388925407]
+shape = SubResource("RectangleShape2D_3gold")
 
-[node name="RelojoariaDoor" type="Area2D" parent="." unique_id=1151277047]
+[node name="RelojoariaDoor" type="Area2D" parent="." unique_id=807290517]
 position = Vector2(152, 392)
-script = ExtResource("9_oia6a")
+script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/relojoaria.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="RelojoariaDoor" unique_id=1196486395]
-shape = SubResource("RectangleShape2D_u3iia")
+[node name="Shape" type="CollisionShape2D" parent="RelojoariaDoor" unique_id=706787977]
+shape = SubResource("RectangleShape2D_6oqwq")
 
-[node name="SouthGate" type="Area2D" parent="." unique_id=239469893]
+[node name="SouthGate" type="Area2D" parent="." unique_id=1922998737]
 position = Vector2(400, 504)
-script = ExtResource("9_oia6a")
+script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/estrada_sul.tscn"
 target_spawn = "from_vila"
 require_flag = &"gerd_joined"
-locked_lines = Array[ExtResource("10_630mc")]([SubResource("Resource_ommn4")])
+locked_lines = Array[ExtResource("10_kdyk0")]([SubResource("Resource_xuhv0")])
 push_back = Vector2(0, -14)
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="SouthGate" unique_id=102335352]
-shape = SubResource("RectangleShape2D_tmpb6")
+[node name="Shape" type="CollisionShape2D" parent="SouthGate" unique_id=539532850]
+shape = SubResource("RectangleShape2D_drymy")
 
-[node name="NorthGate" type="Area2D" parent="." unique_id=1235814899]
+[node name="NorthGate" type="Area2D" parent="." unique_id=741342078]
 position = Vector2(400, 8)
-script = ExtResource("9_oia6a")
+script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 require_flag = &"north_gate_open"
-locked_lines = Array[ExtResource("10_630mc")]([SubResource("Resource_3gold")])
+locked_lines = Array[ExtResource("10_kdyk0")]([SubResource("Resource_8apij")])
 push_back = Vector2(0, 14)
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="NorthGate" unique_id=817614212]
-shape = SubResource("RectangleShape2D_6oqwq")
+[node name="Shape" type="CollisionShape2D" parent="NorthGate" unique_id=130328357]
+shape = SubResource("RectangleShape2D_27msk")
 
-[node name="Pip" type="StaticBody2D" parent="." unique_id=186199232 instance=ExtResource("13_nw2er")]
+[node name="Pip" type="StaticBody2D" parent="." unique_id=1237476460 instance=ExtResource("13_utamp")]
 position = Vector2(360, 280)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
-dialogue_set = ExtResource("16_aek8d")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
+dialogue_set = ExtResource("16_mc5x0")
 display_name = "Pip"
 hide_if_flag = &"slept"
 
-[node name="Olavo" type="StaticBody2D" parent="." unique_id=486928613 instance=ExtResource("13_nw2er")]
+[node name="Olavo" type="StaticBody2D" parent="." unique_id=1434805514 instance=ExtResource("13_utamp")]
 position = Vector2(424, 456)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 1
 facing = 1
-dialogue_set = ExtResource("17_3757x")
+dialogue_set = ExtResource("17_2clgh")
 display_name = "Guarda Olavo"
 hide_if_flag = &"empire_arrived"
 
-[node name="Ilse" type="StaticBody2D" parent="." unique_id=846456713 instance=ExtResource("13_nw2er")]
+[node name="Ilse" type="StaticBody2D" parent="." unique_id=1347497284 instance=ExtResource("13_utamp")]
 position = Vector2(200, 424)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 2
-dialogue_set = ExtResource("18_mc5x0")
+dialogue_set = ExtResource("18_wu6xe")
 display_name = "Velha Ilse"
 
-[node name="Voss" type="StaticBody2D" parent="." unique_id=176152873 instance=ExtResource("13_nw2er")]
+[node name="Voss" type="StaticBody2D" parent="." unique_id=1597104586 instance=ExtResource("13_utamp")]
 position = Vector2(424, 248)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("19_2clgh")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("19_prgs3")
 facing = 3
 display_name = "General Voss"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"voss_fought"
 
-[node name="SoldierSouth" type="StaticBody2D" parent="." unique_id=1697968871 instance=ExtResource("13_nw2er")]
+[node name="SoldierSouth" type="StaticBody2D" parent="." unique_id=933636275 instance=ExtResource("13_utamp")]
 position = Vector2(392, 344)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 4
 facing = 2
-dialogue_set = ExtResource("20_wu6xe")
+dialogue_set = ExtResource("20_fkx7j")
 display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierSouth2" type="StaticBody2D" parent="." unique_id=1174794339 instance=ExtResource("13_nw2er")]
+[node name="SoldierSouth2" type="StaticBody2D" parent="." unique_id=545664999 instance=ExtResource("13_utamp")]
 position = Vector2(408, 344)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 4
 facing = 2
-dialogue_set = ExtResource("20_wu6xe")
+dialogue_set = ExtResource("20_fkx7j")
 display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierNorth" type="StaticBody2D" parent="." unique_id=382162191 instance=ExtResource("13_nw2er")]
+[node name="SoldierNorth" type="StaticBody2D" parent="." unique_id=135099302 instance=ExtResource("13_utamp")]
 position = Vector2(408, 152)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 4
-dialogue_set = ExtResource("20_wu6xe")
+dialogue_set = ExtResource("20_fkx7j")
 display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierWest" type="StaticBody2D" parent="." unique_id=1415141423 instance=ExtResource("13_nw2er")]
+[node name="SoldierWest" type="StaticBody2D" parent="." unique_id=723027240 instance=ExtResource("13_utamp")]
 position = Vector2(280, 248)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 4
 facing = 3
-dialogue_set = ExtResource("20_wu6xe")
+dialogue_set = ExtResource("20_fkx7j")
 display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierSquare" type="StaticBody2D" parent="." unique_id=268246730 instance=ExtResource("13_nw2er")]
+[node name="SoldierSquare" type="StaticBody2D" parent="." unique_id=1052486438 instance=ExtResource("13_utamp")]
 position = Vector2(440, 216)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("15_utamp")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("15_3757x")
 sheet_row = 4
-dialogue_set = ExtResource("20_wu6xe")
+dialogue_set = ExtResource("20_fkx7j")
 display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="Eco" type="StaticBody2D" parent="." unique_id=1683092614 instance=ExtResource("13_nw2er")]
+[node name="Eco" type="StaticBody2D" parent="." unique_id=99551108 instance=ExtResource("13_utamp")]
 position = Vector2(616, 248)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("21_prgs3")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("21_xawn6")
 facing = 1
 display_name = "Eco"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"voss_fought"
 
-[node name="GerdSquare" type="StaticBody2D" parent="." unique_id=1309384739 instance=ExtResource("13_nw2er")]
+[node name="GerdSquare" type="StaticBody2D" parent="." unique_id=601744710 instance=ExtResource("13_utamp")]
 position = Vector2(-56, -56)
-script = ExtResource("14_o8xkn")
-idle_sheet = ExtResource("22_fkx7j")
+script = ExtResource("14_aek8d")
+idle_sheet = ExtResource("22_u5wf2")
 facing = 1
 display_name = "Mestre Gerd"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"voss_fought"
 
-[node name="Airship" type="Sprite2D" parent="." unique_id=1761841814]
+[node name="Airship" type="Sprite2D" parent="." unique_id=1071234932]
 z_index = 30
-position = Vector2(456, 128)
-texture = ExtResource("23_xawn6")
+position = Vector2(456, 96)
+texture = ExtResource("23_ijtnr")
 offset = Vector2(0, -35)
-script = ExtResource("24_u5wf2")
+script = ExtResource("24_b1cg0")
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"prologue_done"
 bob = 2.0
 
-[node name="VossScene" type="Area2D" parent="." unique_id=1444113693]
+[node name="WorkshopRuins" type="Sprite2D" parent="." unique_id=2071059850]
+position = Vector2(648, 232)
+texture = ExtResource("25_3bbm7")
+offset = Vector2(0, -39)
+script = ExtResource("24_b1cg0")
+show_if_flag = &"escaped"
+backdrop_texture = ExtResource("26_hlg7c")
+backdrop_cell = Vector2i(0, 0)
+backdrop_rect = Rect2(-72, -88, 144, 80)
+
+[node name="VossScene" type="Area2D" parent="." unique_id=636715655]
 position = Vector2(552, 232)
-script = ExtResource("25_ijtnr")
-cutscene = ExtResource("26_b1cg0")
+script = ExtResource("27_mehhy")
+cutscene = ExtResource("28_8gcqi")
 show_if_flag = &"empire_arrived"
 
-[node name="Shape" type="CollisionShape2D" parent="VossScene" unique_id=822124267]
-shape = SubResource("RectangleShape2D_xuhv0")
+[node name="Shape" type="CollisionShape2D" parent="VossScene" unique_id=654768346]
+shape = SubResource("RectangleShape2D_4opym")
 
-[node name="Escape" type="Area2D" parent="." unique_id=1269774821]
+[node name="Escape" type="Area2D" parent="." unique_id=1198035086]
 position = Vector2(728, 200)
-script = ExtResource("25_ijtnr")
-cutscene = ExtResource("27_3bbm7")
+script = ExtResource("27_mehhy")
+cutscene = ExtResource("29_u3iia")
 autostart = true
 show_if_flag = &"escaped"
 
-[node name="Shape" type="CollisionShape2D" parent="Escape" unique_id=145420211]
-shape = SubResource("RectangleShape2D_drymy")
+[node name="Shape" type="CollisionShape2D" parent="Escape" unique_id=2118409943]
+shape = SubResource("RectangleShape2D_tiklp")
