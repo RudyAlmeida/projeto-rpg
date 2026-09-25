@@ -112,7 +112,7 @@ children.push(
   new Paragraph({ alignment: AlignmentType.CENTER, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: GOLD, space: 8 } }, spacing: { before: 200, after: 400 }, children: [new TextRun({ text: 'Guia de Estilo de Arte', size: 32, color: '333333' })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 1400 }, children: [new TextRun({ text: 'Pixel art 16-bit · fantasia clássica + steampunk', size: 22, color: '555555' })] }),
   table(['Campo', 'Valor'], [
-    ['Versão', '0.1 — proposta para aprovação'],
+    ['Versão', '1.0 — aprovado pelo Diretor (24/09/2026)'],
     ['Data', '24/09/2026'],
     ['Decisões de base', 'D-02 pixel art 16-bit · D-07 640×360'],
     ['Arquivos no projeto', 'game/assets/palette/velmora32.hex · game/assets/_prompts/style_base.md'],
@@ -196,10 +196,8 @@ children.push(
   H2('Limitações conhecidas'),
   B('A conversão automática não "desenha": detalhes menores que um pixel nativo somem. Na pose de combate o rosto do Kael fica escuro e pede retoque manual.'),
   B('Poses de animação (andar, atacar) vão exigir geração quadro a quadro com a mesma referência, ou retoque manual.'),
-  H2('Pontos para aprovação'),
-  B('Paleta: as rampas cobrem bem pele, linho, latão, couro, azul imperial e natureza?'),
-  B('Escala: o Kael com ~56 px de altura (15% da tela de 640×360, proporção parecida com Chrono Trigger) está bom?'),
-  B('Visual: cabelo azul, cachecol vermelho, óculos de latão e lâmina-engrenagem representam o personagem?'),
+  H2('Aprovação'),
+  B('**Aprovado em 24/09/2026:** paleta Velmora 32, escala de ~56 px (célula 64×64) e visual do Kael.'),
 );
 
 children.splice(tocIndex, 0, ...tocEntries.map(t => new Paragraph({ children: [new TextRun({ text: t, size: 24 })], spacing: { after: 140 } })));

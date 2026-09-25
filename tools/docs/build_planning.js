@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '0.5 — guia de estilo'],
+    ['Versão do documento', '0.6 — design do combate'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -442,9 +442,9 @@ children.push(...phase(0, 'Pré-produção',
     ['Escolher framework de testes (GUT / gdUnit4)', 'Claude', ''],
     ['Testar geração de imagem via Codex', 'Claude', 'codex_test_01.png via Codex CLI (MCP incompatível)', DONE],
     ['Escolher ferramenta de IA de áudio', 'Diretor + Claude', 'Verificar uso comercial'],
-    ['Criar Guia de Estilo + prompt-base', 'Claude + Diretor', 'v0.1 aguardando aprovação: docs/Guia_de_Estilo.docx', WIP],
+    ['Criar Guia de Estilo + prompt-base', 'Claude + Diretor', 'Guia de Estilo v1.0 aprovado', DONE],
     ['Esboçar história em atos e o grupo principal', 'Diretor + Claude', 'Bíblia da história v0.2 aprovada (H-01 a H-06)', DONE],
-    ['Escrever GDD do sistema de combate', 'Claude', 'Fórmulas de dano, turnos CTB, timing, status'],
+    ['Escrever GDD do sistema de combate', 'Claude', 'v0.1 aguardando aprovação: docs/GDD_Combate.docx', WIP],
   ],
   ['Todas as decisões D-01 a D-08 registradas.', 'Projeto abre no Godot sem erros e está versionado.', 'Guia de estilo aprovado com ao menos 3 imagens de referência.'],
 ));
@@ -606,6 +606,7 @@ children.push(
     ['0.3', today, 'Bíblia da história v0.1 criada (docs/Historia_O_Coracao_de_Eter.docx); sumário estático (compatível com LibreOffice); tabelas e títulos não se separam mais entre páginas.'],
     ['0.4', today, 'História aprovada (bíblia v0.2): morte simulada de Gerd, triângulo Kael–Lyra–Isolde; sistema de afinidade e matriz de finais adicionados.'],
     ['0.5', today, 'Guia de Estilo v0.1 (paleta Velmora 32, tamanhos, prompt-base, pipeline); referência oficial do Kael; ferramenta pixelize.mjs.'],
+    ['0.6', today, 'Guia de Estilo aprovado (v1.0); GDD do combate híbrido v0.1 criado (docs/GDD_Combate.docx).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
