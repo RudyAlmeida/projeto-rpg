@@ -103,4 +103,4 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
 
 ## Current status
 
-Phases 0–2 approved. Phase 3 (vertical slice = the prologue, 30–60 min) in progress: script draft in `Roteiro_Prologo.docx` awaiting approval; see the F3 table in the planning doc.
+Phases 0–3 approved (the prologue vertical slice is done and was playtested). **Phase 4 (content production) starts with Act 1**: first write an Act 1 script document like `Roteiro_Prologo.docx` (new `tools/docs/build_act1.js` with `lib.js`) from the story bible (Floresta de Sylvaran → Lyra joins; then Cinzamar/Brann, Porto Névoa/Mira, Catedral de Lumen/Selene, A Grande Bomba) and get the director's approval before building maps. Follow the prologue pipeline: data in `build_data.gd`, maps in `build_maps.gd`, Codex art queued one job at a time while coding in parallel, balance with `tools/sim_prologue.gd` (extend it for new encounters).

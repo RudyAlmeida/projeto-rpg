@@ -96,14 +96,14 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '2.4 — Fase 3: escala de objetos e personagens ajustada pelo Diretor'],
+    ['Versão do documento', '3.0 — Fase 3 concluída; início da Fase 4'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
     ['Repositório', 'github.com/RudyAlmeida/projeto-rpg'],
     ['Engine', 'D:\\Godot\\Godot_v4.7.2-stable_win64.exe'],
-    ['Fase atual', 'Fase 3 — Vertical slice'],
-    ['Status geral', 'Fases 0, 1 e 2 concluídas (24–25/09/2026)'],
+    ['Fase atual', 'Fase 4 — Produção de conteúdo (início: Ato 1)'],
+    ['Status geral', 'Fases 0 a 3 concluídas (24–25/09/2026); vertical slice (prólogo) aprovado'],
   ],
   [35, 65],
 ));
@@ -509,8 +509,8 @@ children.push(...phase(3, 'Vertical slice',
     ['Efeitos visuais de batalha', 'Claude', '8 efeitos animados (corte, impacto, fogo, gelo, raio, cura, vapor, explosão) ligados às ações; dirigível imperial e ruínas da oficina no mapa', DONE],
     ['Músicas e SFX do trecho', 'Claude (IA de áudio)', 'Músicas escolhidas pelo Diretor (Ferro-Velho A, Chefe A, Império B, Adeus B); 32 efeitos sonoros CC0 (Kenney) em menus, batalha, mapa e cutscenes', DONE],
     ['Cutscenes do prólogo', 'Claude', '12 cenas do roteiro (manhã, entrega, estrada, ferro-velho, despertar de Eco, chefe, jantar com escolha, Voss, despedida, fuga)', DONE],
-    ['Balanceamento do trecho', 'Claude + Diretor', ''],
-    ['Playtest externo (2–3 pessoas)', 'Diretor', ''],
+    ['Balanceamento do trecho', 'Claude + Diretor', 'Simulação de 300 lutas por encontro (tools/sim_prologue.gd) + ajustes do playtest', DONE],
+    ['Playtest externo (2–3 pessoas)', 'Diretor', 'Feito; ajustes aplicados (poção, saída da câmara, fonte, escala de objetos/personagens, portas)', DONE],
   ],
   ['Diretor considera o trecho representativo do jogo final.', 'Feedback de playtest registrado e ações definidas.', 'Escopo do jogo completo revisado com base no tempo gasto.'],
 ));
@@ -659,12 +659,13 @@ children.push(
     ['2.1', today, 'Fase 2 aprovada pelo Diretor (músicas: título B, vitória B, batalha A e B alternadas; menus fecham com Esc/Start e X/B). Fase 3 iniciada: roteiro do prólogo v0.1 (docs/Roteiro_Prologo.docx) e tileset da Vila Caldeira (158 testes).'],
     ['2.2', today, 'Prólogo jogável do início ao fim: 10 mapas (vila, 3 interiores, estrada, ferro-velho em 3 áreas, câmara), 12 cutscenes, Gerd convidado, Eco, chefe em partes, corvo ladrão, luta roteirizada com Voss, missões do gato e das molas, cena de fim de capítulo. Novos sistemas: objetos de mapa (baú, alavanca, bloco, ponto de salvamento), portões por flag, tint noturno. 4 músicas novas (171 testes).'],
     ['2.3', today, 'Escolhas do Diretor aplicadas (músicas, SFX de banco CC0, fonte). Poses de batalha de Kael, Eco e Gerd; efeitos visuais; moldura e cursor de latão; dirigível e ruínas. Correções do playtest: retorno do uso de itens no menu, saída da câmara do Eco, fonte dos diálogos (172 testes).'],
+    ['3.0', today, 'Fase 3 concluída e aprovada pelo Diretor após o playtest externo. Próximo: Fase 4, começando pelo Ato 1 (Floresta de Sylvaran, entrada da Lyra).'],
     ['2.4', today, 'Pedido do Diretor após o teste: objetos de cenário e interativos (baús, caldeira de salvar, cama, alavanca, caixas, lampiões, árvores, máquinas) em 2×; personagens do mapa a 78%; portas das casas em 2× (173 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
-  N('Diretor: jogar de novo o prólogo (fonte nova, poses, efeitos, sons) e dar o aval do vertical slice.', 'next'),
-  N('Playtest externo (2–3 pessoas) e ajustes finais de balanceamento; depois revisar o escopo do jogo completo.', 'next'),
+  N('Fase 4 — Ato 1: roteiro detalhado do Ato 1 (como o Roteiro do Prólogo), para aprovação do Diretor.', 'next'),
+  N('Depois: Floresta de Sylvaran (tileset, mapas, inimigos, chefe), entrada da Lyra, e em seguida Cinzamar/Brann, Porto Névoa/Mira, Catedral de Lumen/Selene e a Grande Bomba.', 'next'),
 );
 
 // ---------- document ----------
