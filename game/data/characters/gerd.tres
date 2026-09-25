@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CombatantData" format=3]
 
 [ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_ad58v"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="2_sjmul"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/chr_gerd_battle.png" id="2_ad58v"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="3_b0k1c"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="4_ipstb"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="5_aq5ke"]
@@ -15,7 +15,14 @@
 script = ExtResource("4_ipstb")
 id = &"gerd"
 display_name = "Gerd"
-battle_sheet = ExtResource("2_sjmul")
+battle_sheet = ExtResource("2_ad58v")
+frame_size = Vector2i(79, 64)
+idle_frame = 0
+attack_frame = 1
+hurt_frame = 3
+cast_frame = 2
+ko_frame = 4
+victory_frame = 5
 portrait = ExtResource("3_b0k1c")
 max_hp = 150
 max_mp = 24

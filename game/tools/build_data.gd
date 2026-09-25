@@ -615,7 +615,7 @@ func _build_prologue_combat() -> void:
 		"max_hp": 150, "max_mp": 24, "strength": 11, "weapon_power": 7, "magic": 10, "defense": 10, "spirit": 10,
 		"speed": 16, "luck": 8, "precision": 10, "evasion": 4,
 		"skills": _skills_of(["attack", "gerd_bomb", "gerd_patch", "defend"]),
-		"timing_style": CombatantData.TimingStyle.RING, "perfect_bonus": CombatantData.PerfectBonus.NONE})
+		"timing_style": CombatantData.TimingStyle.RING, "perfect_bonus": CombatantData.PerfectBonus.NONE}.merged(_battle_poses("gerd", Vector2i(79, 64)), true))
 
 	var comment := {"field_comment_by": &"gerd"}
 	var mech := [S.POISON, S.SLEEP] as Array[int]

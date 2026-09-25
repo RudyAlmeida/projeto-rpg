@@ -126,10 +126,7 @@ func show_list(title: String, entries: Array, index: int) -> void:
 		_menu_panel.add_child(label)
 		_menu_rows.append(label)
 		if i == index:
-			var cursor := _label(Vector2(6, y), Vector2(14, ROW_H), GOLD)
-			cursor.text = "▶"
-			_menu_panel.add_child(cursor)
-			_menu_rows.append(cursor)
+			_menu_rows.append(UIKit.cursor(_menu_panel, Vector2(6, y)))
 	if first > 0 or first + MENU_ROWS < entries.size():
 		var more := _label(Vector2(204, 70), Vector2(14, ROW_H), DIM)
 		more.text = "↕"
@@ -179,15 +176,6 @@ func _label(pos: Vector2, size: Vector2, color: Color) -> Label:
 	return label
 
 
+## Same brass window as the menus (UIKit skin).
 func _panel(rect: Rect2) -> Panel:
-	var panel := Panel.new()
-	panel.position = rect.position
-	panel.size = rect.size
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(DARK, 0.94)
-	style.set_border_width_all(2)
-	style.border_color = Color(0.721569, 0.52549, 0.168627)
-	style.anti_aliasing = false
-	panel.add_theme_stylebox_override("panel", style)
-	add_child(panel)
-	return panel
+	return UIKit.panel(self, rect)

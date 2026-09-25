@@ -51,6 +51,12 @@ static func _load_skin() -> void:
 		_cursor = load(CURSOR_PATH)
 
 
+## The window style shared by every panel (brass frame art or flat fallback).
+static func window_style() -> StyleBox:
+	_load_skin()
+	return _window_style
+
+
 ## Window panel: the brass frame art (9-slice) when it exists, else a flat gold border.
 static func panel(parent: Node, rect: Rect2) -> Panel:
 	_load_skin()
@@ -62,23 +68,19 @@ static func panel(parent: Node, rect: Rect2) -> Panel:
 	return p
 
 
-## Menu cursor at `pos`: the brass pointing hand (two bobbing frames) or a gold "▶".
+## Menu cursor at `pos`: the brass pointing hand (bobbing) or a gold "▶".
 static func cursor(parent: Node, pos: Vector2) -> Control:
 	_load_skin()
 	if _cursor == null:
 		return label(parent, pos, "▶", GOLD)
 	var rect := TextureRect.new()
-	var atlas := AtlasTexture.new()
-	atlas.atlas = _cursor
-	var frame := _cursor.get_height()
-	atlas.region = Rect2(0, 0, frame, frame)
-	rect.texture = atlas
-	rect.position = pos + Vector2(-4, 1)
+	rect.texture = _cursor
+	rect.position = pos + Vector2(-6, 2)
 	rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	parent.add_child(rect)
 	var tween := rect.create_tween().set_loops()
-	tween.tween_callback(func() -> void: atlas.region.position.x = frame).set_delay(0.35)
-	tween.tween_callback(func() -> void: atlas.region.position.x = 0).set_delay(0.35)
+	tween.tween_property(rect, "position:x", rect.position.x + 1, 0.0).set_delay(0.3)
+	tween.tween_property(rect, "position:x", rect.position.x, 0.0).set_delay(0.3)
 	return rect
 
 

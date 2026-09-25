@@ -24,6 +24,7 @@ var _choices: ListMenu
 
 
 func _ready() -> void:
+	_panel.add_theme_stylebox_override("panel", UIKit.window_style())
 	_panel.hide()
 	set_process(false)
 

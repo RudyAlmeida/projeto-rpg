@@ -3,7 +3,9 @@
 //
 // Usage:
 //   node tiles.mjs <input.png> <output.png> [--cols 8] [--rows 6] [--tile 16] [--preview 6]
-//                  [--palette <file.hex>]
+//                  [--palette <file.hex>] [--uniform]
+//
+//   --uniform  the sheet is an exact grid with no gutters (cell = width/cols × height/rows)
 //
 // Every cell becomes one tile, keeping the grid order. Cells are found from the magenta
 // gutters; all cells share one square size (the median column width), so a prop drawn
@@ -21,6 +23,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const paletteFile = opt('palette', path.join(here, '../../game/assets/palette/velmora32.hex'));
 const COLS = Number(opt('cols', 8)), ROWS = Number(opt('rows', 6)), TILE = Number(opt('tile', 16));
 const previewScale = Number(opt('preview', 6));
+const uniform = args.includes('--uniform');
 
 const palette = fs.readFileSync(paletteFile, 'utf8').split(/\s+/).filter(Boolean)
   .map(h => [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)]);
@@ -60,7 +63,12 @@ function bands(length, fgAt, count) {
 }
 const colFg = x => { let n = 0; for (let y = 0; y < H; y++) if (idx[y * W + x] >= 0) n++; return n > H * 0.02; };
 const rowFg = y => { let n = 0; for (let x = 0; x < W; x++) if (idx[y * W + x] >= 0) n++; return n > W * 0.02; };
-const cols = bands(W, colFg, COLS), rows = bands(H, rowFg, ROWS);
+let cols = bands(W, colFg, COLS), rows = bands(H, rowFg, ROWS);
+if (uniform) {
+  const cw = W / COLS, rh = H / ROWS;
+  cols = Array.from({ length: COLS }, (_, i) => [Math.round(i * cw), Math.round((i + 1) * cw) - 1]);
+  rows = Array.from({ length: ROWS }, (_, i) => [Math.round(i * rh), Math.round((i + 1) * rh) - 1]);
+}
 if (cols.length !== COLS || rows.length !== ROWS) {
   console.error(`expected ${COLS}×${ROWS} cells, found ${cols.length}×${rows.length}`); process.exit(1);
 }
@@ -68,7 +76,7 @@ const sizes = cols.map(([a, b]) => b - a + 1).sort((a, b) => a - b);
 const S = sizes[Math.floor(sizes.length / 2)];
 // Square cell of side S around each band (bands narrower than S are props: keep them centred
 // horizontally and resting on the bottom of the band).
-const square = ([a, b], bottom) => bottom ? [b - S + 1, b] : [Math.round((a + b - S) / 2), Math.round((a + b - S) / 2) + S - 1];
+const square = ([a, b], bottom) => uniform ? [a, a + S - 1] : bottom ? [b - S + 1, b] : [Math.round((a + b - S) / 2), Math.round((a + b - S) / 2) + S - 1];
 
 const atlas = createCanvas(COLS * TILE, ROWS * TILE);
 const actx = atlas.getContext('2d');

@@ -19,12 +19,7 @@ static func create(parent: Node, rect: Rect2, p_title := "") -> ListMenu:
 	menu.position = rect.position
 	menu.size = rect.size
 	menu.title = p_title
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(UIKit.DARK, 0.95)
-	style.set_border_width_all(2)
-	style.border_color = UIKit.BORDER
-	style.anti_aliasing = false
-	menu.add_theme_stylebox_override("panel", style)
+	menu.add_theme_stylebox_override("panel", UIKit.window_style())
 	menu.rows_visible = maxi(1, int((rect.size.y - (22 if p_title != "" else 6)) / ROW_H))
 	parent.add_child(menu)
 	return menu
