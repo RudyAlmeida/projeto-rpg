@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="6_uuu1o"]
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_uggag"]
 
-[sub_resource type="Resource" id="Resource_731cy"]
+[sub_resource type="Resource" id="Resource_pda1n"]
 script = ExtResource("1_pda1n")
 priority = 2
 condition = 4
@@ -17,7 +17,7 @@ skill = ExtResource("2_731cy")
 target_mode = 4
 tell = "A lâmpada brilha forte..."
 
-[sub_resource type="Resource" id="Resource_6q6vh"]
+[sub_resource type="Resource" id="Resource_731cy"]
 script = ExtResource("1_pda1n")
 skill = ExtResource("3_6q6vh")
 
@@ -41,7 +41,7 @@ speed = 22
 luck = 6
 evasion = 8
 skills = Array[ExtResource("6_uuu1o")]([ExtResource("3_6q6vh"), ExtResource("2_731cy")])
-ai_rules = Array[ExtResource("1_pda1n")]([SubResource("Resource_731cy"), SubResource("Resource_6q6vh")])
+ai_rules = Array[ExtResource("1_pda1n")]([SubResource("Resource_pda1n"), SubResource("Resource_731cy")])
 field_comment = "Éter vazado criando vida própria... Isso não é natural, Kael."
 field_comment_by = &"gerd"
 affinities = {

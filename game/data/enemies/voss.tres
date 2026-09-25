@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_fed3g"]
 [ext_resource type="Resource" path="res://data/skills/voss_order.tres" id="2_jndmx"]
 [ext_resource type="Resource" path="res://data/skills/voss_punch.tres" id="3_1slso"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_oil_slime.png" id="4_qrka5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_voss.png" id="4_fed3g"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="5_dfqjs"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="6_w6u8b"]
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_0ymch"]
 
-[sub_resource type="Resource" id="Resource_fed3g"]
+[sub_resource type="Resource" id="Resource_jndmx"]
 script = ExtResource("1_fed3g")
 priority = 2
 condition = 4
@@ -17,7 +17,7 @@ skill = ExtResource("2_jndmx")
 target_mode = 4
 tell = "\"Soldados! Cerquem-nos!\""
 
-[sub_resource type="Resource" id="Resource_jndmx"]
+[sub_resource type="Resource" id="Resource_1slso"]
 script = ExtResource("1_fed3g")
 skill = ExtResource("3_1slso")
 target_mode = 2
@@ -27,11 +27,11 @@ tell = "Voss carrega a manopla..."
 script = ExtResource("5_dfqjs")
 id = &"voss"
 display_name = "General Voss"
-battle_sheet = ExtResource("4_qrka5")
-frame_size = Vector2i(56, 48)
+battle_sheet = ExtResource("4_fed3g")
+frame_size = Vector2i(66, 64)
 idle_frame = 0
-attack_frame = 2
-hurt_frame = 3
+attack_frame = 1
+hurt_frame = 2
 max_hp = 2400
 strength = 20
 weapon_power = 14
@@ -42,7 +42,7 @@ luck = 10
 precision = 14
 evasion = 3
 skills = Array[ExtResource("6_w6u8b")]([ExtResource("3_1slso"), ExtResource("2_jndmx")])
-ai_rules = Array[ExtResource("1_fed3g")]([SubResource("Resource_fed3g"), SubResource("Resource_jndmx")])
+ai_rules = Array[ExtResource("1_fed3g")]([SubResource("Resource_jndmx"), SubResource("Resource_1slso")])
 status_immunities = Array[int]([0, 1, 5, 4, 14])
 is_boss = true
 formation_offset = Vector2(116, 0)

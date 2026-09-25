@@ -10,19 +10,19 @@
 [ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="8_eftbd"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="9_2a5ui"]
 [ext_resource type="Script" path="res://scripts/world/npc.gd" id="10_2iedu"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="11_ikaje"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers2.png" id="11_ikaje"]
 [ext_resource type="Resource" path="res://data/dialogue/p_anselmo.tres" id="12_an01j"]
 [ext_resource type="Script" path="res://scripts/world/warp.gd" id="13_fr5nn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bomwp"]
 size = Vector2(12, 12)
 
-[node name="Relojoaria" type="Node2D" unique_id=357341552]
+[node name="Relojoaria" type="Node2D" unique_id=473907989]
 y_sort_enabled = true
 script = ExtResource("1_pwowq")
 music = ExtResource("2_nusxg")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=137351441]
+[node name="Map" type="TileMapLayer" parent="." unique_id=1893199211]
 script = ExtResource("3_5i165")
 legend = "vila"
 layout = "HHHHHHHHHH
@@ -34,20 +34,20 @@ H________H
 HK_______H
 HHHHHDHHHH"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1865105228 instance=ExtResource("4_eg0ig")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=425400386 instance=ExtResource("4_eg0ig")]
 motion_mode = 1
 script = ExtResource("5_vb3qi")
 idle_sheet = ExtResource("6_10dx3")
 walk_sheet = ExtResource("7_1d2it")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=1947167126]
+[node name="Spawns" type="Node2D" parent="." unique_id=1034929493]
 
-[node name="entrance" type="Marker2D" parent="Spawns" unique_id=907436005]
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=455315045]
 position = Vector2(88, 104)
 script = ExtResource("8_eftbd")
 facing = 2
 
-[node name="Anselmo" type="StaticBody2D" parent="." unique_id=1535187463 instance=ExtResource("9_2a5ui")]
+[node name="Anselmo" type="StaticBody2D" parent="." unique_id=1710933795 instance=ExtResource("9_2a5ui")]
 position = Vector2(88, 56)
 script = ExtResource("10_2iedu")
 idle_sheet = ExtResource("11_ikaje")
@@ -55,11 +55,11 @@ sheet_row = 3
 dialogue_set = ExtResource("12_an01j")
 display_name = "Sr. Anselmo"
 
-[node name="Door" type="Area2D" parent="." unique_id=1127890476]
+[node name="Door" type="Area2D" parent="." unique_id=850497397]
 position = Vector2(88, 120)
 script = ExtResource("13_fr5nn")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "from_relojoaria"
 
-[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=292572185]
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1570262625]
 shape = SubResource("RectangleShape2D_bomwp")

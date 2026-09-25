@@ -27,12 +27,12 @@ size = Vector2(60, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w15rs"]
 size = Vector2(64, 16)
 
-[node name="EstradaSul" type="Node2D" unique_id=1633838229]
+[node name="EstradaSul" type="Node2D" unique_id=309303609]
 y_sort_enabled = true
 script = ExtResource("1_6bkj7")
 music = ExtResource("2_1650y")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=1834512885]
+[node name="Map" type="TileMapLayer" parent="." unique_id=754746631]
 script = ExtResource("3_n21yo")
 legend = "vila"
 layout = "TTTTTTTTTT,,,,TTTTTTTTTT
@@ -66,24 +66,24 @@ T.........,,,,.........T
 T.........,,,,.........T
 TTTTTTTTTT,,,,TTTTTTTTTT"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=994578958 instance=ExtResource("4_hlmh4")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=856347761 instance=ExtResource("4_hlmh4")]
 motion_mode = 1
 script = ExtResource("5_obs60")
 idle_sheet = ExtResource("6_5545e")
 walk_sheet = ExtResource("7_gj6ll")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=185431158]
+[node name="Spawns" type="Node2D" parent="." unique_id=15750039]
 
-[node name="from_vila" type="Marker2D" parent="Spawns" unique_id=2028107339]
+[node name="from_vila" type="Marker2D" parent="Spawns" unique_id=589672472]
 position = Vector2(192, 24)
 script = ExtResource("8_xww4f")
 
-[node name="from_junkyard" type="Marker2D" parent="Spawns" unique_id=1797985490]
+[node name="from_junkyard" type="Marker2D" parent="Spawns" unique_id=202188265]
 position = Vector2(192, 456)
 script = ExtResource("8_xww4f")
 facing = 2
 
-[node name="HiddenChest" type="StaticBody2D" parent="." unique_id=1608410369]
+[node name="HiddenChest" type="StaticBody2D" parent="." unique_id=80209605]
 position = Vector2(296, 248)
 script = ExtResource("9_8p23s")
 kind = 1
@@ -94,34 +94,34 @@ flag = &"chest_road"
 item_id = &"potion"
 money = 50
 
-[node name="Slimes" type="Area2D" parent="." unique_id=1433658766 instance=ExtResource("11_l7ke6")]
+[node name="Slimes" type="Area2D" parent="." unique_id=1352817021 instance=ExtResource("11_l7ke6")]
 position = Vector2(200, 328)
 script = ExtResource("12_k7bgv")
 enemies = Array[ExtResource("13_ivm3g")]([ExtResource("14_e1x6c"), ExtResource("14_e1x6c")])
 patrol_distance = 20.0
 
-[node name="ToVila" type="Area2D" parent="." unique_id=665229455]
+[node name="ToVila" type="Area2D" parent="." unique_id=1520311945]
 position = Vector2(192, 8)
 script = ExtResource("15_6ksqt")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "from_south"
 
-[node name="Shape" type="CollisionShape2D" parent="ToVila" unique_id=829222965]
+[node name="Shape" type="CollisionShape2D" parent="ToVila" unique_id=410912247]
 shape = SubResource("RectangleShape2D_mj6n6")
 
-[node name="ToJunkyard" type="Area2D" parent="." unique_id=1666874614]
+[node name="ToJunkyard" type="Area2D" parent="." unique_id=39053973]
 position = Vector2(192, 472)
 script = ExtResource("15_6ksqt")
 target_scene = "res://scenes/maps/prologue/ferro_velho_1.tscn"
 target_spawn = "from_north"
 
-[node name="Shape" type="CollisionShape2D" parent="ToJunkyard" unique_id=506447165]
+[node name="Shape" type="CollisionShape2D" parent="ToJunkyard" unique_id=369371851]
 shape = SubResource("RectangleShape2D_a8ffg")
 
-[node name="RoadTutorial" type="Area2D" parent="." unique_id=1240147039]
+[node name="RoadTutorial" type="Area2D" parent="." unique_id=1853015424]
 position = Vector2(192, 72)
 script = ExtResource("16_ln6sj")
 cutscene = ExtResource("17_pdltt")
 
-[node name="Shape" type="CollisionShape2D" parent="RoadTutorial" unique_id=1019302602]
+[node name="Shape" type="CollisionShape2D" parent="RoadTutorial" unique_id=1268921740]
 shape = SubResource("RectangleShape2D_w15rs")

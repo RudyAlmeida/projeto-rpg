@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_jlq2y"]
 [ext_resource type="Resource" path="res://data/skills/core_compact.tres" id="2_f6ep8"]
 [ext_resource type="Resource" path="res://data/skills/core_steam.tres" id="3_fj8w5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_oil_slime.png" id="4_unuyn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_crusher_core.png" id="4_jlq2y"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="5_2unfj"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="6_pjyh1"]
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_tp6pg"]
@@ -34,11 +34,11 @@ tell = "Vapor escapa das chaminés..."
 script = ExtResource("5_2unfj")
 id = &"crusher_core"
 display_name = "Triturador"
-battle_sheet = ExtResource("4_unuyn")
-frame_size = Vector2i(56, 48)
+battle_sheet = ExtResource("4_jlq2y")
+frame_size = Vector2i(104, 115)
 idle_frame = 0
-attack_frame = 2
-hurt_frame = 3
+attack_frame = 1
+hurt_frame = 2
 max_hp = 330
 strength = 14
 weapon_power = 6

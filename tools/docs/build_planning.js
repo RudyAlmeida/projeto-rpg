@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '2.1 — Fase 2 aprovada; Fase 3 iniciada'],
+    ['Versão do documento', '2.2 — Fase 3: prólogo jogável (aguardando teste do Diretor)'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -501,14 +501,14 @@ children.push(...phase(3, 'Vertical slice',
   'Produzir um trecho curto do jogo com qualidade final para validar estilo, ritmo e diversão.',
   '30–60 minutos jogáveis: prólogo, 1 cidade, 1 dungeon, 1 chefe.',
   [
-    ['Roteiro do prólogo', 'Diretor + Claude', 'Rascunho v0.1 em docs/Roteiro_Prologo.docx — aguardando aprovação', WIP],
-    ['Arte final dos 3 personagens iniciais', 'Claude (Codex)', ''],
-    ['Tilesets da cidade e da dungeon', 'Claude (Codex)', 'Vila Caldeira v1 (48 tiles, ferramenta tiles.mjs); Ferro-Velho a fazer', WIP],
-    ['6–8 inimigos + 1 chefe', 'Claude (Codex + código)', ''],
+    ['Roteiro do prólogo', 'Diretor + Claude', 'docs/Roteiro_Prologo.docx v0.1 aprovado', DONE],
+    ['Arte final dos 3 personagens iniciais', 'Claude (Codex)', 'Kael, Eco e Gerd com folhas de referência; faltam poses de batalha dedicadas (ataque, dano, KO)', WIP],
+    ['Tilesets da cidade e da dungeon', 'Claude (Codex)', 'Vila Caldeira e Ferro-Velho do Sul (48 tiles cada, tiles.mjs); 10 mapas gerados por build_maps.gd', DONE],
+    ['6–8 inimigos + 1 chefe', 'Claude (Codex + código)', '7 comuns (Slime, Rato, Corvo ladrão, Aranha, Sentinela, Lâmpada, Soldado), chefe Triturador em 3 partes, luta roteirizada com Voss', DONE],
     ['UI final (molduras, ícones, fonte)', 'Claude (Codex)', ''],
     ['Efeitos visuais de batalha', 'Claude', ''],
-    ['Músicas e SFX do trecho', 'Claude (IA de áudio)', ''],
-    ['Cutscenes do prólogo', 'Claude', ''],
+    ['Músicas e SFX do trecho', 'Claude (IA de áudio)', 'Músicas prontas (Ferro-Velho, Chefe, Império, Adeus; A em uso, B guardada); SFX a definir', WIP],
+    ['Cutscenes do prólogo', 'Claude', '12 cenas do roteiro (manhã, entrega, estrada, ferro-velho, despertar de Eco, chefe, jantar com escolha, Voss, despedida, fuga)', DONE],
     ['Balanceamento do trecho', 'Claude + Diretor', ''],
     ['Playtest externo (2–3 pessoas)', 'Diretor', ''],
   ],
@@ -587,7 +587,12 @@ children.push(
     ['A-022', 'assets/audio/music/bgm_battle_a.mp3 + _b.mp3', 'Música', 'F2', DONE, 'Temas de batalha (Suno, 90 s) — aprovados os dois; o jogo alterna A e B a cada batalha'],
     ['A-023', 'assets/audio/music/bgm_victory_b.mp3', 'Música', 'F2', DONE, 'Fanfarra de vitória (Suno, 30 s) — aprovada a variação B (A guardada)'],
     ['A-024', 'assets/audio/music/bgm_title_b.mp3', 'Música', 'F2', DONE, 'Tema de título (Suno, 90 s) — aprovada a variação B (A guardada)'],
-    ['A-025', 'assets/tilesets/til_vila_caldeira.png', 'Tileset', 'F3', WIP, 'Vila Caldeira: 8×6 tiles 16×16 (chão, bordas, paredes, telhados, canos, objetos); gerado de _source/til_vila_caldeira_raw_v1.png'],
+    ['A-025', 'assets/tilesets/til_vila_caldeira.png', 'Tileset', 'F3', DONE, 'Vila Caldeira: 8×6 tiles 16×16 (chão, bordas, paredes, telhados, canos, objetos); gerado de _source/til_vila_caldeira_raw_v1.png'],
+    ['A-026', 'assets/tilesets/til_junkyard.png', 'Tileset', 'F3', DONE, 'Ferro-Velho do Sul: sucata, esteira, engrenagens gigantes, ruína aetheliana, baús, alavanca, caldeira'],
+    ['A-027', 'assets/sprites/enemies/enm_gear_rat / scrap_crow / bolt_spider / wander_lamp', 'Sprite', 'F3', DONE, 'Inimigos comuns do prólogo, 4 quadros cada'],
+    ['A-028', 'assets/sprites/enemies/enm_crusher_core / claw_up / claw_down', 'Sprite', 'F3', DONE, 'Chefe Triturador em 3 partes (núcleo 104×115 e duas garras)'],
+    ['A-029', 'assets/sprites/characters/voss + enemies/enm_voss', 'Sprite', 'F3', DONE, 'General Voss: 4 poses de mapa e 3 de batalha'],
+    ['A-030', 'assets/audio/music/bgm_junkyard / boss / empire / farewell (_a, _b)', 'Música', 'F3', WIP, 'Suno: Ferro-Velho, Chefe, Tema do Império, Adeus — versão A em uso, aguardando avaliação'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -640,11 +645,12 @@ children.push(
     ['1.3', today, 'Primeira batalha: inimigo no mapa, formação no próprio cenário, fila CTB, menu e alvo, timing de ataque e defesa, vitória/derrota; Brann e Slime de Óleo (76 testes).'],
     ['2.0', today, 'Fase 2 implementada em 4 blocos. A: GameState, níveis/XP, salvar. B: combate completo (status, itens, Barra de Éter, especiais, timing por personagem, IA por regras, troca, técnicas combinadas, fuga, iniciativa). C: equipamento, gemas, árvores. D: menu principal, loja, estalagem, diálogo com escolhas/afinidade, missões, cutscenes, opções, idioma, tela de título (155 testes).'],
     ['2.1', today, 'Fase 2 aprovada pelo Diretor (músicas: título B, vitória B, batalha A e B alternadas; menus fecham com Esc/Start e X/B). Fase 3 iniciada: roteiro do prólogo v0.1 (docs/Roteiro_Prologo.docx) e tileset da Vila Caldeira (158 testes).'],
+    ['2.2', today, 'Prólogo jogável do início ao fim: 10 mapas (vila, 3 interiores, estrada, ferro-velho em 3 áreas, câmara), 12 cutscenes, Gerd convidado, Eco, chefe em partes, corvo ladrão, luta roteirizada com Voss, missões do gato e das molas, cena de fim de capítulo. Novos sistemas: objetos de mapa (baú, alavanca, bloco, ponto de salvamento), portões por flag, tint noturno. 4 músicas novas (171 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
-  N('Diretor: ler e aprovar o Roteiro do Prólogo v0.1 (capítulo 9 lista as decisões: Gerd convidado, chefe Triturador, nomes novos).', 'next'),
-  N('Claude: tileset do Ferro-Velho, mapas reais da vila e do ferro-velho, novos inimigos, chefe, cutscenes do prólogo; músicas novas (Ferro-Velho, Chefe, Império, Adeus) após o roteiro aprovado.', 'next'),
+  N('Diretor: jogar o prólogo (Novo jogo) e avaliar ritmo, dificuldade, mapas e as 4 músicas novas (A/B).', 'next'),
+  N('Claude: poses de batalha dedicadas, UI final, efeitos visuais, SFX, balanceamento com o feedback do Diretor; depois playtest externo.', 'next'),
 );
 
 // ---------- document ----------

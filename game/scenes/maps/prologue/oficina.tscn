@@ -23,7 +23,7 @@
 [ext_resource type="Resource" path="res://data/dialogue/p_gerd_evening.tres" id="21_38wxm"]
 [ext_resource type="Texture2D" path="res://assets/sprites/characters/eco/chr_eco_ref.png" id="22_qdkgr"]
 [ext_resource type="Resource" path="res://data/dialogue/p_eco_home.tres" id="23_u21ss"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="24_ha32u"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers2.png" id="24_ha32u"]
 [ext_resource type="Resource" path="res://data/dialogue/p_pip.tres" id="25_777e4"]
 [ext_resource type="Script" path="res://scripts/world/warp.gd" id="26_kl4du"]
 [ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="27_jhk5h"]
@@ -84,7 +84,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qguva"]
 size = Vector2(16, 16)
 
-[node name="Oficina" type="Node2D" unique_id=990570323]
+[node name="Oficina" type="Node2D" unique_id=2060057045]
 y_sort_enabled = true
 script = ExtResource("1_fndou")
 music = ExtResource("2_7iipg")
@@ -100,7 +100,7 @@ tint = Color(0.5, 0.55, 0.85, 1)
 tint_show_if = &"boss_beaten"
 tint_hide_if = &"slept"
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=719143777]
+[node name="Map" type="TileMapLayer" parent="." unique_id=964330296]
 script = ExtResource("5_eebse")
 legend = "vila"
 layout = "################
@@ -115,63 +115,63 @@ layout = "################
 #o____________x#
 #######D########"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1705231684 instance=ExtResource("6_7jgmu")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1727760305 instance=ExtResource("6_7jgmu")]
 motion_mode = 1
 script = ExtResource("7_n6r61")
 idle_sheet = ExtResource("8_exeek")
 walk_sheet = ExtResource("9_hjsqa")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=1579759996]
+[node name="Spawns" type="Node2D" parent="." unique_id=33668658]
 
-[node name="start" type="Marker2D" parent="Spawns" unique_id=1450048442]
+[node name="start" type="Marker2D" parent="Spawns" unique_id=1853378739]
 position = Vector2(72, 56)
 script = ExtResource("10_6oyan")
 facing = 2
 
-[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1360590170]
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=873219074]
 position = Vector2(120, 152)
 script = ExtResource("10_6oyan")
 facing = 2
 
-[node name="back" type="Marker2D" parent="Spawns" unique_id=2001490091]
+[node name="back" type="Marker2D" parent="Spawns" unique_id=1344137684]
 position = Vector2(232, 88)
 script = ExtResource("10_6oyan")
 facing = 1
 
-[node name="dinner" type="Marker2D" parent="Spawns" unique_id=711861196]
+[node name="dinner" type="Marker2D" parent="Spawns" unique_id=1690691156]
 position = Vector2(104, 104)
 script = ExtResource("10_6oyan")
 facing = 3
 
-[node name="Furnace" type="StaticBody2D" parent="." unique_id=779846543]
+[node name="Furnace" type="StaticBody2D" parent="." unique_id=1071430041]
 position = Vector2(40, 40)
 script = ExtResource("11_qyasx")
 texture = ExtResource("12_vorns")
 tile = Vector2i(4, 3)
 lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_dfh28")])
 
-[node name="Anvil" type="StaticBody2D" parent="." unique_id=990493582]
+[node name="Anvil" type="StaticBody2D" parent="." unique_id=1163464056]
 position = Vector2(72, 40)
 script = ExtResource("11_qyasx")
 texture = ExtResource("12_vorns")
 tile = Vector2i(6, 4)
 lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_fmsvv")])
 
-[node name="Photo" type="StaticBody2D" parent="." unique_id=1510883667]
+[node name="Photo" type="StaticBody2D" parent="." unique_id=157365785]
 position = Vector2(200, 40)
 script = ExtResource("11_qyasx")
 texture = ExtResource("12_vorns")
 tile = Vector2i(0, 4)
 lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_krukg"), SubResource("Resource_b1dap")])
 
-[node name="Clock" type="StaticBody2D" parent="." unique_id=1418882003]
+[node name="Clock" type="StaticBody2D" parent="." unique_id=1541898460]
 position = Vector2(216, 120)
 script = ExtResource("11_qyasx")
 texture = ExtResource("12_vorns")
 tile = Vector2i(2, 4)
 lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_5ppex")])
 
-[node name="Bed" type="StaticBody2D" parent="." unique_id=1648540372]
+[node name="Bed" type="StaticBody2D" parent="." unique_id=519214030]
 position = Vector2(184, 72)
 script = ExtResource("11_qyasx")
 texture = ExtResource("12_vorns")
@@ -179,7 +179,7 @@ tile = Vector2i(1, 5)
 lines = Array[ExtResource("13_gmsxp")]([SubResource("Resource_v4s42")])
 hide_if_flag = &"dinner_done"
 
-[node name="BedRest" type="StaticBody2D" parent="." unique_id=507005420]
+[node name="BedRest" type="StaticBody2D" parent="." unique_id=2139548347]
 position = Vector2(184, 72)
 script = ExtResource("11_qyasx")
 kind = 2
@@ -190,7 +190,7 @@ cutscene = ExtResource("16_k6k1k")
 show_if_flag = &"dinner_done"
 hide_if_flag = &"slept"
 
-[node name="GerdMorning" type="StaticBody2D" parent="." unique_id=718535279 instance=ExtResource("17_fcq8k")]
+[node name="GerdMorning" type="StaticBody2D" parent="." unique_id=1501999894 instance=ExtResource("17_fcq8k")]
 position = Vector2(152, 72)
 script = ExtResource("18_rdvxn")
 idle_sheet = ExtResource("19_sq0dt")
@@ -199,7 +199,7 @@ dialogue_set = ExtResource("20_wwxib")
 display_name = "Mestre Gerd"
 hide_if_flag = &"gerd_joined"
 
-[node name="GerdEvening" type="StaticBody2D" parent="." unique_id=1341776764 instance=ExtResource("17_fcq8k")]
+[node name="GerdEvening" type="StaticBody2D" parent="." unique_id=275576431 instance=ExtResource("17_fcq8k")]
 position = Vector2(136, 88)
 script = ExtResource("18_rdvxn")
 idle_sheet = ExtResource("19_sq0dt")
@@ -208,7 +208,7 @@ display_name = "Mestre Gerd"
 show_if_flag = &"boss_beaten"
 hide_if_flag = &"gerd_out"
 
-[node name="EcoHome" type="StaticBody2D" parent="." unique_id=477037523 instance=ExtResource("17_fcq8k")]
+[node name="EcoHome" type="StaticBody2D" parent="." unique_id=720695022 instance=ExtResource("17_fcq8k")]
 position = Vector2(168, 120)
 script = ExtResource("18_rdvxn")
 idle_sheet = ExtResource("22_qdkgr")
@@ -218,7 +218,7 @@ display_name = "Eco"
 show_if_flag = &"boss_beaten"
 hide_if_flag = &"gerd_out"
 
-[node name="Pip" type="StaticBody2D" parent="." unique_id=587970746 instance=ExtResource("17_fcq8k")]
+[node name="Pip" type="StaticBody2D" parent="." unique_id=620231141 instance=ExtResource("17_fcq8k")]
 position = Vector2(120, 152)
 script = ExtResource("18_rdvxn")
 idle_sheet = ExtResource("24_ha32u")
@@ -228,7 +228,7 @@ display_name = "Pip"
 show_if_flag = &"slept"
 hide_if_flag = &"gerd_out"
 
-[node name="GerdFarewell" type="StaticBody2D" parent="." unique_id=57877751 instance=ExtResource("17_fcq8k")]
+[node name="GerdFarewell" type="StaticBody2D" parent="." unique_id=2023704178 instance=ExtResource("17_fcq8k")]
 position = Vector2(136, 104)
 script = ExtResource("18_rdvxn")
 idle_sheet = ExtResource("19_sq0dt")
@@ -236,49 +236,49 @@ display_name = "Mestre Gerd"
 show_if_flag = &"voss_fought"
 hide_if_flag = &"escaped"
 
-[node name="Door" type="Area2D" parent="." unique_id=6774474]
+[node name="Door" type="Area2D" parent="." unique_id=459869646]
 position = Vector2(120, 168)
 script = ExtResource("26_kl4du")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "from_oficina"
 
-[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1040167948]
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=763422006]
 shape = SubResource("RectangleShape2D_3swy6")
 
-[node name="BackDoor" type="Area2D" parent="." unique_id=935624768]
+[node name="BackDoor" type="Area2D" parent="." unique_id=1480099002]
 position = Vector2(248, 88)
 script = ExtResource("26_kl4du")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "back_door"
 
-[node name="Shape" type="CollisionShape2D" parent="BackDoor" unique_id=1942826766]
+[node name="Shape" type="CollisionShape2D" parent="BackDoor" unique_id=1750014822]
 shape = SubResource("RectangleShape2D_jb322")
 
-[node name="Morning" type="Area2D" parent="." unique_id=1252620211]
+[node name="Morning" type="Area2D" parent="." unique_id=704841170]
 position = Vector2(72, 56)
 script = ExtResource("27_jhk5h")
 cutscene = ExtResource("28_dn8tw")
 autostart = true
 
-[node name="Shape" type="CollisionShape2D" parent="Morning" unique_id=1565840984]
+[node name="Shape" type="CollisionShape2D" parent="Morning" unique_id=2104520291]
 shape = SubResource("RectangleShape2D_yw21e")
 
-[node name="Dinner" type="Area2D" parent="." unique_id=844746537]
+[node name="Dinner" type="Area2D" parent="." unique_id=1177770708]
 position = Vector2(104, 104)
 script = ExtResource("27_jhk5h")
 cutscene = ExtResource("29_th1y4")
 autostart = true
 show_if_flag = &"boss_beaten"
 
-[node name="Shape" type="CollisionShape2D" parent="Dinner" unique_id=790447028]
+[node name="Shape" type="CollisionShape2D" parent="Dinner" unique_id=1200516294]
 shape = SubResource("RectangleShape2D_bn82k")
 
-[node name="Farewell" type="Area2D" parent="." unique_id=1942947809]
+[node name="Farewell" type="Area2D" parent="." unique_id=1251669623]
 position = Vector2(120, 152)
 script = ExtResource("27_jhk5h")
 cutscene = ExtResource("30_mqobi")
 autostart = true
 show_if_flag = &"voss_fought"
 
-[node name="Shape" type="CollisionShape2D" parent="Farewell" unique_id=1641694167]
+[node name="Shape" type="CollisionShape2D" parent="Farewell" unique_id=37854559]
 shape = SubResource("RectangleShape2D_qguva")

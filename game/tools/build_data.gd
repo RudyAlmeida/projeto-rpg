@@ -642,19 +642,19 @@ func _build_prologue_combat() -> void:
 	# Boss: the Triturador, in three parts (the claws guard the core).
 	var boss := {"mechanical": true, "is_boss": true, "status_immunities": [S.POISON, S.SLEEP, S.CONFUSION] as Array[int],
 		"affinities": {E.THUNDER: DamageFormula.Affinity.WEAK}}
-	_enemy("crusher_claw_up", "Garra Superior", "enm_crusher_claw_up", Vector2i(64, 56),
+	_enemy("crusher_claw_up", "Garra Superior", "enm_crusher_claw_up", Vector2i(104, 115),
 		{"max_hp": 110, "strength": 15, "weapon_power": 8, "defense": 12, "spirit": 5, "speed": 14, "precision": 10,
 		"xp_reward": 0, "money_reward": 0}, ["claw_crush"],
 		{"ai_rules": [_rule(1, AIRule.Condition.ALWAYS, 0, "claw_crush", AIRule.TargetMode.RANDOM, 1,
 			"A garra superior se ergue...")] as Array[AIRule], "formation_offset": Vector2(72, -46),
 		"idle_frame": 0, "attack_frame": 1, "hurt_frame": 2}.merged(boss))
-	_enemy("crusher_claw_down", "Garra Inferior", "enm_crusher_claw_down", Vector2i(64, 56),
+	_enemy("crusher_claw_down", "Garra Inferior", "enm_crusher_claw_down", Vector2i(104, 115),
 		{"max_hp": 110, "strength": 15, "weapon_power": 8, "defense": 12, "spirit": 5, "speed": 13, "precision": 10,
 		"xp_reward": 0, "money_reward": 0}, ["claw_crush"],
 		{"ai_rules": [_rule(1, AIRule.Condition.ALWAYS, 0, "claw_crush", AIRule.TargetMode.RANDOM, 1,
 			"A garra inferior se ergue...")] as Array[AIRule], "formation_offset": Vector2(72, 50),
 		"idle_frame": 0, "attack_frame": 1, "hurt_frame": 2}.merged(boss))
-	_enemy("crusher_core", "Triturador", "enm_crusher_core", Vector2i(104, 104),
+	_enemy("crusher_core", "Triturador", "enm_crusher_core", Vector2i(104, 115),
 		{"max_hp": 330, "strength": 14, "weapon_power": 6, "defense": 10, "spirit": 8, "speed": 12, "precision": 10,
 		"xp_reward": 120, "money_reward": 200, "ap_reward": 15}, ["core_steam", "core_compact"],
 		{"guarded_by": [&"crusher_claw_up", &"crusher_claw_down"] as Array[StringName], "guarded_damage_mult": 0.25,
@@ -667,11 +667,11 @@ func _build_prologue_combat() -> void:
 		] as Array[AIRule]}.merged(boss))
 
 	# General Voss: story fight, ends after his 4th turn (no game over).
-	_enemy("voss", "General Voss", "enm_voss", Vector2i(64, 64),
+	_enemy("voss", "General Voss", "enm_voss", Vector2i(66, 64),
 		{"max_hp": 2400, "strength": 20, "weapon_power": 14, "defense": 45, "spirit": 30, "speed": 12, "luck": 10,
 		"precision": 14, "evasion": 3, "xp_reward": 0, "money_reward": 0}, ["voss_punch", "voss_order"],
 		{"is_boss": true, "status_immunities": [S.POISON, S.SLEEP, S.CONFUSION, S.PARALYSIS, S.STUCK] as Array[int],
-		"idle_frame": 0, "attack_frame": 2, "hurt_frame": 3, "formation_offset": Vector2(116, 0),
+		"idle_frame": 0, "attack_frame": 1, "hurt_frame": 2, "formation_offset": Vector2(116, 0),
 		"ai_rules": [
 			_rule(2, AIRule.Condition.EVERY_N_TURNS, 2, "voss_order", AIRule.TargetMode.SELF, 1, "\"Soldados! Cerquem-nos!\""),
 			_rule(1, AIRule.Condition.ALWAYS, 0, "voss_punch", AIRule.TargetMode.HIGHEST_THREAT, 1, "Voss carrega a manopla..."),
@@ -854,7 +854,7 @@ func _build_prologue_story() -> void:
 	])
 
 	# ----- Cenas 5 e 6: Eco desperta, o Triturador -----
-	var parts := [_enemies["crusher_claw_up"], _enemies["crusher_core"], _enemies["crusher_claw_down"]]
+	var parts: Array[CombatantData] = [_enemies["crusher_claw_up"], _enemies["crusher_core"], _enemies["crusher_claw_down"]]
 	_cutscene("p5_eco", "boss_beaten", [
 		_step(ST.STOP_MUSIC),
 		_step(ST.WAIT, {"seconds": 0.8}),
@@ -885,7 +885,7 @@ func _build_prologue_story() -> void:
 			[TIP, "As garras protegem o núcleo: ele só recebe dano cheio depois que uma garra cai."],
 			[TIP, "Ressonância (Kael) desmonta inimigos mecânicos. E se a fornalha se abrir, o Proteger de Eco impede que alguém seja puxado."],
 		]),
-		_step(ST.BATTLE, {"enemies": parts as Array[CombatantData], "music": load(MUSIC_BOSS)}),
+		_step(ST.BATTLE, {"enemies": parts, "music": load(MUSIC_BOSS)}),
 		_say([
 			[KA, "(Ela tá... quieta agora. Obrigada, ela disse. Eu acho.)", POR_KAEL],
 			[EC, "Observação: Kael conversa com máquinas desligadas. Registrando como comportamento normal."],

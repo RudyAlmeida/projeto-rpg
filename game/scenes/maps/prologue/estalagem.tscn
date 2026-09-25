@@ -17,12 +17,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esam0"]
 size = Vector2(12, 12)
 
-[node name="Estalagem" type="Node2D" unique_id=1362432944]
+[node name="Estalagem" type="Node2D" unique_id=545764899]
 y_sort_enabled = true
 script = ExtResource("1_c56b4")
 music = ExtResource("2_wtqnx")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=1951097209]
+[node name="Map" type="TileMapLayer" parent="." unique_id=998524676]
 script = ExtResource("3_8d2l1")
 legend = "vila"
 layout = "##############
@@ -36,20 +36,20 @@ layout = "##############
 #=v========v=#
 #######D######"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=492387858 instance=ExtResource("4_2tep8")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=763158020 instance=ExtResource("4_2tep8")]
 motion_mode = 1
 script = ExtResource("5_vycil")
 idle_sheet = ExtResource("6_p35r0")
 walk_sheet = ExtResource("7_s4b87")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=258665606]
+[node name="Spawns" type="Node2D" parent="." unique_id=174576203]
 
-[node name="entrance" type="Marker2D" parent="Spawns" unique_id=1167863166]
+[node name="entrance" type="Marker2D" parent="Spawns" unique_id=910208352]
 position = Vector2(120, 136)
 script = ExtResource("8_l8fc7")
 facing = 2
 
-[node name="Berta" type="StaticBody2D" parent="." unique_id=923737783 instance=ExtResource("9_2o08j")]
+[node name="Berta" type="StaticBody2D" parent="." unique_id=14116402 instance=ExtResource("9_2o08j")]
 position = Vector2(120, 56)
 script = ExtResource("10_r0nq6")
 idle_sheet = ExtResource("11_74jyd")
@@ -58,11 +58,11 @@ dialogue_set = ExtResource("12_44lo1")
 role = 2
 display_name = "Dona Berta"
 
-[node name="Door" type="Area2D" parent="." unique_id=2083657218]
+[node name="Door" type="Area2D" parent="." unique_id=616108699]
 position = Vector2(120, 152)
 script = ExtResource("13_4pxh8")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
 target_spawn = "from_estalagem"
 
-[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=1660889204]
+[node name="Shape" type="CollisionShape2D" parent="Door" unique_id=735622543]
 shape = SubResource("RectangleShape2D_esam0")

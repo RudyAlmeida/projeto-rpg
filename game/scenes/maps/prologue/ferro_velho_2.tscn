@@ -17,7 +17,7 @@
 [ext_resource type="Resource" path="res://data/cutscenes/p4_boiler.tres" id="15_2pkdo"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="16_j8bmn"]
 [ext_resource type="Script" path="res://scripts/world/npc.gd" id="17_ofgp7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="18_6jh35"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers2.png" id="18_6jh35"]
 [ext_resource type="Resource" path="res://data/dialogue/p_cat.tres" id="19_mwfx7"]
 [ext_resource type="PackedScene" path="res://scenes/characters/field_enemy.tscn" id="20_66dc8"]
 [ext_resource type="Script" path="res://scripts/world/field_enemy.gd" id="21_dj3o4"]
@@ -48,13 +48,13 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwifj"]
 size = Vector2(12, 12)
 
-[node name="FerroVelho2" type="Node2D" unique_id=1943408560]
+[node name="FerroVelho2" type="Node2D" unique_id=2082935864]
 y_sort_enabled = true
 script = ExtResource("1_igaou")
 music = ExtResource("2_cuvlr")
 aether_factor = 0.8
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=981174552]
+[node name="Map" type="TileMapLayer" parent="." unique_id=339470259]
 script = ExtResource("3_qh3w6")
 legend = "junkyard"
 layout = "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
@@ -80,25 +80,25 @@ ZZZZZZZZZZZZZZZZZ_ZZZZZZZZZZZZZZZZZZ
 ZZZZZZZZZZZZZZZZZ_ZZZZZZZZZZZZZZZZZZ
 ZZZZZZZZZZZZZZZZZ_ZZZZZZZZZZZZZZZZZZ"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1251734817 instance=ExtResource("4_pogpm")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2122932402 instance=ExtResource("4_pogpm")]
 motion_mode = 1
 script = ExtResource("5_hpxyi")
 idle_sheet = ExtResource("6_bhm5g")
 walk_sheet = ExtResource("7_ksn1i")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=653595668]
+[node name="Spawns" type="Node2D" parent="." unique_id=500787075]
 
-[node name="from_west" type="Marker2D" parent="Spawns" unique_id=923824727]
+[node name="from_west" type="Marker2D" parent="Spawns" unique_id=1071094522]
 position = Vector2(24, 176)
 script = ExtResource("8_g1vnb")
 facing = 3
 
-[node name="from_south" type="Marker2D" parent="Spawns" unique_id=574456927]
+[node name="from_south" type="Marker2D" parent="Spawns" unique_id=836829244]
 position = Vector2(280, 328)
 script = ExtResource("8_g1vnb")
 facing = 2
 
-[node name="Lever" type="StaticBody2D" parent="." unique_id=753737789]
+[node name="Lever" type="StaticBody2D" parent="." unique_id=1422858371]
 position = Vector2(56, 104)
 script = ExtResource("9_uax4s")
 kind = 3
@@ -109,7 +109,7 @@ flag = &"conveyor_on"
 lines = Array[ExtResource("11_ffbf4")]([SubResource("Resource_gmgxy")])
 cutscene = ExtResource("13_1elv6")
 
-[node name="ScrapBlock" type="StaticBody2D" parent="." unique_id=1309857962]
+[node name="ScrapBlock" type="StaticBody2D" parent="." unique_id=2117237290]
 position = Vector2(280, 296)
 script = ExtResource("9_uax4s")
 kind = 4
@@ -118,7 +118,7 @@ tile = Vector2i(7, 4)
 flag = &"conveyor_on"
 lines = Array[ExtResource("11_ffbf4")]([SubResource("Resource_nqwsc")])
 
-[node name="Boiler" type="StaticBody2D" parent="." unique_id=1661660041]
+[node name="Boiler" type="StaticBody2D" parent="." unique_id=891975671]
 position = Vector2(488, 72)
 script = ExtResource("9_uax4s")
 kind = 2
@@ -127,7 +127,7 @@ tile = Vector2i(7, 3)
 lines = Array[ExtResource("11_ffbf4")]([SubResource("Resource_1iwye")])
 cutscene = ExtResource("15_2pkdo")
 
-[node name="Fuligem" type="StaticBody2D" parent="." unique_id=970832437 instance=ExtResource("16_j8bmn")]
+[node name="Fuligem" type="StaticBody2D" parent="." unique_id=533530587 instance=ExtResource("16_j8bmn")]
 position = Vector2(536, 264)
 script = ExtResource("17_ofgp7")
 idle_sheet = ExtResource("18_6jh35")
@@ -138,36 +138,36 @@ display_name = "Fuligem"
 show_if_flag = &"quest_q_cat"
 hide_if_flag = &"cat_found"
 
-[node name="Spider" type="Area2D" parent="." unique_id=1854086908 instance=ExtResource("20_66dc8")]
+[node name="Spider" type="Area2D" parent="." unique_id=1834344191 instance=ExtResource("20_66dc8")]
 position = Vector2(168, 248)
 script = ExtResource("21_dj3o4")
 enemies = Array[ExtResource("22_ilksq")]([ExtResource("23_0c33d")])
 
-[node name="CrowRat" type="Area2D" parent="." unique_id=1320062825 instance=ExtResource("20_66dc8")]
+[node name="CrowRat" type="Area2D" parent="." unique_id=793327263 instance=ExtResource("20_66dc8")]
 position = Vector2(424, 152)
 script = ExtResource("21_dj3o4")
 enemies = Array[ExtResource("22_ilksq")]([ExtResource("24_58gbn"), ExtResource("25_7drw1")])
 
-[node name="SlimeSpider" type="Area2D" parent="." unique_id=1380496848 instance=ExtResource("20_66dc8")]
+[node name="SlimeSpider" type="Area2D" parent="." unique_id=1500561761 instance=ExtResource("20_66dc8")]
 position = Vector2(232, 56)
 script = ExtResource("21_dj3o4")
 enemies = Array[ExtResource("22_ilksq")]([ExtResource("26_tg00i"), ExtResource("23_0c33d")])
 patrol_distance = 16.0
 
-[node name="ToYard" type="Area2D" parent="." unique_id=2073033387]
+[node name="ToYard" type="Area2D" parent="." unique_id=94433737]
 position = Vector2(8, 176)
 script = ExtResource("27_r7mfy")
 target_scene = "res://scenes/maps/prologue/ferro_velho_1.tscn"
 target_spawn = "from_east"
 
-[node name="Shape" type="CollisionShape2D" parent="ToYard" unique_id=1225594360]
+[node name="Shape" type="CollisionShape2D" parent="ToYard" unique_id=467613104]
 shape = SubResource("RectangleShape2D_48e5n")
 
-[node name="ToWell" type="Area2D" parent="." unique_id=1737580368]
+[node name="ToWell" type="Area2D" parent="." unique_id=311712357]
 position = Vector2(280, 344)
 script = ExtResource("27_r7mfy")
 target_scene = "res://scenes/maps/prologue/ferro_velho_3.tscn"
 target_spawn = "from_north"
 
-[node name="Shape" type="CollisionShape2D" parent="ToWell" unique_id=572115859]
+[node name="Shape" type="CollisionShape2D" parent="ToWell" unique_id=114284802]
 shape = SubResource("RectangleShape2D_vwifj")

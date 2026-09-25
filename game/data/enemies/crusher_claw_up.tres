@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_vrg5g"]
 [ext_resource type="Resource" path="res://data/skills/claw_crush.tres" id="2_40lrw"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_oil_slime.png" id="3_aw5vc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_crusher_claw_up.png" id="3_vrg5g"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="4_e00p8"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="5_ksfcf"]
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="6_coe52"]
@@ -16,11 +16,11 @@ tell = "A garra superior se ergue..."
 script = ExtResource("4_e00p8")
 id = &"crusher_claw_up"
 display_name = "Garra Superior"
-battle_sheet = ExtResource("3_aw5vc")
-frame_size = Vector2i(56, 48)
+battle_sheet = ExtResource("3_vrg5g")
+frame_size = Vector2i(104, 115)
 idle_frame = 0
-attack_frame = 2
-hurt_frame = 3
+attack_frame = 1
+hurt_frame = 2
 max_hp = 110
 strength = 15
 weapon_power = 8
