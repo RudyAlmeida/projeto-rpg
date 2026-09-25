@@ -65,6 +65,22 @@ func test_every_warp_reaches_an_existing_spawn() -> void:
 		map.free()
 
 
+func test_every_exit_can_be_reached() -> void:
+	# A warp on a solid cell traps the player (the chamber's way back up once did).
+	for map_name: String in MAPS:
+		var map: FieldMap = load(DIR + map_name + ".tscn").instantiate()
+		add_child(map)
+		var tiles: AsciiMap = map.get_node("Map")
+		for warp: Warp in map.find_children("*", "Warp", false, false):
+			var shape: RectangleShape2D = warp.get_node("Shape").shape
+			var cells := int(round((shape.size.x + 4) / 16))
+			var first := tiles.local_to_map(warp.position - Vector2((cells - 1) * 8, 0))
+			for i in cells:
+				var cell := first + Vector2i(i, 0)
+				assert_false(tiles.is_solid_at(cell), "%s: exit %s on a solid cell %s" % [map_name, warp.name, cell])
+		map.free()
+
+
 func test_every_map_row_has_the_same_width() -> void:
 	for map_name: String in MAPS:
 		var map: FieldMap = load(DIR + map_name + ".tscn").instantiate()

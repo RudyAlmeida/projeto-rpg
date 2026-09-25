@@ -4,7 +4,7 @@ extends CanvasLayer
 ## (commands, techs, items, swaps), party status with Aether bars bottom-right, and a
 ## message box under the order strip.
 
-const FONT := preload("res://assets/fonts/pixelify_ui.tres")
+const FONT := preload("res://assets/fonts/ui_text.tres")
 const ICONS := preload("res://assets/ui/ico_items.png")
 const GOLD := Color(0.909804, 0.713725, 0.298039)
 const TEXT := Color(0.909804, 0.894118, 0.862745)
@@ -152,7 +152,7 @@ func popup_number(world_pos: Vector2, text: String, color: Color, parent: Node) 
 	# Pure numbers use the crisp number font; words ("Perfeito!", "Errou") keep the UI font.
 	var numeric := text.strip_edges().trim_suffix("!").replace(" +", "").is_valid_int()
 	label.add_theme_font_override("font", UIKit.NUMBER_FONT if numeric else FONT)
-	label.add_theme_font_size_override("font_size", 8 if numeric else 16)
+	label.add_theme_font_size_override("font_size", 8 if numeric else UIKit.FONT_SIZE)
 	label.add_theme_color_override("font_color", color)
 	label.add_theme_color_override("font_outline_color", DARK)
 	label.add_theme_constant_override("outline_size", 4)
@@ -171,7 +171,7 @@ func _label(pos: Vector2, size: Vector2, color: Color) -> Label:
 	label.position = pos
 	label.size = size
 	label.add_theme_font_override("font", FONT)
-	label.add_theme_font_size_override("font_size", 16)
+	label.add_theme_font_size_override("font_size", UIKit.FONT_SIZE)
 	label.add_theme_color_override("font_color", color)
 	return label
 

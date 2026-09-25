@@ -20,7 +20,7 @@ func _ready() -> void:
 	_ui = CanvasLayer.new()
 	add_child(_ui)
 	var logo := UIKit.label(_ui, Vector2(24, 34), "O Coração de Éter", UIKit.GOLD)
-	logo.add_theme_font_size_override("font_size", 32)
+	logo.add_theme_font_size_override("font_size", 40)
 	logo.add_theme_color_override("font_outline_color", UIKit.DARK)
 	logo.add_theme_constant_override("outline_size", 6)
 	var tagline := UIKit.label(_ui, Vector2(28, 72), "Um RPG de fantasia e vapor", UIKit.TEXT)

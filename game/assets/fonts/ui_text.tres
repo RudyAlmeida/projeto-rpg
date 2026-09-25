@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" load_steps=3 format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Jersey10-Regular.ttf" id="1_font"]
+[ext_resource type="FontFile" path="res://assets/fonts/PixelifySans.ttf" id="2_fallback"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_fallback")])
+base_font = ExtResource("1_font")
+spacing_top = -3
+spacing_bottom = -3

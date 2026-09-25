@@ -556,7 +556,7 @@ func _camara() -> void:
 	_border("R")
 	_fill(0, 1, 23, 1, "R")
 	_put("0,5:Q 23,5:Q 0,10:Q 23,10:Q 6,0:Q 17,0:Q 5,5:i 18,5:i 5,11:i 18,11:i")
-	_fill(11, 1, 12, 1, ":")
+	_fill(11, 0, 12, 1, ":")  # the way back up (row 0 holds the exit)
 	_begin("Camara", "junkyard", MUSIC_JUNKYARD)
 	_root.aether_factor = 1.2
 	_npc("EcoSleeping", Vector2(12, 9), ECO_SHEET, 0, F.DOWN, {"display_name": "???", "hide_if_flag": &"eco_awake",

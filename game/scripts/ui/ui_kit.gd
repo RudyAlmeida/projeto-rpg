@@ -3,7 +3,9 @@ extends RefCounted
 ## Shared look for every menu: palette colours, the gold-bordered dark panel, pixel-font
 ## labels and item icons. Screens are built in code with these helpers.
 
-const FONT := preload("res://assets/fonts/pixelify_ui.tres")
+## Text: Jersey 10 at 20 px (2× its pixel grid) — crisp, dotted "i", clear accents.
+const FONT := preload("res://assets/fonts/ui_text.tres")
+const FONT_SIZE := 20
 ## Numbers (HP, damage, prices): Press Start 2P at its native 8 px — Pixelify's 5 reads as 8.
 const NUMBER_FONT := preload("res://assets/fonts/numbers.tres")
 const NUMBER_SIZE := 8
@@ -101,7 +103,7 @@ static func label(parent: Node, pos: Vector2, text := "", color := TEXT, width :
 	l.position = pos
 	l.text = text
 	l.add_theme_font_override("font", FONT)
-	l.add_theme_font_size_override("font_size", 16)
+	l.add_theme_font_size_override("font_size", FONT_SIZE)
 	l.add_theme_color_override("font_color", color)
 	if width > 0.0:
 		l.size = Vector2(width, 18)

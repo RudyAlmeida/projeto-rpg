@@ -495,10 +495,33 @@ func _confirm() -> void:
 				_show_item_target()
 		Screen.ITEM_TARGET:
 			var member: PartyMember = _sub.current()["member"]
+			var target_index := _sub.index
+			var item_index := _list.index
+			var hp_before := member.hp
+			var mp_before := member.mp
+			var was_down := not member.is_alive()
 			if use_item_on(_item, member):
+				AudioManager.play_sfx(&"heal")
+				var parts := PackedStringArray()
+				if was_down:
+					parts.append("voltou a si")
+				if member.hp > hp_before and not was_down:
+					parts.append("recuperou %d HP" % (member.hp - hp_before))
+				if member.mp > mp_before:
+					parts.append("recuperou %d MP" % (member.mp - mp_before))
+				var message := "%s %s." % [member.data.display_name, " e ".join(parts)]
+				# Rebuild the lists but keep both cursors where they were.
 				_show_items()
+				_list.index = mini(item_index, _list.entries.size() - 1)
+				_list.set_entries(_list.entries, true)
 				if GameState.count(_item.id) > 0:
 					_show_item_target()
+					_sub.index = target_index
+					_sub.set_entries(_sub.entries, true)
+				_detail.text = message
+			else:
+				AudioManager.play_sfx(&"ui_error")
+				_detail.text = "Não teve efeito em %s." % member.data.display_name
 		Screen.EQUIP_SLOTS:
 			_slot_kind = _list.current()["kind"]
 			_show_equip_pick()

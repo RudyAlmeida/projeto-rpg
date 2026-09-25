@@ -106,7 +106,7 @@ func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], c
 	_cursor = Label.new()
 	_cursor.text = "▼"
 	_cursor.add_theme_font_override("font", BattleUI.FONT)
-	_cursor.add_theme_font_size_override("font_size", 16)
+	_cursor.add_theme_font_size_override("font_size", UIKit.FONT_SIZE)
 	_cursor.add_theme_color_override("font_color", BattleUI.GOLD)
 	_cursor.z_index = 45
 	_cursor.hide()
@@ -160,7 +160,7 @@ func _add_view(unit: BattleUnit, pos: Vector2) -> BattlerView:
 func _make_tag(view: BattlerView) -> Label:
 	var tag := Label.new()
 	tag.add_theme_font_override("font", BattleUI.FONT)
-	tag.add_theme_font_size_override("font_size", 16)
+	tag.add_theme_font_size_override("font_size", UIKit.FONT_SIZE)
 	tag.add_theme_color_override("font_color", NUMBER_STATUS)
 	tag.add_theme_color_override("font_outline_color", BattleUI.DARK)
 	tag.add_theme_constant_override("outline_size", 3)
