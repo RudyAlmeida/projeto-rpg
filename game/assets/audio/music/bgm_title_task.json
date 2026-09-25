@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "77435993-7d5a-4dd2-a9ac-ca3454cfa12c",
+  "trace_id": "37dff504-b3d8-4d2b-bf24-4d73fa2155d2",
+  "data": [
+    {
+      "id": "6e0fb4ea-e8dd-403c-a0f8-839033d81a2e",
+      "title": "O Coração de Éter (tema de título)",
+      "image_url": "https://cdn2.suno.ai/image_6e0fb4ea-e8dd-403c-a0f8-839033d81a2e.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_6e0fb4ea-e8dd-403c-a0f8-839033d81a2e.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/6e0fb4ea-e8dd-403c-a0f8-839033d81a2e.mp3",
+      "video_url": "https://cdn1.suno.ai/6e0fb4ea-e8dd-403c-a0f8-839033d81a2e.mp4",
+      "created_at": "2026-09-25T12:07:32.635Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG title theme, epic and nostalgic, slow majestic orchestral intro with music box and harp, then soaring strings and french horns with a memorable heroic melody, subtle clockwork percussion, bittersweet and hopeful, like classic 90s JRPG opening themes, major key with melancholic minor passages, 80 BPM, seamless loop",
+      "duration": 89.92
+    },
+    {
+      "id": "bda8b838-232e-4490-afb8-d05748243c23",
+      "title": "O Coração de Éter (tema de título)",
+      "image_url": "https://cdn2.suno.ai/image_bda8b838-232e-4490-afb8-d05748243c23.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_bda8b838-232e-4490-afb8-d05748243c23.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/bda8b838-232e-4490-afb8-d05748243c23.mp3",
+      "video_url": "https://cdn1.suno.ai/bda8b838-232e-4490-afb8-d05748243c23.mp4",
+      "created_at": "2026-09-25T12:07:32.635Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG title theme, epic and nostalgic, slow majestic orchestral intro with music box and harp, then soaring strings and french horns with a memorable heroic melody, subtle clockwork percussion, bittersweet and hopeful, like classic 90s JRPG opening themes, major key with melancholic minor passages, 80 BPM, seamless loop",
+      "duration": 89.96
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

@@ -586,7 +586,7 @@ children.push(
     ['A-021', 'assets/ui/bg_title.png', 'Arte', 'F2', DONE, 'Tela de título 640×360 (Kael, Eco e o Coração de Éter)'],
     ['A-022', 'assets/audio/music/bgm_battle_a.mp3', 'Música', 'F2', WIP, 'Tema de batalha (Suno, 90 s; variação B guardada) — aguardando avaliação'],
     ['A-023', 'assets/audio/music/bgm_victory_a.mp3', 'Música', 'F2', WIP, 'Fanfarra de vitória (Suno, 30 s; variação B guardada) — aguardando avaliação'],
-    ['A-024', 'bgm_title (pendente)', 'Música', 'F2', '⛔ Bloqueada', 'Créditos da AceData esgotados; pedido pronto em _prompts/bgm_title_test.json'],
+    ['A-024', 'assets/audio/music/bgm_title_a.mp3', 'Música', 'F2', WIP, 'Tema de título (Suno, 90 s; variação B guardada) — aguardando avaliação'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -642,7 +642,6 @@ children.push(
   gap(),
   H2('Próximos passos'),
   N('Diretor: jogar e aprovar a Fase 2 (menu, loja, estalagem, missão do Gerd, Lyra, batalhas com a Sentinela).', 'next'),
-  N('Recarregar créditos da AceData e gerar o tema de título.', 'next'),
   N('Fase 3 (vertical slice): roteiro do prólogo, tilesets reais pelo Codex, Ferro-Velho do Sul, primeiro chefe.', 'next'),
 );
 

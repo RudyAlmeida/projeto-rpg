@@ -2,8 +2,7 @@ extends Node2D
 ## Title screen: key art, logo, New game / Continue / Options / Quit.
 
 const BACKGROUND := preload("res://assets/ui/bg_title.png")
-## Until a title theme is generated (Suno credits ran out) the town theme plays here.
-const MUSIC := preload("res://assets/audio/music/bgm_vila_caldeira_test_a.mp3")
+const MUSIC := preload("res://assets/audio/music/bgm_title_a.mp3")
 const FIRST_MAP := "res://scenes/maps/test_map.tscn"
 
 var _menu: ListMenu
