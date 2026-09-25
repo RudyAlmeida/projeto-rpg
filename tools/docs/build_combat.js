@@ -10,7 +10,7 @@ d.cover({
   subtitle: 'GDD — Sistema de Combate',
   tagline: 'Turnos CTB + comandos com timing · batalha no próprio mapa',
   info: [
-    ['Versão', '0.1 — proposta para aprovação'],
+    ['Versão', '1.0 — aprovado pelo Diretor (24/09/2026)'],
     ['Data', '24/09/2026'],
     ['Decisões de base', 'D-03 híbrido (CTB + timing) · D-04 no próprio mapa · D-05 níveis + árvore + gemas'],
     ['Status dos números', 'Valores iniciais; ajustados na Fase 5 (balanceamento)'],
@@ -293,8 +293,9 @@ c.push(
 
 // ---------- 13 ----------
 c.push(
-  H1('13. Pontos para aprovação'),
-  table(['#', 'Pergunta', 'Proposta'], [
+  H1('13. Decisões do combate'),
+  P('Todas as propostas abaixo foram aprovadas em 24/09/2026.', undefined, true),
+  table(['#', 'Pergunta', 'Decisão'], [
     ['C-01', 'Trocar personagem gasta turno?', 'Não: quem entra age na hora (estilo FFX), uma troca por turno'],
     ['C-02', 'Errar o timing tem penalidade?', 'Não: resultado normal'],
     ['C-03', 'Reservas ganham XP?', 'Sim, 75%'],

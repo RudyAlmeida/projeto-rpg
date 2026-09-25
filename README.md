@@ -26,4 +26,10 @@ JRPG por turnos inspirado em Final Fantasy VII, Final Fantasy X e Chrono Trigger
    cd tools/art; npm install; cd ../..
    node tools/art/pixelize.mjs game/assets/_source/nome_raw.png game/assets/sprites/.../nome.png
    ```
-5. Documentos (`docs/`) são gerados por `tools/docs/build_*.js` (`cd tools/docs; npm install`).
+5. Testes automatizados (GUT, testes em `game/tests/`):
+   ```powershell
+   ./tools/run_tests.ps1
+   ```
+6. Controles: editar `game/tools/setup_input_map.gd` e rodar
+   `godot --headless --path game -s res://tools/setup_input_map.gd`.
+7. Documentos (`docs/`) são gerados por `tools/docs/build_*.js` (`cd tools/docs; npm install`).
