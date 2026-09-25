@@ -55,7 +55,8 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
 1. Prompt = the fixed block in `game/assets/_prompts/style_base.md` + an asset block (see `chr_kael_ref.md` for the pattern). Save each asset's prompt in `game/assets/_prompts/`.
 2. Generate with `tools/gen_image.ps1 -Prompt ... -OutPath assets/_source/<name>_raw_v1.png` (Codex CLI 0.156.1 in `tools/codex-cli`), **or** the `codex` MCP server (`codex_generate_image` + poll `codex_image_status`; it may return 2 variants).
 3. Always look at the result: Codex may return a transparent background instead of magenta, and once corrupted an image by "fixing" it. Untouched originals are in `~/.codex/generated_images/`.
-4. Convert: `node tools/art/pixelize.mjs <raw.png> game/assets/sprites/characters/<name>/<name>.png` — removes background (magenta or alpha), splits poses, downsamples to 56 px tall in 64×64 cells, locks to the palette, writes a 6× `_preview.png`. 56 px matches Codex's natural pixel grid; smaller heights erase faces.
+4. Convert: `node tools/art/pixelize.mjs <raw.png> game/assets/sprites/characters/<name>/<name>.png` — removes background (magenta or alpha), splits poses into rows × columns (single row for reference sheets, grids for animations), downsamples to 56 px tall in 64×64 cells (scale taken from the first pose, shared by all), locks to the palette, writes a 6× `_preview.png`. 56 px matches Codex's natural pixel grid; smaller heights erase faces. After changing the tool, re-run it on the approved `_source` images and compare hashes with the committed sprites.
+   For animations, attach the approved reference image (`referenceImages` on the MCP tool) so the character stays identical — see `chr_kael_walk.md`.
 5. Palette: `game/assets/palette/velmora32.hex` (32 colours; index 0 = outline; cyan is reserved for Aether/magic).
 
 `game/assets/_source/` has a `.gdignore` — raw images are versioned but not imported by Godot.
@@ -71,7 +72,7 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
   - `scripts/battle/combat_balance.gd` (`CombatBalance`) — every tunable number, defaults = approved GDD. Change numbers here, not in formulas.
 - Combat is **hybrid CTB + timed button presses** (Perfect ×1.3 / Good ×1.1 attack; ×0.5 / ×0.75 damage taken on defense; missing never penalises), fought **on the field map** (no separate battle screen), 3 active + reserves.
 - Input actions (keyboard + gamepad, device -1) are defined in `game/tools/setup_input_map.gd`; `confirm` and `action_timing` share keys by default but stay separate for remapping.
-- Main scene is `scenes/maps/test_map.tscn` (Phase 1 prototype: `AsciiMap` builds a TileMapLayer + collision from a text layout, `Player` walks with placeholder frames from the reference sheet). `scenes/main/main.tscn` is only an asset-preview scene (character sheets + test music).
+- Main scene is `scenes/maps/test_map.tscn` (Phase 1 prototype: `AsciiMap` builds a TileMapLayer + collision from a text layout, `Player` uses `idle_sheet` (reference sheet: columns down/left/up) and `walk_sheet` (rows down/left/up × 4 frames); right = left mirrored). `scenes/main/main.tscn` is only an asset-preview scene (character sheets + test music).
 - Known engine quirk: any scene that played an MP3 prints "2 ObjectDB instances were leaked at exit" on quit (reproduced with a minimal probe even after stop()+free). Harmless; not our bug.
 - GDScript: static typing everywhere, `class_name` for reusable classes, signals named in past tense. Pixel-art rendering: nearest filter, integer scaling, snap to pixel.
 

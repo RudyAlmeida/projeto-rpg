@@ -51,6 +51,24 @@ func test_walls_stop_the_player() -> void:
 	assert_gt(player.position.y, 16.0, "player crossed the top wall")
 
 
+func test_walking_uses_walk_sheet_row_for_direction() -> void:
+	var sprite: Sprite2D = player.get_node("Sprite")
+	assert_eq(sprite.texture, player.idle_sheet, "idle when standing")
+	Input.action_press(&"move_up")
+	await wait_physics_frames(5)
+	assert_eq(sprite.texture, player.walk_sheet)
+	assert_eq(sprite.region_rect.position.y, 2.0 * Player.FRAME_SIZE, "row 3 = walking up")
+	Input.action_release(&"move_up")
+	await wait_physics_frames(2)
+	assert_eq(sprite.texture, player.idle_sheet, "back to idle after stopping")
+
+
+func test_walk_frames_cycle() -> void:
+	assert_eq(Player.walk_frame_at(0.0), 0)
+	assert_eq(Player.walk_frame_at(1.0 / Player.WALK_FPS), 1)
+	assert_eq(Player.walk_frame_at(Player.WALK_FRAMES / Player.WALK_FPS), 0, "wraps around")
+
+
 func test_facing_for_direction() -> void:
 	assert_eq(Player.facing_for(Vector2.UP), Player.Facing.UP)
 	assert_eq(Player.facing_for(Vector2.DOWN), Player.Facing.DOWN)

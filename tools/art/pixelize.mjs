@@ -64,31 +64,41 @@ for (let p = 0; p < W * H; p++) {
   if (!isBg(r, g, b, a)) { fg[p] = 1; idx[p] = nearest(r, g, b); }
 }
 
-// ---------- split poses by empty columns ----------
-const colCount = new Int32Array(W);
-for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) colCount[x] += fg[y * W + x];
-const minCol = Math.max(2, Math.round(H * 0.004));
-const minGap = Math.round(W * 0.01);
-let groups = [];
-for (let x = 0, start = -1, gap = 0; x <= W; x++) {
-  const on = x < W && colCount[x] >= minCol;
-  if (on) { if (start < 0) start = x; gap = 0; }
-  else if (start >= 0 && (++gap > minGap || x === W)) { groups.push([start, x - gap]); start = -1; gap = 0; }
+// ---------- split poses: rows by empty horizontal bands, then poses by empty columns ----------
+// Returns [start, end] runs where counts[i] >= minCount, merging gaps up to minGap.
+function runs(counts, minCount, minGap, minSize) {
+  const out = [];
+  for (let i = 0, start = -1, gap = 0; i <= counts.length; i++) {
+    const on = i < counts.length && counts[i] >= minCount;
+    if (on) { if (start < 0) start = i; gap = 0; }
+    else if (start >= 0 && (++gap > minGap || i === counts.length)) { out.push([start, i - gap]); start = -1; gap = 0; }
+  }
+  return out.filter(([a, b]) => b - a > minSize); // drop specks
 }
-groups = groups.filter(([a, b]) => b - a > W * 0.02); // drop specks
-const poses = groups.map(([x0, x1]) => {
-  let y0 = H, y1 = -1;
-  for (let y = 0; y < H; y++) for (let x = x0; x <= x1; x++) if (fg[y * W + x]) { if (y < y0) y0 = y; if (y > y1) y1 = y; }
-  return { x0, x1, y0, y1 };
+const rowCount = new Int32Array(H);
+for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) rowCount[y] += fg[y * W + x];
+const bands = runs(rowCount, Math.max(2, Math.round(W * 0.002)), Math.round(H * 0.02), H * 0.05);
+const poses = []; // { x0, x1, y0, y1, row, baseline }
+bands.forEach(([by0, by1], row) => {
+  const colCount = new Int32Array(W);
+  for (let y = by0; y <= by1; y++) for (let x = 0; x < W; x++) colCount[x] += fg[y * W + x];
+  for (const [x0, x1] of runs(colCount, Math.max(2, Math.round(H * 0.004)), Math.round(W * 0.01), W * 0.02)) {
+    let y0 = by1, y1 = by0;
+    for (let y = by0; y <= by1; y++) for (let x = x0; x <= x1; x++) if (fg[y * W + x]) { if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    poses.push({ x0, x1, y0, y1, row });
+  }
 });
 if (!poses.length) { console.error('no poses found'); process.exit(1); }
-console.log(`poses: ${poses.length}`, poses.map(p => `${p.x1 - p.x0 + 1}x${p.y1 - p.y0 + 1}`).join(' '));
+// Each row shares a ground line, so walk frames keep their vertical bob.
+for (const p of poses) p.baseline = Math.max(...poses.filter(q => q.row === p.row).map(q => q.y1));
+const rowSizes = bands.map((_, r) => poses.filter(p => p.row === r).length);
+console.log(`poses: ${poses.length} in ${bands.length} row(s) [${rowSizes.join(', ')}]`);
 
 // ---------- downscale each pose (mode of palette indices per block) ----------
 const ref = poses[Math.min(refPose, poses.length - 1)];
-const scale = targetH / (ref.y1 - ref.y0 + 1); // native px per source px
-const baseline = Math.max(...poses.map(p => p.y1)); // shared ground line
+const scale = targetH / (ref.y1 - ref.y0 + 1); // native px per source px, shared by all poses
 const sprites = poses.map(p => {
+  const baseline = p.baseline;
   const w = Math.max(1, Math.round((p.x1 - p.x0 + 1) * scale));
   const h = Math.max(1, Math.round((baseline - p.y0 + 1) * scale));
   const out = new Int16Array(w * h).fill(-1);
@@ -108,7 +118,7 @@ const sprites = poses.map(p => {
     for (let i = 1; i < counts.length; i++) if (counts[i] > counts[best]) best = i;
     out[oy * w + ox] = best;
   }
-  return { w, h, px: despeckle(out, w, h) };
+  return { w, h, px: despeckle(out, w, h), row: p.row, col: poses.filter(q => q.row === p.row).indexOf(p) };
 });
 
 // Replaces fully isolated pixels (colour shared by none of the 8 neighbours) with the dominant
@@ -141,11 +151,12 @@ function despeckle(px, w, h) {
 // ---------- pack into a sheet ----------
 const cellW = Math.max(cellW0, ...sprites.map(s => s.w));
 const cellH = Math.max(cellH0, ...sprites.map(s => s.h));
-const sheet = createCanvas(cellW * sprites.length, cellH);
+const sheet = createCanvas(cellW * Math.max(...rowSizes), cellH * bands.length);
 const ctx = sheet.getContext('2d');
 const outData = ctx.createImageData(sheet.width, sheet.height);
-sprites.forEach((s, n) => {
-  const ox = n * cellW + Math.floor((cellW - s.w) / 2), oy = cellH - s.h; // bottom-centre
+sprites.forEach(s => {
+  // bottom-centre in its grid cell
+  const ox = s.col * cellW + Math.floor((cellW - s.w) / 2), oy = s.row * cellH + cellH - s.h;
   for (let y = 0; y < s.h; y++) for (let x = 0; x < s.w; x++) {
     const i = s.px[y * s.w + x];
     if (i < 0) continue;
@@ -157,7 +168,7 @@ sprites.forEach((s, n) => {
 ctx.putImageData(outData, 0, 0);
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, sheet.toBuffer('image/png'));
-console.log(`sheet: ${output} (${sprites.length} frames of ${cellW}x${cellH}; sprites ${sprites.map(s => `${s.w}x${s.h}`).join(' ')})`);
+console.log(`sheet: ${output} (${bands.length}x${Math.max(...rowSizes)} grid of ${cellW}x${cellH}; sprites ${sprites.map(s => `${s.w}x${s.h}`).join(' ')})`);
 
 // ---------- preview ----------
 if (previewScale > 0) {

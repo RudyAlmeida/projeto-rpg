@@ -454,7 +454,7 @@ children.push(...phase(1, 'Protótipo técnico',
   'Provar o ciclo básico do jogo o mais cedo possível, com arte provisória.',
   'Build jogável: explorar um mapa, conversar, iniciar batalha, vencer/perder, voltar ao mapa.',
   [
-    ['Personagem controlável com animação de andar', 'Claude', 'Movimento em 8 direções e corrida prontos; animação provisória (balanço) até existirem quadros de caminhada', WIP],
+    ['Personagem controlável com animação de andar', 'Claude', '8 direções, corrida, ciclo de caminhada de 4 quadros × 3 direções (Codex com referência)', DONE],
     ['TileMap de teste com colisão', 'Claude', 'AsciiMap + tiles provisórios na paleta Velmora', DONE],
     ['Câmera seguindo o jogador com limites', 'Claude', 'Suavizada, presa às bordas do mapa', DONE],
     ['Interação com NPC + caixa de diálogo simples', 'Claude', ''],
@@ -572,6 +572,8 @@ children.push(
     ['A-007', 'assets/sprites/characters/lyra/chr_lyra_ref.png', 'Sprite', 'F0', DONE, '4 quadros 64×64'],
     ['A-008', 'assets/audio/music/bgm_vila_caldeira_test_a.mp3', 'Música', 'F0', DONE, 'Aprovada: tema de Vila Caldeira (Suno chirp-v5-5, 60 s)'],
     ['A-009', 'assets/audio/music/bgm_vila_caldeira_test_b.mp3', 'Música (reserva)', 'F0', DONE, 'Variação B (55 s), guardada para uso futuro'],
+    ['A-010', 'assets/_source/chr_kael_walk_raw_v1.png', 'Referência (bruta)', 'F1', DONE, 'Caminhada do Kael; gerada pela ponte MCP com a referência oficial anexada'],
+    ['A-011', 'assets/sprites/characters/kael/chr_kael_walk.png', 'Sprite', 'F1', DONE, 'Grade 3 × 4 de 64×64 (baixo, esquerda, cima)'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -618,7 +620,7 @@ children.push(
     ['0.7', today, 'GDD do combate aprovado (v1.0); input map com 12 ações (teclado + gamepad); GUT 9.7.1 instalado com testes rodando.'],
     ['0.8', today, 'Referências oficiais do Eco e da Lyra (3 personagens no total); ponte MCP do Codex testada; Suno MCP conectado e token validado.'],
     ['0.9', today, 'Licença do áudio confirmada (conta paga); primeira música de teste (Vila Caldeira, 2 variações); TurnQueue e DamageFormula implementados com 25 testes novos.'],
-    ['1.0', today, 'Fase 0 concluída: tema de Vila Caldeira aprovado (versão A; B guardada como reserva). CLAUDE.md criado. Início da Fase 1: Kael andando no mapa de teste com colisão e câmera (39 testes).'],
+    ['1.0', today, 'Fase 0 concluída: tema de Vila Caldeira aprovado (versão A; B guardada como reserva). CLAUDE.md criado. Início da Fase 1: Kael andando no mapa de teste com colisão e câmera; ciclo de caminhada; pixelize.mjs aceita grades (41 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),

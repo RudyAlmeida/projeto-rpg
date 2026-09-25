@@ -1,21 +1,26 @@
 class_name Player
 extends CharacterBody2D
-## Field-map player (Phase 1 prototype). Uses the official reference sheet as placeholder
-## frames: 0 = down, 1 = left, 2 = up (right = left mirrored). Walking is shown with a
-## small bob until real walk cycles exist.
+## Field-map player (Phase 1 prototype).
+## Idle frames come from the reference sheet (0 = down, 1 = left, 2 = up); walking uses
+## `walk_sheet` (rows down / left / up, WALK_FRAMES columns). Right = left mirrored.
+## Without a walk sheet the sprite just bobs.
 
 enum Facing { DOWN, LEFT, UP, RIGHT }
 
 const FRAME_SIZE := 64
+const WALK_FRAMES := 4
+const WALK_FPS := 8.0
 const BOB_HEIGHT := 2.0
-const BOB_SPEED := 14.0
 
 @export var walk_speed := 80.0
 @export var run_multiplier := 1.75
+@export var idle_sheet: Texture2D
+@export var walk_sheet: Texture2D
 
 var facing := Facing.DOWN
 
-var _bob_time := 0.0
+var _anim_time := 0.0
+var _moving := false
 
 @onready var _sprite: Sprite2D = $Sprite
 @onready var _camera: Camera2D = $Camera
@@ -31,11 +36,12 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	move_and_slide()
 
-	if direction != Vector2.ZERO:
+	_moving = direction != Vector2.ZERO
+	if _moving:
 		facing = facing_for(direction)
-		_bob_time += delta * BOB_SPEED * (speed / walk_speed)
+		_anim_time += delta * (speed / walk_speed)
 	else:
-		_bob_time = 0.0
+		_anim_time = 0.0
 	_update_frame()
 
 
@@ -46,6 +52,11 @@ static func facing_for(direction: Vector2) -> Facing:
 	return Facing.DOWN if direction.y > 0 else Facing.UP
 
 
+## Current walk frame (0..WALK_FRAMES-1) for the elapsed animation time.
+static func walk_frame_at(time: float) -> int:
+	return floori(time * WALK_FPS) % WALK_FRAMES
+
+
 func set_camera_limits(rect: Rect2i) -> void:
 	_camera.limit_left = rect.position.x
 	_camera.limit_top = rect.position.y
@@ -54,8 +65,15 @@ func set_camera_limits(rect: Rect2i) -> void:
 
 
 func _update_frame() -> void:
-	var column := {Facing.DOWN: 0, Facing.LEFT: 1, Facing.UP: 2, Facing.RIGHT: 1}[facing] as int
-	_sprite.region_rect = Rect2(column * FRAME_SIZE, 0, FRAME_SIZE, FRAME_SIZE)
+	var direction_index := {Facing.DOWN: 0, Facing.LEFT: 1, Facing.UP: 2, Facing.RIGHT: 1}[facing] as int
 	_sprite.flip_h = facing == Facing.RIGHT
-	# Whole pixels only, so the bob stays crisp at integer scale.
-	_sprite.offset.y = -FRAME_SIZE / 2.0 - roundf(absf(sin(_bob_time)) * BOB_HEIGHT)
+	var bob := 0.0
+	if _moving and walk_sheet:
+		_sprite.texture = walk_sheet
+		_sprite.region_rect = Rect2(walk_frame_at(_anim_time) * FRAME_SIZE, direction_index * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE)
+	else:
+		_sprite.texture = idle_sheet
+		_sprite.region_rect = Rect2(direction_index * FRAME_SIZE, 0, FRAME_SIZE, FRAME_SIZE)
+		if _moving:
+			bob = roundf(absf(sin(_anim_time * 14.0)) * BOB_HEIGHT)  # fallback: whole pixels only
+	_sprite.offset.y = -FRAME_SIZE / 2.0 - bob
