@@ -96,14 +96,14 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '2.0 — Fase 2 implementada (aguardando aprovação)'],
+    ['Versão do documento', '2.1 — Fase 2 aprovada; Fase 3 iniciada'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
     ['Repositório', 'github.com/RudyAlmeida/projeto-rpg'],
     ['Engine', 'D:\\Godot\\Godot_v4.7.2-stable_win64.exe'],
-    ['Fase atual', 'Fase 2 — Sistemas centrais'],
-    ['Status geral', 'Fases 0 e 1 concluídas (24–25/09/2026)'],
+    ['Fase atual', 'Fase 3 — Vertical slice'],
+    ['Status geral', 'Fases 0, 1 e 2 concluídas (24–25/09/2026)'],
   ],
   [35, 65],
 ));
@@ -501,9 +501,9 @@ children.push(...phase(3, 'Vertical slice',
   'Produzir um trecho curto do jogo com qualidade final para validar estilo, ritmo e diversão.',
   '30–60 minutos jogáveis: prólogo, 1 cidade, 1 dungeon, 1 chefe.',
   [
-    ['Roteiro do prólogo', 'Diretor + Claude', ''],
+    ['Roteiro do prólogo', 'Diretor + Claude', 'Rascunho v0.1 em docs/Roteiro_Prologo.docx — aguardando aprovação', WIP],
     ['Arte final dos 3 personagens iniciais', 'Claude (Codex)', ''],
-    ['Tilesets da cidade e da dungeon', 'Claude (Codex)', ''],
+    ['Tilesets da cidade e da dungeon', 'Claude (Codex)', 'Vila Caldeira v1 (48 tiles, ferramenta tiles.mjs); Ferro-Velho a fazer', WIP],
     ['6–8 inimigos + 1 chefe', 'Claude (Codex + código)', ''],
     ['UI final (molduras, ícones, fonte)', 'Claude (Codex)', ''],
     ['Efeitos visuais de batalha', 'Claude', ''],
@@ -587,6 +587,7 @@ children.push(
     ['A-022', 'assets/audio/music/bgm_battle_a.mp3 + _b.mp3', 'Música', 'F2', DONE, 'Temas de batalha (Suno, 90 s) — aprovados os dois; o jogo alterna A e B a cada batalha'],
     ['A-023', 'assets/audio/music/bgm_victory_b.mp3', 'Música', 'F2', DONE, 'Fanfarra de vitória (Suno, 30 s) — aprovada a variação B (A guardada)'],
     ['A-024', 'assets/audio/music/bgm_title_b.mp3', 'Música', 'F2', DONE, 'Tema de título (Suno, 90 s) — aprovada a variação B (A guardada)'],
+    ['A-025', 'assets/tilesets/til_vila_caldeira.png', 'Tileset', 'F3', WIP, 'Vila Caldeira: 8×6 tiles 16×16 (chão, bordas, paredes, telhados, canos, objetos); gerado de _source/til_vila_caldeira_raw_v1.png'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -637,12 +638,13 @@ children.push(
     ['1.1', today, 'Conversa com NPC: Mestre Gerd no mapa de teste, retratos do Kael e do Gerd, caixa de diálogo com texto letra por letra, DialogueManager (autoload).'],
     ['1.2', today, 'Transições de cena: SceneManager (fade), portas, pontos de chegada, casa de teste, AudioManager, FieldMap (56 testes).'],
     ['1.3', today, 'Primeira batalha: inimigo no mapa, formação no próprio cenário, fila CTB, menu e alvo, timing de ataque e defesa, vitória/derrota; Brann e Slime de Óleo (76 testes).'],
-    ['2.0', today, 'Fase 2 implementada em 4 blocos, aguardando aprovação do Diretor. A: GameState, níveis/XP, salvar. B: combate completo (status, itens, Barra de Éter, especiais, timing por personagem, IA por regras, troca, técnicas combinadas, fuga, iniciativa). C: equipamento, gemas, árvores. D: menu principal, loja, estalagem, diálogo com escolhas/afinidade, missões, cutscenes, opções, idioma, tela de título (155 testes).'],
+    ['2.0', today, 'Fase 2 implementada em 4 blocos. A: GameState, níveis/XP, salvar. B: combate completo (status, itens, Barra de Éter, especiais, timing por personagem, IA por regras, troca, técnicas combinadas, fuga, iniciativa). C: equipamento, gemas, árvores. D: menu principal, loja, estalagem, diálogo com escolhas/afinidade, missões, cutscenes, opções, idioma, tela de título (155 testes).'],
+    ['2.1', today, 'Fase 2 aprovada pelo Diretor (músicas: título B, vitória B, batalha A e B alternadas; menus fecham com Esc/Start e X/B). Fase 3 iniciada: roteiro do prólogo v0.1 (docs/Roteiro_Prologo.docx) e tileset da Vila Caldeira (158 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
-  N('Diretor: jogar e aprovar a Fase 2 (menu, loja, estalagem, missão do Gerd, Lyra, batalhas com a Sentinela).', 'next'),
-  N('Fase 3 (vertical slice): roteiro do prólogo, tilesets reais pelo Codex, Ferro-Velho do Sul, primeiro chefe.', 'next'),
+  N('Diretor: ler e aprovar o Roteiro do Prólogo v0.1 (capítulo 9 lista as decisões: Gerd convidado, chefe Triturador, nomes novos).', 'next'),
+  N('Claude: tileset do Ferro-Velho, mapas reais da vila e do ferro-velho, novos inimigos, chefe, cutscenes do prólogo; músicas novas (Ferro-Velho, Chefe, Império, Adeus) após o roteiro aprovado.', 'next'),
 );
 
 // ---------- document ----------

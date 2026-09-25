@@ -20,6 +20,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `Historia_O_Coracao_de_Eter.docx` | `build_story.js` | Story bible: world, party of 7, villains, acts, endings matrix |
 | `Guia_de_Estilo.docx` | `build_style.js` | Art style guide (approved v1.0) |
 | `GDD_Combate.docx` | `build_combat.js` | Combat design (approved v1.0): CTB formulas, timing, status, gems |
+| `Roteiro_Prologo.docx` | `build_prologue.js` | Vertical-slice prologue script: scenes, dialogue, maps, enemies, boss, assets (draft v0.1) |
 
 After meaningful progress, update `build_planning.js` (task status, asset log, history row, version) and regenerate. New docs should use the shared helpers in `tools/docs/lib.js` (static TOC, tables kept together — LibreOffice does not refresh TOC fields).
 
@@ -63,6 +64,7 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
 3. Always look at the result: Codex may return a transparent background instead of magenta, and once corrupted an image by "fixing" it. Untouched originals are in `~/.codex/generated_images/`.
 4. Convert: `node tools/art/pixelize.mjs <raw.png> game/assets/sprites/characters/<name>/<name>.png` — removes background (magenta or alpha), splits poses into rows × columns (single row for reference sheets, grids for animations), downsamples to 56 px tall in 64×64 cells (scale taken from the first pose, shared by all), locks to the palette, writes a 6× `_preview.png`. 56 px matches Codex's natural pixel grid; smaller heights erase faces. After changing the tool, re-run it on the approved `_source` images and compare hashes with the committed sprites.
    For animations, attach the approved reference image (`referenceImages` on the MCP tool) so the character stays identical — see `chr_kael_walk.md`.
+   Tilesets: ask for an exact grid of square tiles separated by magenta gutters (`til_vila_caldeira.md`), then `node tools/art/tiles.mjs <raw.png> game/assets/tilesets/<name>.png --cols 8 --rows 6` (one 16×16 tile per cell, grid order kept, palette-locked, `_preview.png`).
 5. Palette: `game/assets/palette/velmora32.hex` (32 colours; index 0 = outline; cyan is reserved for Aether/magic).
 
 `game/assets/_source/` has a `.gdignore` — raw images are versioned but not imported by Godot.
@@ -97,4 +99,4 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
 
 ## Current status
 
-Phase 0 (pre-production) essentially complete; Phase 1 (technical prototype: walk a map, talk to an NPC, fight a battle) has started — see the F1 table in the planning doc for the next tasks.
+Phases 0–2 approved. Phase 3 (vertical slice = the prologue, 30–60 min) in progress: script draft in `Roteiro_Prologo.docx` awaiting approval; see the F3 table in the planning doc.
