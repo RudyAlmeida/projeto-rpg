@@ -9,7 +9,7 @@ var npc: NPC
 func before_each() -> void:
 	level = load("res://scenes/maps/test_map.tscn").instantiate()
 	add_child_autofree(level)
-	level.get_node("Music").stop()
+	AudioManager.stop_music()
 	player = level.get_node("Player")
 	# A test NPC right below the player (player spawns facing down).
 	npc = load("res://scenes/characters/npc.tscn").instantiate()

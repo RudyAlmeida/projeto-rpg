@@ -9,7 +9,7 @@ func before_each() -> void:
 	level = load("res://scenes/maps/test_map.tscn").instantiate()
 	add_child_autofree(level)
 	player = level.get_node("Player")
-	level.get_node("Music").stop()
+	AudioManager.stop_music()
 	await wait_physics_frames(2)
 
 

@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_field"]
+[ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="2_ascii"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="4_music"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="5_warp"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="6_spawn"]
+
+[sub_resource type="RectangleShape2D" id="Shape_door"]
+size = Vector2(12, 12)
+
+[node name="TestHouse" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_field")
+music = ExtResource("4_music")
+
+[node name="Map" type="TileMapLayer" parent="."]
+script = ExtResource("2_ascii")
+layout = "##############
+#,,,,,,,,,,,,#
+#,,,,,,,,,,,,#
+#,,##,,,,~~,,#
+#,,##,,,,,,,,#
+#,,,,,,,,,,,,#
+#,,,,,,p,,,,,#
+######,#######"
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="entrance" type="Marker2D" parent="Spawns"]
+position = Vector2(104, 104)
+script = ExtResource("6_spawn")
+facing = 2
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(104, 120)
+script = ExtResource("5_warp")
+target_scene = "res://scenes/maps/test_map.tscn"
+target_spawn = "from_house"
+
+[node name="Shape" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("Shape_door")

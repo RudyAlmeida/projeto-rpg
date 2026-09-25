@@ -3,7 +3,8 @@ extends TileMapLayer
 ## Prototype map built from a text layout (Phase 1). Real maps will be painted in the
 ## editor with Codex tilesets; this keeps early maps readable and diff-friendly.
 ##
-## Legend: "." grass, "," path, "#" wall (solid), "~" water (solid), "P" player spawn (grass).
+## Legend: "." grass, "," path/floor, "#" wall (solid), "~" water (solid),
+## "P" player spawn on grass, "p" player spawn on path/floor.
 
 const TILE_SIZE := 16
 const TILESET_TEXTURE := preload("res://assets/tilesets/til_placeholder.png")
@@ -15,7 +16,9 @@ const LEGEND := {
 	"#": {"atlas": 2, "solid": true},
 	"~": {"atlas": 3, "solid": true},
 	"P": {"atlas": 0, "solid": false},
+	"p": {"atlas": 1, "solid": false},
 }
+const SPAWN_SYMBOLS := ["P", "p"]
 const ATLAS_COLUMNS := 4
 
 @export_multiline var layout := ""
@@ -59,7 +62,7 @@ func build(text: String) -> void:
 			if not LEGEND.has(symbol):
 				continue
 			set_cell(Vector2i(x, y), 0, Vector2i(LEGEND[symbol]["atlas"], 0))
-			if symbol == "P":
+			if symbol in SPAWN_SYMBOLS:
 				spawn_position = map_to_local(Vector2i(x, y))
 
 

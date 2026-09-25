@@ -40,6 +40,12 @@ Git is installed but not on this shell's PATH: prefix with `$env:Path = "C:\Prog
 # Render the running game to PNG frames + WAV (visual/audio check without a window)
 & "D:\Godot\Godot_v4.7.2-stable_win64_console.exe" --path game --write-movie <dir>\frame.png --fixed-fps 10 --quit-after 3
 
+# Scripted screenshot of real gameplay: write a temporary game/tools/_probe.gd (extends Node) +
+# _probe.tscn, run it AS A SCENE (autoloads only exist then; `-s` SceneTree scripts can't see them),
+# save get_viewport().get_texture().get_image(), then delete the probe files. If the probe triggers
+# SceneManager.change_scene, make the map the current_scene first or the probe itself gets freed.
+& "D:\Godot\Godot_v4.7.2-stable_win64_console.exe" --path game res://tools/_probe.tscn -- <output dir>
+
 # Regenerate input map after editing ACTIONS in game/tools/setup_input_map.gd
 & "D:\Godot\Godot_v4.7.2-stable_win64_console.exe" --headless --path game -s res://tools/setup_input_map.gd
 
@@ -72,7 +78,11 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
   - `scripts/battle/combat_balance.gd` (`CombatBalance`) — every tunable number, defaults = approved GDD. Change numbers here, not in formulas.
 - Combat is **hybrid CTB + timed button presses** (Perfect ×1.3 / Good ×1.1 attack; ×0.5 / ×0.75 damage taken on defense; missing never penalises), fought **on the field map** (no separate battle screen), 3 active + reserves.
 - Input actions (keyboard + gamepad, device -1) are defined in `game/tools/setup_input_map.gd`; `confirm` and `action_timing` share keys by default but stay separate for remapping.
-- Main scene is `scenes/maps/test_map.tscn` (Phase 1 prototype: `AsciiMap` builds a TileMapLayer + collision from a text layout, `Player` uses `idle_sheet` (reference sheet: columns down/left/up) and `walk_sheet` (rows down/left/up × 4 frames); right = left mirrored). `scenes/main/main.tscn` is only an asset-preview scene (character sheets + test music).
+- Main scene is `scenes/maps/test_map.tscn` (Phase 1 prototype). Maps use `FieldMap` (root script; children `Map` = `AsciiMap`, `Player`, optional `Spawns/<id>` = `SpawnPoint`, `Warp` Area2D doors). `AsciiMap` builds a TileMapLayer + collision from a text layout (`P`/`p` = default spawn on grass/floor). `Player` uses `idle_sheet` (reference sheet: columns down/left/up) and `walk_sheet` (rows down/left/up × 4 frames); right = left mirrored. `scenes/main/main.tscn` is only an asset-preview scene.
+- Autoloads: `DialogueManager` (`play(lines)` awaits the text box; `DialogueLine` resources), `SceneManager` (`change_scene(path, spawn_id)` with fade; maps call `take_pending_spawn()`), `AudioManager` (`play_music()` keeps the same track playing across rooms). `Player.can_move()` is false during dialogue or transitions.
+- NPCs (`scenes/characters/npc.tscn`, `NPC`) have `idle_sheet`, `facing` and a `dialogue` array; the player's `InteractRay` + `confirm` calls `interact()` on whatever is in front.
+- UI text uses `assets/fonts/pixelify_ui.tres` (Pixelify Sans, OFL; ligatures off because "fi" renders unreadably at pixel size, wider spaces; font imported with antialiasing/hinting off).
+- Tests: inside GUT `get_tree().current_scene` is null, so `SceneManager.change_scene` just adds the new map next to the runner — unload it in `after_each` (`get_tree().unload_current_scene()`). Loops that wait on game state must be bounded (an unbounded `while box.is_open()` once hung the whole suite).
 - Known engine quirk: any scene that played an MP3 prints "2 ObjectDB instances were leaked at exit" on quit (reproduced with a minimal probe even after stop()+free). Harmless; not our bug.
 - GDScript: static typing everywhere, `class_name` for reusable classes, signals named in past tense. Pixel-art rendering: nearest filter, integer scaling, snap to pixel.
 

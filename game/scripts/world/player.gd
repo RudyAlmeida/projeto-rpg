@@ -35,7 +35,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction := Vector2.ZERO
-	if not DialogueManager.is_active:
+	if can_move():
 		direction = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 	var speed := walk_speed * (run_multiplier if Input.is_action_pressed(&"run") else 1.0)
 	velocity = direction * speed
@@ -51,8 +51,13 @@ func _physics_process(delta: float) -> void:
 	_update_frame()
 
 
+## False while a conversation or a scene transition is running.
+func can_move() -> bool:
+	return not DialogueManager.is_active and not SceneManager.is_transitioning
+
+
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"confirm") and not DialogueManager.is_active and not DialogueManager.just_closed():
+	if event.is_action_pressed(&"confirm") and can_move() and not DialogueManager.just_closed():
 		if try_interact():
 			get_viewport().set_input_as_handled()
 
@@ -95,6 +100,8 @@ func set_camera_limits(rect: Rect2i) -> void:
 	_camera.limit_top = rect.position.y
 	_camera.limit_right = rect.end.x
 	_camera.limit_bottom = rect.end.y
+	# Jump straight to the player (e.g. after a spawn) instead of smoothing across the map.
+	_camera.reset_smoothing()
 
 
 func _update_frame() -> void:

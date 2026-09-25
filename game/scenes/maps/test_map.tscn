@@ -1,6 +1,9 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=17 format=3]
 
-[ext_resource type="Script" path="res://scripts/world/test_map.gd" id="1_testmap"]
+[ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_testmap"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="9_music"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="10_warp"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="11_spawn"]
 [ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="2_ascii"]
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="4_npc"]
@@ -8,6 +11,9 @@
 [ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="6_line"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="7_por_gerd"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="8_por_kael"]
+
+[sub_resource type="RectangleShape2D" id="Shape_door"]
+size = Vector2(12, 12)
 
 [sub_resource type="Resource" id="Line_gerd_1"]
 script = ExtResource("6_line")
@@ -36,6 +42,7 @@ text = "E fique longe do Ferro-Velho do Sul. Ouvi barulhos estranhos por lá est
 [node name="TestMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_testmap")
+music = ExtResource("9_music")
 
 [node name="Map" type="TileMapLayer" parent="."]
 script = ExtResource("2_ascii")
@@ -76,4 +83,17 @@ dialogue = Array[ExtResource("6_line")]([SubResource("Line_gerd_1"), SubResource
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="from_house" type="Marker2D" parent="Spawns"]
+position = Vector2(88, 104)
+script = ExtResource("11_spawn")
+
+[node name="HouseDoor" type="Area2D" parent="."]
+position = Vector2(88, 88)
+script = ExtResource("10_warp")
+target_scene = "res://scenes/maps/test_house.tscn"
+target_spawn = "entrance"
+
+[node name="Shape" type="CollisionShape2D" parent="HouseDoor"]
+shape = SubResource("Shape_door")

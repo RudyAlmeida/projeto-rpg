@@ -26,6 +26,12 @@ func test_spawn_is_centre_of_p_cell() -> void:
 	assert_eq(map.spawn_position, Vector2(2 * 16 + 8, 1 * 16 + 8))
 
 
+func test_lowercase_p_spawns_on_floor() -> void:
+	map.build("###\n#p#\n###")
+	assert_eq(map.spawn_position, Vector2(24, 24))
+	assert_eq(map.get_cell_atlas_coords(Vector2i(1, 1)), Vector2i(1, 0), "floor tile, not grass")
+
+
 func test_pixel_rect_for_camera_limits() -> void:
 	assert_eq(map.pixel_rect(), Rect2i(0, 0, 80, 64))
 
