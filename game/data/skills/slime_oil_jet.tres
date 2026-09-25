@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ryg2d"]
+
+[resource]
+script = ExtResource("1_ryg2d")
+id = &"slime_oil_jet"
+display_name = "Jato de Óleo"
+kind = 4
+description = "Óleo grudento que deixa o alvo lento."
+inflicts = {
+8: 70
+}

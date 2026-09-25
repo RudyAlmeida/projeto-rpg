@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="CombatantData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_thg2i"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/eco/chr_eco_ref.png" id="2_cg8mx"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_upm06"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="4_ahore"]
+[ext_resource type="Resource" path="res://data/skills/attack.tres" id="5_pirpf"]
+[ext_resource type="Resource" path="res://data/skills/eco_protect.tres" id="6_pjctu"]
+[ext_resource type="Resource" path="res://data/skills/eco_repair.tres" id="7_f23bj"]
+[ext_resource type="Resource" path="res://data/skills/defend.tres" id="8_71k2m"]
+[ext_resource type="Resource" path="res://data/skills/eco_special.tres" id="9_gafi4"]
+
+[resource]
+script = ExtResource("3_upm06")
+id = &"eco"
+display_name = "Eco"
+battle_sheet = ExtResource("2_cg8mx")
+max_hp = 150
+max_mp = 25
+strength = 11
+weapon_power = 6
+magic = 8
+defense = 16
+spirit = 10
+speed = 18
+precision = 9
+evasion = 3
+growth = {
+&"defense": 1.6,
+&"evasion": 0.2,
+&"luck": 0.3,
+&"magic": 0.8,
+&"max_hp": 14.0,
+&"max_mp": 2.0,
+&"precision": 0.4,
+&"speed": 0.4,
+&"spirit": 1.0,
+&"strength": 1.0
+}
+skills = Array[ExtResource("4_ahore")]([ExtResource("5_pirpf"), ExtResource("6_pjctu"), ExtResource("7_f23bj"), ExtResource("8_71k2m")])
+special = ExtResource("9_gafi4")
+perfect_bonus = 4
+mechanical = true
+status_immunities = Array[int]([0, 1])

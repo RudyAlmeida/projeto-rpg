@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ffsmo"]
+
+[resource]
+script = ExtResource("1_ffsmo")
+id = &"eco_repair"
+display_name = "Reparo"
+kind = 3
+target = 1
+mp_cost = 4
+power = 25
+description = "Recupera HP de um aliado."

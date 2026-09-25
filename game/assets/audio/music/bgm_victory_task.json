@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "d45f76c9-b573-4bda-8113-148f4fb2f0c6",
+  "trace_id": "f85f15d5-9ec4-4596-9d60-87e4c820b083",
+  "data": [
+    {
+      "id": "401901a5-6244-4a36-9c47-46e8d294f11c",
+      "title": "Vitória (teste)",
+      "image_url": "https://cdn2.suno.ai/image_401901a5-6244-4a36-9c47-46e8d294f11c.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_401901a5-6244-4a36-9c47-46e8d294f11c.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/401901a5-6244-4a36-9c47-46e8d294f11c.mp3",
+      "video_url": "https://cdn1.suno.ai/401901a5-6244-4a36-9c47-46e8d294f11c.mp4",
+      "created_at": "2026-09-25T03:37:32.648Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "short 16-bit SNES JRPG victory fanfare, triumphant brass and timpani, bright major key, then a light cheerful looping coda with pizzicato strings and glockenspiel, 120 BPM",
+      "duration": 29.68
+    },
+    {
+      "id": "fa9d2fe6-823d-47d8-8ace-4d1d69734f28",
+      "title": "Vitória (teste)",
+      "image_url": "https://cdn2.suno.ai/image_fa9d2fe6-823d-47d8-8ace-4d1d69734f28.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_fa9d2fe6-823d-47d8-8ace-4d1d69734f28.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/fa9d2fe6-823d-47d8-8ace-4d1d69734f28.mp3",
+      "video_url": "https://cdn1.suno.ai/fa9d2fe6-823d-47d8-8ace-4d1d69734f28.mp4",
+      "created_at": "2026-09-25T03:37:32.648Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "short 16-bit SNES JRPG victory fanfare, triumphant brass and timpani, bright major key, then a light cheerful looping coda with pizzicato strings and glockenspiel, 120 BPM",
+      "duration": 29.68
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

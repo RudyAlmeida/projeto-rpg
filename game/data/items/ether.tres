@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ut840"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_yrj7y"]
+
+[resource]
+script = ExtResource("2_yrj7y")
+id = &"ether"
+display_name = "Éter Engarrafado"
+icon_index = 1
+price = 90
+description = "Recupera 25 MP."
+heal_mp = 25

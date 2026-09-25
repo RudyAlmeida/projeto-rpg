@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DualTechData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/dual_tech_data.gd" id="1_vmp81"]
+[ext_resource type="Resource" path="res://data/skills/tech_earth_roar.tres" id="2_rb5yv"]
+
+[resource]
+script = ExtResource("1_vmp81")
+id = &"earth_roar"
+display_name = "Rugido da Terra"
+participants = Array[StringName]([&"lyra", &"brann", &"eco"])
+skill = ExtResource("2_rb5yv")
+mp_cost = 6
+description = "Lyra + Brann + Eco: terremoto de vapor e raízes."

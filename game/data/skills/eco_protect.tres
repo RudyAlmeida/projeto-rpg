@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_6p235"]
+
+[resource]
+script = ExtResource("1_6p235")
+id = &"eco_protect"
+display_name = "Protocolo Escudo"
+kind = 4
+target = 4
+mp_cost = 6
+description = "Proteção para todo o grupo."
+inflicts = {
+9: 100
+}

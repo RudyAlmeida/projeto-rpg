@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ksxg0"]
+
+[resource]
+script = ExtResource("1_ksxg0")
+id = &"tech_iron_wall"
+display_name = "Muralha de Ferro"
+kind = 4
+target = 4
+inflicts = {
+9: 100,
+11: 100
+}

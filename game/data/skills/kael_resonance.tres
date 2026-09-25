@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_p66f4"]
+
+[resource]
+script = ExtResource("1_p66f4")
+id = &"kael_resonance"
+display_name = "Ressonância"
+mp_cost = 3
+multiplier = 0.6
+description = "Kael ouve a máquina e solta uma peça: inimigos mecânicos ficam Desmontados (DEF −50%)."
+inflicts = {
+13: 100
+}
+mechanical_only = true

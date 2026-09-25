@@ -107,6 +107,19 @@ func preview(count: int, weight := WEIGHT_NORMAL) -> Array[Object]:
 	return order
 
 
+## Refills a non-current actor as if it had acted (Dual Tech partners spend their turn).
+func refill(actor: Object, weight := WEIGHT_NORMAL) -> void:
+	var entry := _find(actor)
+	if entry:
+		entry.counter = delay_for(entry.speed, weight, entry.speed_mult)
+
+
+## Puts a revived actor back in the queue with a normal delay.
+func readd(actor: Object, speed: int, is_player: bool) -> void:
+	if not has(actor):
+		_entries.append(Entry.new(actor, speed, is_player, delay_for(speed, WEIGHT_NORMAL)))
+
+
 func set_speed_mult(actor: Object, mult: float) -> void:
 	var entry := _find(actor)
 	if entry:

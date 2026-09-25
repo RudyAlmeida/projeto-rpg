@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_3q75m"]
+
+[resource]
+script = ExtResource("1_3q75m")
+id = &"lyra_special"
+display_name = "Floração"
+kind = 1
+target = 3
+power = 45
+element = 1
+description = "Uma explosão de chamas floresce sobre os inimigos."

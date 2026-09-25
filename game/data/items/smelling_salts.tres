@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_q8vty"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_acp20"]
+
+[resource]
+script = ExtResource("2_acp20")
+id = &"smelling_salts"
+display_name = "Sais de Vapor"
+icon_index = 3
+price = 40
+description = "Cura Sono, Confusão, Paralisia, Silêncio e Cegueira."
+cures = Array[int]([1, 5, 4, 2, 3])

@@ -1,0 +1,8 @@
+{
+  "title": "Vitória (teste)",
+  "style": "short 16-bit SNES JRPG victory fanfare, triumphant brass and timpani, bright major key, then a light cheerful looping coda with pizzicato strings and glockenspiel, 120 BPM",
+  "negative_tags": "vocals, singing, lyrics, EDM, dubstep, trap",
+  "model": "chirp-v5-5",
+  "instrumental": true,
+  "duration": 30
+}

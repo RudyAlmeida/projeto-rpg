@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_mi7r4"]
+
+[resource]
+script = ExtResource("1_mi7r4")
+id = &"lyra_sleep"
+display_name = "Sono"
+kind = 4
+mp_cost = 5
+description = "Faz o alvo dormir."
+inflicts = {
+1: 75
+}

@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="SkillData" format=3]
 
-[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_skill"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_32ikm"]
 
 [resource]
-script = ExtResource("1_skill")
+script = ExtResource("1_32ikm")
 id = &"defend"
 display_name = "Defender"
 kind = 2

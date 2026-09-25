@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_xlw8w"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_bg0db"]
+
+[resource]
+script = ExtResource("2_bg0db")
+id = &"phoenix_feather"
+display_name = "Pena Fênix"
+icon_index = 2
+price = 200
+description = "Revive um aliado com 30% do HP."
+target = 5
+revive_percent = 0.3

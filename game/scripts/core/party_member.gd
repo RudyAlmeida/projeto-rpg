@@ -9,6 +9,8 @@ var level := 1
 var xp := 0
 var hp: int
 var mp: int
+## Aether bar (0..100), kept between battles (GDD 7).
+var aether := 0
 
 
 func _init(p_data: CombatantData, p_level := 1) -> void:
@@ -26,6 +28,11 @@ static func xp_to_next(p_level: int, balance: CombatBalance = null) -> int:
 func stat(name: StringName) -> int:
 	var base: int = data.get(name)
 	return base + floori(float(data.growth.get(name, 0.0)) * (level - 1))
+
+
+## Weapon power used for physical damage (base weapon until equipment exists).
+func weapon_attack() -> int:
+	return data.weapon_power
 
 
 func max_hp() -> int:
@@ -64,7 +71,7 @@ func restore() -> void:
 
 
 func to_dict() -> Dictionary:
-	return {"data": data.resource_path, "level": level, "xp": xp, "hp": hp, "mp": mp}
+	return {"data": data.resource_path, "level": level, "xp": xp, "hp": hp, "mp": mp, "aether": aether}
 
 
 static func from_dict(d: Dictionary) -> PartyMember:
@@ -72,4 +79,5 @@ static func from_dict(d: Dictionary) -> PartyMember:
 	member.xp = int(d["xp"])
 	member.hp = clampi(int(d["hp"]), 0, member.max_hp())
 	member.mp = clampi(int(d["mp"]), 0, member.max_mp())
+	member.aether = clampi(int(d.get("aether", 0)), 0, 100)
 	return member

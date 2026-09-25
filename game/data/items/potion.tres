@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_wdku8"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_0bv3h"]
+
+[resource]
+script = ExtResource("2_0bv3h")
+id = &"potion"
+display_name = "Poção"
+price = 30
+description = "Recupera 60 HP."
+heal_hp = 60

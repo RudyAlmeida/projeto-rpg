@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DualTechData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/dual_tech_data.gd" id="1_gqly0"]
+[ext_resource type="Resource" path="res://data/skills/tech_spark.tres" id="2_slh7x"]
+
+[resource]
+script = ExtResource("1_gqly0")
+id = &"spark"
+display_name = "Faísca Viva"
+participants = Array[StringName]([&"kael", &"lyra"])
+skill = ExtResource("2_slh7x")
+description = "Kael + Lyra: a lâmina ganha a chama de Lyra."

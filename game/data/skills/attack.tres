@@ -1,13 +1,9 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="SkillData" format=3]
 
-[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_skill"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_cn0mr"]
 
 [resource]
-script = ExtResource("1_skill")
+script = ExtResource("1_cn0mr")
 id = &"attack"
 display_name = "Atacar"
-kind = 0
-target = 0
-weight = 3
-multiplier = 1.0
 description = "Ataque físico com a arma equipada."

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DualTechData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/dual_tech_data.gd" id="1_8uw6p"]
+[ext_resource type="Resource" path="res://data/skills/tech_iron_wall.tres" id="2_jysji"]
+
+[resource]
+script = ExtResource("1_8uw6p")
+id = &"iron_wall"
+display_name = "Muralha de Ferro"
+participants = Array[StringName]([&"brann", &"eco"])
+skill = ExtResource("2_jysji")
+description = "Brann + Eco: escudo e regeneração para o grupo."

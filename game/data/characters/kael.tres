@@ -1,16 +1,21 @@
-[gd_resource type="Resource" script_class="CombatantData" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="CombatantData" format=3]
 
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
-[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_lb476"]
 [ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="2_sheet"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="3_3jcw8"]
 [ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
 [ext_resource type="Resource" path="res://data/skills/defend.tres" id="4_defend"]
+[ext_resource type="Resource" path="res://data/skills/kael_resonance.tres" id="7_q0qw1"]
+[ext_resource type="Resource" path="res://data/skills/kael_special.tres" id="9_241r5"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
 
 [resource]
 script = ExtResource("1_data")
+id = &"kael"
 display_name = "Kael"
 battle_sheet = ExtResource("2_sheet")
-idle_frame = 3
+portrait = ExtResource("3_3jcw8")
 max_hp = 120
 max_mp = 20
 strength = 12
@@ -20,7 +25,6 @@ defense = 8
 spirit = 6
 speed = 25
 luck = 10
-precision = 10
 evasion = 8
 growth = {
 &"defense": 1.0,
@@ -34,4 +38,6 @@ growth = {
 &"spirit": 0.7,
 &"strength": 1.5
 }
-skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_defend")])
+skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("7_q0qw1"), ExtResource("4_defend")])
+special = ExtResource("9_241r5")
+perfect_bonus = 1

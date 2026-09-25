@@ -3,7 +3,8 @@ extends RefCounted
 ## Pure combat formulas (GDD_Combate, section 5). No scene or node access, so they can be
 ## unit-tested and reused by the battle, the UI previews and the balancing tools.
 
-enum Timing { MISS, GOOD, PERFECT }
+## OVERLOAD: a hold-style press held too long (Brann's steam bursts) — no bonus.
+enum Timing { MISS, GOOD, PERFECT, OVERLOAD }
 enum Affinity { NORMAL, WEAK, RESIST, IMMUNE, ABSORB }
 
 static var balance := CombatBalance.new()

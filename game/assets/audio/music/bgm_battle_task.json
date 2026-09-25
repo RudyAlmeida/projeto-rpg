@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "task_id": "847027da-17e8-4e98-82a3-c69a3f422c5a",
+  "trace_id": "400b31fb-9134-41bc-9683-c87a74a063a7",
+  "data": [
+    {
+      "id": "790aabaa-c253-48dc-b794-bb7084399c05",
+      "title": "Engrenagens em Combate (teste)",
+      "image_url": "https://cdn2.suno.ai/image_790aabaa-c253-48dc-b794-bb7084399c05.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_790aabaa-c253-48dc-b794-bb7084399c05.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/790aabaa-c253-48dc-b794-bb7084399c05.mp3",
+      "video_url": "https://cdn1.suno.ai/790aabaa-c253-48dc-b794-bb7084399c05.mp4",
+      "created_at": "2026-09-25T03:37:25.294Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG battle theme, energetic and heroic, driving snare and toms, punchy brass stabs, fast string ostinato, bouncy bass, steampunk flavour with metallic percussion like anvils and clockwork, minor key with a heroic major chorus, 150 BPM, seamless loop, like classic 90s JRPG battle music",
+      "duration": 89.6
+    },
+    {
+      "id": "c8589646-2bc9-442c-b6da-f277e29c40d8",
+      "title": "Engrenagens em Combate (teste)",
+      "image_url": "https://cdn2.suno.ai/image_c8589646-2bc9-442c-b6da-f277e29c40d8.jpeg",
+      "image_large_url": "https://cdn2.suno.ai/image_large_c8589646-2bc9-442c-b6da-f277e29c40d8.jpeg",
+      "lyric": "",
+      "audio_url": "https://cdn.acedata2.cloud/suno/c8589646-2bc9-442c-b6da-f277e29c40d8.mp3",
+      "video_url": "https://cdn1.suno.ai/c8589646-2bc9-442c-b6da-f277e29c40d8.mp4",
+      "created_at": "2026-09-25T03:37:25.294Z",
+      "model": "chirp-v5-5",
+      "state": "succeeded",
+      "prompt": null,
+      "style": "16-bit SNES-era JRPG battle theme, energetic and heroic, driving snare and toms, punchy brass stabs, fast string ostinato, bouncy bass, steampunk flavour with metallic percussion like anvils and clockwork, minor key with a heroic major chorus, 150 BPM, seamless loop, like classic 90s JRPG battle music",
+      "duration": 89.48
+    }
+  ],
+  "cost": {
+    "amount": 0.56,
+    "currency": "credit"
+  }
+}

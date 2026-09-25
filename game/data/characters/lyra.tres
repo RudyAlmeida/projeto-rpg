@@ -1,23 +1,26 @@
-[gd_resource type="Resource" script_class="CombatantData" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="CombatantData" format=3]
 
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_0ta86"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
-[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
 [ext_resource type="Texture2D" path="res://assets/sprites/characters/lyra/chr_lyra_ref.png" id="2_sheet"]
 [ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
 [ext_resource type="Resource" path="res://data/skills/fire.tres" id="4_fire"]
 [ext_resource type="Resource" path="res://data/skills/defend.tres" id="5_defend"]
+[ext_resource type="Resource" path="res://data/skills/ice.tres" id="7_ptl7v"]
+[ext_resource type="Resource" path="res://data/skills/lyra_sleep.tres" id="8_vlu0o"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Resource" path="res://data/skills/lyra_special.tres" id="10_n0iyr"]
 
 [resource]
 script = ExtResource("1_data")
+id = &"lyra"
 display_name = "Lyra"
 battle_sheet = ExtResource("2_sheet")
-idle_frame = 3
 max_hp = 85
 max_mp = 40
 strength = 6
 weapon_power = 4
 magic = 15
-defense = 5
 spirit = 12
 speed = 22
 luck = 8
@@ -35,4 +38,7 @@ growth = {
 &"spirit": 1.2,
 &"strength": 0.6
 }
-skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_fire"), ExtResource("5_defend")])
+skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_fire"), ExtResource("7_ptl7v"), ExtResource("8_vlu0o"), ExtResource("5_defend")])
+special = ExtResource("10_n0iyr")
+timing_style = 2
+perfect_bonus = 2

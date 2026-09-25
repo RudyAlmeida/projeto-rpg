@@ -110,7 +110,7 @@ func test_enemy_ai_attacks_a_living_hero() -> void:
 	_unit("Kael").hp = 0
 	for i in 20:
 		var choice := battle.choose_enemy_action(slime)
-		assert_eq(choice[0], TACKLE)
+		assert_true(choice[0] in SLIME.skills, "uses one of its own skills (Tackle or Oil Jet)")
 		assert_true((choice[1] as BattleUnit).is_player)
 		assert_true((choice[1] as BattleUnit).is_alive(), "never targets a KO'd hero")
 

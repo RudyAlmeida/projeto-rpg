@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_cdeeo"]
+
+[resource]
+script = ExtResource("1_cdeeo")
+id = &"tech_spark"
+display_name = "Faísca Viva"
+multiplier = 2.0
+element = 1
