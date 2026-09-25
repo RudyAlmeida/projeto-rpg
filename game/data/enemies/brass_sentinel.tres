@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="7_uyvsj"]
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="8_sq17f"]
 
-[sub_resource type="Resource" id="Resource_s8gwk"]
+[sub_resource type="Resource" id="Resource_6bsvc"]
 script = ExtResource("1_6bsvc")
 priority = 3
 condition = 1
@@ -17,7 +17,7 @@ value = 35.0
 skill = ExtResource("2_iail0")
 target_mode = 4
 
-[sub_resource type="Resource" id="Resource_jom7t"]
+[sub_resource type="Resource" id="Resource_iail0"]
 script = ExtResource("1_6bsvc")
 priority = 2
 condition = 4
@@ -26,7 +26,7 @@ skill = ExtResource("3_mtxig")
 target_mode = 5
 tell = "A Sentinela acumula vapor no canhão..."
 
-[sub_resource type="Resource" id="Resource_rhe4g"]
+[sub_resource type="Resource" id="Resource_mtxig"]
 script = ExtResource("1_6bsvc")
 skill = ExtResource("4_uyut7")
 target_mode = 2
@@ -51,7 +51,7 @@ luck = 3
 precision = 9
 evasion = 2
 skills = Array[ExtResource("7_uyvsj")]([ExtResource("4_uyut7"), ExtResource("3_mtxig"), ExtResource("2_iail0")])
-ai_rules = Array[ExtResource("1_6bsvc")]([SubResource("Resource_s8gwk"), SubResource("Resource_jom7t"), SubResource("Resource_rhe4g")])
+ai_rules = Array[ExtResource("1_6bsvc")]([SubResource("Resource_6bsvc"), SubResource("Resource_iail0"), SubResource("Resource_mtxig")])
 mechanical = true
 status_immunities = Array[int]([0, 1])
 affinities = {

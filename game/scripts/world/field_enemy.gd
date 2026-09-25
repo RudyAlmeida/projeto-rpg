@@ -10,6 +10,8 @@ const BOB_TIME := 0.45
 
 ## The enemy group this encounter fights.
 @export var enemies: Array[CombatantData] = []
+## Quest objective completed by defeating this encounter, as "quest_id:objective_id".
+@export var quest_objective := ""
 @export var patrol_distance := 24.0
 @export var patrol_speed := 14.0
 

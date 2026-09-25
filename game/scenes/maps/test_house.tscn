@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_field"]
 [ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="2_ascii"]
@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="4_music"]
 [ext_resource type="Script" path="res://scripts/world/warp.gd" id="5_warp"]
 [ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="6_spawn"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="7_npc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/lyra/chr_lyra_ref.png" id="8_lyra"]
+[ext_resource type="Resource" path="res://data/dialogue/lyra_house.tres" id="9_lyra_talk"]
 
 [sub_resource type="RectangleShape2D" id="Shape_door"]
 size = Vector2(12, 12)
@@ -25,6 +28,12 @@ layout = "##############
 #,,,,,,,,,,,,#
 #,,,,,,p,,,,,#
 ######,#######"
+
+[node name="Lyra" parent="." instance=ExtResource("7_npc")]
+position = Vector2(168, 40)
+idle_sheet = ExtResource("8_lyra")
+dialogue_set = ExtResource("9_lyra_talk")
+display_name = "Lyra"
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
 

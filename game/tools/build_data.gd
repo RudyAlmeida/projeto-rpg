@@ -1,7 +1,8 @@
-extends SceneTree
-## Generates the prototype data resources (skills, items, techs, heroes, enemies) with the
-## real classes and saves them with ResourceSaver — safer than hand-written .tres.
-## Run: godot --headless --path game -s res://tools/build_data.gd
+extends Node
+## Generates the prototype data resources (skills, items, techs, heroes, enemies, trees,
+## quests, dialogue, cutscenes) with the real classes and saves them with ResourceSaver —
+## safer than hand-written .tres. Runs as a scene so autoload-dependent classes compile.
+## Run: godot --headless --path game res://tools/build_data.tscn
 ## Edit the tables below and re-run; the .tres files are the output, not the source.
 
 const S := StatusEffects.Id
@@ -13,7 +14,7 @@ var _skills := {}
 var _saved := 0
 
 
-func _init() -> void:
+func _ready() -> void:
 	_build_skills()
 	_build_items()
 	_build_equipment_and_gems()
@@ -21,8 +22,9 @@ func _init() -> void:
 	_build_enemies()
 	_build_techs()
 	_build_trees()
+	_build_village_content()
 	print("build_data: %d resources written" % _saved)
-	quit()
+	get_tree().quit()
 
 
 # ---------- helpers ----------
@@ -349,6 +351,133 @@ func _build_trees() -> void:
 		_node("e_plate2", "Blindagem II", 3, Vector2i(2, 0), {"requires": ["e_field"], "stat_bonuses": {&"defense": 4}, "description": "+4 DEF"}),
 		_node("e_surge", "Sobrecarga de Éter", 2, Vector2i(2, 1), {"requires": ["e_sensors"], "stat_bonuses": {&"magic": 3}, "description": "+3 MAG"}),
 	])
+
+
+# ---------- Vila Caldeira test content (quests, NPC dialogue, cutscene) ----------
+
+const POR_GERD := "res://assets/portraits/por_gerd_neutral.png"
+const POR_KAEL := "res://assets/portraits/por_kael_neutral.png"
+
+
+func _line(speaker: String, text: String, portrait := "") -> DialogueLine:
+	return DialogueLine.make(speaker, text, load(portrait) if portrait != "" else null)
+
+
+func _lines(items: Array) -> Array[DialogueLine]:
+	var out: Array[DialogueLine] = []
+	for item: Array in items:
+		out.append(_line(item[0], item[1], item[2] if item.size() > 2 else ""))
+	return out
+
+
+func _branch(lines: Array[DialogueLine], props := {}) -> DialogueBranch:
+	var b := DialogueBranch.new()
+	b.lines = lines
+	for key: String in props:
+		if key in ["require_flags", "forbid_flags", "set_flags"]:
+			var arr: Array[StringName] = []
+			for f: String in props[key]:
+				arr.append(StringName(f))
+			b.set(key, arr)
+		else:
+			b.set(key, props[key])
+	return b
+
+
+func _dialogue_set(id: String, branches: Array) -> void:
+	var s := DialogueSet.new()
+	s.id = StringName(id)
+	s.branches.assign(branches)
+	_save(s, "res://data/dialogue/%s.tres" % id)
+
+
+func _choice(text: String, affinity: Dictionary, response: Array[DialogueLine]) -> DialogueChoice:
+	var c := DialogueChoice.new()
+	c.text = text
+	c.affinity = affinity
+	c.set_flags = [&"lyra_talked"] as Array[StringName]
+	c.response = response
+	return c
+
+
+func _step(type: CutsceneStep.Type, props := {}) -> CutsceneStep:
+	var s := CutsceneStep.new()
+	s.type = type
+	for key: String in props:
+		s.set(key, props[key])
+	return s
+
+
+func _build_village_content() -> void:
+	var quest := QuestData.new()
+	quest.id = &"q_village_noise"
+	quest.title = "Barulhos na Vila"
+	quest.description = "Mestre Gerd viu uma máquina imperial rondando o sudoeste de Vila Caldeira."
+	quest.main_story = true
+	quest.objective_ids = [&"defeat_sentinel"] as Array[StringName]
+	quest.objective_texts = ["Derrote a Sentinela de Latão no sudoeste da vila"] as Array[String]
+	quest.reward_money = 150
+	quest.reward_xp = 40
+	quest.reward_items = {&"gem_thunder": 1}
+	_save(quest, "res://data/quests/q_village_noise.tres")
+
+	var G := "Mestre Gerd"
+	_dialogue_set("gerd", [
+		_branch(_lines([
+			[G, "Uma Sentinela imperial? Aqui, tão longe da capital...", POR_GERD],
+			["Kael", "Ela estava rondando a vila, mestre. Mas já era.", POR_KAEL],
+			[G, "Hmpf. Bom trabalho, garoto. Leve esta gema: ela ouve o raio melhor do que eu.", POR_GERD],
+		]), {"require_quest_state": "q_village_noise=ready", "finish_quest": &"q_village_noise"}),
+		_branch(_lines([
+			[G, "A tal máquina ainda está lá fora, perto das casas do sudoeste. Cuidado com o canhão dela.", POR_GERD],
+		]), {"require_quest_state": "q_village_noise=active"}),
+		_branch(_lines([
+			[G, "Continue treinando com a lâmina. E passe na casa do noroeste: a Lyra perguntou de você.", POR_GERD],
+		]), {"require_quest_state": "q_village_noise=done"}),
+		_branch(_lines([
+			[G, "Kael! Até que enfim. A caldeira da senhora Brisa voltou a assobiar.", POR_GERD],
+			["Kael", "De novo? Mas eu troquei a válvula ontem, mestre!", POR_KAEL],
+			[G, "Hmpf. As máquinas não mentem, garoto. Se ela assobia, é porque quer dizer alguma coisa.", POR_GERD],
+			[G, "Aliás... vi uma máquina imperial rondando o sudoeste da vila. Dá uma olhada? Com cuidado.", POR_GERD],
+		]), {"start_quest": &"q_village_noise"}),
+	])
+	_dialogue_set("merchant", [
+		_branch(_lines([["Lojista", "Bem-vindo à Engrenagem Dourada! Poções, peças e gemas — tudo com garantia de latão."]])),
+	])
+	_dialogue_set("innkeeper", [
+		_branch(_lines([["Estalajadeira", "Estalagem da Chaleira! A sopa está quente e as camas, macias."]])),
+	])
+	var L := "Lyra"
+	var question := _line(L, "Então você é o garoto que conversa com máquinas. Diga: elas merecem viver mais do que as florestas?")
+	question.choices = [
+		_choice("Elas também sentem. Dá para cuidar de ambas.", {&"lyra": 2},
+			_lines([[L, "...Talvez você não seja como os outros do Império."]])),
+		_choice("Máquinas são o futuro. É assim que as coisas são.", {&"lyra": -1, &"isolde": 1},
+			_lines([[L, "É exatamente esse \"futuro\" que está matando a floresta."]])),
+		_choice("Eu só conserto coisas.", {},
+			_lines([[L, "Hmpf. Veremos se é só isso."]])),
+	] as Array[DialogueChoice]
+	_dialogue_set("lyra_house", [
+		_branch(_lines([[L, "A floresta ainda sente falta do Éter... mas obrigada por ouvir."]]), {"require_flags": ["lyra_talked"]}),
+		_branch([question] as Array[DialogueLine]),
+	])
+
+	var intro := Cutscene.new()
+	intro.id = &"intro_gerd"
+	intro.once_flag = &"intro_seen"
+	intro.steps = [
+		_step(CutsceneStep.Type.SAY, {"lines": _lines([[G, "Ei, Kael! Espere aí!", POR_GERD]])}),
+		_step(CutsceneStep.Type.MOVE, {"actor": NodePath("Gerd"), "position": Vector2(330, 232), "speed": 70.0}),
+		_step(CutsceneStep.Type.FACE, {"actor": NodePath("Player"), "facing": Player.Facing.RIGHT}),
+		_step(CutsceneStep.Type.SAY, {"lines": _lines([
+			[G, "Antes de sair por aí, pegue estas poções. Ninguém da minha oficina anda desprevenido.", POR_GERD],
+			["Kael", "Valeu, mestre!", POR_KAEL],
+		])}),
+		_step(CutsceneStep.Type.GIVE_ITEM, {"id": &"potion", "amount": 2}),
+		_step(CutsceneStep.Type.MOVE, {"actor": NodePath("Gerd"), "position": Vector2(424, 232), "speed": 70.0}),
+		_step(CutsceneStep.Type.FACE, {"actor": NodePath("Gerd"), "facing": Player.Facing.LEFT}),
+	] as Array[CutsceneStep]
+	_save(intro, "res://data/cutscenes/intro_gerd.tres")
 
 
 func _build_techs() -> void:

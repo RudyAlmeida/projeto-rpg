@@ -13,7 +13,7 @@ config_version=5
 config/name="O Coração de Éter"
 config/description="JRPG inspirado em Final Fantasy VII, Final Fantasy X e Chrono Trigger."
 config/version="0.0.1"
-run/main_scene="res://scenes/maps/test_map.tscn"
+run/main_scene="res://scenes/ui/title_screen.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -25,6 +25,7 @@ AudioManager="*res://autoload/audio_manager.gd"
 DataRegistry="*res://autoload/data_registry.gd"
 GameState="*res://autoload/game_state.gd"
 SaveManager="*res://autoload/save_manager.gd"
+Settings="*res://autoload/settings.gd"
 
 [display]
 
@@ -34,6 +35,11 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/ui.pt_BR.translation", "res://i18n/ui.en.translation")
+locale/fallback="pt_BR"
 
 [editor_plugins]
 

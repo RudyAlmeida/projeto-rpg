@@ -24,6 +24,7 @@ var locked := false
 
 var _anim_time := 0.0
 var _moving := false
+var _scripted := false  # a cutscene is moving the player
 
 @onready var _sprite: Sprite2D = $Sprite
 @onready var _camera: Camera2D = $Camera
@@ -36,6 +37,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if _scripted:
+		_anim_time += delta
+		_update_frame()
+		return
 	var direction := Vector2.ZERO
 	if can_move():
 		direction = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
@@ -69,6 +74,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"confirm") and can_move() and not DialogueManager.just_closed():
 		if try_interact():
 			get_viewport().set_input_as_handled()
+	elif event.is_action_pressed(&"menu") and can_move():
+		get_viewport().set_input_as_handled()
+		MainMenu.open(get_tree())
 
 
 ## Talks to / uses whatever is right in front of the player. Returns true if something reacted.
@@ -90,6 +98,27 @@ static func facing_vector(dir: Facing) -> Vector2:
 		Facing.RIGHT:
 			return Vector2.RIGHT
 	return Vector2.DOWN
+
+
+## Cutscenes: walk to `target` with the walk animation.
+func walk_to(target: Vector2, speed := 60.0) -> void:
+	var delta := target - position
+	if delta.length() < 1.0:
+		return
+	facing = facing_for(delta)
+	_scripted = true
+	_moving = true
+	var tween := create_tween()
+	tween.tween_property(self, "position", target, delta.length() / speed)
+	await tween.finished
+	_moving = false
+	_scripted = false
+	_update_frame()
+
+
+func face(dir: Facing) -> void:
+	facing = dir
+	_update_frame()
 
 
 ## Dominant axis wins; horizontal wins exact diagonals so side sprites show while strafing.

@@ -9,6 +9,7 @@ const FOLDERS := {
 	&"enemies": "res://data/enemies",
 	&"techs": "res://data/techs",
 	&"trees": "res://data/trees",
+	&"quests": "res://data/quests",
 }
 
 var _by_kind := {}  # kind -> {id -> Resource}
@@ -39,6 +40,16 @@ func character(id: StringName) -> CombatantData:
 
 func skill(id: StringName) -> SkillData:
 	return _by_kind[&"skills"].get(id)
+
+
+func quest(id: StringName) -> QuestData:
+	return _by_kind[&"quests"].get(id)
+
+
+func all_quests() -> Array[QuestData]:
+	var out: Array[QuestData] = []
+	out.assign(_by_kind[&"quests"].values())
+	return out
 
 
 ## Skill tree whose `character` is `character_id` (null if none).

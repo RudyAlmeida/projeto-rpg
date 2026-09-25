@@ -133,6 +133,7 @@ func gain_ap(amount: int) -> Array[GemInstance]:
 	return up
 
 
+## Full rest (inns): HP/MP to max, KO'd heroes stand up.
 func restore() -> void:
 	hp = max_hp()
 	mp = max_mp()

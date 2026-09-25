@@ -1,0 +1,8 @@
+{
+  "title": "O Coração de Éter (tema de título)",
+  "style": "16-bit SNES-era JRPG title theme, epic and nostalgic, slow majestic orchestral intro with music box and harp, then soaring strings and french horns with a memorable heroic melody, subtle clockwork percussion, bittersweet and hopeful, like classic 90s JRPG opening themes, major key with melancholic minor passages, 80 BPM, seamless loop",
+  "negative_tags": "vocals, singing, lyrics, EDM, dubstep, trap, rock drums",
+  "model": "chirp-v5-5",
+  "instrumental": true,
+  "duration": 90
+}

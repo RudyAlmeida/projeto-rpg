@@ -51,6 +51,15 @@ func fade_alpha() -> float:
 	return _fade.modulate.a
 
 
+## Fade to black without changing scene (inns, cutscenes).
+func fade_out() -> void:
+	await _fade_to(1.0)
+
+
+func fade_in() -> void:
+	await _fade_to(0.0)
+
+
 func _fade_to(alpha: float) -> void:
 	var tween := create_tween()
 	tween.tween_property(_fade, "modulate:a", alpha, FADE_TIME)

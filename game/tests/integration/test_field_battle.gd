@@ -50,6 +50,7 @@ func test_touching_enemy_starts_battle() -> void:
 
 func test_victory_removes_enemy_and_frees_player() -> void:
 	watch_signals(level)
+	var money_before := GameState.money
 	level.start_battle(slime)
 	await wait_for_signal(level.battle_finished, 40.0)
 	assert_signal_emitted_with_parameters(level, "battle_finished", [Battle.Outcome.VICTORY])
@@ -58,7 +59,7 @@ func test_victory_removes_enemy_and_frees_player() -> void:
 	assert_false(level.in_battle())
 	assert_true(level.player.visible)
 	assert_true(level.player.can_move())
-	assert_eq(GameState.money, 100 + 16, "starting money + battle money")
+	assert_eq(GameState.money, money_before + 16, "battle money is credited")
 	assert_eq(GameState.party[0].level, 2, "24 XP takes a fresh hero to level 2")
 
 

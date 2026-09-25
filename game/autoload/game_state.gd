@@ -4,6 +4,7 @@ extends Node
 
 signal money_changed(amount: int)
 signal inventory_changed
+signal quest_changed(id: StringName)
 
 var party: Array[PartyMember] = []
 var money := 0
@@ -13,9 +14,9 @@ var inventory: Dictionary = {}
 var gem_bag: Array[GemInstance] = []
 ## Story / world flags, e.g. {"met_gerd": true, "affinity_lyra": 3}.
 var flags: Dictionary = {}
+## Quest id -> {"state": "active"|"ready"|"done", "done": [objective ids]}.
+var quests: Dictionary = {}
 var play_time := 0.0
-## Player preferences (options menu; stored in user://settings.cfg, not in saves).
-var settings: Dictionary = {}
 
 
 func _process(delta: float) -> void:
@@ -35,7 +36,83 @@ func new_game(heroes: Array[CombatantData], starting_money := 0) -> void:
 	inventory.clear()
 	gem_bag.clear()
 	flags.clear()
+	quests.clear()
 	play_time = 0.0
+
+
+# ---------- affinity (H-06) ----------
+
+## Hidden affinity with a character (the Kael–Lyra–Isolde triangle decides the epilogue).
+func affinity(character: StringName) -> int:
+	return int(flags.get(StringName("affinity_" + character), 0))
+
+
+func add_affinity(character: StringName, amount: int) -> void:
+	flags[StringName("affinity_" + character)] = affinity(character) + amount
+
+
+# ---------- quests ----------
+
+func quest_state(id: StringName) -> String:
+	return str(quests.get(id, {}).get("state", ""))
+
+
+func start_quest(id: StringName) -> void:
+	if quests.has(id):
+		return
+	quests[id] = {"state": "active", "done": []}
+	_sync_quest(id)
+	# Objectives achieved before the quest was given (e.g. the enemy was already beaten).
+	var quest := DataRegistry.quest(id)
+	if quest:
+		for objective in quest.objective_ids:
+			if get_flag(_early_flag(id, objective)):
+				complete_objective(id, objective)
+
+
+## Marks an objective done; when all are done the quest becomes "ready" to hand in.
+## Before the quest starts it is remembered and applied when the quest begins.
+func complete_objective(id: StringName, objective: StringName) -> void:
+	if not quests.has(id):
+		set_flag(_early_flag(id, objective))
+		return
+	if quest_state(id) != "active":
+		return
+	var done: Array = quests[id]["done"]
+	if not objective in done:
+		done.append(objective)
+	var quest := DataRegistry.quest(id)
+	if quest and quest.objective_ids.all(func(o: StringName) -> bool: return o in done):
+		quests[id]["state"] = "ready"
+	_sync_quest(id)
+
+
+func is_objective_done(id: StringName, objective: StringName) -> bool:
+	return objective in quests.get(id, {}).get("done", [])
+
+
+## Hands in a quest and pays its rewards.
+func finish_quest(id: StringName) -> void:
+	if quest_state(id) == "done" or not quests.has(id):
+		return
+	quests[id]["state"] = "done"
+	var quest := DataRegistry.quest(id)
+	if quest:
+		add_money(quest.reward_money)
+		for item_id: StringName in quest.reward_items:
+			add_item(item_id, int(quest.reward_items[item_id]))
+		for member in party:
+			member.gain_xp(quest.reward_xp)
+	_sync_quest(id)
+
+
+static func _early_flag(id: StringName, objective: StringName) -> StringName:
+	return StringName("objective_%s_%s" % [id, objective])
+
+
+func _sync_quest(id: StringName) -> void:
+	flags[StringName("quest_" + id)] = quest_state(id)
+	quest_changed.emit(id)
 
 
 # ---------- money / items ----------
@@ -145,6 +222,7 @@ func to_dict() -> Dictionary:
 		"inventory": inventory.duplicate(),
 		"gem_bag": gem_bag.map(func(g: GemInstance) -> Dictionary: return g.to_dict()),
 		"flags": flags.duplicate(true),
+		"quests": quests.duplicate(true),
 		"play_time": play_time,
 	}
 
@@ -165,4 +243,11 @@ func from_dict(d: Dictionary) -> void:
 	flags.clear()
 	for key: String in d.get("flags", {}):
 		flags[StringName(key)] = d["flags"][key]
+	quests.clear()
+	for key: String in d.get("quests", {}):
+		var q: Dictionary = d["quests"][key]
+		var done: Array[StringName] = []
+		for o: String in q.get("done", []):
+			done.append(StringName(o))
+		quests[StringName(key)] = {"state": str(q.get("state", "active")), "done": done}
 	play_time = float(d.get("play_time", 0.0))

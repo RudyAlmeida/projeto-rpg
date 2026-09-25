@@ -1,16 +1,14 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/world/field_map.gd" id="1_testmap"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="9_music"]
-[ext_resource type="Script" path="res://scripts/world/warp.gd" id="10_warp"]
-[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="11_spawn"]
 [ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="2_ascii"]
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="4_npc"]
 [ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="5_gerd"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="6_line"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="7_por_gerd"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="8_por_kael"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/villagers/npc_villagers.png" id="6_villagers"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_vila_caldeira_test_a.mp3" id="9_music"]
+[ext_resource type="Script" path="res://scripts/world/warp.gd" id="10_warp"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="11_spawn"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="12_combatant"]
 [ext_resource type="Resource" path="res://data/characters/kael.tres" id="13_kael"]
 [ext_resource type="Resource" path="res://data/characters/lyra.tres" id="14_lyra"]
@@ -19,33 +17,35 @@
 [ext_resource type="PackedScene" path="res://scenes/characters/field_enemy.tscn" id="17_field_enemy"]
 [ext_resource type="Resource" path="res://data/characters/eco.tres" id="18_eco"]
 [ext_resource type="Resource" path="res://data/enemies/brass_sentinel.tres" id="19_sentinel"]
+[ext_resource type="Resource" path="res://data/dialogue/gerd.tres" id="20_gerd_talk"]
+[ext_resource type="Resource" path="res://data/dialogue/merchant.tres" id="21_merchant_talk"]
+[ext_resource type="Resource" path="res://data/dialogue/innkeeper.tres" id="22_inn_talk"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_trigger.gd" id="23_trigger"]
+[ext_resource type="Resource" path="res://data/cutscenes/intro_gerd.tres" id="24_intro"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="30_item"]
+[ext_resource type="Resource" path="res://data/items/potion.tres" id="31"]
+[ext_resource type="Resource" path="res://data/items/ether.tres" id="32"]
+[ext_resource type="Resource" path="res://data/items/phoenix_feather.tres" id="33"]
+[ext_resource type="Resource" path="res://data/items/antidote.tres" id="34"]
+[ext_resource type="Resource" path="res://data/items/smelling_salts.tres" id="35"]
+[ext_resource type="Resource" path="res://data/items/brass_blade.tres" id="36"]
+[ext_resource type="Resource" path="res://data/items/oak_staff.tres" id="37"]
+[ext_resource type="Resource" path="res://data/items/heavy_gauntlet.tres" id="38"]
+[ext_resource type="Resource" path="res://data/items/aviator_coat.tres" id="39"]
+[ext_resource type="Resource" path="res://data/items/eco_plating.tres" id="40"]
+[ext_resource type="Resource" path="res://data/items/brass_amulet.tres" id="41"]
+[ext_resource type="Resource" path="res://data/items/gear_amulet.tres" id="42"]
+[ext_resource type="Resource" path="res://data/items/gem_ice.tres" id="43"]
+[ext_resource type="Resource" path="res://data/items/gem_heal.tres" id="44"]
+[ext_resource type="Resource" path="res://data/items/gem_strength.tres" id="45"]
+[ext_resource type="Resource" path="res://data/items/gem_timing.tres" id="46"]
+[ext_resource type="Resource" path="res://data/items/gem_fire.tres" id="47"]
 
 [sub_resource type="RectangleShape2D" id="Shape_door"]
 size = Vector2(12, 12)
 
-[sub_resource type="Resource" id="Line_gerd_1"]
-script = ExtResource("6_line")
-speaker = "Mestre Gerd"
-portrait = ExtResource("7_por_gerd")
-text = "Kael! Até que enfim. A caldeira da senhora Brisa voltou a assobiar."
-
-[sub_resource type="Resource" id="Line_kael_1"]
-script = ExtResource("6_line")
-speaker = "Kael"
-portrait = ExtResource("8_por_kael")
-text = "De novo? Mas eu troquei a válvula ontem, mestre!"
-
-[sub_resource type="Resource" id="Line_gerd_2"]
-script = ExtResource("6_line")
-speaker = "Mestre Gerd"
-portrait = ExtResource("7_por_gerd")
-text = "Hmpf. As máquinas não mentem, garoto. Se ela assobia, é porque quer dizer alguma coisa."
-
-[sub_resource type="Resource" id="Line_gerd_3"]
-script = ExtResource("6_line")
-speaker = "Mestre Gerd"
-portrait = ExtResource("7_por_gerd")
-text = "E fique longe do Ferro-Velho do Sul. Ouvi barulhos estranhos por lá esta noite..."
+[sub_resource type="RectangleShape2D" id="Shape_trigger"]
+size = Vector2(16, 48)
 
 [node name="TestMap" type="Node2D"]
 y_sort_enabled = true
@@ -55,10 +55,12 @@ party = Array[ExtResource("12_combatant")]([ExtResource("13_kael"), ExtResource(
 starting_items = {
 &"antidote": 2,
 &"ether": 1,
+&"gem_fire": 1,
+&"gem_heal": 1,
 &"phoenix_feather": 1,
 &"potion": 3
 }
-starting_money = 100
+starting_money = 300
 
 [node name="Map" type="TileMapLayer" parent="."]
 script = ExtResource("2_ascii")
@@ -95,7 +97,24 @@ layout = "################################################
 position = Vector2(424, 232)
 idle_sheet = ExtResource("5_gerd")
 facing = 1
-dialogue = Array[ExtResource("6_line")]([SubResource("Line_gerd_1"), SubResource("Line_kael_1"), SubResource("Line_gerd_2"), SubResource("Line_gerd_3")])
+dialogue_set = ExtResource("20_gerd_talk")
+display_name = "Mestre Gerd"
+
+[node name="Merchant" parent="." instance=ExtResource("4_npc")]
+position = Vector2(488, 104)
+idle_sheet = ExtResource("6_villagers")
+dialogue_set = ExtResource("21_merchant_talk")
+role = 1
+shop_stock = Array[ExtResource("30_item")]([ExtResource("31"), ExtResource("32"), ExtResource("33"), ExtResource("34"), ExtResource("35"), ExtResource("36"), ExtResource("37"), ExtResource("38"), ExtResource("39"), ExtResource("40"), ExtResource("41"), ExtResource("42"), ExtResource("47"), ExtResource("43"), ExtResource("44"), ExtResource("45"), ExtResource("46")])
+display_name = "Engrenagem Dourada"
+
+[node name="Innkeeper" parent="." instance=ExtResource("4_npc")]
+position = Vector2(552, 104)
+idle_sheet = ExtResource("6_villagers")
+sheet_row = 1
+dialogue_set = ExtResource("22_inn_talk")
+role = 2
+display_name = "Estalajadeira"
 
 [node name="OilSlimes" parent="." instance=ExtResource("17_field_enemy")]
 position = Vector2(584, 328)
@@ -104,8 +123,17 @@ enemies = Array[ExtResource("12_combatant")]([ExtResource("16_slime"), ExtResour
 [node name="Sentinel" parent="." instance=ExtResource("17_field_enemy")]
 position = Vector2(168, 360)
 enemies = Array[ExtResource("12_combatant")]([ExtResource("19_sentinel"), ExtResource("16_slime")])
+quest_objective = "q_village_noise:defeat_sentinel"
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
+
+[node name="IntroTrigger" type="Area2D" parent="."]
+position = Vector2(296, 232)
+script = ExtResource("23_trigger")
+cutscene = ExtResource("24_intro")
+
+[node name="Shape" type="CollisionShape2D" parent="IntroTrigger"]
+shape = SubResource("Shape_trigger")
 
 [node name="Spawns" type="Node2D" parent="."]
 

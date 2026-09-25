@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_okq1x"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_2ucqf"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_nrihk"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_gv3uh"]
+
+[sub_resource type="Resource" id="Resource_m4lhn"]
+script = ExtResource("2_2ucqf")
+speaker = "Estalajadeira"
+text = "Estalagem da Chaleira! A sopa está quente e as camas, macias."
+
+[sub_resource type="Resource" id="Resource_0q5dq"]
+script = ExtResource("1_okq1x")
+lines = Array[ExtResource("2_2ucqf")]([SubResource("Resource_m4lhn")])
+
+[resource]
+script = ExtResource("4_gv3uh")
+id = &"innkeeper"
+branches = Array[ExtResource("1_okq1x")]([SubResource("Resource_0q5dq")])

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://scripts/core/quest_data.gd" id="1_e1avm"]
+
+[resource]
+script = ExtResource("1_e1avm")
+id = &"q_village_noise"
+title = "Barulhos na Vila"
+description = "Mestre Gerd viu uma máquina imperial rondando o sudoeste de Vila Caldeira."
+main_story = true
+objective_ids = Array[StringName]([&"defeat_sentinel"])
+objective_texts = Array[String](["Derrote a Sentinela de Latão no sudoeste da vila"])
+reward_money = 150
+reward_xp = 40
+reward_items = {
+&"gem_thunder": 1
+}

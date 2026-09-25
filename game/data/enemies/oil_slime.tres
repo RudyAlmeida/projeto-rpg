@@ -8,12 +8,12 @@
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_ull5w"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
 
-[sub_resource type="Resource" id="Resource_bn2h2"]
+[sub_resource type="Resource" id="Resource_ull5w"]
 script = ExtResource("1_is1qk")
 skill = ExtResource("2_tackle")
 weight = 70
 
-[sub_resource type="Resource" id="Resource_vwoq7"]
+[sub_resource type="Resource" id="Resource_bn2h2"]
 script = ExtResource("1_is1qk")
 condition = 3
 value = 8.0
@@ -39,7 +39,7 @@ luck = 3
 precision = 8
 evasion = 4
 skills = Array[ExtResource("9_skill")]([ExtResource("2_tackle"), ExtResource("3_ull5w")])
-ai_rules = Array[ExtResource("1_is1qk")]([SubResource("Resource_bn2h2"), SubResource("Resource_vwoq7")])
+ai_rules = Array[ExtResource("1_is1qk")]([SubResource("Resource_ull5w"), SubResource("Resource_bn2h2")])
 ai_weights = Array[int]([70, 30])
 affinities = {
 1: 1,

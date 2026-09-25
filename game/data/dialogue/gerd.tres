@@ -1,0 +1,88 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_s0c1t"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_pc0t3"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_5xorm"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="4_5f2fu"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="5_5fo22"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="6_jdp7t"]
+
+[sub_resource type="Resource" id="Resource_135bl"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "Uma Sentinela imperial? Aqui, tão longe da capital..."
+
+[sub_resource type="Resource" id="Resource_3q08t"]
+script = ExtResource("2_pc0t3")
+speaker = "Kael"
+portrait = ExtResource("5_5fo22")
+text = "Ela estava rondando a vila, mestre. Mas já era."
+
+[sub_resource type="Resource" id="Resource_23m2r"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "Hmpf. Bom trabalho, garoto. Leve esta gema: ela ouve o raio melhor do que eu."
+
+[sub_resource type="Resource" id="Resource_ebpl3"]
+script = ExtResource("1_s0c1t")
+require_quest_state = "q_village_noise=ready"
+lines = Array[ExtResource("2_pc0t3")]([SubResource("Resource_135bl"), SubResource("Resource_3q08t"), SubResource("Resource_23m2r")])
+finish_quest = &"q_village_noise"
+
+[sub_resource type="Resource" id="Resource_57cv5"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "A tal máquina ainda está lá fora, perto das casas do sudoeste. Cuidado com o canhão dela."
+
+[sub_resource type="Resource" id="Resource_27m7v"]
+script = ExtResource("1_s0c1t")
+require_quest_state = "q_village_noise=active"
+lines = Array[ExtResource("2_pc0t3")]([SubResource("Resource_57cv5")])
+
+[sub_resource type="Resource" id="Resource_a2a5m"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "Continue treinando com a lâmina. E passe na casa do noroeste: a Lyra perguntou de você."
+
+[sub_resource type="Resource" id="Resource_5y4mp"]
+script = ExtResource("1_s0c1t")
+require_quest_state = "q_village_noise=done"
+lines = Array[ExtResource("2_pc0t3")]([SubResource("Resource_a2a5m")])
+
+[sub_resource type="Resource" id="Resource_sss67"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "Kael! Até que enfim. A caldeira da senhora Brisa voltou a assobiar."
+
+[sub_resource type="Resource" id="Resource_3htan"]
+script = ExtResource("2_pc0t3")
+speaker = "Kael"
+portrait = ExtResource("5_5fo22")
+text = "De novo? Mas eu troquei a válvula ontem, mestre!"
+
+[sub_resource type="Resource" id="Resource_40cwd"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "Hmpf. As máquinas não mentem, garoto. Se ela assobia, é porque quer dizer alguma coisa."
+
+[sub_resource type="Resource" id="Resource_fbctq"]
+script = ExtResource("2_pc0t3")
+speaker = "Mestre Gerd"
+portrait = ExtResource("4_5f2fu")
+text = "Aliás... vi uma máquina imperial rondando o sudoeste da vila. Dá uma olhada? Com cuidado."
+
+[sub_resource type="Resource" id="Resource_ojkku"]
+script = ExtResource("1_s0c1t")
+lines = Array[ExtResource("2_pc0t3")]([SubResource("Resource_sss67"), SubResource("Resource_3htan"), SubResource("Resource_40cwd"), SubResource("Resource_fbctq")])
+start_quest = &"q_village_noise"
+
+[resource]
+script = ExtResource("6_jdp7t")
+id = &"gerd"
+branches = Array[ExtResource("1_s0c1t")]([SubResource("Resource_ebpl3"), SubResource("Resource_27m7v"), SubResource("Resource_5y4mp"), SubResource("Resource_ojkku")])

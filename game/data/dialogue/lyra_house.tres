@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_c0683"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_brnwf"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_iesoi"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_r8rm8"]
+
+[sub_resource type="Resource" id="Resource_6cnky"]
+script = ExtResource("2_brnwf")
+speaker = "Lyra"
+text = "A floresta ainda sente falta do Éter... mas obrigada por ouvir."
+
+[sub_resource type="Resource" id="Resource_hs2l1"]
+script = ExtResource("1_c0683")
+require_flags = Array[StringName]([&"lyra_talked"])
+lines = Array[ExtResource("2_brnwf")]([SubResource("Resource_6cnky")])
+
+[sub_resource type="Resource" id="Resource_qoktf"]
+script = ExtResource("2_brnwf")
+speaker = "Lyra"
+text = "...Talvez você não seja como os outros do Império."
+
+[sub_resource type="Resource" id="Resource_43ap2"]
+script = ExtResource("3_iesoi")
+text = "Elas também sentem. Dá para cuidar de ambas."
+set_flags = Array[StringName]([&"lyra_talked"])
+affinity = {
+&"lyra": 2
+}
+response = Array[ExtResource("2_brnwf")]([SubResource("Resource_qoktf")])
+
+[sub_resource type="Resource" id="Resource_xdba7"]
+script = ExtResource("2_brnwf")
+speaker = "Lyra"
+text = "É exatamente esse \"futuro\" que está matando a floresta."
+
+[sub_resource type="Resource" id="Resource_wvcek"]
+script = ExtResource("3_iesoi")
+text = "Máquinas são o futuro. É assim que as coisas são."
+set_flags = Array[StringName]([&"lyra_talked"])
+affinity = {
+&"isolde": 1,
+&"lyra": -1
+}
+response = Array[ExtResource("2_brnwf")]([SubResource("Resource_xdba7")])
+
+[sub_resource type="Resource" id="Resource_plihg"]
+script = ExtResource("2_brnwf")
+speaker = "Lyra"
+text = "Hmpf. Veremos se é só isso."
+
+[sub_resource type="Resource" id="Resource_h8sbq"]
+script = ExtResource("3_iesoi")
+text = "Eu só conserto coisas."
+set_flags = Array[StringName]([&"lyra_talked"])
+response = Array[ExtResource("2_brnwf")]([SubResource("Resource_plihg")])
+
+[sub_resource type="Resource" id="Resource_gnl7h"]
+script = ExtResource("2_brnwf")
+speaker = "Lyra"
+text = "Então você é o garoto que conversa com máquinas. Diga: elas merecem viver mais do que as florestas?"
+choices = Array[ExtResource("3_iesoi")]([SubResource("Resource_43ap2"), SubResource("Resource_wvcek"), SubResource("Resource_h8sbq")])
+
+[sub_resource type="Resource" id="Resource_8ik6i"]
+script = ExtResource("1_c0683")
+lines = Array[ExtResource("2_brnwf")]([SubResource("Resource_gnl7h")])
+
+[resource]
+script = ExtResource("4_r8rm8")
+id = &"lyra_house"
+branches = Array[ExtResource("1_c0683")]([SubResource("Resource_hs2l1"), SubResource("Resource_8ik6i")])

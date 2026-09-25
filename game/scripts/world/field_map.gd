@@ -32,7 +32,7 @@ func _ready() -> void:
 	if not GameState.is_started() and not party.is_empty():
 		GameState.new_game(party, starting_money)
 		for id: StringName in starting_items:
-			GameState.inventory[id] = int(starting_items[id])
+			GameState.add_item(id, int(starting_items[id]))  # gems go to the gem bag
 	_place_player(SceneManager.take_pending_spawn())
 	player.set_camera_limits(camera_rect(map.pixel_rect(), get_viewport_rect().size))
 	AudioManager.play_music(music)
@@ -58,12 +58,12 @@ func start_battle(enemy: FieldEnemy) -> void:
 	var outcome := Battle.Outcome.DEFEAT
 	while outcome == Battle.Outcome.DEFEAT:
 		_battle = BattleScene.new()
-		_battle.auto_timing = battle_auto_timing
+		_battle.auto_timing = battle_auto_timing if battle_auto_timing >= 0 else Settings.auto_timing()
 		_battle.inventory = GameState.inventory
 		_battle.techs = DataRegistry.all_techs()
 		_battle.aether_factor = aether_factor
 		_battle.play_music = battle_music
-		_battle.timing_window_scale = GameState.settings.get(&"timing_window", 1.0)
+		_battle.timing_window_scale = Settings.timing_window()
 		add_child(_battle)
 		_battle.start_with_party(GameState.party, enemy.enemies, player.camera_center(),
 			approach == Encounter.INITIATIVE, null, approach == Encounter.AMBUSH)
@@ -77,6 +77,9 @@ func start_battle(enemy: FieldEnemy) -> void:
 	if outcome == Battle.Outcome.FLED:
 		enemy.resume()
 	else:
+		if enemy.quest_objective != "":
+			var parts := enemy.quest_objective.split(":")
+			GameState.complete_objective(StringName(parts[0]), StringName(parts[1]))
 		enemy.queue_free()
 	player.show()
 	player.locked = false
