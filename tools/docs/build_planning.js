@@ -585,7 +585,7 @@ children.push(
     ['A-020', 'assets/sprites/characters/villagers/npc_villagers.png', 'Sprite', 'F2', DONE, 'Lojista e estalajadeira (grade 2 × 4)'],
     ['A-021', 'assets/ui/bg_title.png', 'Arte', 'F2', DONE, 'Tela de título 640×360 (Kael, Eco e o Coração de Éter)'],
     ['A-022', 'assets/audio/music/bgm_battle_a.mp3 + _b.mp3', 'Música', 'F2', DONE, 'Temas de batalha (Suno, 90 s) — aprovados os dois; o jogo alterna A e B a cada batalha'],
-    ['A-023', 'assets/audio/music/bgm_victory_a.mp3', 'Música', 'F2', WIP, 'Fanfarra de vitória (Suno, 30 s; variação B guardada) — aguardando avaliação'],
+    ['A-023', 'assets/audio/music/bgm_victory_b.mp3', 'Música', 'F2', DONE, 'Fanfarra de vitória (Suno, 30 s) — aprovada a variação B (A guardada)'],
     ['A-024', 'assets/audio/music/bgm_title_b.mp3', 'Música', 'F2', DONE, 'Tema de título (Suno, 90 s) — aprovada a variação B (A guardada)'],
   ], [9, 30, 14, 9, 15, 23]),
 );

@@ -27,7 +27,7 @@ const BATTLE_TRACKS: Array[AudioStream] = [
 	preload("res://assets/audio/music/bgm_battle_a.mp3"),
 	preload("res://assets/audio/music/bgm_battle_b.mp3"),
 ]
-const VICTORY_MUSIC := preload("res://assets/audio/music/bgm_victory_a.mp3")
+const VICTORY_MUSIC := preload("res://assets/audio/music/bgm_victory_b.mp3")
 
 var battle: Battle
 ## Tests / accessibility: forwarded to the timing prompt (see TimingPrompt.auto_result).
