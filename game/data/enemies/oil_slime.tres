@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CombatantData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Resource" path="res://data/skills/slime_tackle.tres" id="2_tackle"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Slime de Óleo"
+frame_size = Vector2i(48, 48)
+idle_frame = 0
+attack_frame = 2
+hurt_frame = 3
+max_hp = 60
+strength = 9
+weapon_power = 4
+magic = 0
+defense = 5
+spirit = 5
+speed = 10
+luck = 3
+precision = 8
+evasion = 4
+skills = Array[ExtResource("9_skill")]([ExtResource("2_tackle")])
+ai_weights = Array[int]([100])
+affinities = {
+1: 1,
+4: 2
+}
+xp_reward = 12
+money_reward = 8

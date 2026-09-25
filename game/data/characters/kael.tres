@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CombatantData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="2_sheet"]
+[ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
+[ext_resource type="Resource" path="res://data/skills/defend.tres" id="4_defend"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Kael"
+battle_sheet = ExtResource("2_sheet")
+idle_frame = 3
+max_hp = 120
+max_mp = 20
+strength = 12
+weapon_power = 10
+magic = 6
+defense = 8
+spirit = 6
+speed = 25
+luck = 10
+precision = 10
+evasion = 8
+skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_defend")])

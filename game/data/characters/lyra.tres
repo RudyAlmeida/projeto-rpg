@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CombatantData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/lyra/chr_lyra_ref.png" id="2_sheet"]
+[ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
+[ext_resource type="Resource" path="res://data/skills/fire.tres" id="4_fire"]
+[ext_resource type="Resource" path="res://data/skills/defend.tres" id="5_defend"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Lyra"
+battle_sheet = ExtResource("2_sheet")
+idle_frame = 3
+max_hp = 85
+max_mp = 40
+strength = 6
+weapon_power = 4
+magic = 15
+defense = 5
+spirit = 12
+speed = 22
+luck = 8
+precision = 8
+evasion = 10
+skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_fire"), ExtResource("5_defend")])

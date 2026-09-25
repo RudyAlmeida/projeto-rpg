@@ -25,6 +25,8 @@ extends Resource
 @export var magic_stat_mult := 2.0
 @export var heal_stat_mult := 1.5
 @export var max_damage := 9999
+## Damage taken while in the Defend stance (until the unit's next turn).
+@export var defend_mult := 0.5
 
 @export_group("Elements")
 @export var weak_mult := 1.5
