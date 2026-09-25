@@ -32,15 +32,42 @@ func _init(p_rng: RandomNumberGenerator = null, p_balance: CombatBalance = null)
 	queue = TurnQueue.new(balance)
 
 
+## Quick start with fresh level-1 heroes (tests, previews).
 func start(heroes: Array[CombatantData], foes: Array[CombatantData], initiative := false) -> void:
+	var members: Array[PartyMember] = []
 	for data in heroes:
-		var unit := BattleUnit.new(data, true)
+		members.append(PartyMember.new(data))
+	start_with_party(members, foes, initiative)
+
+
+## Starts with the persistent party: current HP/MP and level-scaled stats carry in.
+## Heroes already KO'd do not take part.
+func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], initiative := false) -> void:
+	for member in members:
+		if not member.is_alive():
+			continue
+		var unit := BattleUnit.new(member.data, true, member)
 		party.append(unit)
-		queue.add(unit, data.speed, true, initiative, rng)
+		queue.add(unit, unit.stat(&"speed"), true, initiative, rng)
 	for data in foes:
 		var unit := BattleUnit.new(data, false)
 		enemies.append(unit)
-		queue.add(unit, data.speed, false, false, rng)
+		queue.add(unit, unit.stat(&"speed"), false, false, rng)
+
+
+## Writes HP/MP back to the party and shares the XP (GDD 8.3: KO'd heroes get 50%).
+## Returns one entry per hero: {member, xp, levels}. KO'd heroes come back with 1 HP
+## (prototype rule until revive items and inns exist).
+func finish_victory() -> Array[Dictionary]:
+	var results: Array[Dictionary] = []
+	var xp := total_xp()
+	for unit in party:
+		var member := unit.member
+		member.hp = maxi(unit.hp, 1)
+		member.mp = unit.mp
+		var share := roundi(xp * (1.0 if unit.is_alive() else balance.xp_ko_mult))
+		results.append({"member": member, "xp": share, "levels": member.gain_xp(share, balance)})
+	return results
 
 
 ## Advances the CTB queue. The returned unit's defend stance ends as its turn begins.
@@ -87,7 +114,7 @@ func resolve(actor: BattleUnit, skill: SkillData, target: BattleUnit,
 		SkillData.Kind.DEFEND:
 			actor.defending = true
 		SkillData.Kind.HEAL:
-			var amount := DamageFormula.finalize(DamageFormula.heal_base(actor.data.magic, skill.power),
+			var amount := DamageFormula.finalize(DamageFormula.heal_base(actor.stat(&"magic"), skill.power),
 				DamageFormula.roll_variance(rng), false, 1.0, DamageFormula.attack_timing_mult(timing))
 			r.amount = target.heal(amount)
 		SkillData.Kind.ATTACK, SkillData.Kind.MAGIC:
@@ -103,17 +130,17 @@ func _resolve_offense(r: ActionResult) -> void:
 	var skill := r.skill
 	var physical := skill.kind == SkillData.Kind.ATTACK
 
-	if physical and rng.randf() * 100.0 >= DamageFormula.hit_chance(actor.data.precision, target.data.evasion):
+	if physical and rng.randf() * 100.0 >= DamageFormula.hit_chance(actor.stat(&"precision"), target.stat(&"evasion")):
 		r.hit = false
 		return
 
 	var base: float
 	if physical:
-		base = DamageFormula.physical_base(actor.data.strength + actor.data.weapon_power, skill.multiplier, target.data.defense)
+		base = DamageFormula.physical_base(actor.stat(&"strength") + actor.data.weapon_power, skill.multiplier, target.stat(&"defense"))
 	else:
-		base = DamageFormula.magical_base(actor.data.magic, skill.power, skill.multiplier, target.data.spirit)
+		base = DamageFormula.magical_base(actor.stat(&"magic"), skill.power, skill.multiplier, target.stat(&"spirit"))
 
-	r.crit = physical and rng.randf() * 100.0 < DamageFormula.crit_chance(actor.data.luck)
+	r.crit = physical and rng.randf() * 100.0 < DamageFormula.crit_chance(actor.stat(&"luck"))
 	var element := DamageFormula.element_mult(target.data.affinity_for(skill.element))
 	# Timing: heroes press to hit harder; heroes being hit press to take less.
 	var timing_mult := DamageFormula.attack_timing_mult(r.timing) if actor.is_player \

@@ -10,6 +10,7 @@ var slime: FieldEnemy
 
 func before_each() -> void:
 	Engine.time_scale = 8.0
+	GameState.party.clear()  # the map starts a fresh game with its own party
 	level = load("res://scenes/maps/test_map.tscn").instantiate()
 	level.battle_auto_timing = DamageFormula.Timing.PERFECT
 	add_child_autofree(level)
@@ -57,6 +58,8 @@ func test_victory_removes_enemy_and_frees_player() -> void:
 	assert_false(level.in_battle())
 	assert_true(level.player.visible)
 	assert_true(level.player.can_move())
+	assert_eq(GameState.money, 16, "battle money is credited")
+	assert_eq(GameState.party[0].level, 2, "24 XP takes a fresh hero to level 2")
 
 
 func test_battle_uses_party_and_enemy_group() -> void:

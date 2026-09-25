@@ -28,6 +28,15 @@ extends Resource
 ## Damage taken while in the Defend stance (until the unit's next turn).
 @export var defend_mult := 0.5
 
+@export_group("Progression")
+## XP needed to go from `level` to `level + 1` = round(xp_base × level ^ xp_exponent).
+@export var xp_base := 20.0
+@export var xp_exponent := 1.6
+@export var max_level := 99
+## GDD 8.3: share of battle XP for reserve members and heroes KO'd at the end.
+@export var xp_reserve_mult := 0.75
+@export var xp_ko_mult := 0.5
+
 @export_group("Elements")
 @export var weak_mult := 1.5
 @export var resist_mult := 0.5

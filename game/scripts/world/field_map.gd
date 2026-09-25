@@ -21,6 +21,9 @@ var _battle: BattleScene
 
 
 func _ready() -> void:
+	# Running a map directly (editor F6 / dev start): begin a game with this map's party.
+	if not GameState.is_started() and not party.is_empty():
+		GameState.new_game(party)
 	_place_player(SceneManager.take_pending_spawn())
 	player.set_camera_limits(camera_rect(map.pixel_rect(), get_viewport_rect().size))
 	AudioManager.play_music(music)
@@ -35,7 +38,7 @@ func in_battle() -> bool:
 ## Battle on the spot (D-04): the field enemy and the player sprite step aside, the battle
 ## places everyone around the camera centre. Defeat retries the same battle.
 func start_battle(enemy: FieldEnemy) -> void:
-	if in_battle() or party.is_empty():
+	if in_battle() or not GameState.is_started():
 		return
 	player.locked = true
 	player.hide()
@@ -45,9 +48,11 @@ func start_battle(enemy: FieldEnemy) -> void:
 		_battle = BattleScene.new()
 		_battle.auto_timing = battle_auto_timing
 		add_child(_battle)
-		_battle.start(party, enemy.enemies, player.camera_center())
+		_battle.start_with_party(GameState.party, enemy.enemies, player.camera_center())
 		battle_started.emit(_battle)
 		outcome = await _battle.battle_ended
+		if outcome == Battle.Outcome.VICTORY:
+			GameState.add_money(_battle.battle.total_money())
 		_battle.queue_free()
 		_battle = null
 	enemy.queue_free()
@@ -74,8 +79,12 @@ static func camera_rect(map_rect: Rect2i, screen: Vector2) -> Rect2i:
 
 
 func _place_player(spawn_id: String) -> void:
+	var saved_position := SaveManager.take_pending_position()
 	var spawn := spawn_point(spawn_id)
-	if spawn:
+	if saved_position != Vector2.INF:
+		player.position = saved_position
+		player.facing = SaveManager.pending_facing
+	elif spawn:
 		player.position = spawn.position
 		player.facing = spawn.facing
 	else:

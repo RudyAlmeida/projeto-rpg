@@ -2,6 +2,9 @@ class_name CombatantData
 extends Resource
 ## Static definition of a hero or enemy: stats, commands, affinities and battle sprite.
 
+const STATS: Array[StringName] = [&"max_hp", &"max_mp", &"strength", &"magic", &"defense",
+	&"spirit", &"speed", &"luck", &"precision", &"evasion"]
+
 @export var display_name := ""
 
 @export_group("Sprite")
@@ -27,6 +30,9 @@ extends Resource
 @export var luck := 5
 @export var precision := 10
 @export var evasion := 5
+## Heroes: points gained per level for each name in STATS (fractions accumulate:
+## stat = base + floor(growth × (level − 1))).
+@export var growth: Dictionary = {}
 
 @export_group("Commands")
 @export var skills: Array[SkillData] = []

@@ -24,8 +24,8 @@ func _ready() -> void:
 	strip.add_child(_order)
 	_menu_panel = _panel(Rect2(8, 268, 150, 84))
 	_menu_panel.hide()
-	_message_panel = _panel(Rect2(170, 28, 300, 46))  # under the order strip, clear of the fight
-	_message = _label(Vector2(0, 4), Vector2(300, 40), TEXT)
+	_message_panel = _panel(Rect2(90, 28, 460, 46))  # under the order strip, clear of the fight
+	_message = _label(Vector2(0, 4), Vector2(460, 40), TEXT)
 	_message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_panel.add_child(_message)
 	_message_panel.hide()
@@ -45,8 +45,8 @@ func update_party(party: Array[BattleUnit], active: BattleUnit) -> void:
 	for i in party.size():
 		var u := party[i]
 		var row := _status_labels[i]
-		row.text = "%s %s  HP %3d/%d  MP %2d" % ["▶" if u == active else " ", u.display_name(), u.hp, u.data.max_hp, u.mp]
-		row.add_theme_color_override("font_color", DIM if not u.is_alive() else (HP_LOW if u.hp * 4 < u.data.max_hp else TEXT))
+		row.text = "%s %s  HP %3d/%d  MP %2d" % ["▶" if u == active else " ", u.display_name(), u.hp, u.max_hp(), u.mp]
+		row.add_theme_color_override("font_color", DIM if not u.is_alive() else (HP_LOW if u.hp * 4 < u.max_hp() else TEXT))
 
 
 func update_order(order: Array[Object], current: BattleUnit) -> void:

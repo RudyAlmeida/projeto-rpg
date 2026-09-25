@@ -35,11 +35,21 @@ signal _command_ready(skill: SkillData, target: BattleUnit)
 signal _result_confirmed
 
 
+## Quick start with fresh level-1 heroes (tests, previews).
 func start(heroes: Array[CombatantData], foes: Array[CombatantData], center: Vector2,
+		initiative := false, rng: RandomNumberGenerator = null) -> void:
+	var members: Array[PartyMember] = []
+	for data in heroes:
+		members.append(PartyMember.new(data))
+	start_with_party(members, foes, center, initiative, rng)
+
+
+## Battle with the persistent party; on victory HP/MP and XP are written back to `members`.
+func start_with_party(members: Array[PartyMember], foes: Array[CombatantData], center: Vector2,
 		initiative := false, rng: RandomNumberGenerator = null) -> void:
 	y_sort_enabled = true
 	battle = Battle.new(rng)
-	battle.start(heroes, foes, initiative)
+	battle.start_with_party(members, foes, initiative)
 	for i in battle.party.size():
 		_add_view(battle.party[i], center + HERO_OFFSETS[i % HERO_OFFSETS.size()])
 	for i in battle.enemies.size():
@@ -178,7 +188,14 @@ func _finish(outcome: Battle.Outcome) -> void:
 	_ui.update_party(battle.party, null)
 	_ui.clear_order()
 	if outcome == Battle.Outcome.VICTORY:
-		_ui.show_message("Vitória!\n+%d XP   +%d moedas" % [battle.total_xp(), battle.total_money()])
+		var text := "Vitória!  +%d XP   +%d moedas" % [battle.total_xp(), battle.total_money()]
+		var promoted: PackedStringArray = []
+		for result in battle.finish_victory():
+			if result["levels"] > 0:
+				var member: PartyMember = result["member"]
+				promoted.append("%s nv. %d" % [member.data.display_name, member.level])
+		text += "\n" + ("Subiu de nível: " + ", ".join(promoted) if not promoted.is_empty() else "")
+		_ui.show_message(text.strip_edges())
 	else:
 		_ui.show_message("Derrota...\nConfirmar: tentar de novo")
 	_mode = Mode.RESULT

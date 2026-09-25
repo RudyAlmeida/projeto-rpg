@@ -22,4 +22,16 @@ speed = 25
 luck = 10
 precision = 10
 evasion = 8
+growth = {
+&"defense": 1.0,
+&"evasion": 0.4,
+&"luck": 0.5,
+&"magic": 0.6,
+&"max_hp": 12.0,
+&"max_mp": 2.0,
+&"precision": 0.5,
+&"speed": 0.6,
+&"spirit": 0.7,
+&"strength": 1.5
+}
 skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_defend")])
