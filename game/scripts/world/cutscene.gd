@@ -105,7 +105,8 @@ func _run_step(map: Node, step: CutsceneStep) -> void:
 			SceneManager.change_scene(TITLE_SCENE)
 
 
-## Adds a hero (no-op if already there). `level` 0 = the party's average level.
+## Adds a hero (no-op if already there). `level` 0 = the average level of the regular
+## (non-guest) members.
 static func join_party(character_id: StringName, level := 0) -> void:
 	if GameState.party.any(func(m: PartyMember) -> bool: return m.data.id == character_id):
 		return
@@ -115,9 +116,12 @@ static func join_party(character_id: StringName, level := 0) -> void:
 		return
 	if level <= 0:
 		var total := 0
+		var count := 0
 		for m in GameState.party:
-			total += m.level
-		level = maxi(1, roundi(float(total) / maxi(1, GameState.party.size())))
+			if not m.data.guest:  # guests have a fixed level
+				total += m.level
+				count += 1
+		level = maxi(1, roundi(float(total) / maxi(1, count)))
 	GameState.party.append(PartyMember.new(data, level))
 
 

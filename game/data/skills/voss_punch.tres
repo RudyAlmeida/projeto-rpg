@@ -7,4 +7,4 @@ script = ExtResource("1_4rk27")
 id = &"voss_punch"
 display_name = "Punho de Pistão"
 weight = 4
-multiplier = 1.4
+multiplier = 1.8

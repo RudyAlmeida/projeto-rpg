@@ -8,4 +8,4 @@ id = &"core_steam"
 display_name = "Vapor Escaldante"
 target = 3
 weight = 4
-multiplier = 0.7
+multiplier = 0.85

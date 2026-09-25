@@ -91,6 +91,12 @@ func fight(foes: Array[CombatantData], approach := Encounter.NORMAL, music_overr
 	var was_locked := player.locked
 	player.locked = true
 	player.hide()
+	# NPCs and other field enemies step aside too, so only the battle formation is on screen.
+	var hidden: Array[CanvasItem] = []
+	for node in get_children():
+		if (node is NPC or node is FieldEnemy) and (node as CanvasItem).visible:
+			hidden.append(node)
+			(node as CanvasItem).hide()
 	var outcome := Battle.Outcome.DEFEAT
 	while outcome == Battle.Outcome.DEFEAT:
 		_battle = BattleScene.new()
@@ -111,6 +117,9 @@ func fight(foes: Array[CombatantData], approach := Encounter.NORMAL, music_overr
 		_battle.queue_free()
 		_battle = null
 		approach = Encounter.NORMAL  # a retry starts even
+	for node in hidden:
+		if is_instance_valid(node):
+			node.show()
 	player.show()
 	player.locked = was_locked
 	battle_finished.emit(outcome)

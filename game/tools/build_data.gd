@@ -171,7 +171,7 @@ func _build_equipment_and_gems() -> void:
 	var A := ItemData.Kind.ARMOR
 	var X := ItemData.Kind.ACCESSORY
 	# Starting gear.
-	_gear("wrench", "Chave de Oficina", W, 4, 0, 6, {}, 1, ["kael"], "A chave inglesa de Kael. Serve para apertar parafusos... e cabeças.")
+	_gear("wrench", "Chave de Oficina", W, 19, 0, 6, {}, 1, ["kael"], "A chave inglesa de Kael. Serve para apertar parafusos... e cabeças.")
 	_gear("gear_blade", "Lâmina-engrenagem", W, 4, 0, 10, {}, 2, ["kael"], "A espada de Kael, com pistão no guarda-mão.")
 	_gear("root_staff", "Cajado de Raiz", W, 5, 0, 4, {&"magic": 2}, 2, ["lyra"], "Raiz viva com um cristal quase apagado.")
 	_gear("steam_gauntlet", "Manopla a Vapor", W, 6, 0, 12, {}, 1, ["brann"], "O braço de Brann.")
@@ -500,7 +500,6 @@ const MUSIC_EMPIRE := "res://assets/audio/music/bgm_empire_a.mp3"
 const MUSIC_FAREWELL := "res://assets/audio/music/bgm_farewell_a.mp3"
 const MAP_OFICINA := "res://scenes/maps/prologue/oficina.tscn"
 const MAP_VILA := "res://scenes/maps/prologue/vila_caldeira.tscn"
-const KEY_ICON := 15
 
 var _enemies := {}
 
@@ -570,11 +569,11 @@ func _build_prologue() -> void:
 func _build_prologue_combat() -> void:
 	var KEY := ItemData.Kind.KEY
 	# Key items and quest materials.
-	_item("gear_box", "Caixa de Engrenagens", KEY, KEY_ICON, 0, {"battle_usable": false, "field_usable": false,
+	_item("gear_box", "Caixa de Engrenagens", KEY, 16, 0, {"battle_usable": false, "field_usable": false,
 		"description": "Encomenda do mestre Gerd para o Tobias. Pesada e barulhenta."})
-	_item("bronze_valve", "Válvula de Bronze", KEY, KEY_ICON, 0, {"battle_usable": false, "field_usable": false,
+	_item("bronze_valve", "Válvula de Bronze", KEY, 17, 0, {"battle_usable": false, "field_usable": false,
 		"description": "Válvula antiga para a caldeira da estalagem."})
-	_item("brass_spring", "Mola de Latão", KEY, KEY_ICON, 0, {"battle_usable": false, "field_usable": false,
+	_item("brass_spring", "Mola de Latão", KEY, 18, 0, {"battle_usable": false, "field_usable": false,
 		"description": "Mola roída por um Rato-Engrenagem. O Sr. Anselmo precisa de três."})
 
 	# Skills of the new enemies, Gerd and the boss.
@@ -582,16 +581,16 @@ func _build_prologue_combat() -> void:
 	_skill("crow_peck", "Bicada", K.ATTACK, T.ENEMY, {"multiplier": 0.9})
 	_skill("crow_snatch", "Furto", K.ATTACK, T.ENEMY, {"multiplier": 0.5, "steals": true, "description": "Rouba um item."})
 	_skill("spider_sting", "Ferrão", K.ATTACK, T.ENEMY, {"inflicts": {S.POISON: 60}})
-	_skill("lamp_bolt", "Faísca Errante", K.MAGIC, T.ENEMY, {"power": 16, "element": E.THUNDER})
+	_skill("lamp_bolt", "Faísca Errante", K.MAGIC, T.ENEMY, {"power": 22, "element": E.THUNDER})
 	_skill("lamp_glow", "Brilhar", K.SUPPORT, T.SELF, {"inflicts": {S.PROTECT: 100}, "status_turns": 2})
 	_skill("soldier_shot", "Tiro a Vapor", K.ATTACK, T.ENEMY, {"multiplier": 1.1})
 	_skill("gerd_bomb", "Bomba de Oficina", K.MAGIC, T.ALL_ENEMIES, {"mp_cost": 5, "power": 16, "element": E.FIRE,
 		"weight": 4, "description": "Uma lata de parafusos e pólvora. Fogo em todos os inimigos."})
-	_skill("gerd_patch", "Remendo", K.HEAL, T.ALLY, {"mp_cost": 4, "power": 26, "description": "Gerd remenda um aliado."})
+	_skill("gerd_patch", "Remendo", K.HEAL, T.ALLY, {"mp_cost": 5, "power": 18, "description": "Gerd remenda um aliado."})
 	_skill("claw_crush", "Esmagar", K.ATTACK, T.ENEMY, {"multiplier": 1.5, "weight": 4})
-	_skill("core_steam", "Vapor Escaldante", K.ATTACK, T.ALL_ENEMIES, {"multiplier": 0.7, "weight": 4})
+	_skill("core_steam", "Vapor Escaldante", K.ATTACK, T.ALL_ENEMIES, {"multiplier": 0.85, "weight": 4})
 	_skill("core_compact", "Compactar", K.ATTACK, T.ENEMY, {"multiplier": 0.8, "weight": 4, "inflicts": {S.STUCK: 100}})
-	_skill("voss_punch", "Punho de Pistão", K.ATTACK, T.ENEMY, {"multiplier": 1.4, "weight": 4})
+	_skill("voss_punch", "Punho de Pistão", K.ATTACK, T.ENEMY, {"multiplier": 1.8, "weight": 4})
 	_skill("voss_order", "Ordem de Captura", K.SUPPORT, T.SELF, {"weight": 2})
 	_skill("tech_spark_iron", "Faísca e Ferro", K.ATTACK, T.ENEMY, {"multiplier": 2.4})
 	_tech("spark_iron", "Faísca e Ferro", ["kael", "gerd"], "tech_spark_iron", 4, "Kael + Gerd: \"Eu seguro, você corta.\"")
@@ -600,7 +599,7 @@ func _build_prologue_combat() -> void:
 	_hero("gerd", {"display_name": "Gerd", "guest": true,
 		"battle_sheet": load("res://assets/sprites/characters/gerd/npc_gerd_ref.png"), "idle_frame": 3,
 		"portrait": load(POR_GERD),
-		"max_hp": 190, "max_mp": 30, "strength": 13, "weapon_power": 9, "magic": 11, "defense": 12, "spirit": 10,
+		"max_hp": 150, "max_mp": 24, "strength": 11, "weapon_power": 7, "magic": 10, "defense": 10, "spirit": 10,
 		"speed": 16, "luck": 8, "precision": 10, "evasion": 4,
 		"skills": _skills_of(["attack", "gerd_bomb", "gerd_patch", "defend"]),
 		"timing_style": CombatantData.TimingStyle.RING, "perfect_bonus": CombatantData.PerfectBonus.NONE})
@@ -609,24 +608,24 @@ func _build_prologue_combat() -> void:
 	var mech := [S.POISON, S.SLEEP] as Array[int]
 
 	_enemy("gear_rat", "Rato-Engrenagem", "enm_gear_rat", Vector2i(52, 28),
-		{"max_hp": 38, "strength": 8, "weapon_power": 3, "defense": 4, "spirit": 3, "speed": 34, "luck": 4,
+		{"max_hp": 42, "strength": 12, "weapon_power": 5, "defense": 4, "spirit": 3, "speed": 34, "luck": 4,
 		"precision": 10, "evasion": 10, "xp_reward": 9, "money_reward": 6, "ap_reward": 2}, ["rat_bite"],
 		{"mechanical": true, "drops": {&"brass_spring": 45.0},
 		"field_comment": "Ratos comendo cobre. Até a praga daqui é mecânica."}.merged(comment))
 	_enemy("scrap_crow", "Corvo de Sucata", "enm_scrap_crow", Vector2i(48, 40),
-		{"max_hp": 44, "strength": 9, "weapon_power": 4, "defense": 5, "spirit": 5, "speed": 28, "luck": 8,
+		{"max_hp": 48, "strength": 13, "weapon_power": 5, "defense": 5, "spirit": 5, "speed": 28, "luck": 8,
 		"precision": 11, "evasion": 14, "xp_reward": 12, "money_reward": 14, "ap_reward": 3}, ["crow_peck", "crow_snatch"],
 		{"ai_weights": [55, 45] as Array[int], "escape_after_turns": 3, "drops": {&"potion": 30.0},
 		"affinities": {E.WIND: DamageFormula.Affinity.WEAK},
 		"field_comment": "Esses bichos roubam parafuso até do meu bolso. Acerta antes que ele fuja!"}.merged(comment))
 	_enemy("bolt_spider", "Aranha-Parafuso", "enm_bolt_spider", Vector2i(52, 36),
-		{"max_hp": 56, "strength": 10, "weapon_power": 5, "defense": 8, "spirit": 4, "speed": 18, "luck": 4,
+		{"max_hp": 62, "strength": 14, "weapon_power": 6, "defense": 8, "spirit": 4, "speed": 18, "luck": 4,
 		"precision": 10, "evasion": 5, "xp_reward": 16, "money_reward": 12, "ap_reward": 3}, ["rat_bite", "spider_sting"],
 		{"ai_weights": [40, 60] as Array[int], "mechanical": true, "status_immunities": mech, "drops": {&"antidote": 35.0},
 		"affinities": {E.ICE: DamageFormula.Affinity.WEAK},
 		"field_comment": "Cuidado com o veneno. Tem antídoto na bolsa?"}.merged(comment))
 	_enemy("wander_lamp", "Lâmpada Errante", "enm_wander_lamp", Vector2i(45, 48),
-		{"max_hp": 42, "max_mp": 40, "strength": 5, "weapon_power": 2, "magic": 12, "defense": 4, "spirit": 12,
+		{"max_hp": 46, "max_mp": 40, "strength": 5, "weapon_power": 2, "magic": 17, "defense": 4, "spirit": 12,
 		"speed": 22, "luck": 6, "precision": 10, "evasion": 8, "xp_reward": 18, "money_reward": 20, "ap_reward": 4},
 		["lamp_bolt", "lamp_glow"],
 		{"ai_rules": [
@@ -635,27 +634,27 @@ func _build_prologue_combat() -> void:
 		] as Array[AIRule], "drops": {&"ether": 25.0},
 		"affinities": {E.THUNDER: DamageFormula.Affinity.ABSORB, E.ICE: DamageFormula.Affinity.WEAK},
 		"field_comment": "Éter vazado criando vida própria... Isso não é natural, Kael."}.merged(comment))
-	_enemy("imperial_soldier", "Soldado Imperial", "enm_imperial_soldier", Vector2i(48, 56),
-		{"max_hp": 70, "strength": 12, "weapon_power": 8, "defense": 10, "spirit": 6, "speed": 20, "luck": 5,
+	_enemy("imperial_soldier", "Soldado Imperial", "enm_imperial_soldier", Vector2i(59, 56),
+		{"max_hp": 70, "strength": 15, "weapon_power": 9, "defense": 10, "spirit": 6, "speed": 20, "luck": 5,
 		"precision": 12, "evasion": 5, "xp_reward": 20, "money_reward": 15, "ap_reward": 3}, ["soldier_shot"], {})
 
 	# Boss: the Triturador, in three parts (the claws guard the core).
 	var boss := {"mechanical": true, "is_boss": true, "status_immunities": [S.POISON, S.SLEEP, S.CONFUSION] as Array[int],
 		"affinities": {E.THUNDER: DamageFormula.Affinity.WEAK}}
 	_enemy("crusher_claw_up", "Garra Superior", "enm_crusher_claw_up", Vector2i(104, 115),
-		{"max_hp": 110, "strength": 15, "weapon_power": 8, "defense": 12, "spirit": 5, "speed": 14, "precision": 10,
+		{"max_hp": 90, "strength": 20, "weapon_power": 10, "defense": 12, "spirit": 5, "speed": 14, "precision": 10,
 		"xp_reward": 0, "money_reward": 0}, ["claw_crush"],
 		{"ai_rules": [_rule(1, AIRule.Condition.ALWAYS, 0, "claw_crush", AIRule.TargetMode.RANDOM, 1,
 			"A garra superior se ergue...")] as Array[AIRule], "formation_offset": Vector2(72, -46),
 		"idle_frame": 0, "attack_frame": 1, "hurt_frame": 2}.merged(boss))
 	_enemy("crusher_claw_down", "Garra Inferior", "enm_crusher_claw_down", Vector2i(104, 115),
-		{"max_hp": 110, "strength": 15, "weapon_power": 8, "defense": 12, "spirit": 5, "speed": 13, "precision": 10,
+		{"max_hp": 90, "strength": 20, "weapon_power": 10, "defense": 12, "spirit": 5, "speed": 13, "precision": 10,
 		"xp_reward": 0, "money_reward": 0}, ["claw_crush"],
 		{"ai_rules": [_rule(1, AIRule.Condition.ALWAYS, 0, "claw_crush", AIRule.TargetMode.RANDOM, 1,
 			"A garra inferior se ergue...")] as Array[AIRule], "formation_offset": Vector2(72, 50),
 		"idle_frame": 0, "attack_frame": 1, "hurt_frame": 2}.merged(boss))
 	_enemy("crusher_core", "Triturador", "enm_crusher_core", Vector2i(104, 115),
-		{"max_hp": 330, "strength": 14, "weapon_power": 6, "defense": 10, "spirit": 8, "speed": 12, "precision": 10,
+		{"max_hp": 260, "strength": 18, "weapon_power": 8, "defense": 10, "spirit": 8, "speed": 12, "precision": 10,
 		"xp_reward": 120, "money_reward": 200, "ap_reward": 15}, ["core_steam", "core_compact"],
 		{"guarded_by": [&"crusher_claw_up", &"crusher_claw_down"] as Array[StringName], "guarded_damage_mult": 0.25,
 		"formation_offset": Vector2(128, 4), "idle_frame": 0, "attack_frame": 1, "hurt_frame": 2,
@@ -668,7 +667,7 @@ func _build_prologue_combat() -> void:
 
 	# General Voss: story fight, ends after his 4th turn (no game over).
 	_enemy("voss", "General Voss", "enm_voss", Vector2i(66, 64),
-		{"max_hp": 2400, "strength": 20, "weapon_power": 14, "defense": 45, "spirit": 30, "speed": 12, "luck": 10,
+		{"max_hp": 2400, "strength": 27, "weapon_power": 16, "defense": 45, "spirit": 30, "speed": 12, "luck": 10,
 		"precision": 14, "evasion": 3, "xp_reward": 0, "money_reward": 0}, ["voss_punch", "voss_order"],
 		{"is_boss": true, "status_immunities": [S.POISON, S.SLEEP, S.CONFUSION, S.PARALYSIS, S.STUCK] as Array[int],
 		"idle_frame": 0, "attack_frame": 1, "hurt_frame": 2, "formation_offset": Vector2(116, 0),

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="6_w6u8b"]
 [ext_resource type="Script" path="res://scripts/items/item_data.gd" id="7_0ymch"]
 
-[sub_resource type="Resource" id="Resource_jndmx"]
+[sub_resource type="Resource" id="Resource_fed3g"]
 script = ExtResource("1_fed3g")
 priority = 2
 condition = 4
@@ -17,7 +17,7 @@ skill = ExtResource("2_jndmx")
 target_mode = 4
 tell = "\"Soldados! Cerquem-nos!\""
 
-[sub_resource type="Resource" id="Resource_1slso"]
+[sub_resource type="Resource" id="Resource_jndmx"]
 script = ExtResource("1_fed3g")
 skill = ExtResource("3_1slso")
 target_mode = 2
@@ -33,8 +33,8 @@ idle_frame = 0
 attack_frame = 1
 hurt_frame = 2
 max_hp = 2400
-strength = 20
-weapon_power = 14
+strength = 27
+weapon_power = 16
 defense = 45
 spirit = 30
 speed = 12
@@ -42,7 +42,7 @@ luck = 10
 precision = 14
 evasion = 3
 skills = Array[ExtResource("6_w6u8b")]([ExtResource("3_1slso"), ExtResource("2_jndmx")])
-ai_rules = Array[ExtResource("1_fed3g")]([SubResource("Resource_jndmx"), SubResource("Resource_1slso")])
+ai_rules = Array[ExtResource("1_fed3g")]([SubResource("Resource_fed3g"), SubResource("Resource_jndmx")])
 status_immunities = Array[int]([0, 1, 5, 4, 14])
 is_boss = true
 formation_offset = Vector2(116, 0)

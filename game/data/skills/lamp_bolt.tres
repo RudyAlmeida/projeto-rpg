@@ -7,5 +7,5 @@ script = ExtResource("1_egoci")
 id = &"lamp_bolt"
 display_name = "Faísca Errante"
 kind = 1
-power = 16
+power = 22
 element = 3
