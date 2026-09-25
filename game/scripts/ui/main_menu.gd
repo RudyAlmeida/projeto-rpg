@@ -93,7 +93,7 @@ func _show_party() -> void:
 			UIKit.sprite_frame(_content, Vector2(4, y + 4), m.data, 0)
 		var active := "" if i < Battle.ACTIVE_MAX else "  (reserva)"
 		UIKit.label(_content, Vector2(72, y + 4), "%s   Nv. %d%s" % [m.data.display_name, m.level, active], UIKit.GOLD)
-		UIKit.label(_content, Vector2(72, y + 22), "HP %d/%d    MP %d/%d" % [m.hp, m.max_hp(), m.mp, m.max_mp()],
+		UIKit.number_label(_content, Vector2(72, y + 22), "HP %d/%d  MP %d/%d" % [m.hp, m.max_hp(), m.mp, m.max_mp()],
 			UIKit.TEXT if m.is_alive() else UIKit.BAD)
 		UIKit.label(_content, Vector2(72, y + 40), "Próx. nível: %d XP    PH: %d    Éter: %d%%" % [
 			PartyMember.xp_to_next(m.level) - m.xp, m.skill_points, m.aether], UIKit.DIM)
@@ -296,7 +296,7 @@ func _show_status() -> void:
 		UIKit.sprite_frame(_content, Vector2(8, 8), m.data, m.data.idle_frame)
 	UIKit.label(_content, Vector2(80, 8), "%s   Nv. %d" % [m.data.display_name, m.level], UIKit.GOLD)
 	UIKit.label(_content, Vector2(80, 26), "XP para o próximo nível: %d" % (PartyMember.xp_to_next(m.level) - m.xp), UIKit.DIM)
-	UIKit.label(_content, Vector2(80, 44), "HP %d/%d   MP %d/%d   Éter %d%%" % [m.hp, m.max_hp(), m.mp, m.max_mp(), m.aether])
+	UIKit.number_label(_content, Vector2(80, 44), "HP %d/%d  MP %d/%d  Éter %d%%" % [m.hp, m.max_hp(), m.mp, m.max_mp(), m.aether])
 	var stats := _detail_label(Rect2(8, 80, 200, 256))
 	stats.text = _stats_text(m, null)
 	var right := _detail_label(Rect2(216, 80, 244, 256))
@@ -406,9 +406,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_cursor_moved()
 		return
 	if UIKit.is_back(event) or (event.is_action_pressed(&"menu") and _screen == Screen.ROOT):
+		AudioManager.play_sfx(&"ui_cancel")
 		get_viewport().set_input_as_handled()
 		_back()
 	elif event.is_action_pressed(&"confirm"):
+		AudioManager.play_sfx(&"ui_confirm")
 		get_viewport().set_input_as_handled()
 		_confirm()
 

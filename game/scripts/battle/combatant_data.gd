@@ -18,9 +18,14 @@ const STATS: Array[StringName] = [&"max_hp", &"max_mp", &"strength", &"magic", &
 @export var frame_size := Vector2i(64, 64)
 ## Column of `battle_sheet` used while standing in battle (heroes: 3 = battle stance).
 @export var idle_frame := 3
-## Optional extra columns (-1 = reuse idle): enemies have attack / hurt frames.
+## Optional extra frames (-1 = fall back): enemies have attack / hurt frames; heroes with a
+## battle sheet also have technique, knock-out and victory poses. Frame indices run left to
+## right and wrap into the next row (columns = sheet width / frame width).
 @export var attack_frame := -1
 @export var hurt_frame := -1
+@export var cast_frame := -1
+@export var ko_frame := -1
+@export var victory_frame := -1
 ## Battle sprites must face the other side: heroes right, enemies left.
 @export var flip_h := false
 ## Portrait for menus (optional).

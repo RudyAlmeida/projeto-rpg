@@ -10,6 +10,8 @@ extends Area2D
 @export var locked_lines: Array[DialogueLine] = []
 ## Where the player is pushed back to (local offset) after a locked message.
 @export var push_back := Vector2(0, 12)
+## Played when the player goes through (building doors); empty for open-air exits.
+@export var sound: StringName = &"door"
 
 
 func _ready() -> void:
@@ -27,4 +29,6 @@ func _on_body_entered(body: Node2D) -> void:
 		player.position += push_back
 		player.locked = false
 		return
+	if sound != &"":
+		AudioManager.play_sfx(sound)
 	SceneManager.change_scene(target_scene, target_spawn)

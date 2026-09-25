@@ -75,17 +75,20 @@ func interact(_player: Node2D) -> void:
 				await DialogueManager.play([DialogueLine.make("", "Vazio.")] as Array[DialogueLine])
 				return
 			GameState.set_flag(flag)
+			AudioManager.play_sfx(&"chest")
 			await DialogueManager.play([DialogueLine.make("", chest_text())] as Array[DialogueLine])
 		Kind.SAVE_POINT:
 			if not lines.is_empty():
 				await DialogueManager.play(lines)
 			for member in GameState.party:
 				member.restore()
+			AudioManager.play_sfx(&"save")
 			await MainMenu.open_save(get_tree()).closed
 		Kind.LEVER:
 			if not lines.is_empty():
 				await DialogueManager.play(lines)
 			if flag != &"" and not is_used():
+				AudioManager.play_sfx(&"lever")
 				GameState.set_flag(flag)
 	used.emit()
 	if cutscene and (cutscene.once_flag == &"" or not GameState.get_flag(cutscene.once_flag)):

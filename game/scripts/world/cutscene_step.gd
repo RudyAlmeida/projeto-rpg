@@ -5,7 +5,7 @@ extends Resource
 
 enum Type { SAY, MOVE, FACE, WAIT, FADE_OUT, FADE_IN, SET_FLAG, START_QUEST, GIVE_ITEM, PLAY_MUSIC,
 	JOIN_PARTY, LEAVE_PARTY, BATTLE, CHANGE_SCENE, SHAKE, FLASH, SHOW, HIDE, TELEPORT, END_CHAPTER,
-	RESTORE_PARTY, GIVE_MONEY, REMOVE_ITEM, STOP_MUSIC, COMPLETE_OBJECTIVE, FINISH_QUEST }
+	RESTORE_PARTY, GIVE_MONEY, REMOVE_ITEM, STOP_MUSIC, COMPLETE_OBJECTIVE, FINISH_QUEST, SFX }
 
 @export var type := Type.SAY
 @export var actor: NodePath
@@ -17,6 +17,7 @@ enum Type { SAY, MOVE, FACE, WAIT, FADE_OUT, FADE_IN, SET_FLAG, START_QUEST, GIV
 ## WAIT / SHAKE / FLASH duration.
 @export var seconds := 0.5
 ## SET_FLAG / START_QUEST / GIVE_ITEM / REMOVE_ITEM / JOIN_PARTY / LEAVE_PARTY: the id.
+## SFX: the sound id (assets/audio/sfx/<id>.ogg).
 ## COMPLETE_OBJECTIVE: "quest_id:objective_id".
 @export var id: StringName
 ## GIVE_ITEM / REMOVE_ITEM / GIVE_MONEY: amount. JOIN_PARTY: level (0 = party average).

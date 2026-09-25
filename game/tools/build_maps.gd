@@ -179,6 +179,8 @@ func _warp(node_name: String, cell: Vector2, target: String, spawn: String, cell
 	w.position = c(cell.x + (cells_w - 1) / 2.0, cell.y)
 	w.target_scene = OUT + target + ".tscn"
 	w.target_spawn = spawn
+	if not "Door" in node_name:
+		w.sound = &""
 	for key: String in props:
 		w.set(key, props[key])
 	_own(w)
@@ -216,6 +218,24 @@ func _object(node_name: String, cell: Vector2, kind: MapObject.Kind, tileset: St
 		o.set(key, props[key])
 	_own(o)
 	return o
+
+
+## Story-gated decoration (skipped while its art does not exist). The sprite's bottom
+## sits on `cell` so y-sorting with the player works.
+func _gated_sprite(node_name: String, path: String, cell: Vector2, show_if: StringName, hide_if: StringName,
+		bob: float, z: int) -> void:
+	if not ResourceLoader.exists(path):
+		return
+	var g := GatedSprite.new()
+	g.name = node_name
+	g.texture = load(path)
+	g.position = c(cell.x, cell.y) + Vector2(0, 8)
+	g.offset = Vector2(0, -g.texture.get_height() / 2.0)
+	g.show_if_flag = show_if
+	g.hide_if_flag = hide_if
+	g.bob = bob
+	g.z_index = z
+	_own(g)
 
 
 func _enemy(node_name: String, cell: Vector2, ids: Array, props := {}) -> void:
@@ -413,6 +433,9 @@ func _vila() -> void:
 		"show_if_flag": &"empire_arrived", "hide_if_flag": &"voss_fought"})
 	_npc("GerdSquare", Vector2(-4, -4), GERD_SHEET, 0, F.LEFT, {"display_name": "Mestre Gerd",
 		"show_if_flag": &"empire_arrived", "hide_if_flag": &"voss_fought"})
+	# The imperial airship hovers over the square; the workshop lies in ruins after the escape.
+	_gated_sprite("Airship", "res://assets/sprites/objects/obj_airship.png", Vector2(28, 7), &"empire_arrived", &"prologue_done", 2.0, 30)
+	_gated_sprite("WorkshopRuins", "res://assets/sprites/objects/obj_workshop_ruins.png", Vector2(40, 13.5), &"escaped", &"", 0.0, 0)
 	_trigger("VossScene", Vector2(34, 14), Vector2(1, 13), "p8_voss", empire)
 	_trigger("Escape", Vector2(45, 12), Vector2(1, 1), "p9_escape", {"autostart": true, "show_if_flag": &"escaped"})
 	_finish("vila_caldeira")

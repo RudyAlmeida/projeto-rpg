@@ -51,6 +51,7 @@ func move(step: int) -> bool:
 	if entries.is_empty():
 		return false
 	index = wrapi(index + step, 0, entries.size())
+	AudioManager.play_sfx(&"ui_move", 1.0, 0.6)
 	_redraw()
 	return true
 
@@ -87,13 +88,13 @@ func _redraw() -> void:
 		var note := str(e.get("note", ""))
 		var note_w := 0.0
 		if note != "":
-			var n := UIKit.label(_content, Vector2(0, y), note, UIKit.DIM if not e.get("enabled", true) else UIKit.GOLD)
+			var n := UIKit.number_label(_content, Vector2(0, y), note, UIKit.DIM if not e.get("enabled", true) else UIKit.GOLD)
 			n.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 			n.size = Vector2(size.x - 12, 18)
 			note_w = n.get_minimum_size().x + 8
 		UIKit.label(_content, Vector2(x, y), str(e.get("text", "")), color, size.x - x - 10 - note_w)
 		if i == index:
-			UIKit.label(_content, Vector2(6, y), "▶", UIKit.GOLD)
+			UIKit.cursor(_content, Vector2(6, y))
 	if first > 0:
 		UIKit.label(_content, Vector2(size.x - 16, top - 12), "▲", UIKit.DIM)
 	if first + rows_visible < entries.size():

@@ -20,6 +20,7 @@ var _menu_panel: Panel
 var _menu_title: Label
 var _menu_rows: Array[Control] = []
 var _status_rows: Array[Label] = []
+var _status_numbers: Array[Label] = []
 var _aether_bars: Array[ColorRect] = []
 var _aether_back: Array[ColorRect] = []
 var _message: Label
@@ -49,6 +50,8 @@ func setup_party(slots: int) -> void:
 		var row := _label(Vector2(8, 2 + i * 28), Vector2(382, 18), TEXT)
 		panel.add_child(row)
 		_status_rows.append(row)
+		var numbers := UIKit.number_label(panel, Vector2(92, 2 + i * 28))
+		_status_numbers.append(numbers)
 		var back := ColorRect.new()
 		back.color = DARK.lightened(0.15)
 		back.position = Vector2(26, 20 + i * 28)
@@ -66,17 +69,21 @@ func setup_party(slots: int) -> void:
 func update_party(party: Array[BattleUnit], active: BattleUnit) -> void:
 	for i in _status_rows.size():
 		var row := _status_rows[i]
+		var numbers := _status_numbers[i]
 		if i >= party.size():
 			row.text = ""
+			numbers.text = ""
 			_aether_bars[i].size.x = 0
 			continue
 		var u := party[i]
 		var tags := PackedStringArray()
 		for id: int in u.statuses:
 			tags.append(StatusEffects.tag(id))
-		row.text = "%s%-6s HP %3d/%-3d MP %2d  %s" % ["▶" if u == active else "  ", u.display_name(), u.hp, u.max_hp(), u.mp,
-			" ".join(tags)]
-		row.add_theme_color_override("font_color", DIM if not u.is_alive() else (HP_LOW if u.hp * 4 < u.max_hp() else TEXT))
+		row.text = "%s%s" % ["▶" if u == active else "  ", u.display_name()]
+		numbers.text = "HP%4d/%-4dMP%3d  %s" % [u.hp, u.max_hp(), u.mp, " ".join(tags)]
+		var color := DIM if not u.is_alive() else (HP_LOW if u.hp * 4 < u.max_hp() else TEXT)
+		row.add_theme_color_override("font_color", color)
+		numbers.add_theme_color_override("font_color", color)
 		_aether_bars[i].size.x = 100.0 * u.aether / BattleUnit.AETHER_MAX
 		_aether_bars[i].color = GOLD if u.aether_full() else AETHER
 
@@ -145,8 +152,10 @@ func show_message(text: String) -> void:
 func popup_number(world_pos: Vector2, text: String, color: Color, parent: Node) -> void:
 	var label := Label.new()
 	label.text = text
-	label.add_theme_font_override("font", FONT)
-	label.add_theme_font_size_override("font_size", 16)
+	# Pure numbers use the crisp number font; words ("Perfeito!", "Errou") keep the UI font.
+	var numeric := text.strip_edges().trim_suffix("!").replace(" +", "").is_valid_int()
+	label.add_theme_font_override("font", UIKit.NUMBER_FONT if numeric else FONT)
+	label.add_theme_font_size_override("font_size", 8 if numeric else 16)
 	label.add_theme_color_override("font_color", color)
 	label.add_theme_color_override("font_outline_color", DARK)
 	label.add_theme_constant_override("outline_size", 4)

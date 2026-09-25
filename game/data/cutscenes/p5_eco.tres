@@ -47,163 +47,173 @@ speed = 30.0
 
 [sub_resource type="Resource" id="Resource_y7c28"]
 script = ExtResource("2_l5jcm")
+type = 26
+id = &"magic"
+
+[sub_resource type="Resource" id="Resource_2orow"]
+script = ExtResource("2_l5jcm")
 type = 15
 seconds = 0.8
 color = Color(0.31, 0.88, 0.82, 1)
 
-[sub_resource type="Resource" id="Resource_2orow"]
+[sub_resource type="Resource" id="Resource_dqy21"]
 script = ExtResource("4_qu4mf")
 speaker = "???"
 text = "...Kael."
 
-[sub_resource type="Resource" id="Resource_dqy21"]
+[sub_resource type="Resource" id="Resource_wyflc"]
 script = ExtResource("4_qu4mf")
 speaker = "Kael"
 portrait = ExtResource("6_g8ho6")
 text = "Ele... ele sabe meu nome!"
 
-[sub_resource type="Resource" id="Resource_wyflc"]
+[sub_resource type="Resource" id="Resource_7u7i6"]
 script = ExtResource("4_qu4mf")
 speaker = "Mestre Gerd"
 portrait = ExtResource("7_wi1ph")
 text = "(baixinho, para si) ...Então ainda funciona."
 
-[sub_resource type="Resource" id="Resource_7u7i6"]
+[sub_resource type="Resource" id="Resource_pxb00"]
 script = ExtResource("4_qu4mf")
 speaker = "Kael"
 portrait = ExtResource("6_g8ho6")
 text = "O senhor disse alguma coisa?"
 
-[sub_resource type="Resource" id="Resource_pxb00"]
+[sub_resource type="Resource" id="Resource_k54ic"]
 script = ExtResource("4_qu4mf")
 speaker = "Mestre Gerd"
 portrait = ExtResource("7_wi1ph")
 text = "Disse que isso aí deve valer uma fortuna. Vamos embora."
 
-[sub_resource type="Resource" id="Resource_k54ic"]
+[sub_resource type="Resource" id="Resource_tec4p"]
 script = ExtResource("4_qu4mf")
 speaker = "???"
 text = "Designação: E-C-O. Diretiva: ...dado corrompido. Kael: presente. Diretiva parcialmente cumprida."
 
-[sub_resource type="Resource" id="Resource_tec4p"]
+[sub_resource type="Resource" id="Resource_stw54"]
 script = ExtResource("4_qu4mf")
 speaker = "Kael"
 portrait = ExtResource("6_g8ho6")
 text = "Eco. Tá bom, Eco. Você... vem com a gente?"
 
-[sub_resource type="Resource" id="Resource_stw54"]
+[sub_resource type="Resource" id="Resource_bph01"]
 script = ExtResource("4_qu4mf")
 speaker = "Eco"
 portrait = ExtResource("8_ns1e7")
 text = "Afirmativo. Pergunta: o que é \"a gente\"?"
 
-[sub_resource type="Resource" id="Resource_bph01"]
+[sub_resource type="Resource" id="Resource_7vjri"]
 script = ExtResource("4_qu4mf")
 text = "Eco entrou no grupo!"
 
-[sub_resource type="Resource" id="Resource_7vjri"]
-script = ExtResource("2_l5jcm")
-lines = Array[ExtResource("4_qu4mf")]([SubResource("Resource_2orow"), SubResource("Resource_dqy21"), SubResource("Resource_wyflc"), SubResource("Resource_7u7i6"), SubResource("Resource_pxb00"), SubResource("Resource_k54ic"), SubResource("Resource_tec4p"), SubResource("Resource_stw54"), SubResource("Resource_bph01")])
-
 [sub_resource type="Resource" id="Resource_1tqh5"]
+script = ExtResource("2_l5jcm")
+lines = Array[ExtResource("4_qu4mf")]([SubResource("Resource_dqy21"), SubResource("Resource_wyflc"), SubResource("Resource_7u7i6"), SubResource("Resource_pxb00"), SubResource("Resource_k54ic"), SubResource("Resource_tec4p"), SubResource("Resource_stw54"), SubResource("Resource_bph01"), SubResource("Resource_7vjri")])
+
+[sub_resource type="Resource" id="Resource_jouhi"]
 script = ExtResource("2_l5jcm")
 type = 10
 id = &"eco"
 amount = 0
 
-[sub_resource type="Resource" id="Resource_jouhi"]
+[sub_resource type="Resource" id="Resource_4dsog"]
 script = ExtResource("2_l5jcm")
 type = 6
 id = &"eco_awake"
 
-[sub_resource type="Resource" id="Resource_4dsog"]
+[sub_resource type="Resource" id="Resource_bxb50"]
+script = ExtResource("2_l5jcm")
+type = 26
+id = &"rumble"
+
+[sub_resource type="Resource" id="Resource_g431e"]
 script = ExtResource("2_l5jcm")
 type = 14
 seconds = 1.2
 strength = 5.0
 
-[sub_resource type="Resource" id="Resource_bxb50"]
+[sub_resource type="Resource" id="Resource_0mdku"]
 script = ExtResource("4_qu4mf")
 text = "O pulso de Éter do despertar reativa algo enorme na sucata acima da câmara..."
 
-[sub_resource type="Resource" id="Resource_g431e"]
+[sub_resource type="Resource" id="Resource_yxbx5"]
 script = ExtResource("4_qu4mf")
 speaker = "Eco"
 portrait = ExtResource("8_ns1e7")
 text = "Alerta. Máquina hostil. Nível de irritação: elevado."
 
-[sub_resource type="Resource" id="Resource_0mdku"]
+[sub_resource type="Resource" id="Resource_u8v12"]
 script = ExtResource("4_qu4mf")
 speaker = "Kael"
 portrait = ExtResource("6_g8ho6")
 text = "Ela tá com dor! Os braços tão travados... se eu soltar as garras, ela para!"
 
-[sub_resource type="Resource" id="Resource_yxbx5"]
+[sub_resource type="Resource" id="Resource_njn2g"]
 script = ExtResource("4_qu4mf")
 speaker = "Dica"
 text = "As garras protegem o núcleo: ele só recebe dano cheio depois que uma garra cai."
 
-[sub_resource type="Resource" id="Resource_u8v12"]
+[sub_resource type="Resource" id="Resource_u7xy4"]
 script = ExtResource("4_qu4mf")
 speaker = "Dica"
 text = "Ressonância (Kael) desmonta inimigos mecânicos. E se a fornalha se abrir, o Proteger de Eco impede que alguém seja puxado."
 
-[sub_resource type="Resource" id="Resource_njn2g"]
+[sub_resource type="Resource" id="Resource_7j8i2"]
 script = ExtResource("2_l5jcm")
-lines = Array[ExtResource("4_qu4mf")]([SubResource("Resource_bxb50"), SubResource("Resource_g431e"), SubResource("Resource_0mdku"), SubResource("Resource_yxbx5"), SubResource("Resource_u8v12")])
+lines = Array[ExtResource("4_qu4mf")]([SubResource("Resource_0mdku"), SubResource("Resource_yxbx5"), SubResource("Resource_u8v12"), SubResource("Resource_njn2g"), SubResource("Resource_u7xy4")])
 
-[sub_resource type="Resource" id="Resource_u7xy4"]
+[sub_resource type="Resource" id="Resource_jnqsy"]
 script = ExtResource("2_l5jcm")
 type = 12
 music = ExtResource("12_0465w")
 enemies = Array[ExtResource("3_8aafx")]([ExtResource("9_ocvjc"), ExtResource("10_1x1re"), ExtResource("11_qljoo")])
 
-[sub_resource type="Resource" id="Resource_7j8i2"]
+[sub_resource type="Resource" id="Resource_8xlrt"]
 script = ExtResource("4_qu4mf")
 speaker = "Kael"
 portrait = ExtResource("6_g8ho6")
 text = "(Ela tá... quieta agora. Obrigada, ela disse. Eu acho.)"
 
-[sub_resource type="Resource" id="Resource_jnqsy"]
+[sub_resource type="Resource" id="Resource_rj0xh"]
 script = ExtResource("4_qu4mf")
 speaker = "Eco"
 portrait = ExtResource("8_ns1e7")
 text = "Observação: Kael conversa com máquinas desligadas. Registrando como comportamento normal."
 
-[sub_resource type="Resource" id="Resource_8xlrt"]
+[sub_resource type="Resource" id="Resource_nvmix"]
 script = ExtResource("4_qu4mf")
 speaker = "Mestre Gerd"
 portrait = ExtResource("7_wi1ph")
 text = "Pega a válvula e vamos pra casa. Esse lugar me dá arrepio."
 
-[sub_resource type="Resource" id="Resource_rj0xh"]
+[sub_resource type="Resource" id="Resource_s0xlr"]
 script = ExtResource("4_qu4mf")
 text = "Kael encontrou: Válvula de Bronze e Lâmina-engrenagem!"
 
-[sub_resource type="Resource" id="Resource_nvmix"]
+[sub_resource type="Resource" id="Resource_vekge"]
 script = ExtResource("2_l5jcm")
-lines = Array[ExtResource("4_qu4mf")]([SubResource("Resource_7j8i2"), SubResource("Resource_jnqsy"), SubResource("Resource_8xlrt"), SubResource("Resource_rj0xh")])
+lines = Array[ExtResource("4_qu4mf")]([SubResource("Resource_8xlrt"), SubResource("Resource_rj0xh"), SubResource("Resource_nvmix"), SubResource("Resource_s0xlr")])
 
-[sub_resource type="Resource" id="Resource_s0xlr"]
+[sub_resource type="Resource" id="Resource_u6lt7"]
 script = ExtResource("2_l5jcm")
 type = 8
 id = &"bronze_valve"
 
-[sub_resource type="Resource" id="Resource_vekge"]
+[sub_resource type="Resource" id="Resource_dnna5"]
 script = ExtResource("2_l5jcm")
 type = 8
 id = &"gear_blade"
 
-[sub_resource type="Resource" id="Resource_u6lt7"]
+[sub_resource type="Resource" id="Resource_xixf8"]
 script = ExtResource("2_l5jcm")
 type = 24
 id = &"q_prologue:fetch_valve"
 
-[sub_resource type="Resource" id="Resource_dnna5"]
+[sub_resource type="Resource" id="Resource_s3vwq"]
 script = ExtResource("2_l5jcm")
 type = 4
 
-[sub_resource type="Resource" id="Resource_xixf8"]
+[sub_resource type="Resource" id="Resource_wptcx"]
 script = ExtResource("2_l5jcm")
 type = 13
 id = &"dinner"
@@ -213,4 +223,4 @@ text = "res://scenes/maps/prologue/oficina.tscn"
 script = ExtResource("1_r61pb")
 id = &"p5_eco"
 once_flag = &"boss_beaten"
-steps = Array[ExtResource("2_l5jcm")]([SubResource("Resource_4vgr8"), SubResource("Resource_yg4so"), SubResource("Resource_xqic7"), SubResource("Resource_dsn8d"), SubResource("Resource_y7c28"), SubResource("Resource_7vjri"), SubResource("Resource_1tqh5"), SubResource("Resource_jouhi"), SubResource("Resource_4dsog"), SubResource("Resource_njn2g"), SubResource("Resource_u7xy4"), SubResource("Resource_nvmix"), SubResource("Resource_s0xlr"), SubResource("Resource_vekge"), SubResource("Resource_u6lt7"), SubResource("Resource_dnna5"), SubResource("Resource_xixf8")])
+steps = Array[ExtResource("2_l5jcm")]([SubResource("Resource_4vgr8"), SubResource("Resource_yg4so"), SubResource("Resource_xqic7"), SubResource("Resource_dsn8d"), SubResource("Resource_y7c28"), SubResource("Resource_2orow"), SubResource("Resource_1tqh5"), SubResource("Resource_jouhi"), SubResource("Resource_4dsog"), SubResource("Resource_bxb50"), SubResource("Resource_g431e"), SubResource("Resource_7j8i2"), SubResource("Resource_jnqsy"), SubResource("Resource_vekge"), SubResource("Resource_u6lt7"), SubResource("Resource_dnna5"), SubResource("Resource_xixf8"), SubResource("Resource_s3vwq"), SubResource("Resource_wptcx")])

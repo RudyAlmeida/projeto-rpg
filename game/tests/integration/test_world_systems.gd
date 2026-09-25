@@ -237,7 +237,9 @@ func test_options_close_with_esc_cancel_and_back_row() -> void:
 		add_child_autofree(panel)
 		watch_signals(panel)
 		if how == &"row":
-			for i in 5:
+			for i in 10:
+				if panel._list.current()["id"] == "back":
+					break
 				panel._unhandled_input(_action(&"move_down"))
 			assert_eq(panel._list.current()["id"], "back")
 			panel._unhandled_input(_action(&"confirm"))

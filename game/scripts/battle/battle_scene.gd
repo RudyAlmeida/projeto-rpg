@@ -404,6 +404,8 @@ func _timed(hero_involved: bool, at: BattlerView, impact_time: float, style: Com
 func _show_results(results: Array[Battle.ActionResult]) -> void:
 	if results.is_empty():
 		return
+	_play_result_sounds(results)
+	_play_result_effects(results)
 	var first := results[0]
 	# Only a hero's press can produce a timing result: the acting hero or the hero being hit.
 	if first.timing != DamageFormula.Timing.MISS:
@@ -456,6 +458,67 @@ func _show_results(results: Array[Battle.ActionResult]) -> void:
 	_refresh()
 
 
+## Visual effect on each target (BattleVFX sheet): slashes and impacts for attacks,
+## elements for magic, sparkles for healing.
+func _play_result_effects(results: Array[Battle.ActionResult]) -> void:
+	for r in results:
+		if r.skill == null and r.item == null:
+			continue
+		var effect := &""
+		if r.item or (r.skill and (r.skill.kind == SkillData.Kind.HEAL or r.revived)):
+			effect = &"heal"
+		elif r.skill.kind == SkillData.Kind.MAGIC:
+			effect = {SkillData.Element.FIRE: &"fire", SkillData.Element.ICE: &"ice",
+				SkillData.Element.THUNDER: &"thunder"}.get(r.skill.element, &"impact")
+		elif r.skill.kind == SkillData.Kind.ATTACK and r.hit:
+			effect = &"slash" if r.actor.is_player and r.actor.data.id == &"kael" else &"impact"
+			if r.skill.weight >= TurnQueue.WEIGHT_HEAVY and r.skill.is_multi_target():
+				effect = &"steam"
+		if effect == &"":
+			continue
+		var view := view_of(r.target)
+		BattleVFX.spawn(self, effect, view.position + Vector2(0, -view.frame_size().y / 2.0), not r.actor.is_player)
+		if r.knocked_out and not r.target.is_player and r.target.data.is_boss:
+			BattleVFX.spawn(self, &"explosion", view.position + Vector2(0, -view.frame_size().y / 2.0))
+
+
+## Sound effects for an action (Kenney CC0 sounds, AudioManager.play_sfx).
+func _play_result_sounds(results: Array[Battle.ActionResult]) -> void:
+	var first := results[0]
+	var pitch := randf_range(0.92, 1.08)
+	if first.timing == DamageFormula.Timing.PERFECT:
+		AudioManager.play_sfx(&"perfect")
+	var skill := first.skill
+	if first.item:
+		AudioManager.play_sfx(&"item")
+	elif skill == null:
+		pass
+	elif skill.kind == SkillData.Kind.DEFEND:
+		AudioManager.play_sfx(&"guard")
+	elif skill.kind == SkillData.Kind.HEAL or first.revived:
+		AudioManager.play_sfx(&"heal")
+	elif skill.kind == SkillData.Kind.SUPPORT:
+		AudioManager.play_sfx(&"magic", pitch)
+	elif not first.hit:
+		AudioManager.play_sfx(&"miss", pitch)
+	elif skill.kind == SkillData.Kind.MAGIC:
+		var by_element := {SkillData.Element.FIRE: &"fire", SkillData.Element.ICE: &"ice", SkillData.Element.THUNDER: &"thunder"}
+		AudioManager.play_sfx(by_element.get(skill.element, &"magic"), pitch)
+	else:
+		var hit_sound := &"hit_heavy" if first.crit or skill.weight >= TurnQueue.WEIGHT_HEAVY else &"hit"
+		if first.target.data.mechanical:
+			hit_sound = &"hit_metal"
+		elif first.actor.is_player and first.actor.data.id == &"kael":
+			hit_sound = &"slash"
+		AudioManager.play_sfx(hit_sound, pitch)
+		if not first.actor.is_player and first.timing != DamageFormula.Timing.MISS:
+			AudioManager.play_sfx(&"guard", pitch, 0.7)  # the hero blocked in time
+	if results.any(func(r: Battle.ActionResult) -> bool: return r.knocked_out):
+		AudioManager.play_sfx(&"knockout")
+	if results.any(func(r: Battle.ActionResult) -> bool: return r.stolen_item != &""):
+		AudioManager.play_sfx(&"steal")
+
+
 func _swap_views(out_unit: BattleUnit, in_unit: BattleUnit) -> void:
 	var out_view := view_of(out_unit)
 	var in_view := view_of(in_unit)
@@ -473,6 +536,8 @@ func _finish(outcome: Battle.Outcome) -> void:
 		Battle.Outcome.VICTORY:
 			if play_music:
 				AudioManager.play_music(VICTORY_MUSIC, false)
+			for unit in battle.party:
+				view_of(unit).victory()
 			var text := "Vitória!  +%d XP   +%d moedas" % [battle.total_xp(), battle.total_money()]
 			drops = battle.roll_drops()
 			var promoted: PackedStringArray = []
@@ -483,6 +548,7 @@ func _finish(outcome: Battle.Outcome) -> void:
 			var line2 := PackedStringArray()
 			if not promoted.is_empty():
 				line2.append("Subiu de nível: " + ", ".join(promoted))
+				AudioManager.play_sfx(&"level_up")
 			for id in drops:
 				inventory[id] = int(inventory.get(id, 0)) + 1
 				var item := DataRegistry.item(id)
@@ -582,9 +648,11 @@ func _list_input(event: InputEvent) -> void:
 		_ui.show_list(_menu_title(), _list_entries, _list_index)
 		get_viewport().set_input_as_handled()
 	elif UIKit.is_back(event) and _mode != Mode.ROOT:
+		AudioManager.play_sfx(&"ui_cancel")
 		get_viewport().set_input_as_handled()
 		_open_root()
 	elif event.is_action_pressed(&"confirm"):
+		AudioManager.play_sfx(&"ui_confirm")
 		get_viewport().set_input_as_handled()
 		var entry: Dictionary = _list_entries[_list_index]
 		if not entry.get("enabled", true):
@@ -675,11 +743,13 @@ func _target_input(event: InputEvent) -> void:
 		_place_cursor()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed(&"confirm"):
+		AudioManager.play_sfx(&"ui_confirm")
 		get_viewport().set_input_as_handled()
 		_pending["targets"] = _targets.duplicate() if _target_all else [_targets[_target_index]]
 		_ui.show_message("")
 		submit_action(_pending)
 	elif UIKit.is_back(event):
+		AudioManager.play_sfx(&"ui_cancel")
 		get_viewport().set_input_as_handled()
 		_cursor.hide()
 		_ui.show_message("")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="1_data"]
 [ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_lb476"]
-[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_ref.png" id="2_sheet"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/kael/chr_kael_battle.png" id="2_241r5"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="3_3jcw8"]
 [ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
 [ext_resource type="Resource" path="res://data/skills/defend.tres" id="4_defend"]
@@ -17,7 +17,14 @@
 script = ExtResource("1_data")
 id = &"kael"
 display_name = "Kael"
-battle_sheet = ExtResource("2_sheet")
+battle_sheet = ExtResource("2_241r5")
+frame_size = Vector2i(94, 82)
+idle_frame = 0
+attack_frame = 1
+hurt_frame = 3
+cast_frame = 2
+ko_frame = 4
+victory_frame = 5
 portrait = ExtResource("3_3jcw8")
 max_hp = 120
 max_mp = 20

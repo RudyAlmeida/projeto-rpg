@@ -105,6 +105,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_update_info()
 		return
 	if UIKit.is_back(event):
+		AudioManager.play_sfx(&"ui_cancel")
 		get_viewport().set_input_as_handled()
 		if _mode == Mode.TOP:
 			closed.emit()
@@ -113,6 +114,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_list.hide()
 			_refresh()
 	elif event.is_action_pressed(&"confirm"):
+		AudioManager.play_sfx(&"ui_confirm")
 		get_viewport().set_input_as_handled()
 		_confirm()
 

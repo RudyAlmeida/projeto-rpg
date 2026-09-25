@@ -12,6 +12,7 @@ const TIMING_WINDOWS := {&"easy": 2.0, &"normal": 1.0, &"hard": 0.5, &"auto": 1.
 const LANGUAGES := [&"pt_BR", &"en"]
 
 var music_volume := 0.8
+var sfx_volume := 0.8
 var text_speed: StringName = &"normal"
 var timing_mode: StringName = &"normal"
 var fullscreen := false
@@ -38,6 +39,7 @@ func chars_per_second() -> float:
 
 func apply() -> void:
 	AudioManager.music_volume = music_volume
+	AudioManager.sfx_volume = sfx_volume
 	if DialogueManager.box():
 		DialogueManager.box().chars_per_second = chars_per_second()
 	if not Engine.is_embedded_in_editor() and DisplayServer.get_name() != "headless":
@@ -49,6 +51,7 @@ func apply() -> void:
 func save_settings() -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("audio", "music_volume", music_volume)
+	cfg.set_value("audio", "sfx_volume", sfx_volume)
 	cfg.set_value("game", "text_speed", String(text_speed))
 	cfg.set_value("game", "timing_mode", String(timing_mode))
 	cfg.set_value("game", "language", String(language))
@@ -61,6 +64,7 @@ func load_settings() -> void:
 	if cfg.load(PATH) != OK:
 		return
 	music_volume = float(cfg.get_value("audio", "music_volume", music_volume))
+	sfx_volume = float(cfg.get_value("audio", "sfx_volume", sfx_volume))
 	text_speed = StringName(cfg.get_value("game", "text_speed", String(text_speed)))
 	timing_mode = StringName(cfg.get_value("game", "timing_mode", String(timing_mode)))
 	language = StringName(cfg.get_value("game", "language", String(language)))

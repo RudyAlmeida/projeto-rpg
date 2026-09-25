@@ -30,11 +30,12 @@ func frame_size() -> Vector2:
 	return Vector2(unit.data.frame_size)
 
 
-func show_frame(column: int) -> void:
-	if column < 0:
-		column = unit.data.idle_frame
+func show_frame(index: int) -> void:
+	if index < 0:
+		index = unit.data.idle_frame
 	var size := frame_size()
-	_sprite.region_rect = Rect2(column * size.x, 0, size.x, size.y)
+	var columns := maxi(1, int(_sprite.texture.get_width() / size.x)) if _sprite.texture else 1
+	_sprite.region_rect = Rect2((index % columns) * size.x, (index / columns) * size.y, size.x, size.y)
 
 
 ## Point above the head, for the target cursor and damage numbers.
@@ -60,10 +61,22 @@ func return_home() -> void:
 
 
 func cast() -> void:
+	if unit.data.cast_frame >= 0:
+		show_frame(unit.data.cast_frame)
 	var tween := create_tween()
 	tween.tween_property(_sprite, "modulate", Color(1.6, 1.4, 0.8), 0.15)
 	tween.tween_property(_sprite, "modulate", Color.WHITE, 0.15)
 	await tween.finished
+	if unit.data.cast_frame >= 0:
+		await get_tree().create_timer(0.25).timeout
+		if unit.is_alive():
+			show_frame(unit.data.idle_frame)
+
+
+## Victory pose at the end of a won battle (heroes with a battle sheet).
+func victory() -> void:
+	if unit.is_alive() and unit.data.victory_frame >= 0:
+		show_frame(unit.data.victory_frame)
 
 
 func hurt() -> void:
@@ -82,12 +95,16 @@ func hurt() -> void:
 func revive() -> void:
 	_sprite.rotation = 0.0
 	_sprite.modulate = Color.WHITE
+	_sprite.modulate = Color.WHITE
 	show_frame(unit.data.idle_frame)
 
 
 func knock_out() -> void:
 	var tween := create_tween()
-	if unit.is_player:
+	if unit.data.ko_frame >= 0:
+		show_frame(unit.data.ko_frame)
+		tween.tween_property(_sprite, "modulate", Color(0.6, 0.6, 0.7), 0.3)
+	elif unit.is_player:
 		tween.tween_property(_sprite, "modulate", Color(0.5, 0.5, 0.6, 0.7), 0.3)
 		tween.parallel().tween_property(_sprite, "rotation", -PI / 2 if not unit.data.flip_h else PI / 2, 0.3)
 	else:

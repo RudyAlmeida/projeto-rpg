@@ -57,6 +57,8 @@ func _run_step(map: Node, step: CutsceneStep) -> void:
 			GameState.set_flag(step.id)
 		CutsceneStep.Type.START_QUEST:
 			GameState.start_quest(step.id)
+		CutsceneStep.Type.SFX:
+			AudioManager.play_sfx(step.id)
 		CutsceneStep.Type.FINISH_QUEST:
 			GameState.finish_quest(step.id)
 		CutsceneStep.Type.COMPLETE_OBJECTIVE:

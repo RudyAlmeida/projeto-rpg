@@ -26,6 +26,8 @@ func _refresh() -> void:
 	_list.set_entries([
 		{"text": "Volume da música", "note": "%d%%" % roundi(Settings.music_volume * 100), "id": "volume",
 			"help": "Volume das músicas."},
+		{"text": "Volume dos efeitos", "note": "%d%%" % roundi(Settings.sfx_volume * 100), "id": "sfx",
+			"help": "Volume dos efeitos sonoros."},
 		{"text": "Velocidade do texto", "note": TEXT_SPEED_NAMES[Settings.text_speed], "id": "text",
 			"help": "Velocidade das letras nos diálogos."},
 		{"text": "Timing em batalha", "note": TIMING_NAMES[Settings.timing_mode], "id": "timing",
@@ -55,6 +57,9 @@ func change(id: String, step: int) -> void:
 			return
 		"volume":
 			Settings.music_volume = clampf(snappedf(Settings.music_volume + 0.1 * step, 0.1), 0.0, 1.0)
+		"sfx":
+			Settings.sfx_volume = clampf(snappedf(Settings.sfx_volume + 0.1 * step, 0.1), 0.0, 1.0)
+			AudioManager.play_sfx(&"ui_move")
 		"text":
 			Settings.text_speed = _cycle(Settings.TEXT_SPEEDS.keys(), Settings.text_speed, step)
 		"timing":
@@ -77,12 +82,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _list.handle_navigation(event):
 		_update_help()
 	elif event.is_action_pressed(&"confirm") and _list.current()["id"] == "back":
+		AudioManager.play_sfx(&"ui_cancel")
 		close()
 	elif event.is_action_pressed(&"move_right") or event.is_action_pressed(&"confirm"):
 		change(_list.current()["id"], 1)
 	elif event.is_action_pressed(&"move_left"):
 		change(_list.current()["id"], -1)
 	elif UIKit.is_back(event):
+		AudioManager.play_sfx(&"ui_cancel")
 		close()
 	else:
 		return

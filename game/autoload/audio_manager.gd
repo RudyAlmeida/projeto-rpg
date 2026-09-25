@@ -1,10 +1,19 @@
 extends Node
-## Autoload "AudioManager": background music that survives scene changes.
-## Asking for the track that is already playing keeps it going (no restart between rooms).
-## Battles push their theme and pop back to the map music afterwards.
+## Autoload "AudioManager": background music that survives scene changes, and sound
+## effects. Asking for the track that is already playing keeps it going (no restart between
+## rooms). Battles push their theme and pop back to the map music afterwards.
+## Sound effects: play_sfx(&"hit") plays assets/audio/sfx/hit.ogg (Kenney CC0 packs).
+
+const SFX_DIR := "res://assets/audio/sfx/"
+const SFX_VOICES := 8
 
 var _music: AudioStreamPlayer
 var _stack: Array[AudioStream] = []
+var _sfx_players: Array[AudioStreamPlayer] = []
+var _sfx_cache := {}
+var _next_voice := 0
+## 0..1, set from the options menu.
+var sfx_volume := 1.0
 ## 0..1, set from the options menu.
 var music_volume := 1.0:
 	set(value):
@@ -19,6 +28,34 @@ func _ready() -> void:
 	_music.bus = &"Master"
 	add_child(_music)
 	music_volume = music_volume
+	for i in SFX_VOICES:
+		var p := AudioStreamPlayer.new()
+		p.bus = &"Master"
+		add_child(p)
+		_sfx_players.append(p)
+
+
+## Plays a sound effect by id (file name in assets/audio/sfx). Unknown ids are ignored.
+## `pitch` varies repeated sounds (hits) a little.
+func play_sfx(id: StringName, pitch := 1.0, volume := 1.0) -> void:
+	if sfx_volume <= 0.0:
+		return
+	var stream := sfx(id)
+	if stream == null:
+		return
+	var player := _sfx_players[_next_voice]
+	_next_voice = (_next_voice + 1) % _sfx_players.size()
+	player.stream = stream
+	player.pitch_scale = pitch
+	player.volume_db = linear_to_db(maxf(sfx_volume * volume, 0.0001))
+	player.play()
+
+
+func sfx(id: StringName) -> AudioStream:
+	if not _sfx_cache.has(id):
+		var path := SFX_DIR + String(id) + ".ogg"
+		_sfx_cache[id] = load(path) if ResourceLoader.exists(path) else null
+	return _sfx_cache[id]
 
 
 func play_music(stream: AudioStream, loop := true) -> void:

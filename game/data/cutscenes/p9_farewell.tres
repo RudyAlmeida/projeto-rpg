@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_h8vmf"]
 [ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_tgb4j"]
 [ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_chycg"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_farewell_a.mp3" id="5_7bx5b"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_farewell_b.mp3" id="5_7bx5b"]
 [ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="6_4hp2k"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="7_p7flu"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="8_vy07j"]
@@ -71,22 +71,27 @@ lines = Array[ExtResource("4_chycg")]([SubResource("Resource_o5irl")])
 
 [sub_resource type="Resource" id="Resource_sok1y"]
 script = ExtResource("2_h8vmf")
+type = 26
+id = &"steam"
+
+[sub_resource type="Resource" id="Resource_ntwfd"]
+script = ExtResource("2_h8vmf")
 type = 14
 seconds = 0.6
 strength = 2.0
 
-[sub_resource type="Resource" id="Resource_ntwfd"]
+[sub_resource type="Resource" id="Resource_r7oog"]
 script = ExtResource("2_h8vmf")
 type = 1
 actor = NodePath("Player")
 position = Vector2(232, 88)
 speed = 90.0
 
-[sub_resource type="Resource" id="Resource_r7oog"]
+[sub_resource type="Resource" id="Resource_qsjhl"]
 script = ExtResource("2_h8vmf")
 type = 4
 
-[sub_resource type="Resource" id="Resource_qsjhl"]
+[sub_resource type="Resource" id="Resource_lqw5x"]
 script = ExtResource("2_h8vmf")
 type = 13
 id = &"back_door"
@@ -96,4 +101,4 @@ text = "res://scenes/maps/prologue/vila_caldeira.tscn"
 script = ExtResource("1_moxby")
 id = &"p9_farewell"
 once_flag = &"escaped"
-steps = Array[ExtResource("2_h8vmf")]([SubResource("Resource_3wvav"), SubResource("Resource_nv4hs"), SubResource("Resource_gpc4w"), SubResource("Resource_qbsao"), SubResource("Resource_sok1y"), SubResource("Resource_ntwfd"), SubResource("Resource_r7oog"), SubResource("Resource_qsjhl")])
+steps = Array[ExtResource("2_h8vmf")]([SubResource("Resource_3wvav"), SubResource("Resource_nv4hs"), SubResource("Resource_gpc4w"), SubResource("Resource_qbsao"), SubResource("Resource_sok1y"), SubResource("Resource_ntwfd"), SubResource("Resource_r7oog"), SubResource("Resource_qsjhl"), SubResource("Resource_lqw5x")])

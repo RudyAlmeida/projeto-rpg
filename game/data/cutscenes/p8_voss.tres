@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="8_uvkre"]
 [ext_resource type="Resource" path="res://data/enemies/imperial_soldier.tres" id="9_2slkc"]
 [ext_resource type="Resource" path="res://data/enemies/voss.tres" id="10_fvcgs"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_empire_a.mp3" id="11_vyetf"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_empire_b.mp3" id="11_vyetf"]
 [ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="12_nw2h1"]
 
 [sub_resource type="Resource" id="Resource_28jba"]
@@ -95,57 +95,62 @@ lines = Array[ExtResource("4_ovvpm")]([SubResource("Resource_gc6v8")])
 
 [sub_resource type="Resource" id="Resource_6mr7n"]
 script = ExtResource("2_3hes4")
+type = 26
+id = &"explosion_small"
+
+[sub_resource type="Resource" id="Resource_7wo28"]
+script = ExtResource("2_3hes4")
 type = 15
 seconds = 0.6
 color = Color(1, 0.6, 0.25, 1)
 
-[sub_resource type="Resource" id="Resource_7wo28"]
+[sub_resource type="Resource" id="Resource_3tyy4"]
 script = ExtResource("2_3hes4")
 type = 14
 seconds = 1.0
 strength = 6.0
 
-[sub_resource type="Resource" id="Resource_3tyy4"]
+[sub_resource type="Resource" id="Resource_bybn0"]
 script = ExtResource("2_3hes4")
 type = 18
 actor = NodePath("GerdSquare")
 position = Vector2(472, 280)
 facing = 2
 
-[sub_resource type="Resource" id="Resource_bybn0"]
+[sub_resource type="Resource" id="Resource_30dgy"]
 script = ExtResource("4_ovvpm")
 text = "Um carrinho de oficina em chamas atravessa a praça e explode entre os soldados!"
 
-[sub_resource type="Resource" id="Resource_30dgy"]
+[sub_resource type="Resource" id="Resource_vbon4"]
 script = ExtResource("4_ovvpm")
 speaker = "Mestre Gerd"
 portrait = ExtResource("12_nw2h1")
 text = "Pela oficina! Porta dos fundos! AGORA!"
 
-[sub_resource type="Resource" id="Resource_vbon4"]
-script = ExtResource("2_3hes4")
-lines = Array[ExtResource("4_ovvpm")]([SubResource("Resource_bybn0"), SubResource("Resource_30dgy")])
-
 [sub_resource type="Resource" id="Resource_63ehj"]
+script = ExtResource("2_3hes4")
+lines = Array[ExtResource("4_ovvpm")]([SubResource("Resource_30dgy"), SubResource("Resource_vbon4")])
+
+[sub_resource type="Resource" id="Resource_wrcv3"]
 script = ExtResource("2_3hes4")
 type = 11
 id = &"gerd"
 
-[sub_resource type="Resource" id="Resource_wrcv3"]
+[sub_resource type="Resource" id="Resource_w7bnw"]
 script = ExtResource("2_3hes4")
 type = 20
 
-[sub_resource type="Resource" id="Resource_w7bnw"]
+[sub_resource type="Resource" id="Resource_5drsy"]
 script = ExtResource("4_ovvpm")
 speaker = "Dica"
 text = "Corra para a oficina Brunor, a leste da praça!"
 
-[sub_resource type="Resource" id="Resource_5drsy"]
+[sub_resource type="Resource" id="Resource_y6ti6"]
 script = ExtResource("2_3hes4")
-lines = Array[ExtResource("4_ovvpm")]([SubResource("Resource_w7bnw")])
+lines = Array[ExtResource("4_ovvpm")]([SubResource("Resource_5drsy")])
 
 [resource]
 script = ExtResource("1_c734k")
 id = &"p8_voss"
 once_flag = &"voss_fought"
-steps = Array[ExtResource("2_3hes4")]([SubResource("Resource_28jba"), SubResource("Resource_2ori2"), SubResource("Resource_h7eq5"), SubResource("Resource_lspgt"), SubResource("Resource_f8rsx"), SubResource("Resource_gu83n"), SubResource("Resource_20edt"), SubResource("Resource_6mr7n"), SubResource("Resource_7wo28"), SubResource("Resource_3tyy4"), SubResource("Resource_vbon4"), SubResource("Resource_63ehj"), SubResource("Resource_wrcv3"), SubResource("Resource_5drsy")])
+steps = Array[ExtResource("2_3hes4")]([SubResource("Resource_28jba"), SubResource("Resource_2ori2"), SubResource("Resource_h7eq5"), SubResource("Resource_lspgt"), SubResource("Resource_f8rsx"), SubResource("Resource_gu83n"), SubResource("Resource_20edt"), SubResource("Resource_6mr7n"), SubResource("Resource_7wo28"), SubResource("Resource_3tyy4"), SubResource("Resource_bybn0"), SubResource("Resource_63ehj"), SubResource("Resource_wrcv3"), SubResource("Resource_w7bnw"), SubResource("Resource_y6ti6")])

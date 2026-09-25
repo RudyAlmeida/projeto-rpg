@@ -53,10 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if active.handle_navigation(event):
 		get_viewport().set_input_as_handled()
 	elif UIKit.is_back(event) and _slots:
+		AudioManager.play_sfx(&"ui_cancel")
 		get_viewport().set_input_as_handled()
 		_slots.queue_free()
 		_slots = null
 	elif event.is_action_pressed(&"confirm"):
+		AudioManager.play_sfx(&"ui_confirm")
 		get_viewport().set_input_as_handled()
 		if _slots:
 			if _slots.is_enabled():
