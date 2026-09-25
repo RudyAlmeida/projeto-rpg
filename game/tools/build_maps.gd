@@ -90,6 +90,9 @@ func _house(x0: int, y0: int, w: int, roof_rows: int, wall_rows: int, roof: Stri
 	var wy := y0 + roof_rows
 	_fill(x0, wy, x0 + w - 1, wy + wall_rows - 1, wall)
 	for dx: int in windows:
+		# The double door (2× sprite) covers the cells beside it: no windows there.
+		if door_dx >= 0 and absi(dx - door_dx) <= 1:
+			continue
 		_cell_set(x0 + dx, wy, "W")
 	if door_dx < 0:
 		return Vector2i(-1, -1)
@@ -98,16 +101,19 @@ func _house(x0: int, y0: int, w: int, roof_rows: int, wall_rows: int, roof: Stri
 	return door
 
 
-## Room interior: walls all around (two rows at the top), floor inside, door gap at the
-## bottom. Returns the door cell.
+## Room interior: walls all around (two rows at the top and at the bottom), floor inside,
+## a double door in the bottom wall (2× sprite over both rows). `h` counts one bottom wall
+## row; the grid gets an extra one so the door fits. Returns the door (exit) cell.
 func _room(w: int, h: int, wall: String, floor_ch: String, door_x: int, windows: Array) -> Vector2i:
-	_new_grid(w, h, floor_ch)
+	_new_grid(w, h + 1, floor_ch)
 	_border(wall)
 	_fill(0, 1, w - 1, 1, wall)
+	_fill(0, h - 1, w - 1, h - 1, wall)
 	for x: int in windows:
 		_cell_set(x, 1, "W")
-	_cell_set(door_x, h - 1, "d")
-	return Vector2i(door_x, h - 1)
+	_cell_set(door_x, h - 1, "d")  # walkable, hidden under the big door
+	_cell_set(door_x, h, "D")
+	return Vector2i(door_x, h)
 
 
 func _layout() -> String:
@@ -290,7 +296,7 @@ const VOSS_SHEET := "res://assets/sprites/characters/voss/chr_voss_map.png"
 
 
 func _oficina() -> void:
-	_room(16, 11, "#", "_", 7, [2, 7, 12])
+	var door := _room(16, 11, "#", "_", 7, [2, 7, 12])
 	_cell_set(15, 5, "d")  # back door
 	_put("5,2:K 1,9:o 14,9:x 1,2:c 14,2:g 8,6:q 9,6:q")
 	_begin("Oficina", "vila", MUSIC_VILA)
@@ -333,7 +339,7 @@ func _oficina() -> void:
 	_spawn("back", Vector2(14, 5), F.LEFT)
 	_spawn("dinner", Vector2(6, 6), F.RIGHT)
 	_root.get_node("Map").layout = _layout()
-	_warp("Door", Vector2(7, 10), "vila_caldeira", "from_oficina")
+	_warp("Door", Vector2(door.x, door.y), "vila_caldeira", "from_oficina")
 	_warp("BackDoor", Vector2(15, 5), "vila_caldeira", "back_door")
 	_trigger("Morning", Vector2(4, 3), Vector2(1, 1), "p1_morning", {"autostart": true})
 	_trigger("Dinner", Vector2(6, 6), Vector2(1, 1), "p7_dinner", {"autostart": true, "show_if_flag": &"boss_beaten"})
@@ -342,7 +348,7 @@ func _oficina() -> void:
 
 
 func _loja() -> void:
-	_room(12, 9, "H", "_", 6, [2, 9])
+	var door := _room(12, 9, "H", "_", 6, [2, 9])
 	_put("4,4:q 5,4:q 7,4:q 8,4:q 1,2:o 10,2:o 1,7:g 10,7:c")
 	_begin("Loja", "vila", MUSIC_VILA)
 	_npc("Tobias", Vector2(6, 3), VILLAGERS, 0, F.DOWN, {"display_name": "Engrenagem Dourada",
@@ -350,29 +356,29 @@ func _loja() -> void:
 		"shop_stock": _items(["potion", "ether", "antidote", "phoenix_feather", "smelling_salts", "brass_blade",
 			"aviator_coat", "eco_plating", "brass_amulet", "gem_ice", "gem_heal"])})
 	_spawn("entrance", Vector2(6, 7), F.UP)
-	_warp("Door", Vector2(6, 8), "vila_caldeira", "from_loja")
+	_warp("Door", Vector2(door.x, door.y), "vila_caldeira", "from_loja")
 	_finish("loja")
 
 
 func _estalagem() -> void:
-	_room(14, 10, "#", "=", 7, [2, 5, 9, 12])
+	var door := _room(14, 10, "#", "=", 7, [2, 5, 9, 12])
 	_put("5,4:q 6,4:q 8,4:q 9,4:q 2,6:B 11,6:B 2,8:v 11,8:v 1,2:o")
 	_begin("Estalagem", "vila", MUSIC_VILA)
 	_npc("Berta", Vector2(7, 3), VILLAGERS, 1, F.DOWN, {"display_name": "Dona Berta",
 		"dialogue_set": _dialogue("p_berta"), "role": NPC.Role.INN, "inn_price": 20})
 	_spawn("entrance", Vector2(7, 8), F.UP)
-	_warp("Door", Vector2(7, 9), "vila_caldeira", "from_estalagem")
+	_warp("Door", Vector2(door.x, door.y), "vila_caldeira", "from_estalagem")
 	_finish("estalagem")
 
 
 func _relojoaria() -> void:
-	_room(10, 8, "H", "_", 5, [2, 7])
+	var door := _room(10, 8, "H", "_", 5, [2, 7])
 	_put("1,2:g 8,2:g 3,4:q 4,4:q 6,4:q 1,6:K")
 	_begin("Relojoaria", "vila", MUSIC_VILA)
 	_npc("Anselmo", Vector2(5, 3), VILLAGERS2, 3, F.DOWN, {"display_name": "Sr. Anselmo",
 		"dialogue_set": _dialogue("p_anselmo")})
 	_spawn("entrance", Vector2(5, 6), F.UP)
-	_warp("Door", Vector2(5, 7), "vila_caldeira", "from_relojoaria")
+	_warp("Door", Vector2(door.x, door.y), "vila_caldeira", "from_relojoaria")
 	_finish("relojoaria")
 
 
@@ -387,7 +393,7 @@ func _vila() -> void:
 	var oficina := _house(36, 9, 9, 3, 2, "r", "R", "#", 4, [1, 7])
 	_cell_set(37, 9, "C")
 	var loja := _house(6, 4, 7, 3, 2, "^", "A", "H", 3, [1, 5])
-	var estalagem := _house(29, 3, 9, 3, 2, "^", "A", "#", 4, [1, 3, 5, 7])
+	var estalagem := _house(29, 3, 9, 3, 2, "^", "A", "#", 4, [1, 2, 6, 7])
 	var relojoaria := _house(6, 20, 7, 3, 2, "r", "R", "H", 3, [1, 5])
 	_house(34, 21, 7, 3, 2, "^", "A", "#", -1, [1, 3, 5])
 	_house(14, 4, 5, 2, 2, "r", "R", "H", -1, [2])

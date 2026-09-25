@@ -27,13 +27,13 @@ size = Vector2(28, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xi5n"]
 size = Vector2(16, 16)
 
-[node name="Camara" type="Node2D" unique_id=1460834176]
+[node name="Camara" type="Node2D" unique_id=384145474]
 y_sort_enabled = true
 script = ExtResource("1_iw5b7")
 music = ExtResource("2_juipc")
 aether_factor = 1.2
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=302159738]
+[node name="Map" type="TileMapLayer" parent="." unique_id=701636663]
 script = ExtResource("3_2cl0c")
 legend = "junkyard"
 layout = "RRRRRRQRRRR::RRRRQRRRRRR
@@ -53,19 +53,19 @@ R::::::::::::::::::::::R
 R::::::::::::::::::::::R
 RRRRRRRRRRRRRRRRRRRRRRRR"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1218379179 instance=ExtResource("4_mj5us")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1038996227 instance=ExtResource("4_mj5us")]
 motion_mode = 1
 script = ExtResource("5_uk8wo")
 idle_sheet = ExtResource("6_mkpsc")
 walk_sheet = ExtResource("7_b00n3")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=666843664]
+[node name="Spawns" type="Node2D" parent="." unique_id=1401018967]
 
-[node name="from_north" type="Marker2D" parent="Spawns" unique_id=43628033]
+[node name="from_north" type="Marker2D" parent="Spawns" unique_id=1813796963]
 position = Vector2(200, 40)
 script = ExtResource("8_bbfm2")
 
-[node name="EcoSleeping" type="StaticBody2D" parent="." unique_id=1464297610 instance=ExtResource("9_2fpin")]
+[node name="EcoSleeping" type="StaticBody2D" parent="." unique_id=2079695777 instance=ExtResource("9_2fpin")]
 position = Vector2(200, 152)
 script = ExtResource("10_xjkq2")
 idle_sheet = ExtResource("11_c7y7q")
@@ -73,21 +73,21 @@ dialogue = Array[ExtResource("12_8dcoy")]([SubResource("Resource_cktiw")])
 display_name = "???"
 hide_if_flag = &"eco_awake"
 
-[node name="Up" type="Area2D" parent="." unique_id=770368617]
+[node name="Up" type="Area2D" parent="." unique_id=1789600987]
 position = Vector2(192, 8)
 script = ExtResource("14_ovha5")
 target_scene = "res://scenes/maps/prologue/ferro_velho_3.tscn"
 target_spawn = "from_below"
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="Up" unique_id=1603413590]
+[node name="Shape" type="CollisionShape2D" parent="Up" unique_id=1485831691]
 shape = SubResource("RectangleShape2D_unnv3")
 
-[node name="Awakening" type="Area2D" parent="." unique_id=195937269]
+[node name="Awakening" type="Area2D" parent="." unique_id=1295272629]
 position = Vector2(200, 40)
 script = ExtResource("15_yey6l")
 cutscene = ExtResource("16_t2ag2")
 autostart = true
 
-[node name="Shape" type="CollisionShape2D" parent="Awakening" unique_id=1774239867]
+[node name="Shape" type="CollisionShape2D" parent="Awakening" unique_id=129147828]
 shape = SubResource("RectangleShape2D_4xi5n")

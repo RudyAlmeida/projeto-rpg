@@ -64,12 +64,12 @@ size = Vector2(16, 208)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tiklp"]
 size = Vector2(16, 16)
 
-[node name="VilaCaldeira" type="Node2D" unique_id=1475395502]
+[node name="VilaCaldeira" type="Node2D" unique_id=1597434718]
 y_sort_enabled = true
 script = ExtResource("1_akcrr")
 music = ExtResource("2_xdcfx")
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=26865253]
+[node name="Map" type="TileMapLayer" parent="." unique_id=2080314783]
 script = ExtResource("3_r6vvl")
 legend = "vila"
 layout = "TTTTTTTTTTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTTTTT
@@ -78,7 +78,7 @@ T.......................::.......................T
 T.......................::...AAAAAAAAA...........T
 T.....AAAAAAA.RRRRR.....::...^^^^^^^^^...........T
 T.....^^^^^^^.rrrrr.....::...^^^^^^^^^.......T...T
-T..T..^^^^^^^.HHWHH.....::...#W#W#W#W#...........T
+T..T..^^^^^^^.HHWHH.....::...#WW###WW#...........T
 T.....HWHHHWH.HHHHH.....::...####D####...........T
 T.....HHHDHHH.......k...::....v..,..v............T
 T........,.S............::.......,..RCRRRRRRR....T
@@ -105,77 +105,77 @@ T.~~~~~~~~~~~~~~~~~...t.::.......................T
 T.......................::.......................T
 TTTTTTTTTTTTTTTTTTTTTTTT::TTTTTTTTTTTTTTTTTTTTTTTT"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1560090872 instance=ExtResource("4_abiik")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1871135206 instance=ExtResource("4_abiik")]
 motion_mode = 1
 script = ExtResource("5_f8xh6")
 idle_sheet = ExtResource("6_f1c5v")
 walk_sheet = ExtResource("7_oia6a")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=1591258411]
+[node name="Spawns" type="Node2D" parent="." unique_id=396831974]
 
-[node name="from_oficina" type="Marker2D" parent="Spawns" unique_id=111196728]
+[node name="from_oficina" type="Marker2D" parent="Spawns" unique_id=310723512]
 position = Vector2(648, 232)
 script = ExtResource("8_630mc")
 
-[node name="from_loja" type="Marker2D" parent="Spawns" unique_id=1724258822]
+[node name="from_loja" type="Marker2D" parent="Spawns" unique_id=1763349780]
 position = Vector2(152, 152)
 script = ExtResource("8_630mc")
 
-[node name="from_estalagem" type="Marker2D" parent="Spawns" unique_id=1160044176]
+[node name="from_estalagem" type="Marker2D" parent="Spawns" unique_id=1911402444]
 position = Vector2(536, 136)
 script = ExtResource("8_630mc")
 
-[node name="from_relojoaria" type="Marker2D" parent="Spawns" unique_id=1740691187]
+[node name="from_relojoaria" type="Marker2D" parent="Spawns" unique_id=1621487363]
 position = Vector2(152, 408)
 script = ExtResource("8_630mc")
 
-[node name="from_south" type="Marker2D" parent="Spawns" unique_id=1686389239]
+[node name="from_south" type="Marker2D" parent="Spawns" unique_id=1860692423]
 position = Vector2(392, 472)
 script = ExtResource("8_630mc")
 facing = 2
 
-[node name="back_door" type="Marker2D" parent="Spawns" unique_id=978107508]
+[node name="back_door" type="Marker2D" parent="Spawns" unique_id=202774153]
 position = Vector2(728, 200)
 script = ExtResource("8_630mc")
 facing = 1
 
-[node name="OficinaDoor" type="Area2D" parent="." unique_id=264362954]
+[node name="OficinaDoor" type="Area2D" parent="." unique_id=2127369064]
 position = Vector2(648, 216)
 script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/oficina.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="OficinaDoor" unique_id=1180644082]
+[node name="Shape" type="CollisionShape2D" parent="OficinaDoor" unique_id=1742148257]
 shape = SubResource("RectangleShape2D_ommn4")
 
-[node name="LojaDoor" type="Area2D" parent="." unique_id=1438513535]
+[node name="LojaDoor" type="Area2D" parent="." unique_id=110531818]
 position = Vector2(152, 136)
 script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/loja.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="LojaDoor" unique_id=421824932]
+[node name="Shape" type="CollisionShape2D" parent="LojaDoor" unique_id=1226922066]
 shape = SubResource("RectangleShape2D_tmpb6")
 
-[node name="EstalagemDoor" type="Area2D" parent="." unique_id=902263072]
+[node name="EstalagemDoor" type="Area2D" parent="." unique_id=1308573547]
 position = Vector2(536, 120)
 script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/estalagem.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="EstalagemDoor" unique_id=1973203378]
+[node name="Shape" type="CollisionShape2D" parent="EstalagemDoor" unique_id=2086337552]
 shape = SubResource("RectangleShape2D_3gold")
 
-[node name="RelojoariaDoor" type="Area2D" parent="." unique_id=434397743]
+[node name="RelojoariaDoor" type="Area2D" parent="." unique_id=1102373997]
 position = Vector2(152, 392)
 script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/relojoaria.tscn"
 target_spawn = "entrance"
 
-[node name="Shape" type="CollisionShape2D" parent="RelojoariaDoor" unique_id=164540961]
+[node name="Shape" type="CollisionShape2D" parent="RelojoariaDoor" unique_id=1535060228]
 shape = SubResource("RectangleShape2D_6oqwq")
 
-[node name="SouthGate" type="Area2D" parent="." unique_id=410910310]
+[node name="SouthGate" type="Area2D" parent="." unique_id=1201980899]
 position = Vector2(400, 504)
 script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/estrada_sul.tscn"
@@ -185,10 +185,10 @@ locked_lines = Array[ExtResource("10_kdyk0")]([SubResource("Resource_xuhv0")])
 push_back = Vector2(0, -14)
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="SouthGate" unique_id=1144881275]
+[node name="Shape" type="CollisionShape2D" parent="SouthGate" unique_id=1967141849]
 shape = SubResource("RectangleShape2D_drymy")
 
-[node name="NorthGate" type="Area2D" parent="." unique_id=414257679]
+[node name="NorthGate" type="Area2D" parent="." unique_id=911419940]
 position = Vector2(400, 8)
 script = ExtResource("9_aha3c")
 target_scene = "res://scenes/maps/prologue/vila_caldeira.tscn"
@@ -197,10 +197,10 @@ locked_lines = Array[ExtResource("10_kdyk0")]([SubResource("Resource_8apij")])
 push_back = Vector2(0, 14)
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="NorthGate" unique_id=36569755]
+[node name="Shape" type="CollisionShape2D" parent="NorthGate" unique_id=1887125806]
 shape = SubResource("RectangleShape2D_27msk")
 
-[node name="Pip" type="StaticBody2D" parent="." unique_id=990359229 instance=ExtResource("13_utamp")]
+[node name="Pip" type="StaticBody2D" parent="." unique_id=2146024280 instance=ExtResource("13_utamp")]
 position = Vector2(360, 280)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -208,7 +208,7 @@ dialogue_set = ExtResource("16_mc5x0")
 display_name = "Pip"
 hide_if_flag = &"slept"
 
-[node name="Olavo" type="StaticBody2D" parent="." unique_id=1241908347 instance=ExtResource("13_utamp")]
+[node name="Olavo" type="StaticBody2D" parent="." unique_id=109269463 instance=ExtResource("13_utamp")]
 position = Vector2(424, 456)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -218,7 +218,7 @@ dialogue_set = ExtResource("17_2clgh")
 display_name = "Guarda Olavo"
 hide_if_flag = &"empire_arrived"
 
-[node name="Ilse" type="StaticBody2D" parent="." unique_id=433082515 instance=ExtResource("13_utamp")]
+[node name="Ilse" type="StaticBody2D" parent="." unique_id=1799557680 instance=ExtResource("13_utamp")]
 position = Vector2(200, 424)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -226,7 +226,7 @@ sheet_row = 2
 dialogue_set = ExtResource("18_wu6xe")
 display_name = "Velha Ilse"
 
-[node name="Voss" type="StaticBody2D" parent="." unique_id=1546193872 instance=ExtResource("13_utamp")]
+[node name="Voss" type="StaticBody2D" parent="." unique_id=1987558586 instance=ExtResource("13_utamp")]
 position = Vector2(424, 248)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("19_prgs3")
@@ -235,7 +235,7 @@ display_name = "General Voss"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"voss_fought"
 
-[node name="SoldierSouth" type="StaticBody2D" parent="." unique_id=1278108080 instance=ExtResource("13_utamp")]
+[node name="SoldierSouth" type="StaticBody2D" parent="." unique_id=1494724812 instance=ExtResource("13_utamp")]
 position = Vector2(392, 344)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -246,7 +246,7 @@ display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierSouth2" type="StaticBody2D" parent="." unique_id=361580096 instance=ExtResource("13_utamp")]
+[node name="SoldierSouth2" type="StaticBody2D" parent="." unique_id=1652090151 instance=ExtResource("13_utamp")]
 position = Vector2(408, 344)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -257,7 +257,7 @@ display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierNorth" type="StaticBody2D" parent="." unique_id=1252484579 instance=ExtResource("13_utamp")]
+[node name="SoldierNorth" type="StaticBody2D" parent="." unique_id=143532806 instance=ExtResource("13_utamp")]
 position = Vector2(408, 152)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -267,7 +267,7 @@ display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierWest" type="StaticBody2D" parent="." unique_id=1782284640 instance=ExtResource("13_utamp")]
+[node name="SoldierWest" type="StaticBody2D" parent="." unique_id=1207725119 instance=ExtResource("13_utamp")]
 position = Vector2(280, 248)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -278,7 +278,7 @@ display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="SoldierSquare" type="StaticBody2D" parent="." unique_id=1330048049 instance=ExtResource("13_utamp")]
+[node name="SoldierSquare" type="StaticBody2D" parent="." unique_id=692590166 instance=ExtResource("13_utamp")]
 position = Vector2(440, 216)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("15_3757x")
@@ -288,7 +288,7 @@ display_name = "Soldado Imperial"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"escaped"
 
-[node name="Eco" type="StaticBody2D" parent="." unique_id=1573102967 instance=ExtResource("13_utamp")]
+[node name="Eco" type="StaticBody2D" parent="." unique_id=1454856167 instance=ExtResource("13_utamp")]
 position = Vector2(616, 248)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("21_xawn6")
@@ -297,7 +297,7 @@ display_name = "Eco"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"voss_fought"
 
-[node name="GerdSquare" type="StaticBody2D" parent="." unique_id=137073895 instance=ExtResource("13_utamp")]
+[node name="GerdSquare" type="StaticBody2D" parent="." unique_id=456222456 instance=ExtResource("13_utamp")]
 position = Vector2(-56, -56)
 script = ExtResource("14_aek8d")
 idle_sheet = ExtResource("22_u5wf2")
@@ -306,7 +306,7 @@ display_name = "Mestre Gerd"
 show_if_flag = &"empire_arrived"
 hide_if_flag = &"voss_fought"
 
-[node name="Airship" type="Sprite2D" parent="." unique_id=1012989275]
+[node name="Airship" type="Sprite2D" parent="." unique_id=864781329]
 z_index = 30
 position = Vector2(456, 96)
 texture = ExtResource("23_ijtnr")
@@ -316,7 +316,7 @@ show_if_flag = &"empire_arrived"
 hide_if_flag = &"prologue_done"
 bob = 2.0
 
-[node name="WorkshopRuins" type="Sprite2D" parent="." unique_id=838890797]
+[node name="WorkshopRuins" type="Sprite2D" parent="." unique_id=299538127]
 position = Vector2(648, 232)
 texture = ExtResource("25_3bbm7")
 offset = Vector2(0, -39)
@@ -326,21 +326,21 @@ backdrop_texture = ExtResource("26_hlg7c")
 backdrop_cell = Vector2i(0, 0)
 backdrop_rect = Rect2(-72, -88, 144, 80)
 
-[node name="VossScene" type="Area2D" parent="." unique_id=1980331666]
+[node name="VossScene" type="Area2D" parent="." unique_id=1185169085]
 position = Vector2(552, 232)
 script = ExtResource("27_mehhy")
 cutscene = ExtResource("28_8gcqi")
 show_if_flag = &"empire_arrived"
 
-[node name="Shape" type="CollisionShape2D" parent="VossScene" unique_id=797908012]
+[node name="Shape" type="CollisionShape2D" parent="VossScene" unique_id=1052812416]
 shape = SubResource("RectangleShape2D_4opym")
 
-[node name="Escape" type="Area2D" parent="." unique_id=1156795231]
+[node name="Escape" type="Area2D" parent="." unique_id=102843770]
 position = Vector2(728, 200)
 script = ExtResource("27_mehhy")
 cutscene = ExtResource("29_u3iia")
 autostart = true
 show_if_flag = &"escaped"
 
-[node name="Shape" type="CollisionShape2D" parent="Escape" unique_id=623641443]
+[node name="Shape" type="CollisionShape2D" parent="Escape" unique_id=534506982]
 shape = SubResource("RectangleShape2D_tiklp")

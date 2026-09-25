@@ -48,13 +48,13 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwifj"]
 size = Vector2(12, 12)
 
-[node name="FerroVelho2" type="Node2D" unique_id=1062304855]
+[node name="FerroVelho2" type="Node2D" unique_id=2146668724]
 y_sort_enabled = true
 script = ExtResource("1_igaou")
 music = ExtResource("2_cuvlr")
 aether_factor = 0.8
 
-[node name="Map" type="TileMapLayer" parent="." unique_id=1773480688]
+[node name="Map" type="TileMapLayer" parent="." unique_id=1567935587]
 script = ExtResource("3_qh3w6")
 legend = "junkyard"
 layout = "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
@@ -80,25 +80,25 @@ ZZZZZZZZZZZZZZZZZ_ZZZZZZZZZZZZZZZZZZ
 ZZZZZZZZZZZZZZZZZ_ZZZZZZZZZZZZZZZZZZ
 ZZZZZZZZZZZZZZZZZ_ZZZZZZZZZZZZZZZZZZ"
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1498028734 instance=ExtResource("4_pogpm")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1452681240 instance=ExtResource("4_pogpm")]
 motion_mode = 1
 script = ExtResource("5_hpxyi")
 idle_sheet = ExtResource("6_bhm5g")
 walk_sheet = ExtResource("7_ksn1i")
 
-[node name="Spawns" type="Node2D" parent="." unique_id=1626634181]
+[node name="Spawns" type="Node2D" parent="." unique_id=1238811603]
 
-[node name="from_west" type="Marker2D" parent="Spawns" unique_id=94758190]
+[node name="from_west" type="Marker2D" parent="Spawns" unique_id=271818856]
 position = Vector2(24, 176)
 script = ExtResource("8_g1vnb")
 facing = 3
 
-[node name="from_south" type="Marker2D" parent="Spawns" unique_id=528658510]
+[node name="from_south" type="Marker2D" parent="Spawns" unique_id=22588628]
 position = Vector2(280, 328)
 script = ExtResource("8_g1vnb")
 facing = 2
 
-[node name="Lever" type="StaticBody2D" parent="." unique_id=1373625534]
+[node name="Lever" type="StaticBody2D" parent="." unique_id=1506638951]
 position = Vector2(56, 104)
 script = ExtResource("9_uax4s")
 kind = 3
@@ -109,7 +109,7 @@ flag = &"conveyor_on"
 lines = Array[ExtResource("11_ffbf4")]([SubResource("Resource_gmgxy")])
 cutscene = ExtResource("13_1elv6")
 
-[node name="ScrapBlock" type="StaticBody2D" parent="." unique_id=1814291702]
+[node name="ScrapBlock" type="StaticBody2D" parent="." unique_id=202238232]
 position = Vector2(280, 296)
 script = ExtResource("9_uax4s")
 kind = 4
@@ -118,7 +118,7 @@ tile = Vector2i(7, 4)
 flag = &"conveyor_on"
 lines = Array[ExtResource("11_ffbf4")]([SubResource("Resource_nqwsc")])
 
-[node name="Boiler" type="StaticBody2D" parent="." unique_id=1315465217]
+[node name="Boiler" type="StaticBody2D" parent="." unique_id=1738759958]
 position = Vector2(488, 72)
 script = ExtResource("9_uax4s")
 kind = 2
@@ -127,7 +127,7 @@ tile = Vector2i(7, 3)
 lines = Array[ExtResource("11_ffbf4")]([SubResource("Resource_1iwye")])
 cutscene = ExtResource("15_2pkdo")
 
-[node name="Fuligem" type="StaticBody2D" parent="." unique_id=311792344 instance=ExtResource("16_j8bmn")]
+[node name="Fuligem" type="StaticBody2D" parent="." unique_id=610441938 instance=ExtResource("16_j8bmn")]
 position = Vector2(536, 264)
 script = ExtResource("17_ofgp7")
 idle_sheet = ExtResource("18_6jh35")
@@ -138,38 +138,38 @@ display_name = "Fuligem"
 show_if_flag = &"quest_q_cat"
 hide_if_flag = &"cat_found"
 
-[node name="Spider" type="Area2D" parent="." unique_id=2067882153 instance=ExtResource("20_66dc8")]
+[node name="Spider" type="Area2D" parent="." unique_id=199961183 instance=ExtResource("20_66dc8")]
 position = Vector2(168, 248)
 script = ExtResource("21_dj3o4")
 enemies = Array[ExtResource("22_ilksq")]([ExtResource("23_0c33d")])
 
-[node name="CrowRat" type="Area2D" parent="." unique_id=1239628795 instance=ExtResource("20_66dc8")]
+[node name="CrowRat" type="Area2D" parent="." unique_id=1436659094 instance=ExtResource("20_66dc8")]
 position = Vector2(424, 152)
 script = ExtResource("21_dj3o4")
 enemies = Array[ExtResource("22_ilksq")]([ExtResource("24_58gbn"), ExtResource("25_7drw1")])
 
-[node name="SlimeSpider" type="Area2D" parent="." unique_id=1092717909 instance=ExtResource("20_66dc8")]
+[node name="SlimeSpider" type="Area2D" parent="." unique_id=608126537 instance=ExtResource("20_66dc8")]
 position = Vector2(232, 56)
 script = ExtResource("21_dj3o4")
 enemies = Array[ExtResource("22_ilksq")]([ExtResource("26_tg00i"), ExtResource("23_0c33d")])
 patrol_distance = 16.0
 
-[node name="ToYard" type="Area2D" parent="." unique_id=1162271291]
+[node name="ToYard" type="Area2D" parent="." unique_id=204570162]
 position = Vector2(8, 176)
 script = ExtResource("27_r7mfy")
 target_scene = "res://scenes/maps/prologue/ferro_velho_1.tscn"
 target_spawn = "from_east"
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="ToYard" unique_id=1074216853]
+[node name="Shape" type="CollisionShape2D" parent="ToYard" unique_id=1524947477]
 shape = SubResource("RectangleShape2D_48e5n")
 
-[node name="ToWell" type="Area2D" parent="." unique_id=574739965]
+[node name="ToWell" type="Area2D" parent="." unique_id=430137188]
 position = Vector2(280, 344)
 script = ExtResource("27_r7mfy")
 target_scene = "res://scenes/maps/prologue/ferro_velho_3.tscn"
 target_spawn = "from_north"
 sound = &""
 
-[node name="Shape" type="CollisionShape2D" parent="ToWell" unique_id=1406440148]
+[node name="Shape" type="CollisionShape2D" parent="ToWell" unique_id=1328477443]
 shape = SubResource("RectangleShape2D_vwifj")
