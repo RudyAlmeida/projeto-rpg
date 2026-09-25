@@ -65,7 +65,7 @@ children.push(
   new Paragraph({ alignment: AlignmentType.CENTER, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: GOLD, space: 8 } }, spacing: { after: 400 }, children: [new TextRun({ text: 'Bíblia da História — Rascunho para revisão', size: 30, color: '333333' })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 1600 }, children: [new TextRun({ text: 'Mundo, personagens, antagonistas e estrutura em atos', size: 22, color: '555555' })] }),
   table(['Campo', 'Valor'], [
-    ['Versão', '0.1 — proposta inicial (tudo aberto a ajustes)'],
+    ['Versão', '0.2 — pontos H-01 a H-06 decididos'],
     ['Data', '24/09/2026'],
     ['Decisões de base', 'D-01 tom equilibrado · fantasia clássica + steampunk · D-06 um mundo só'],
     ['Documento de controle', 'docs/Planejamento_Projeto_RPG.docx'],
@@ -88,6 +88,7 @@ children.push(
   B('**Escutar** — Kael ouve máquinas; cada personagem aprende a ouvir alguém que ignorava.'),
   B('**O preço do futuro** — quem paga pelo conforto de quem?'),
   B('**Identidade** — Eco descobre se tem alma; Brann e Isolde decidem quem são além do Império.'),
+  B('**Coração dividido** — o triângulo Kael–Lyra–Isolde espelha o conflito do mundo: magia ou progresso.'),
   H2('1.2 Curva de tom'),
   table(['Momento', 'Tom'], [
     ['Prólogo e Ato 1', 'Aventura leve, humor do grupo, descoberta do mundo'],
@@ -213,6 +214,33 @@ children.push(...character('Isolde Ferrovar', '20 anos · princesa e engenheira-
   ['Golpe especial', 'Fábrica de Guerra — várias torretas de uma vez'],
 ]));
 
+// ---------- 3.x Coadjuvante: Gerd ----------
+children.push(...character('Mestre Gerd Brunor — coadjuvante', '61 anos · mestre mecânico de Vila Caldeira · tutor de Kael', [
+  ['Aparência', 'Baixo e robusto, careca com costeletas brancas, avental de couro chamuscado, braço esquerdo mecânico antigo, cachimbo apagado'],
+  ['Personalidade', 'Rabugento, sábio, carinhoso de um jeito desajeitado; fala com as máquinas como se fossem pessoas'],
+  ['Papel', 'Criou Kael como neto. Ex-engenheiro imperial que fugiu ao perceber para que servia o Éter'],
+  ['Segredo', 'Sabe da linhagem aetheliana de Kael e escondeu Eco no ferro-velho há anos'],
+  ['Prólogo', '"Morre" na explosão da oficina, segurando os soldados para Kael e Eco fugirem'],
+  ['Verdade', 'Sobreviveu; Voss o levou para Brasaforte e o obrigou a completar o Coração — por isso o Império conseguiu terminá-lo'],
+  ['Ato 2', 'Pista: Isolde fala de "um velho prisioneiro que conversa com as engrenagens"; o grupo não o encontra'],
+  ['Ato 3', 'Reaparece no mundo partido; melhora o dirigível Andorinha, guia o grupo até Aethel e sabe como abrir o Coração. Personagem convidado em algumas batalhas'],
+  ['Combate (convidado)', 'Bombas de oficina, reparo de aliados mecânicos (Eco, torretas de Isolde)'],
+]));
+
+// ---------- 3.y Romance ----------
+children.push(
+  H2('Triângulo amoroso: Kael, Lyra e Isolde'),
+  P('O romance espelha o tema central: **Lyra** representa a magia e a natureza; **Isolde**, a tecnologia e o progresso. A escolha do jogador não é "certa" ou "errada" — ela muda o epílogo e o tom do final.'),
+  table(['Elemento', 'Como funciona'], [
+    ['Afinidade', 'Valor oculto com Lyra e com Isolde (e com o resto do grupo). Sobe e desce com escolhas de diálogo e ações'],
+    ['Momentos-chave', '4–5 cenas com escolhas marcantes (ex.: noite no convés da Andorinha no Ato 2, a escolha de quem salvar primeiro no colapso do Coração)'],
+    ['Tensão entre as duas', 'Lyra e Isolde começam como opostas (natureza x máquina) e aprendem a se respeitar; rivalidade, não ódio'],
+    ['Antes do Ato 2', 'Isolde só entra no Ato 2, então no Ato 1 a afinidade com Lyra já existe e Isolde precisa "alcançar"'],
+    ['Sem romance', 'Opção válida: manter as duas como amigas leva a um epílogo focado no grupo'],
+  ], [25, 75]),
+  gap(),
+);
+
 // ---------- 4. Antagonistas ----------
 children.push(
   H1('4. Antagonistas'),
@@ -235,7 +263,7 @@ children.push(
     'Vida em Vila Caldeira: tutorial de exploração e diálogo; oficina do mestre Gerd.',
     'Ferro-Velho do Sul: tutorial de combate; Kael encontra e desperta Eco, que diz seu nome.',
     'Soldados imperiais chegam atrás do "artefato"; a vila é ameaçada; primeira luta contra Voss (derrota forçada).',
-    'Gerd se sacrifica para que Kael e Eco fujam. **Tom:** leve até o fim, que tem o primeiro impacto.',
+    'Gerd segura os soldados e a oficina explode — o jogador acredita que ele morreu. **Tom:** leve até o fim, que tem o primeiro impacto.',
   ]),
   ...beat('Ato 1 — "Os Ecos da Terra" (5–7 h)', [
     'Floresta de Sylvaran: magia morrendo; Lyra acusa Eco; os dois salvam juntos o Grande Carvalho → Lyra entra.',
@@ -248,12 +276,15 @@ children.push(
   ...beat('Ato 2 — "O Império de Latão" (6–9 h)', [
     'Grupo reunido de novo (Selene pede perdão e revela o que a Ordem sabe sobre o Artífice).',
     'Infiltração em Brasaforte; aliança com Isolde, que descobre para que serve o Coração.',
+    'Pista sobre Gerd: Isolde menciona um velho prisioneiro que "conversa com as engrenagens".',
+    'Noite no convés da Andorinha: primeiro momento-chave do triângulo amoroso.',
     'Resgate de Eco; Eco começa a recuperar memórias e lembra de Vaeloth.',
     'Revelação: Morvain é Vaeloth; o Imperador tenta impedi-lo e é morto.',
     '**Clímax:** o Coração desperta; as refinarias sugam o Éter restante; o mundo se parte (continentes rachados, céu dourado). Grupo separado.',
   ]),
   ...beat('Ato 3 — "O Mundo Partido" (3–5 h + opcional)', [
     'Kael acorda sozinho um ano depois; reúne o grupo (ordem livre, cada resgate é uma missão).',
+    '**Reviravolta:** Gerd está vivo — escapou de Brasaforte no colapso. Reencontro emocional; ele melhora a Andorinha e revela como abrir o Coração.',
     'Missões pessoais opcionais de cada personagem (afetam o final).',
     'Aethel, a Cidade Submersa: verdade sobre Eco e a linhagem de Kael.',
     'Invasão do Coração de Éter; batalha contra Voss (poupar ou não), Morvain e Vaeloth.',
@@ -261,9 +292,18 @@ children.push(
   ...beat('Final — "O Preço do Futuro"', [
     'Para derrotar Vaeloth, o Éter precisa voltar a circular livre — o que desliga a maioria das máquinas.',
     '**Final padrão (agridoce):** Eco usa sua alma de Éter para libertar o Coração e se desliga; a magia volta, a era do vapor termina.',
-    '**Final completo (missões pessoais + Voss poupado):** Kael "ouve" Eco dentro do Éter livre e o traz de volta; Isolde e Kael projetam máquinas que usam o Éter sem consumi-lo — o terceiro caminho.',
+    '**Final completo (missões pessoais + Voss poupado):** Kael "ouve" Eco dentro do Éter livre e o traz de volta; o grupo encontra o terceiro caminho — máquinas que usam o Éter sem consumi-lo.',
+    'O epílogo de cada final muda conforme o triângulo amoroso (ver matriz abaixo).',
     'Pós-jogo: New Game+ e chefes secretos (a definir).',
   ]),
+  H2('Matriz de finais'),
+  P('Dois finais principais, cada um com um epílogo definido pelo triângulo amoroso — 6 combinações.'),
+  table(['Epílogo', 'Final agridoce (Eco se desliga)', 'Final completo (Eco volta)'], [
+    ['Lyra', 'Kael e Lyra replantam Sylvaran; a floresta renasce, mas sem Eco', 'Kael, Lyra e Eco cuidam da floresta; máquinas e raízes crescem juntas'],
+    ['Isolde', 'Kael e Isolde reconstroem Brasaforte sem Éter, em luto por Eco', 'Kael, Isolde e Eco criam as máquinas que usam o Éter sem consumi-lo'],
+    ['Sem romance', 'O grupo se despede e cada um segue seu caminho', 'O grupo reunido funda uma oficina; Gerd e Eco discutem sobre engrenagens'],
+  ], [18, 41, 41]),
+  gap(),
 );
 
 // ---------- 6. Técnicas combinadas ----------
@@ -282,15 +322,15 @@ children.push(
 
 // ---------- 7. Pendências ----------
 children.push(
-  H1('7. Pontos em aberto para o Diretor'),
-  table(['#', 'Pergunta', 'Proposta atual'], [
-    ['H-01', 'Nomes estão bons? (Velmora, Ferrovar, Kael, Eco…)', 'Todos provisórios'],
-    ['H-02', 'Sete personagens jogáveis é o número certo?', '7 (Isolde entra no Ato 2)'],
-    ['H-03', 'O mundo se parte no Ato 2 (estilo FF6)?', 'Sim — reaproveita mapas em versão "devastada"'],
-    ['H-04', 'Quantos finais?', '2 (agridoce e completo)'],
-    ['H-05', 'Mestre Gerd morre no prólogo?', 'Sim — primeira perda'],
-    ['H-06', 'Romance entre personagens?', 'Sutil, sem ser central'],
-  ], [10, 50, 40]),
+  H1('7. Decisões da história'),
+  table(['#', 'Pergunta', 'Decisão'], [
+    ['H-01', 'Nomes (Velmora, Ferrovar, Kael, Eco…)', 'Aprovados'],
+    ['H-02', 'Número de personagens jogáveis', '7 (Isolde entra no Ato 2)'],
+    ['H-03', 'O mundo se parte no Ato 2?', 'Sim — reaproveita mapas em versão "devastada"'],
+    ['H-04', 'Quantos finais?', '2 principais (agridoce e completo), cada um com epílogo definido pelo romance'],
+    ['H-05', 'Mestre Gerd morre no prólogo?', 'Morte simulada; ele volta no Ato 3 para ajudar o grupo'],
+    ['H-06', 'Romance entre personagens?', 'Triângulo Kael–Lyra–Isolde com afinidade; muda o epílogo'],
+  ], [10, 40, 50]),
 );
 
 children.splice(tocIndex, 0, ...tocEntries.map(t => new Paragraph({ children: [new TextRun({ text: t, size: 24 })], spacing: { after: 140 } })));
