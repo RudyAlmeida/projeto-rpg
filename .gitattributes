@@ -1,0 +1,10 @@
+# Normalize text files to LF (Godot default)
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+
+*.png binary
+*.jpg binary
+*.ogg binary
+*.wav binary
+*.docx binary
