@@ -11,6 +11,8 @@ var inventory: Dictionary = {}
 ## Story / world flags, e.g. {"met_gerd": true, "affinity_lyra": 3}.
 var flags: Dictionary = {}
 var play_time := 0.0
+## Player preferences (options menu; stored in user://settings.cfg, not in saves).
+var settings: Dictionary = {}
 
 
 func _process(delta: float) -> void:
@@ -35,6 +37,12 @@ func new_game(heroes: Array[CombatantData], starting_money := 0) -> void:
 func add_money(amount: int) -> void:
 	money = maxi(0, money + amount)
 	money_changed.emit(money)
+
+
+## Battle Pontos de Éter go to every party member's equipped gems (GDD 8.2).
+func add_ap(amount: int) -> void:
+	for member in party:
+		member.gain_ap(amount)
 
 
 func set_flag(name: StringName, value: Variant = true) -> void:

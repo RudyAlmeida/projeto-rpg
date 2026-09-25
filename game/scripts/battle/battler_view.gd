@@ -79,6 +79,12 @@ func hurt() -> void:
 		show_frame(unit.data.idle_frame)
 
 
+func revive() -> void:
+	_sprite.rotation = 0.0
+	_sprite.modulate = Color.WHITE
+	show_frame(unit.data.idle_frame)
+
+
 func knock_out() -> void:
 	var tween := create_tween()
 	if unit.is_player:

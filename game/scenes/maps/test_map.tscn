@@ -17,6 +17,8 @@
 [ext_resource type="Resource" path="res://data/characters/brann.tres" id="15_brann"]
 [ext_resource type="Resource" path="res://data/enemies/oil_slime.tres" id="16_slime"]
 [ext_resource type="PackedScene" path="res://scenes/characters/field_enemy.tscn" id="17_field_enemy"]
+[ext_resource type="Resource" path="res://data/characters/eco.tres" id="18_eco"]
+[ext_resource type="Resource" path="res://data/enemies/brass_sentinel.tres" id="19_sentinel"]
 
 [sub_resource type="RectangleShape2D" id="Shape_door"]
 size = Vector2(12, 12)
@@ -49,7 +51,14 @@ text = "E fique longe do Ferro-Velho do Sul. Ouvi barulhos estranhos por lá est
 y_sort_enabled = true
 script = ExtResource("1_testmap")
 music = ExtResource("9_music")
-party = Array[ExtResource("12_combatant")]([ExtResource("13_kael"), ExtResource("14_lyra"), ExtResource("15_brann")])
+party = Array[ExtResource("12_combatant")]([ExtResource("13_kael"), ExtResource("14_lyra"), ExtResource("15_brann"), ExtResource("18_eco")])
+starting_items = {
+&"antidote": 2,
+&"ether": 1,
+&"phoenix_feather": 1,
+&"potion": 3
+}
+starting_money = 100
 
 [node name="Map" type="TileMapLayer" parent="."]
 script = ExtResource("2_ascii")
@@ -91,6 +100,10 @@ dialogue = Array[ExtResource("6_line")]([SubResource("Line_gerd_1"), SubResource
 [node name="OilSlimes" parent="." instance=ExtResource("17_field_enemy")]
 position = Vector2(584, 328)
 enemies = Array[ExtResource("12_combatant")]([ExtResource("16_slime"), ExtResource("16_slime")])
+
+[node name="Sentinel" parent="." instance=ExtResource("17_field_enemy")]
+position = Vector2(168, 360)
+enemies = Array[ExtResource("12_combatant")]([ExtResource("19_sentinel"), ExtResource("16_slime")])
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
 

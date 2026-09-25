@@ -65,6 +65,11 @@ func gain_xp(amount: int, balance: CombatBalance = null) -> int:
 	return gained
 
 
+## Pontos de Éter for equipped gems (filled in by the gem system).
+func gain_ap(_amount: int) -> void:
+	pass
+
+
 func restore() -> void:
 	hp = max_hp()
 	mp = max_mp()

@@ -58,7 +58,7 @@ func test_victory_removes_enemy_and_frees_player() -> void:
 	assert_false(level.in_battle())
 	assert_true(level.player.visible)
 	assert_true(level.player.can_move())
-	assert_eq(GameState.money, 16, "battle money is credited")
+	assert_eq(GameState.money, 100 + 16, "starting money + battle money")
 	assert_eq(GameState.party[0].level, 2, "24 XP takes a fresh hero to level 2")
 
 

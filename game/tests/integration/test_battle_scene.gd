@@ -71,7 +71,7 @@ func test_cancel_in_target_mode_returns_to_menu() -> void:
 	_press(&"confirm")
 	assert_eq(scene._mode, BattleScene.Mode.TARGET)
 	_press(&"cancel")
-	assert_eq(scene._mode, BattleScene.Mode.MENU)
+	assert_eq(scene._mode, BattleScene.Mode.ROOT)
 
 
 func test_timing_windows() -> void:

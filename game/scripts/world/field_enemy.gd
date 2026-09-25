@@ -49,6 +49,21 @@ func freeze() -> void:
 	set_deferred("monitoring", false)
 
 
+## Back on the field after the party fled; harmless for `grace` seconds.
+func resume(grace := 2.0) -> void:
+	show()
+	_active = true
+	modulate.a = 0.5
+	await get_tree().create_timer(grace).timeout
+	modulate.a = 1.0
+	monitoring = true
+
+
+## Direction the enemy is looking (its patrol direction; the sprite art faces left).
+func facing_vector() -> Vector2:
+	return Vector2.RIGHT if _sprite.flip_h else Vector2.LEFT
+
+
 func _show_frame(column: int) -> void:
 	var size := Vector2(enemies[0].frame_size)
 	_sprite.region_rect = Rect2(column * size.x, 0, size.x, size.y)
