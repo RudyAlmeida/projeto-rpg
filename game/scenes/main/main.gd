@@ -7,6 +7,7 @@ const SHEETS: Array[String] = [
 	"res://assets/sprites/characters/eco/chr_eco_ref.png",
 	"res://assets/sprites/characters/lyra/chr_lyra_ref.png",
 ]
+const MUSIC_PATH := "res://assets/audio/music/bgm_vila_caldeira_test_a.mp3"
 const FRAMES_PER_SHEET := 4
 const ROW_HEIGHT := 96
 const TOP := 40
@@ -40,3 +41,15 @@ func _ready() -> void:
 		add_child(front)
 		shown += 1
 	_label.text = "O Coracao de Eter - personagens (%d)" % shown
+	_play_test_music()
+
+
+func _play_test_music() -> void:
+	if not ResourceLoader.exists(MUSIC_PATH):
+		return
+	var stream: AudioStreamMP3 = load(MUSIC_PATH)
+	stream.loop = true
+	var player := AudioStreamPlayer.new()
+	player.stream = stream
+	add_child(player)
+	player.play()

@@ -1,0 +1,8 @@
+{
+  "title": "Vila Caldeira (teste)",
+  "style": "16-bit SNES-era JRPG town theme, warm and cozy steampunk workshop village, music box, accordion, light orchestral strings, pizzicato, glockenspiel, soft clockwork ticking percussion, gentle and nostalgic like classic 90s JRPG town music, major key, 100 BPM, seamless loop feel",
+  "negative_tags": "vocals, singing, lyrics, EDM, dubstep, heavy metal, trap drums",
+  "model": "chirp-v5-5",
+  "instrumental": true,
+  "duration": 60
+}
