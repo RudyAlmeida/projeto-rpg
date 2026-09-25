@@ -20,7 +20,9 @@ const runs = (text, opts = {}) => {
     : new TextRun({ text: p, ...opts }));
 };
 const P = (text, opts = {}) => new Paragraph({ children: runs(text, opts.run), spacing: { after: 120 }, ...opts.para });
-const H1 = t => new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun(t)], pageBreakBefore: true });
+// Static table of contents: LibreOffice does not refresh TOC fields on open, so we list H1s ourselves.
+const tocEntries = [];
+const H1 = t => { tocEntries.push(t); return new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun(t)], pageBreakBefore: true }); };
 const H2 = t => new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun(t)] });
 const H3 = t => new Paragraph({ heading: HeadingLevel.HEADING_3, children: [new TextRun(t)] });
 const B = (t, level = 0) => new Paragraph({ numbering: { reference: 'bullets', level }, children: runs(t), spacing: { after: 60 } });
@@ -29,29 +31,29 @@ const N = (t, ref = 'num') => new Paragraph({ numbering: { reference: ref, level
 const border = { style: BorderStyle.SINGLE, size: 4, color: 'B7C3D0' };
 const borders = { top: border, bottom: border, left: border, right: border };
 
+// Tables up to KEEP_ROWS rows are kept on one page; longer ones split with a repeated header.
+const KEEP_ROWS = 22;
 function table(headers, rows, widths) {
   const sum = widths.reduce((a, b) => a + b, 0);
   widths = widths.map(w => Math.round(w * W / sum));
   widths[widths.length - 1] += W - widths.reduce((a, b) => a + b, 0);
-  const cell = (text, i, header) => new TableCell({
+  const keep = rows.length <= KEEP_ROWS;
+  const cell = (text, i, header, keepNext) => new TableCell({
     width: { size: widths[i], type: WidthType.DXA },
     borders,
     verticalAlign: VerticalAlign.CENTER,
     shading: header ? { type: ShadingType.CLEAR, color: 'auto', fill: ACCENT } : undefined,
     margins: { top: 60, bottom: 60, left: 100, right: 100 },
-    children: [new Paragraph({ children: runs(text, header ? { bold: true, color: 'FFFFFF', size: 19 } : { size: 19 }) })],
+    children: [new Paragraph({ keepNext, children: runs(text, header ? { bold: true, color: 'FFFFFF', size: 19 } : { size: 19 }) })],
   });
   return new Table({
     width: { size: W, type: WidthType.DXA },
     columnWidths: widths,
     rows: [
-      new TableRow({ tableHeader: true, children: headers.map((h, i) => cell(h, i, true)) }),
+      new TableRow({ tableHeader: true, cantSplit: true, children: headers.map((h, i) => cell(h, i, true, true)) }),
       ...rows.map((r, ri) => new TableRow({
-        children: r.map((c, i) => {
-          const tc = cell(c, i, false);
-          if (ri % 2 === 1) tc.options = tc.options;
-          return tc;
-        }),
+        cantSplit: true,
+        children: r.map((c, i) => cell(c, i, false, keep && ri < rows.length - 1)),
       })),
     ],
   });
@@ -67,11 +69,11 @@ const phaseTable = (prefix, tasks) => table(
 
 const phase = (num, title, objetivo, entregavel, tasks, criterios) => [
   H2(`Fase ${num} — ${title}`),
-  P(`**Objetivo:** ${objetivo}`),
-  P(`**Entregável:** ${entregavel}`),
+  P(`**Objetivo:** ${objetivo}`, { para: { keepNext: true } }),
+  P(`**Entregável:** ${entregavel}`, { para: { keepNext: true } }),
   phaseTable(`F${num}`, tasks),
   gap(),
-  P('**Critérios de conclusão (Definition of Done):**'),
+  P('**Critérios de conclusão (Definition of Done):**', { para: { keepNext: true } }),
   ...criterios.map(c => B(c)),
 ];
 
@@ -85,7 +87,7 @@ const children = [];
 // Cover
 children.push(
   new Paragraph({ children: [], spacing: { before: 2400 } }),
-  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'PROJETO RPG', bold: true, size: 64, color: ACCENT, font: 'Georgia' })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'O CORAÇÃO DE ÉTER', bold: true, size: 60, color: ACCENT, font: 'Georgia' })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 }, children: [new TextRun({ text: '(título provisório)', italics: true, size: 24, color: '666666' })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: GOLD, space: 8 } }, spacing: { after: 400 }, children: [new TextRun({ text: 'Documento de Planejamento e Controle de Fases', size: 32, color: '333333' })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [new TextRun({ text: 'RPG por turnos inspirado em Final Fantasy VII, Final Fantasy X e Chrono Trigger', size: 22 })] }),
@@ -94,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '0.2 — decisões fundamentais'],
+    ['Versão do documento', '0.3 — decisões fundamentais'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -106,13 +108,12 @@ children.push(table(
   [35, 65],
 ));
 
-// TOC
+// TOC (filled in after all sections are built)
 children.push(
   new Paragraph({ children: [new PageBreak()] }),
   new Paragraph({ children: [new TextRun({ text: 'Sumário', bold: true, size: 32, color: ACCENT })], spacing: { after: 200 } }),
-  P('Clique com o botão direito no sumário e escolha "Atualizar campo" para gerar/atualizar os números de página.', { run: { italics: true, color: '777777', size: 18 } }),
-  new TableOfContents('Sumário', { hyperlink: true, headingStyleRange: '1-2' }),
 );
+const tocIndex = children.length;
 
 // 1. Como usar
 children.push(
@@ -599,6 +600,7 @@ children.push(
   table(['Versão', 'Data', 'Alterações'], [
     ['0.1', created, 'Criação do documento: visão, sistemas, arquitetura, pipeline de arte, fases 0–6, riscos e decisões pendentes.'],
     ['0.2', today, 'Decisões D-01 a D-09 registradas (premissa: O Coração de Éter); projeto Godot, Git/GitHub e teste de imagem concluídos; seções de combate, progressão, arte e áudio atualizadas.'],
+    ['0.3', today, 'Bíblia da história v0.1 criada (docs/Historia_O_Coracao_de_Eter.docx); sumário estático (compatível com LibreOffice); tabelas e títulos não se separam mais entre páginas.'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
@@ -612,6 +614,8 @@ children.push(
 // ---------- document ----------
 const numCfg = ref => ({ reference: ref, levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 360 } } } }] });
 
+children.splice(tocIndex, 0, ...tocEntries.map(t => new Paragraph({ children: [new TextRun({ text: t, size: 24 })], spacing: { after: 140 } })));
+
 const doc = new Document({
   creator: 'Claude',
   title: 'Projeto RPG — Planejamento e Controle de Fases',
@@ -622,9 +626,9 @@ const doc = new Document({
         run: { size: 34, bold: true, color: ACCENT, font: 'Georgia' },
         paragraph: { spacing: { before: 240, after: 200 }, outlineLevel: 0, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: GOLD, space: 4 } } } },
       { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true,
-        run: { size: 26, bold: true, color: ACCENT }, paragraph: { spacing: { before: 280, after: 120 }, outlineLevel: 1 } },
+        run: { size: 26, bold: true, color: ACCENT }, paragraph: { spacing: { before: 280, after: 120 }, outlineLevel: 1, keepNext: true, keepLines: true } },
       { id: 'Heading3', name: 'Heading 3', basedOn: 'Normal', next: 'Normal', quickFormat: true,
-        run: { size: 22, bold: true, color: '444444' }, paragraph: { spacing: { before: 160, after: 80 }, outlineLevel: 2 } },
+        run: { size: 22, bold: true, color: '444444' }, paragraph: { spacing: { before: 160, after: 80 }, outlineLevel: 2, keepNext: true, keepLines: true } },
     ],
   },
   numbering: {

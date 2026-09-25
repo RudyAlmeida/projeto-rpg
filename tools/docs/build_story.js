@@ -15,9 +15,11 @@ const GOLD = 'B8860B';
 const runs = (text, opts = {}) => String(text).split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map(p => p.startsWith('**')
   ? new TextRun({ text: p.slice(2, -2), bold: true, ...opts })
   : new TextRun({ text: p, ...opts }));
-const P = (text, run) => new Paragraph({ children: runs(text, run), spacing: { after: 120 } });
+const P = (text, run, keepNext = false) => new Paragraph({ keepNext, children: runs(text, run), spacing: { after: 120 } });
 const Q = text => new Paragraph({ children: runs(text, { italics: true, color: '555555' }), indent: { left: 400 }, spacing: { after: 160 } });
-const H1 = t => new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun(t)], pageBreakBefore: true });
+// Static table of contents: LibreOffice does not refresh TOC fields on open, so we list H1s ourselves.
+const tocEntries = [];
+const H1 = t => { tocEntries.push(t); return new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun(t)], pageBreakBefore: true }); };
 const H2 = t => new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun(t)] });
 const H3 = t => new Paragraph({ heading: HeadingLevel.HEADING_3, children: [new TextRun(t)] });
 const B = t => new Paragraph({ numbering: { reference: 'bullets', level: 0 }, children: runs(t), spacing: { after: 60 } });
@@ -25,21 +27,22 @@ const gap = () => new Paragraph({ children: [], spacing: { after: 120 } });
 
 const border = { style: BorderStyle.SINGLE, size: 4, color: 'C9B8A0' };
 const borders = { top: border, bottom: border, left: border, right: border };
+// Tables are kept on one page (all are short in this document).
 function table(headers, rows, widths) {
   const sum = widths.reduce((a, b) => a + b, 0);
   widths = widths.map(w => Math.round(w * W / sum));
   widths[widths.length - 1] += W - widths.reduce((a, b) => a + b, 0);
-  const cell = (text, i, header) => new TableCell({
+  const cell = (text, i, header, keepNext) => new TableCell({
     width: { size: widths[i], type: WidthType.DXA }, borders, verticalAlign: VerticalAlign.CENTER,
     shading: header ? { type: ShadingType.CLEAR, color: 'auto', fill: ACCENT } : undefined,
     margins: { top: 60, bottom: 60, left: 100, right: 100 },
-    children: [new Paragraph({ children: runs(text, header ? { bold: true, color: 'FFFFFF', size: 19 } : { size: 19 }) })],
+    children: [new Paragraph({ keepNext, children: runs(text, header ? { bold: true, color: 'FFFFFF', size: 19 } : { size: 19 }) })],
   });
   return new Table({
     width: { size: W, type: WidthType.DXA }, columnWidths: widths,
     rows: [
-      new TableRow({ tableHeader: true, children: headers.map((h, i) => cell(h, i, true)) }),
-      ...rows.map(r => new TableRow({ children: r.map((c, i) => cell(c, i, false)) })),
+      new TableRow({ tableHeader: true, cantSplit: true, children: headers.map((h, i) => cell(h, i, true, true)) }),
+      ...rows.map((r, ri) => new TableRow({ cantSplit: true, children: r.map((c, i) => cell(c, i, false, ri < rows.length - 1)) })),
     ],
   });
 }
@@ -47,7 +50,7 @@ function table(headers, rows, widths) {
 // Character sheet: fields -> 2-column table
 const character = (name, subtitle, fields) => [
   H2(name),
-  P(subtitle, { italics: true, color: '666666' }),
+  P(subtitle, { italics: true, color: '666666' }, true),
   table(['Campo', 'Descrição'], fields, [26, 74]),
   gap(),
 ];
@@ -69,9 +72,8 @@ children.push(
   ], [35, 65]),
   new Paragraph({ children: [new PageBreak()] }),
   new Paragraph({ children: [new TextRun({ text: 'Sumário', bold: true, size: 32, color: ACCENT })], spacing: { after: 200 } }),
-  P('Clique com o botão direito no sumário e escolha "Atualizar campo" para gerar os números de página.', { italics: true, color: '777777', size: 18 }),
-  new TableOfContents('Sumário', { hyperlink: true, headingStyleRange: '1-2' }),
 );
+const tocIndex = children.length;
 
 // ---------- 1. Resumo ----------
 children.push(
@@ -291,6 +293,8 @@ children.push(
   ], [10, 50, 40]),
 );
 
+children.splice(tocIndex, 0, ...tocEntries.map(t => new Paragraph({ children: [new TextRun({ text: t, size: 24 })], spacing: { after: 140 } })));
+
 // ---------- document ----------
 const doc = new Document({
   creator: 'Claude',
@@ -302,9 +306,9 @@ const doc = new Document({
         run: { size: 34, bold: true, color: ACCENT, font: 'Georgia' },
         paragraph: { spacing: { before: 240, after: 200 }, outlineLevel: 0, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: GOLD, space: 4 } } } },
       { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true,
-        run: { size: 26, bold: true, color: ACCENT }, paragraph: { spacing: { before: 280, after: 80 }, outlineLevel: 1 } },
+        run: { size: 26, bold: true, color: ACCENT }, paragraph: { spacing: { before: 280, after: 80 }, outlineLevel: 1, keepNext: true, keepLines: true } },
       { id: 'Heading3', name: 'Heading 3', basedOn: 'Normal', next: 'Normal', quickFormat: true,
-        run: { size: 22, bold: true, color: '444444' }, paragraph: { spacing: { before: 160, after: 80 }, outlineLevel: 2 } },
+        run: { size: 22, bold: true, color: '444444' }, paragraph: { spacing: { before: 160, after: 80 }, outlineLevel: 2, keepNext: true, keepLines: true } },
     ],
   },
   numbering: { config: [{ reference: 'bullets', levels: [{ level: 0, format: LevelFormat.BULLET, text: '•', alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 300 } } } }] }] },
