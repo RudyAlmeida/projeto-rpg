@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_4oe00"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_vuvhx"]
+
+[resource]
+script = ExtResource("2_vuvhx")
+id = &"aviator_coat"
+display_name = "Casaco de Aviador"
+kind = 2
+icon_index = 7
+price = 260
+description = "Couro forrado dos aeronautas."
+battle_usable = false
+field_usable = false
+stat_bonuses = {
+&"defense": 7,
+&"spirit": 2
+}
+gem_slots = 2

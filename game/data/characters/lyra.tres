@@ -10,6 +10,9 @@
 [ext_resource type="Resource" path="res://data/skills/lyra_sleep.tres" id="8_vlu0o"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
 [ext_resource type="Resource" path="res://data/skills/lyra_special.tres" id="10_n0iyr"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="11_n0iyr"]
+[ext_resource type="Resource" path="res://data/items/root_staff.tres" id="12_p8j8x"]
+[ext_resource type="Resource" path="res://data/items/leather_coat.tres" id="13_tbtyb"]
 
 [resource]
 script = ExtResource("1_data")
@@ -38,6 +41,7 @@ growth = {
 &"spirit": 1.2,
 &"strength": 0.6
 }
+starting_equipment = Array[ExtResource("11_n0iyr")]([ExtResource("12_p8j8x"), ExtResource("13_tbtyb")])
 skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_fire"), ExtResource("7_ptl7v"), ExtResource("8_vlu0o"), ExtResource("5_defend")])
 special = ExtResource("10_n0iyr")
 timing_style = 2

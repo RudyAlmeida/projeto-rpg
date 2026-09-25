@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_m5sqj"]
+
+[resource]
+script = ExtResource("1_m5sqj")
+id = &"heal"
+display_name = "Cura"
+kind = 3
+target = 1
+mp_cost = 4
+power = 30
+description = "Recupera HP de um aliado."

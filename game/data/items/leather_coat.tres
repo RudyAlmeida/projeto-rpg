@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_xsmgc"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_83jh0"]
+
+[resource]
+script = ExtResource("2_83jh0")
+id = &"leather_coat"
+display_name = "Casaco de Couro"
+kind = 2
+icon_index = 7
+price = 80
+description = "Couro resistente de oficina."
+battle_usable = false
+field_usable = false
+stat_bonuses = {
+&"defense": 3
+}
+gem_slots = 1

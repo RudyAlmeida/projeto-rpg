@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_1sdco"]
+
+[resource]
+script = ExtResource("1_1sdco")
+id = &"lyra_regen"
+display_name = "Seiva"
+kind = 4
+target = 1
+mp_cost = 5
+description = "Regeneração em um aliado."
+inflicts = {
+11: 100
+}

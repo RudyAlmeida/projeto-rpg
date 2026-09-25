@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_sjfai"]
+[ext_resource type="Resource" path="res://data/skills/fire.tres" id="2_rfjjt"]
+[ext_resource type="Resource" path="res://data/skills/fire2.tres" id="3_uu6u3"]
+[ext_resource type="Resource" path="res://data/skills/fire3.tres" id="4_nnsdv"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="5_le1cd"]
+
+[resource]
+script = ExtResource("5_le1cd")
+id = &"gem_fire"
+display_name = "Gema de Fogo"
+kind = 4
+icon_index = 9
+price = 400
+description = "Fogo → Labareda → Inferno."
+battle_usable = false
+field_usable = false
+gem_skills = Array[ExtResource("1_sjfai")]([ExtResource("2_rfjjt"), ExtResource("3_uu6u3"), ExtResource("4_nnsdv")])
+gem_stat_bonuses = {
+&"magic": 1
+}

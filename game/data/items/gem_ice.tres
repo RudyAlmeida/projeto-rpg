@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_sbgbr"]
+[ext_resource type="Resource" path="res://data/skills/ice.tres" id="2_ebamd"]
+[ext_resource type="Resource" path="res://data/skills/ice2.tres" id="3_4sja4"]
+[ext_resource type="Resource" path="res://data/skills/ice3.tres" id="4_ag2fl"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="5_y1rrr"]
+
+[resource]
+script = ExtResource("5_y1rrr")
+id = &"gem_ice"
+display_name = "Gema de Gelo"
+kind = 4
+icon_index = 10
+price = 400
+description = "Gelo → Nevasca → Era do Gelo."
+battle_usable = false
+field_usable = false
+gem_skills = Array[ExtResource("1_sbgbr")]([ExtResource("2_ebamd"), ExtResource("3_4sja4"), ExtResource("4_ag2fl")])
+gem_stat_bonuses = {
+&"magic": 1
+}

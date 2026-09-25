@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_auwa6"]
+
+[resource]
+script = ExtResource("1_auwa6")
+id = &"brann_scald"
+display_name = "Vapor Escaldante"
+target = 3
+weight = 4
+mp_cost = 5
+multiplier = 0.8
+description = "Jato de vapor em todos os inimigos."

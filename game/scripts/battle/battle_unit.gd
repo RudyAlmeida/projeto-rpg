@@ -39,6 +39,11 @@ func attack_power() -> int:
 	return stat(&"strength") + (member.weapon_attack() if member else data.weapon_power)
 
 
+## Battle commands: heroes add skill-tree and gem skills to their own.
+func skill_list() -> Array[SkillData]:
+	return member.all_skills() if member else data.skills
+
+
 func max_hp() -> int:
 	return stat(&"max_hp")
 

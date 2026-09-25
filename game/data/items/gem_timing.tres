@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_vyp73"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_aep0g"]
+
+[resource]
+script = ExtResource("2_aep0g")
+id = &"gem_timing"
+display_name = "Olho de Relojoeiro"
+kind = 4
+icon_index = 14
+price = 600
+description = "Janela de timing +25% por nível."
+battle_usable = false
+field_usable = false
+gem_effects = {
+&"timing_window": 1.25
+}

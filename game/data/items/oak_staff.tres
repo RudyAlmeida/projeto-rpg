@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_1euxc"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_lt7sd"]
+
+[resource]
+script = ExtResource("2_lt7sd")
+id = &"oak_staff"
+display_name = "Cajado de Carvalho"
+kind = 1
+icon_index = 5
+price = 300
+description = "Cajado antigo de Sylvaran."
+battle_usable = false
+field_usable = false
+attack = 6
+stat_bonuses = {
+&"magic": 6
+}
+equippable_by = Array[StringName]([&"lyra"])
+gem_slots = 3

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ep4hs"]
+[ext_resource type="Resource" path="res://data/skills/heal.tres" id="2_yvsgf"]
+[ext_resource type="Resource" path="res://data/skills/heal2.tres" id="3_ncsbv"]
+[ext_resource type="Resource" path="res://data/skills/heal3.tres" id="4_qyyov"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="5_qwxrr"]
+
+[resource]
+script = ExtResource("5_qwxrr")
+id = &"gem_heal"
+display_name = "Gema de Cura"
+kind = 4
+icon_index = 12
+price = 450
+description = "Cura → Cura em Grupo → Renascer."
+battle_usable = false
+field_usable = false
+gem_skills = Array[ExtResource("1_ep4hs")]([ExtResource("2_yvsgf"), ExtResource("3_ncsbv"), ExtResource("4_qyyov")])
+gem_stat_bonuses = {
+&"spirit": 1
+}

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_p4u4w"]
+
+[resource]
+script = ExtResource("1_p4u4w")
+id = &"fire2"
+display_name = "Labareda"
+kind = 1
+mp_cost = 9
+power = 42
+element = 1

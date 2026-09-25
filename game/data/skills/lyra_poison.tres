@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_0ffth"]
+
+[resource]
+script = ExtResource("1_0ffth")
+id = &"lyra_poison"
+display_name = "Espinhos Venenosos"
+kind = 4
+mp_cost = 3
+description = "Envenena o alvo."
+inflicts = {
+0: 85
+}

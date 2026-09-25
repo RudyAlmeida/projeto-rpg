@@ -70,8 +70,7 @@ func start_battle(enemy: FieldEnemy) -> void:
 		battle_started.emit(_battle)
 		outcome = await _battle.battle_ended
 		if outcome == Battle.Outcome.VICTORY:
-			GameState.add_money(_battle.battle.total_money())
-			GameState.add_ap(_battle.battle.total_ap())
+			GameState.add_money(_battle.battle.total_money())  # AP and drops are handled by the battle
 		_battle.queue_free()
 		_battle = null
 		approach = Encounter.NORMAL  # a retry starts even

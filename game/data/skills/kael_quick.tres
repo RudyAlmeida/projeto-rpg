@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_g4f1t"]
+
+[resource]
+script = ExtResource("1_g4f1t")
+id = &"kael_quick"
+display_name = "Engrenagem Rápida"
+kind = 4
+target = 2
+weight = 2
+mp_cost = 5
+description = "Kael acelera: Pressa."
+inflicts = {
+7: 100
+}

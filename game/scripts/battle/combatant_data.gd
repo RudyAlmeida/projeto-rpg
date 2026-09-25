@@ -42,6 +42,10 @@ const STATS: Array[StringName] = [&"max_hp", &"max_mp", &"strength", &"magic", &
 ## stat = base + floor(growth × (level − 1))).
 @export var growth: Dictionary = {}
 
+@export_group("Equipment")
+## Heroes start a new game with these equipped (weapon / armor / accessory).
+@export var starting_equipment: Array[ItemData] = []
+
 @export_group("Commands")
 @export var skills: Array[SkillData] = []
 ## Special move unlocked when the Aether bar is full (heroes).

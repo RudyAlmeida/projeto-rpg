@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_ppmd6"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_nmra5"]
+
+[resource]
+script = ExtResource("2_nmra5")
+id = &"root_staff"
+display_name = "Cajado de Raiz"
+kind = 1
+icon_index = 5
+description = "Raiz viva com um cristal quase apagado."
+battle_usable = false
+field_usable = false
+attack = 4
+stat_bonuses = {
+&"magic": 2
+}
+equippable_by = Array[StringName]([&"lyra"])
+gem_slots = 2

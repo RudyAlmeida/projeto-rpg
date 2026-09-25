@@ -6,7 +6,10 @@
 [ext_resource type="Resource" path="res://data/skills/attack.tres" id="3_attack"]
 [ext_resource type="Resource" path="res://data/skills/defend.tres" id="4_defend"]
 [ext_resource type="Resource" path="res://data/skills/brann_special.tres" id="7_ixb84"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="8_wkbxd"]
+[ext_resource type="Resource" path="res://data/items/steam_gauntlet.tres" id="9_n0qpp"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Resource" path="res://data/items/leather_coat.tres" id="10_xg5fr"]
 
 [resource]
 script = ExtResource("1_data")
@@ -36,6 +39,7 @@ growth = {
 &"spirit": 0.5,
 &"strength": 1.8
 }
+starting_equipment = Array[ExtResource("8_wkbxd")]([ExtResource("9_n0qpp"), ExtResource("10_xg5fr")])
 skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("4_defend")])
 special = ExtResource("7_ixb84")
 timing_style = 1

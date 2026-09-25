@@ -349,9 +349,13 @@ func _perform_flee() -> void:
 		await _wait(0.6)
 
 
-## Prompt centred on `at` that the caller awaits directly.
+## Prompt centred on `at` that the caller awaits directly. The window widens with the
+## options setting and the pressing hero's timing gems.
 func _prompt_at(at: BattlerView, impact_time: float, style: CombatantData.TimingStyle) -> DamageFormula.Timing:
 	_prompt.position = at.position + Vector2(0, -at.frame_size().y / 2.0)
+	var presser := _actor if _actor else (at.unit if at.unit.is_player else null)
+	var gem_mult := presser.member.timing_window_mult() if presser and presser.member else 1.0
+	_prompt.window_scale = timing_window_scale * gem_mult
 	return await _prompt.run(impact_time, style)
 
 
@@ -454,6 +458,12 @@ func _finish(outcome: Battle.Outcome) -> void:
 				inventory[id] = int(inventory.get(id, 0)) + 1
 				var item := DataRegistry.item(id)
 				line2.append("Obteve: " + (item.display_name if item else str(id)))
+			# Pontos de Éter for socketed gems (GDD 8.2).
+			var ap := battle.total_ap()
+			for unit in battle.party + battle.reserves:
+				if unit.member:
+					for gem in unit.member.gain_ap(ap):
+						line2.append("%s nv. %d" % [gem.item.display_name, gem.level()])
 			_ui.show_message((text + "\n" + "   ".join(line2)).strip_edges())
 		Battle.Outcome.DEFEAT:
 			_ui.show_message("Derrota...\nConfirmar: tentar de novo")
@@ -497,7 +507,7 @@ func _root_entries() -> Array:
 
 func _skill_entries() -> Array:
 	var entries := []
-	for skill in _actor.data.skills:
+	for skill in _actor.skill_list():
 		if skill.kind == SkillData.Kind.ATTACK and skill.id == &"attack" or skill.kind == SkillData.Kind.DEFEND:
 			continue
 		entries.append({"text": skill.display_name, "skill": skill, "enabled": _actor.can_use(skill),
@@ -568,12 +578,12 @@ func _list_input(event: InputEvent) -> void:
 func _choose_root(id: String) -> void:
 	match id:
 		"attack":
-			_choose_targets({"type": "skill", "skill": _actor.data.skills[0]}, SkillData.Target.ENEMY, Mode.ROOT)
+			_choose_targets({"type": "skill", "skill": _actor.skill_list()[0]}, SkillData.Target.ENEMY, Mode.ROOT)
 		"special":
 			var special := _actor.data.special
 			_choose_targets({"type": "skill", "skill": special}, special.target, Mode.ROOT)
 		"defend":
-			for skill in _actor.data.skills:
+			for skill in _actor.skill_list():
 				if skill.kind == SkillData.Kind.DEFEND:
 					submit_action({"type": "skill", "skill": skill, "targets": [_actor] as Array[BattleUnit]})
 					return

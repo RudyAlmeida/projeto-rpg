@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_pg8j5"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_6m2p1"]
+
+[resource]
+script = ExtResource("2_6m2p1")
+id = &"gear_blade"
+display_name = "Lâmina-engrenagem"
+kind = 1
+icon_index = 4
+description = "A espada de Kael, com pistão no guarda-mão."
+battle_usable = false
+field_usable = false
+attack = 10
+equippable_by = Array[StringName]([&"kael"])
+gem_slots = 2

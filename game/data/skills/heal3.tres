@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_k0863"]
+
+[resource]
+script = ExtResource("1_k0863")
+id = &"heal3"
+display_name = "Renascer"
+kind = 3
+target = 5
+mp_cost = 18
+description = "Revive um aliado com 50% do HP."
+revive_percent = 0.5

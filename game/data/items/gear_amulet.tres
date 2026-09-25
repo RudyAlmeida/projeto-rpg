@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_iyqj6"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_f5yje"]
+
+[resource]
+script = ExtResource("2_f5yje")
+id = &"gear_amulet"
+display_name = "Amuleto de Engrenagem"
+kind = 3
+icon_index = 8
+price = 220
+description = "Uma engrenagem que nunca para de girar."
+battle_usable = false
+field_usable = false
+stat_bonuses = {
+&"speed": 3
+}

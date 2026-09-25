@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="SkillTreeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/core/skill_tree_node.gd" id="1_8iakh"]
+[ext_resource type="Resource" path="res://data/skills/eco_barrier.tres" id="2_mqiux"]
+[ext_resource type="Script" path="res://scripts/core/skill_tree_data.gd" id="3_a67uy"]
+
+[sub_resource type="Resource" id="Resource_arft7"]
+script = ExtResource("1_8iakh")
+id = &"e_plate1"
+display_name = "Blindagem I"
+stat_bonuses = {
+&"defense": 3
+}
+description = "+3 DEF"
+
+[sub_resource type="Resource" id="Resource_u8ib5"]
+script = ExtResource("1_8iakh")
+id = &"e_core"
+display_name = "Núcleo Estável"
+stat_bonuses = {
+&"max_hp": 20
+}
+description = "+20 HP"
+grid_position = Vector2i(0, 1)
+
+[sub_resource type="Resource" id="Resource_jfbr3"]
+script = ExtResource("1_8iakh")
+id = &"e_field"
+display_name = "Campo Etéreo"
+cost = 2
+requires = Array[StringName]([&"e_plate1"])
+skill = ExtResource("2_mqiux")
+description = "Nova técnica: Barreira"
+grid_position = Vector2i(1, 0)
+
+[sub_resource type="Resource" id="Resource_1bnts"]
+script = ExtResource("1_8iakh")
+id = &"e_sensors"
+display_name = "Sensores"
+cost = 2
+requires = Array[StringName]([&"e_core"])
+stat_bonuses = {
+&"precision": 2,
+&"spirit": 2
+}
+description = "+2 PRE, +2 ESP"
+grid_position = Vector2i(1, 1)
+
+[sub_resource type="Resource" id="Resource_yvx5q"]
+script = ExtResource("1_8iakh")
+id = &"e_plate2"
+display_name = "Blindagem II"
+cost = 3
+requires = Array[StringName]([&"e_field"])
+stat_bonuses = {
+&"defense": 4
+}
+description = "+4 DEF"
+grid_position = Vector2i(2, 0)
+
+[sub_resource type="Resource" id="Resource_qu6sr"]
+script = ExtResource("1_8iakh")
+id = &"e_surge"
+display_name = "Sobrecarga de Éter"
+cost = 2
+requires = Array[StringName]([&"e_sensors"])
+stat_bonuses = {
+&"magic": 3
+}
+description = "+3 MAG"
+grid_position = Vector2i(2, 1)
+
+[resource]
+script = ExtResource("3_a67uy")
+id = &"eco_tree"
+character = &"eco"
+nodes = Array[ExtResource("1_8iakh")]([SubResource("Resource_arft7"), SubResource("Resource_u8ib5"), SubResource("Resource_jfbr3"), SubResource("Resource_1bnts"), SubResource("Resource_yvx5q"), SubResource("Resource_qu6sr")])

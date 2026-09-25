@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_wn0lq"]
+[ext_resource type="Resource" path="res://data/skills/thunder.tres" id="2_xabi2"]
+[ext_resource type="Resource" path="res://data/skills/thunder2.tres" id="3_3tgw6"]
+[ext_resource type="Resource" path="res://data/skills/thunder3.tres" id="4_pna5a"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="5_om4xe"]
+
+[resource]
+script = ExtResource("5_om4xe")
+id = &"gem_thunder"
+display_name = "Gema de Raio"
+kind = 4
+icon_index = 11
+price = 450
+description = "Raio → Trovão → Tempestade."
+battle_usable = false
+field_usable = false
+gem_skills = Array[ExtResource("1_wn0lq")]([ExtResource("2_xabi2"), ExtResource("3_3tgw6"), ExtResource("4_pna5a")])
+gem_stat_bonuses = {
+&"magic": 1
+}

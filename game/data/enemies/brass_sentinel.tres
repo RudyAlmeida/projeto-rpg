@@ -1,40 +1,41 @@
 [gd_resource type="Resource" script_class="CombatantData" format=3]
 
-[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_gb7sq"]
-[ext_resource type="Resource" path="res://data/skills/sentinel_repair.tres" id="2_6bsvc"]
-[ext_resource type="Resource" path="res://data/skills/sentinel_cannon.tres" id="3_iail0"]
-[ext_resource type="Resource" path="res://data/skills/sentinel_club.tres" id="4_mtxig"]
-[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_brass_sentinel.png" id="5_uyut7"]
-[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="6_mebpe"]
-[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="7_fgaew"]
+[ext_resource type="Script" path="res://scripts/battle/ai_rule.gd" id="1_6bsvc"]
+[ext_resource type="Resource" path="res://data/skills/sentinel_repair.tres" id="2_iail0"]
+[ext_resource type="Resource" path="res://data/skills/sentinel_cannon.tres" id="3_mtxig"]
+[ext_resource type="Resource" path="res://data/skills/sentinel_club.tres" id="4_uyut7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/enm_brass_sentinel.png" id="5_mebpe"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="6_fgaew"]
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="7_uyvsj"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="8_sq17f"]
 
-[sub_resource type="Resource" id="Resource_uyvsj"]
-script = ExtResource("1_gb7sq")
+[sub_resource type="Resource" id="Resource_s8gwk"]
+script = ExtResource("1_6bsvc")
 priority = 3
 condition = 1
 value = 35.0
-skill = ExtResource("2_6bsvc")
+skill = ExtResource("2_iail0")
 target_mode = 4
 
-[sub_resource type="Resource" id="Resource_sq17f"]
-script = ExtResource("1_gb7sq")
+[sub_resource type="Resource" id="Resource_jom7t"]
+script = ExtResource("1_6bsvc")
 priority = 2
 condition = 4
 value = 3.0
-skill = ExtResource("3_iail0")
+skill = ExtResource("3_mtxig")
 target_mode = 5
 tell = "A Sentinela acumula vapor no canhão..."
 
-[sub_resource type="Resource" id="Resource_s8gwk"]
-script = ExtResource("1_gb7sq")
-skill = ExtResource("4_mtxig")
+[sub_resource type="Resource" id="Resource_rhe4g"]
+script = ExtResource("1_6bsvc")
+skill = ExtResource("4_uyut7")
 target_mode = 2
 
 [resource]
-script = ExtResource("6_mebpe")
+script = ExtResource("6_fgaew")
 id = &"brass_sentinel"
 display_name = "Sentinela de Latão"
-battle_sheet = ExtResource("5_uyut7")
+battle_sheet = ExtResource("5_mebpe")
 frame_size = Vector2i(72, 48)
 idle_frame = 0
 attack_frame = 2
@@ -49,8 +50,8 @@ speed = 14
 luck = 3
 precision = 9
 evasion = 2
-skills = Array[ExtResource("7_fgaew")]([ExtResource("4_mtxig"), ExtResource("3_iail0"), ExtResource("2_6bsvc")])
-ai_rules = Array[ExtResource("1_gb7sq")]([SubResource("Resource_uyvsj"), SubResource("Resource_sq17f"), SubResource("Resource_s8gwk")])
+skills = Array[ExtResource("7_uyvsj")]([ExtResource("4_uyut7"), ExtResource("3_mtxig"), ExtResource("2_iail0")])
+ai_rules = Array[ExtResource("1_6bsvc")]([SubResource("Resource_s8gwk"), SubResource("Resource_jom7t"), SubResource("Resource_rhe4g")])
 mechanical = true
 status_immunities = Array[int]([0, 1])
 affinities = {

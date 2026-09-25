@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="SkillTreeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/core/skill_tree_node.gd" id="1_a23te"]
+[ext_resource type="Resource" path="res://data/skills/brann_scald.tres" id="2_07cu2"]
+[ext_resource type="Resource" path="res://data/skills/brann_barrier.tres" id="3_adldw"]
+[ext_resource type="Script" path="res://scripts/core/skill_tree_data.gd" id="4_julvu"]
+
+[sub_resource type="Resource" id="Resource_7opxx"]
+script = ExtResource("1_a23te")
+id = &"b_armor1"
+display_name = "Couraça I"
+stat_bonuses = {
+&"defense": 2
+}
+description = "+2 DEF"
+
+[sub_resource type="Resource" id="Resource_n464h"]
+script = ExtResource("1_a23te")
+id = &"b_str1"
+display_name = "Punho de Ferro"
+stat_bonuses = {
+&"strength": 2
+}
+description = "+2 FOR"
+grid_position = Vector2i(0, 1)
+
+[sub_resource type="Resource" id="Resource_s5483"]
+script = ExtResource("1_a23te")
+id = &"b_scald"
+display_name = "Vapor Escaldante"
+cost = 2
+requires = Array[StringName]([&"b_armor1"])
+skill = ExtResource("2_07cu2")
+description = "Nova técnica: todos os inimigos"
+grid_position = Vector2i(1, 0)
+
+[sub_resource type="Resource" id="Resource_vg52g"]
+script = ExtResource("1_a23te")
+id = &"b_armor2"
+display_name = "Couraça II"
+cost = 2
+requires = Array[StringName]([&"b_str1"])
+stat_bonuses = {
+&"defense": 3,
+&"max_hp": 20
+}
+description = "+3 DEF, +20 HP"
+grid_position = Vector2i(1, 1)
+
+[sub_resource type="Resource" id="Resource_dv6lf"]
+script = ExtResource("1_a23te")
+id = &"b_barrier"
+display_name = "Barreira de Vapor"
+cost = 3
+requires = Array[StringName]([&"b_scald"])
+skill = ExtResource("3_adldw")
+description = "Nova técnica: Barreira no grupo"
+grid_position = Vector2i(2, 0)
+
+[sub_resource type="Resource" id="Resource_35l36"]
+script = ExtResource("1_a23te")
+id = &"b_boiler"
+display_name = "Fôlego de Caldeira"
+cost = 2
+requires = Array[StringName]([&"b_armor2"])
+stat_bonuses = {
+&"max_mp": 8
+}
+description = "+8 MP"
+grid_position = Vector2i(2, 1)
+
+[resource]
+script = ExtResource("4_julvu")
+id = &"brann_tree"
+character = &"brann"
+nodes = Array[ExtResource("1_a23te")]([SubResource("Resource_7opxx"), SubResource("Resource_n464h"), SubResource("Resource_s5483"), SubResource("Resource_vg52g"), SubResource("Resource_dv6lf"), SubResource("Resource_35l36")])

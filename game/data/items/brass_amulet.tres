@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_rmal2"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_ivaiv"]
+
+[resource]
+script = ExtResource("2_ivaiv")
+id = &"brass_amulet"
+display_name = "Amuleto de Latão"
+kind = 3
+icon_index = 8
+price = 150
+description = "Proteção contra o azar."
+battle_usable = false
+field_usable = false
+stat_bonuses = {
+&"luck": 2,
+&"spirit": 2
+}

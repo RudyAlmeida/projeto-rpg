@@ -9,6 +9,9 @@
 [ext_resource type="Resource" path="res://data/skills/kael_resonance.tres" id="7_q0qw1"]
 [ext_resource type="Resource" path="res://data/skills/kael_special.tres" id="9_241r5"]
 [ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="9_skill"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="10_241r5"]
+[ext_resource type="Resource" path="res://data/items/gear_blade.tres" id="11_e5lx2"]
+[ext_resource type="Resource" path="res://data/items/leather_coat.tres" id="12_k1t0k"]
 
 [resource]
 script = ExtResource("1_data")
@@ -38,6 +41,7 @@ growth = {
 &"spirit": 0.7,
 &"strength": 1.5
 }
+starting_equipment = Array[ExtResource("10_241r5")]([ExtResource("11_e5lx2"), ExtResource("12_k1t0k")])
 skills = Array[ExtResource("9_skill")]([ExtResource("3_attack"), ExtResource("7_q0qw1"), ExtResource("4_defend")])
 special = ExtResource("9_241r5")
 perfect_bonus = 1

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/skill_data.gd" id="1_4rs0c"]
+[ext_resource type="Script" path="res://scripts/items/item_data.gd" id="2_1pd8d"]
+
+[resource]
+script = ExtResource("2_1pd8d")
+id = &"brass_blade"
+display_name = "Lâmina de Latão"
+kind = 1
+icon_index = 4
+price = 320
+description = "Lâmina reforçada com latão."
+battle_usable = false
+field_usable = false
+attack = 17
+equippable_by = Array[StringName]([&"kael"])
+gem_slots = 2
