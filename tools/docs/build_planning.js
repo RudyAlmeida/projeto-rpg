@@ -593,6 +593,10 @@ children.push(
     ['A-028', 'assets/sprites/enemies/enm_crusher_core / claw_up / claw_down', 'Sprite', 'F3', DONE, 'Chefe Triturador em 3 partes (núcleo 104×115 e duas garras)'],
     ['A-029', 'assets/sprites/characters/voss + enemies/enm_voss', 'Sprite', 'F3', DONE, 'General Voss: 4 poses de mapa e 3 de batalha'],
     ['A-030', 'assets/audio/music/bgm_junkyard / boss / empire / farewell (_a, _b)', 'Música', 'F3', WIP, 'Suno: Ferro-Velho, Chefe, Tema do Império, Adeus — versão A em uso, aguardando avaliação'],
+    ['A-031', 'assets/sprites/characters/villagers/npc_villagers2.png', 'Sprite', 'F3', DONE, 'Pip, Guarda Olavo, Velha Ilse, Sr. Anselmo, soldado imperial e o gato Fuligem (4 direções)'],
+    ['A-032', 'assets/sprites/enemies/enm_imperial_soldier.png', 'Sprite', 'F3', DONE, 'Soldado imperial de batalha (4 quadros)'],
+    ['A-033', 'assets/portraits/por_eco_neutral.png, por_voss_neutral.png', 'Retrato', 'F3', DONE, 'Retratos de diálogo de Eco e Voss (gerados com a referência anexada)'],
+    ['A-034', 'assets/ui/ico_items.png (linha 5)', 'Ícones', 'F3', DONE, 'Caixa de engrenagens, válvula de bronze, mola de latão, chave de oficina'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 

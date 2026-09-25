@@ -1,97 +1,99 @@
 [gd_resource type="Resource" script_class="Cutscene" format=3]
 
-[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_p28iw"]
-[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_moxby"]
-[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_h8vmf"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_tgb4j"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_farewell_a.mp3" id="5_chycg"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="6_7bx5b"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="7_4hp2k"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="8_p7flu"]
-
-[sub_resource type="Resource" id="Resource_vy07j"]
-script = ExtResource("2_moxby")
-type = 9
-music = ExtResource("5_chycg")
-
-[sub_resource type="Resource" id="Resource_m4v8v"]
-script = ExtResource("4_tgb4j")
-speaker = "Kael"
-portrait = ExtResource("7_4hp2k")
-text = "O senhor vem com a gente!"
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_moxby"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_h8vmf"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_tgb4j"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_chycg"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_farewell_a.mp3" id="5_7bx5b"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="6_4hp2k"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="7_p7flu"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="8_vy07j"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_eco_neutral.png" id="9_m4v8v"]
 
 [sub_resource type="Resource" id="Resource_3wvav"]
-script = ExtResource("4_tgb4j")
-speaker = "Mestre Gerd"
-portrait = ExtResource("8_p7flu")
-text = "Esses joelhos não correm mais, garoto. Mas esta oficina ainda sabe fazer barulho."
+script = ExtResource("2_h8vmf")
+type = 9
+music = ExtResource("5_7bx5b")
 
 [sub_resource type="Resource" id="Resource_sav4d"]
-script = ExtResource("4_tgb4j")
-speaker = "Mestre Gerd"
-portrait = ExtResource("8_p7flu")
-text = "Vai pro norte. Pra floresta. E Kael..."
+script = ExtResource("4_chycg")
+speaker = "Kael"
+portrait = ExtResource("7_p7flu")
+text = "O senhor vem com a gente!"
 
 [sub_resource type="Resource" id="Resource_u1rnr"]
-script = ExtResource("4_tgb4j")
+script = ExtResource("4_chycg")
 speaker = "Mestre Gerd"
-portrait = ExtResource("8_p7flu")
-text = "...escuta ele. Ele sabe mais do que parece. Eu devia ter te contado tudo antes."
+portrait = ExtResource("8_vy07j")
+text = "Esses joelhos não correm mais, garoto. Mas esta oficina ainda sabe fazer barulho."
 
 [sub_resource type="Resource" id="Resource_whmvv"]
-script = ExtResource("4_tgb4j")
-speaker = "Eco"
-text = "Gerd Brunor. Pergunta: você vem \"amanhã\"?"
+script = ExtResource("4_chycg")
+speaker = "Mestre Gerd"
+portrait = ExtResource("8_vy07j")
+text = "Vai pro norte. Pra floresta. E Kael..."
 
 [sub_resource type="Resource" id="Resource_wnpvg"]
-script = ExtResource("4_tgb4j")
+script = ExtResource("4_chycg")
 speaker = "Mestre Gerd"
-portrait = ExtResource("8_p7flu")
-text = "(sorri) ...Cuida dele, lata velha."
+portrait = ExtResource("8_vy07j")
+text = "...escuta ele. Ele sabe mais do que parece. Eu devia ter te contado tudo antes."
 
 [sub_resource type="Resource" id="Resource_0xr8u"]
-script = ExtResource("2_moxby")
-lines = Array[ExtResource("4_tgb4j")]([SubResource("Resource_m4v8v"), SubResource("Resource_3wvav"), SubResource("Resource_sav4d"), SubResource("Resource_u1rnr"), SubResource("Resource_whmvv"), SubResource("Resource_wnpvg")])
+script = ExtResource("4_chycg")
+speaker = "Eco"
+portrait = ExtResource("9_m4v8v")
+text = "Gerd Brunor. Pergunta: você vem \"amanhã\"?"
 
 [sub_resource type="Resource" id="Resource_6c2tb"]
-script = ExtResource("2_moxby")
+script = ExtResource("4_chycg")
+speaker = "Mestre Gerd"
+portrait = ExtResource("8_vy07j")
+text = "(sorri) ...Cuida dele, lata velha."
+
+[sub_resource type="Resource" id="Resource_nv4hs"]
+script = ExtResource("2_h8vmf")
+lines = Array[ExtResource("4_chycg")]([SubResource("Resource_sav4d"), SubResource("Resource_u1rnr"), SubResource("Resource_whmvv"), SubResource("Resource_wnpvg"), SubResource("Resource_0xr8u"), SubResource("Resource_6c2tb")])
+
+[sub_resource type="Resource" id="Resource_gpc4w"]
+script = ExtResource("2_h8vmf")
 type = 1
 actor = NodePath("GerdFarewell")
 position = Vector2(56, 72)
 
-[sub_resource type="Resource" id="Resource_nv4hs"]
-script = ExtResource("4_tgb4j")
+[sub_resource type="Resource" id="Resource_o5irl"]
+script = ExtResource("4_chycg")
 text = "Gerd abre todas as válvulas da fornalha. O vapor começa a uivar."
 
-[sub_resource type="Resource" id="Resource_gpc4w"]
-script = ExtResource("2_moxby")
-lines = Array[ExtResource("4_tgb4j")]([SubResource("Resource_nv4hs")])
+[sub_resource type="Resource" id="Resource_qbsao"]
+script = ExtResource("2_h8vmf")
+lines = Array[ExtResource("4_chycg")]([SubResource("Resource_o5irl")])
 
-[sub_resource type="Resource" id="Resource_o5irl"]
-script = ExtResource("2_moxby")
+[sub_resource type="Resource" id="Resource_sok1y"]
+script = ExtResource("2_h8vmf")
 type = 14
 seconds = 0.6
 strength = 2.0
 
-[sub_resource type="Resource" id="Resource_qbsao"]
-script = ExtResource("2_moxby")
+[sub_resource type="Resource" id="Resource_ntwfd"]
+script = ExtResource("2_h8vmf")
 type = 1
 actor = NodePath("Player")
 position = Vector2(232, 88)
 speed = 90.0
 
-[sub_resource type="Resource" id="Resource_sok1y"]
-script = ExtResource("2_moxby")
+[sub_resource type="Resource" id="Resource_r7oog"]
+script = ExtResource("2_h8vmf")
 type = 4
 
-[sub_resource type="Resource" id="Resource_ntwfd"]
-script = ExtResource("2_moxby")
+[sub_resource type="Resource" id="Resource_qsjhl"]
+script = ExtResource("2_h8vmf")
 type = 13
 id = &"back_door"
 text = "res://scenes/maps/prologue/vila_caldeira.tscn"
 
 [resource]
-script = ExtResource("1_p28iw")
+script = ExtResource("1_moxby")
 id = &"p9_farewell"
 once_flag = &"escaped"
-steps = Array[ExtResource("2_moxby")]([SubResource("Resource_vy07j"), SubResource("Resource_0xr8u"), SubResource("Resource_6c2tb"), SubResource("Resource_gpc4w"), SubResource("Resource_o5irl"), SubResource("Resource_qbsao"), SubResource("Resource_sok1y"), SubResource("Resource_ntwfd")])
+steps = Array[ExtResource("2_h8vmf")]([SubResource("Resource_3wvav"), SubResource("Resource_nv4hs"), SubResource("Resource_gpc4w"), SubResource("Resource_qbsao"), SubResource("Resource_sok1y"), SubResource("Resource_ntwfd"), SubResource("Resource_r7oog"), SubResource("Resource_qsjhl")])

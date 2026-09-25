@@ -1,121 +1,123 @@
 [gd_resource type="Resource" script_class="Cutscene" format=3]
 
-[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_v686k"]
-[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_p5inl"]
-[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_5jn13"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_n01ys"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_empire_a.mp3" id="5_0jnnf"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="6_k1ds3"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="7_qxk0p"]
-[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="8_sm1if"]
+[ext_resource type="Script" path="res://scripts/world/cutscene.gd" id="1_p5inl"]
+[ext_resource type="Script" path="res://scripts/world/cutscene_step.gd" id="2_5jn13"]
+[ext_resource type="Script" path="res://scripts/battle/combatant_data.gd" id="3_n01ys"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="4_0jnnf"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/bgm_empire_a.mp3" id="5_k1ds3"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="6_qxk0p"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="7_sm1if"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_eco_neutral.png" id="8_frak0"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="9_gxjs2"]
 
-[sub_resource type="Resource" id="Resource_frak0"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_crpb1"]
+script = ExtResource("2_5jn13")
 type = 4
 
-[sub_resource type="Resource" id="Resource_gxjs2"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_yibjp"]
+script = ExtResource("2_5jn13")
 type = 6
 id = &"slept"
 
-[sub_resource type="Resource" id="Resource_crpb1"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_atkyv"]
+script = ExtResource("2_5jn13")
 type = 18
 actor = NodePath("Player")
 position = Vector2(184, 88)
 
-[sub_resource type="Resource" id="Resource_yibjp"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_oxukj"]
+script = ExtResource("2_5jn13")
 type = 3
 seconds = 1.0
 
-[sub_resource type="Resource" id="Resource_atkyv"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_8kfow"]
+script = ExtResource("2_5jn13")
 type = 5
 
-[sub_resource type="Resource" id="Resource_oxukj"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_rbqn0"]
+script = ExtResource("2_5jn13")
 type = 14
 seconds = 1.6
 strength = 2.0
 
-[sub_resource type="Resource" id="Resource_8kfow"]
-script = ExtResource("2_p5inl")
-type = 9
-music = ExtResource("5_0jnnf")
-
-[sub_resource type="Resource" id="Resource_rbqn0"]
-script = ExtResource("4_n01ys")
-text = "Um ronco grave faz as janelas tremerem. Uma sombra enorme cobre a vila."
-
 [sub_resource type="Resource" id="Resource_1l5n7"]
-script = ExtResource("2_p5inl")
-lines = Array[ExtResource("4_n01ys")]([SubResource("Resource_rbqn0")])
+script = ExtResource("2_5jn13")
+type = 9
+music = ExtResource("5_k1ds3")
 
 [sub_resource type="Resource" id="Resource_jhy6p"]
-script = ExtResource("2_p5inl")
+script = ExtResource("4_0jnnf")
+text = "Um ronco grave faz as janelas tremerem. Uma sombra enorme cobre a vila."
+
+[sub_resource type="Resource" id="Resource_4e0st"]
+script = ExtResource("2_5jn13")
+lines = Array[ExtResource("4_0jnnf")]([SubResource("Resource_jhy6p")])
+
+[sub_resource type="Resource" id="Resource_15ohp"]
+script = ExtResource("2_5jn13")
 type = 1
 actor = NodePath("Pip")
 position = Vector2(120, 120)
 speed = 90.0
 
-[sub_resource type="Resource" id="Resource_4e0st"]
-script = ExtResource("4_n01ys")
+[sub_resource type="Resource" id="Resource_y42eo"]
+script = ExtResource("4_0jnnf")
 speaker = "Pip"
 text = "Kael! Os soldados tão revirando as casas atrás de um \"artefato\"! O Guarda Olavo tentou impedir e levaram ele!"
 
-[sub_resource type="Resource" id="Resource_15ohp"]
-script = ExtResource("4_n01ys")
+[sub_resource type="Resource" id="Resource_jy2m5"]
+script = ExtResource("4_0jnnf")
 speaker = "Mestre Gerd"
-portrait = ExtResource("7_qxk0p")
+portrait = ExtResource("7_sm1if")
 text = "...Soldados. Eu sabia que esse dia ia chegar."
 
-[sub_resource type="Resource" id="Resource_y42eo"]
-script = ExtResource("4_n01ys")
+[sub_resource type="Resource" id="Resource_d6817"]
+script = ExtResource("4_0jnnf")
 speaker = "Mestre Gerd"
-portrait = ExtResource("7_qxk0p")
+portrait = ExtResource("7_sm1if")
 text = "Fiquem aqui, os dois. Eu preciso buscar uma coisa. E você, Pip, pra casa. AGORA."
 
-[sub_resource type="Resource" id="Resource_jy2m5"]
-script = ExtResource("2_p5inl")
-lines = Array[ExtResource("4_n01ys")]([SubResource("Resource_4e0st"), SubResource("Resource_15ohp"), SubResource("Resource_y42eo")])
+[sub_resource type="Resource" id="Resource_vesnc"]
+script = ExtResource("2_5jn13")
+lines = Array[ExtResource("4_0jnnf")]([SubResource("Resource_y42eo"), SubResource("Resource_jy2m5"), SubResource("Resource_d6817")])
 
-[sub_resource type="Resource" id="Resource_d6817"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_m1wcm"]
+script = ExtResource("2_5jn13")
 type = 1
 actor = NodePath("GerdEvening")
 position = Vector2(120, 152)
 speed = 70.0
 
-[sub_resource type="Resource" id="Resource_vesnc"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_qajym"]
+script = ExtResource("2_5jn13")
 type = 1
 actor = NodePath("Pip")
 position = Vector2(120, 168)
 speed = 90.0
 
-[sub_resource type="Resource" id="Resource_m1wcm"]
-script = ExtResource("2_p5inl")
+[sub_resource type="Resource" id="Resource_7pvmh"]
+script = ExtResource("2_5jn13")
 type = 6
 id = &"gerd_out"
 
-[sub_resource type="Resource" id="Resource_qajym"]
-script = ExtResource("4_n01ys")
+[sub_resource type="Resource" id="Resource_47jq5"]
+script = ExtResource("4_0jnnf")
 speaker = "Eco"
+portrait = ExtResource("8_frak0")
 text = "Pergunta: \"fiquem aqui\" inclui olhar pela janela?"
 
-[sub_resource type="Resource" id="Resource_7pvmh"]
-script = ExtResource("4_n01ys")
+[sub_resource type="Resource" id="Resource_3t2qk"]
+script = ExtResource("4_0jnnf")
 speaker = "Kael"
-portrait = ExtResource("8_sm1if")
+portrait = ExtResource("9_gxjs2")
 text = "Não. Inclui ir até a praça. Vamos, Eco."
 
-[sub_resource type="Resource" id="Resource_47jq5"]
-script = ExtResource("2_p5inl")
-lines = Array[ExtResource("4_n01ys")]([SubResource("Resource_qajym"), SubResource("Resource_7pvmh")])
+[sub_resource type="Resource" id="Resource_64ql2"]
+script = ExtResource("2_5jn13")
+lines = Array[ExtResource("4_0jnnf")]([SubResource("Resource_47jq5"), SubResource("Resource_3t2qk")])
 
 [resource]
-script = ExtResource("1_v686k")
+script = ExtResource("1_p5inl")
 id = &"p8_morning"
 once_flag = &"empire_arrived"
-steps = Array[ExtResource("2_p5inl")]([SubResource("Resource_frak0"), SubResource("Resource_gxjs2"), SubResource("Resource_crpb1"), SubResource("Resource_yibjp"), SubResource("Resource_atkyv"), SubResource("Resource_oxukj"), SubResource("Resource_8kfow"), SubResource("Resource_1l5n7"), SubResource("Resource_jhy6p"), SubResource("Resource_jy2m5"), SubResource("Resource_d6817"), SubResource("Resource_vesnc"), SubResource("Resource_m1wcm"), SubResource("Resource_47jq5")])
+steps = Array[ExtResource("2_5jn13")]([SubResource("Resource_crpb1"), SubResource("Resource_yibjp"), SubResource("Resource_atkyv"), SubResource("Resource_oxukj"), SubResource("Resource_8kfow"), SubResource("Resource_rbqn0"), SubResource("Resource_1l5n7"), SubResource("Resource_4e0st"), SubResource("Resource_15ohp"), SubResource("Resource_vesnc"), SubResource("Resource_m1wcm"), SubResource("Resource_qajym"), SubResource("Resource_7pvmh"), SubResource("Resource_64ql2")])

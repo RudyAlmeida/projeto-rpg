@@ -1,20 +1,22 @@
 [gd_resource type="Resource" script_class="DialogueSet" format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_3p8np"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_aaylx"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_sqk23"]
-[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="4_2v3kt"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_branch.gd" id="1_aaylx"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="2_sqk23"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_choice.gd" id="3_2v3kt"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_eco_neutral.png" id="4_6deis"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_set.gd" id="5_rs6tk"]
 
-[sub_resource type="Resource" id="Resource_6deis"]
-script = ExtResource("2_aaylx")
+[sub_resource type="Resource" id="Resource_5jdi3"]
+script = ExtResource("2_sqk23")
 speaker = "Eco"
+portrait = ExtResource("4_6deis")
 text = "Observação: esta casa tem 214 parafusos. 3 estão soltos. Recomendo reparo."
 
-[sub_resource type="Resource" id="Resource_rs6tk"]
-script = ExtResource("1_3p8np")
-lines = Array[ExtResource("2_aaylx")]([SubResource("Resource_6deis")])
+[sub_resource type="Resource" id="Resource_2fs12"]
+script = ExtResource("1_aaylx")
+lines = Array[ExtResource("2_sqk23")]([SubResource("Resource_5jdi3")])
 
 [resource]
-script = ExtResource("4_2v3kt")
+script = ExtResource("5_rs6tk")
 id = &"p_eco_home"
-branches = Array[ExtResource("1_3p8np")]([SubResource("Resource_rs6tk")])
+branches = Array[ExtResource("1_aaylx")]([SubResource("Resource_2fs12")])

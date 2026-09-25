@@ -218,6 +218,7 @@ func _build_characters() -> void:
 		"timing_style": CombatantData.TimingStyle.HOLD, "perfect_bonus": CombatantData.PerfectBonus.STEAM})
 	_hero("eco", {"starting_equipment": [_items["leather_coat"]] as Array[ItemData],
 		"display_name": "Eco", "battle_sheet": load("res://assets/sprites/characters/eco/chr_eco_ref.png"),
+		"portrait": load(POR_ECO),
 		"idle_frame": 3, "mechanical": true,
 		"max_hp": 150, "max_mp": 25, "strength": 11, "weapon_power": 6, "magic": 8, "defense": 16, "spirit": 10,
 		"speed": 18, "luck": 5, "precision": 9, "evasion": 3,
@@ -363,6 +364,8 @@ func _build_trees() -> void:
 
 const POR_GERD := "res://assets/portraits/por_gerd_neutral.png"
 const POR_KAEL := "res://assets/portraits/por_kael_neutral.png"
+const POR_ECO := "res://assets/portraits/por_eco_neutral.png"
+const POR_VOSS := "res://assets/portraits/por_voss_neutral.png"
 
 
 func _line(speaker: String, text: String, portrait := "") -> DialogueLine:
@@ -718,7 +721,7 @@ func _build_prologue_story() -> void:
 		_branch(_lines([[G, "Vai dormir, garoto. A cama não vai se deitar sozinha.", POR_GERD]])),
 	])
 	_dialogue_set("p_eco_home", [
-		_branch(_lines([[EC, "Observação: esta casa tem 214 parafusos. 3 estão soltos. Recomendo reparo."]])),
+		_branch(_lines([[EC, "Observação: esta casa tem 214 parafusos. 3 estão soltos. Recomendo reparo.", POR_ECO]])),
 	])
 	_dialogue_set("p_tobias", [
 		_branch(_lines([
@@ -871,7 +874,7 @@ func _build_prologue_story() -> void:
 			[G, "Disse que isso aí deve valer uma fortuna. Vamos embora.", POR_GERD],
 			["???", "Designação: E-C-O. Diretiva: ...dado corrompido. Kael: presente. Diretiva parcialmente cumprida."],
 			[KA, "Eco. Tá bom, Eco. Você... vem com a gente?", POR_KAEL],
-			[EC, "Afirmativo. Pergunta: o que é \"a gente\"?"],
+			[EC, "Afirmativo. Pergunta: o que é \"a gente\"?", POR_ECO],
 			["", "Eco entrou no grupo!"],
 		]),
 		_step(ST.JOIN_PARTY, {"id": &"eco", "amount": 0}),
@@ -879,7 +882,7 @@ func _build_prologue_story() -> void:
 		_step(ST.SHAKE, {"seconds": 1.2, "strength": 5.0}),
 		_say([
 			["", "O pulso de Éter do despertar reativa algo enorme na sucata acima da câmara..."],
-			[EC, "Alerta. Máquina hostil. Nível de irritação: elevado."],
+			[EC, "Alerta. Máquina hostil. Nível de irritação: elevado.", POR_ECO],
 			[KA, "Ela tá com dor! Os braços tão travados... se eu soltar as garras, ela para!", POR_KAEL],
 			[TIP, "As garras protegem o núcleo: ele só recebe dano cheio depois que uma garra cai."],
 			[TIP, "Ressonância (Kael) desmonta inimigos mecânicos. E se a fornalha se abrir, o Proteger de Eco impede que alguém seja puxado."],
@@ -887,7 +890,7 @@ func _build_prologue_story() -> void:
 		_step(ST.BATTLE, {"enemies": parts, "music": load(MUSIC_BOSS)}),
 		_say([
 			[KA, "(Ela tá... quieta agora. Obrigada, ela disse. Eu acho.)", POR_KAEL],
-			[EC, "Observação: Kael conversa com máquinas desligadas. Registrando como comportamento normal."],
+			[EC, "Observação: Kael conversa com máquinas desligadas. Registrando como comportamento normal.", POR_ECO],
 			[G, "Pega a válvula e vamos pra casa. Esse lugar me dá arrepio.", POR_GERD],
 			["", "Kael encontrou: Válvula de Bronze e Lâmina-engrenagem!"],
 		]),
@@ -899,19 +902,19 @@ func _build_prologue_story() -> void:
 	])
 
 	# ----- Cena 7: jantar -----
-	var sad := _line(EC, "Registrando: \"triste\". Pedido de definição.")
+	var sad := _line(EC, "Registrando: \"triste\". Pedido de definição.", POR_ECO)
 	sad.choices = [
 		_story_choice("\"Triste é quando falta alguém na mesa.\"", {&"eco": 2},
 			_lines([["", "Gerd fica em silêncio e olha para a foto antiga na prateleira."]])),
 		_story_choice("\"Triste é sopa sem sal. Né, mestre?\"", {&"gerd": 1},
 			_lines([[G, "Hah! Hahaha! Engraçadinho. ...Passa o sal.", POR_GERD]])),
 		_story_choice("\"Eu te explico amanhã, Eco.\"", {},
-			_lines([[EC, "Amanhã. Registrado."]])),
+			_lines([[EC, "Amanhã. Registrado.", POR_ECO]])),
 	] as Array[DialogueChoice]
 	_cutscene("p7_dinner", "dinner_done", [
 		_step(ST.WAIT, {"seconds": 0.4}),
 		_say([
-			[EC, "Pergunta: por que humanos se sentam juntos para abastecer?"],
+			[EC, "Pergunta: por que humanos se sentam juntos para abastecer?", POR_ECO],
 			[G, "Porque comer sozinho é triste, lata velha.", POR_GERD],
 		]),
 		_step(ST.SAY, {"lines": [sad] as Array[DialogueLine]}),
@@ -945,7 +948,7 @@ func _build_prologue_story() -> void:
 		_step(ST.MOVE, {"actor": NodePath("Pip"), "position": _cell(7, 10), "speed": 90.0}),
 		_step(ST.SET_FLAG, {"id": &"gerd_out"}),
 		_say([
-			[EC, "Pergunta: \"fiquem aqui\" inclui olhar pela janela?"],
+			[EC, "Pergunta: \"fiquem aqui\" inclui olhar pela janela?", POR_ECO],
 			[KA, "Não. Inclui ir até a praça. Vamos, Eco.", POR_KAEL],
 		]),
 	])
@@ -956,15 +959,15 @@ func _build_prologue_story() -> void:
 		_step(ST.FACE, {"actor": NodePath("Player"), "facing": Player.Facing.LEFT}),
 		_step(ST.MOVE, {"actor": NodePath("Eco"), "position": _cell(31, 16), "speed": 60.0}),
 		_say([
-			["General Voss", "Uma máquina foi ativada no Ferro-Velho ontem. Os medidores de Brasaforte registraram o pulso daqui."],
-			["General Voss", "Entreguem-na, e ninguém se machuca."],
-			[EC, "Declaração: sou a máquina."],
+			["General Voss", "Uma máquina foi ativada no Ferro-Velho ontem. Os medidores de Brasaforte registraram o pulso daqui.", POR_VOSS],
+			["General Voss", "Entreguem-na, e ninguém se machuca.", POR_VOSS],
+			[EC, "Declaração: sou a máquina.", POR_ECO],
 			[KA, "Eco!", POR_KAEL],
-			["General Voss", "...Um aetheliano funcionando. Então o velho Brunor mentiu esse tempo todo. Peguem."],
+			["General Voss", "...Um aetheliano funcionando. Então o velho Brunor mentiu esse tempo todo. Peguem.", POR_VOSS],
 		]),
 		_step(ST.BATTLE, {"enemies": [soldier, _enemies["voss"], soldier] as Array[CombatantData],
 			"music": load(MUSIC_EMPIRE), "end_after_turns": {&"voss": 4}}),
-		_say([["General Voss", "Coragem. Falta de juízo, mas coragem. Algemas."]]),
+		_say([["General Voss", "Coragem. Falta de juízo, mas coragem. Algemas.", POR_VOSS]]),
 		_step(ST.FLASH, {"color": Color(1.0, 0.6, 0.25), "seconds": 0.6}),
 		_step(ST.SHAKE, {"seconds": 1.0, "strength": 6.0}),
 		_step(ST.TELEPORT, {"actor": NodePath("GerdSquare"), "position": _cell(29, 17), "facing": Player.Facing.UP}),
@@ -985,7 +988,7 @@ func _build_prologue_story() -> void:
 			[G, "Esses joelhos não correm mais, garoto. Mas esta oficina ainda sabe fazer barulho.", POR_GERD],
 			[G, "Vai pro norte. Pra floresta. E Kael...", POR_GERD],
 			[G, "...escuta ele. Ele sabe mais do que parece. Eu devia ter te contado tudo antes.", POR_GERD],
-			[EC, "Gerd Brunor. Pergunta: você vem \"amanhã\"?"],
+			[EC, "Gerd Brunor. Pergunta: você vem \"amanhã\"?", POR_ECO],
 			[G, "(sorri) ...Cuida dele, lata velha.", POR_GERD],
 		]),
 		_step(ST.MOVE, {"actor": NodePath("GerdFarewell"), "position": _cell(3, 4), "speed": 50.0}),
@@ -1002,7 +1005,7 @@ func _build_prologue_story() -> void:
 		_say([
 			["", "A oficina Brunor explode numa coluna de vapor e fogo."],
 			[KA, "MESTRE!", POR_KAEL],
-			[EC, "...Registrando: \"triste\"."],
+			[EC, "...Registrando: \"triste\".", POR_ECO],
 		]),
 		_step(ST.FADE_OUT),
 		_step(ST.TELEPORT, {"actor": NodePath("Player"), "position": _cell(24, 2), "facing": Player.Facing.DOWN}),
