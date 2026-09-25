@@ -96,7 +96,7 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '1.0 — Fase 0 concluída'],
+    ['Versão do documento', '1.1 — conversa com NPC'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
@@ -457,7 +457,7 @@ children.push(...phase(1, 'Protótipo técnico',
     ['Personagem controlável com animação de andar', 'Claude', '8 direções, corrida, ciclo de caminhada de 4 quadros × 3 direções (Codex com referência)', DONE],
     ['TileMap de teste com colisão', 'Claude', 'AsciiMap + tiles provisórios na paleta Velmora', DONE],
     ['Câmera seguindo o jogador com limites', 'Claude', 'Suavizada, presa às bordas do mapa', DONE],
-    ['Interação com NPC + caixa de diálogo simples', 'Claude', ''],
+    ['Interação com NPC + caixa de diálogo simples', 'Claude', 'Mestre Gerd no mapa; caixa com retrato, nome e texto letra por letra; fonte Pixelify Sans (OFL)', DONE],
     ['SceneManager com transições (fade)', 'Claude', ''],
     ['Inimigo visível no mapa que inicia batalha', 'Claude', ''],
     ['Batalha mínima: 3 heróis x 2 inimigos, atacar/defender', 'Claude', ''],
@@ -574,6 +574,10 @@ children.push(
     ['A-009', 'assets/audio/music/bgm_vila_caldeira_test_b.mp3', 'Música (reserva)', 'F0', DONE, 'Variação B (55 s), guardada para uso futuro'],
     ['A-010', 'assets/_source/chr_kael_walk_raw_v1.png', 'Referência (bruta)', 'F1', DONE, 'Caminhada do Kael; gerada pela ponte MCP com a referência oficial anexada'],
     ['A-011', 'assets/sprites/characters/kael/chr_kael_walk.png', 'Sprite', 'F1', DONE, 'Grade 3 × 4 de 64×64 (baixo, esquerda, cima)'],
+    ['A-012', 'assets/sprites/characters/gerd/npc_gerd_ref.png', 'Sprite', 'F1', DONE, 'Mestre Gerd, 4 poses (52 px, mais baixo que o Kael)'],
+    ['A-013', 'assets/portraits/por_kael_neutral.png', 'Retrato', 'F1', DONE, '64×64, gerado com a referência do Kael'],
+    ['A-014', 'assets/portraits/por_gerd_neutral.png', 'Retrato', 'F1', DONE, '64×64, gerado com a referência do Gerd'],
+    ['A-015', 'assets/fonts/PixelifySans.ttf', 'Fonte', 'F1', DONE, 'Google Fonts, licença OFL 1.1 (texto em assets/fonts/)'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -621,6 +625,7 @@ children.push(
     ['0.8', today, 'Referências oficiais do Eco e da Lyra (3 personagens no total); ponte MCP do Codex testada; Suno MCP conectado e token validado.'],
     ['0.9', today, 'Licença do áudio confirmada (conta paga); primeira música de teste (Vila Caldeira, 2 variações); TurnQueue e DamageFormula implementados com 25 testes novos.'],
     ['1.0', today, 'Fase 0 concluída: tema de Vila Caldeira aprovado (versão A; B guardada como reserva). CLAUDE.md criado. Início da Fase 1: Kael andando no mapa de teste com colisão e câmera; ciclo de caminhada; pixelize.mjs aceita grades (41 testes).'],
+    ['1.1', today, 'Conversa com NPC: Mestre Gerd no mapa de teste, retratos do Kael e do Gerd, caixa de diálogo com texto letra por letra, DialogueManager (autoload).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),

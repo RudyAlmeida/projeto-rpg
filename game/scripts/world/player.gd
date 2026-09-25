@@ -11,6 +11,7 @@ const FRAME_SIZE := 64
 const WALK_FRAMES := 4
 const WALK_FPS := 8.0
 const BOB_HEIGHT := 2.0
+const INTERACT_REACH := 20.0
 
 @export var walk_speed := 80.0
 @export var run_multiplier := 1.75
@@ -24,14 +25,18 @@ var _moving := false
 
 @onready var _sprite: Sprite2D = $Sprite
 @onready var _camera: Camera2D = $Camera
+@onready var _interact_ray: RayCast2D = $InteractRay
 
 
 func _ready() -> void:
+	_interact_ray.add_exception(self)
 	_update_frame()
 
 
 func _physics_process(delta: float) -> void:
-	var direction := Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+	var direction := Vector2.ZERO
+	if not DialogueManager.is_active:
+		direction = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 	var speed := walk_speed * (run_multiplier if Input.is_action_pressed(&"run") else 1.0)
 	velocity = direction * speed
 	move_and_slide()
@@ -42,7 +47,35 @@ func _physics_process(delta: float) -> void:
 		_anim_time += delta * (speed / walk_speed)
 	else:
 		_anim_time = 0.0
+	_interact_ray.target_position = facing_vector(facing) * INTERACT_REACH
 	_update_frame()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"confirm") and not DialogueManager.is_active and not DialogueManager.just_closed():
+		if try_interact():
+			get_viewport().set_input_as_handled()
+
+
+## Talks to / uses whatever is right in front of the player. Returns true if something reacted.
+func try_interact() -> bool:
+	_interact_ray.force_raycast_update()
+	var target := _interact_ray.get_collider()
+	if target and target.has_method(&"interact"):
+		target.interact(self)
+		return true
+	return false
+
+
+static func facing_vector(dir: Facing) -> Vector2:
+	match dir:
+		Facing.LEFT:
+			return Vector2.LEFT
+		Facing.UP:
+			return Vector2.UP
+		Facing.RIGHT:
+			return Vector2.RIGHT
+	return Vector2.DOWN
 
 
 ## Dominant axis wins; horizontal wins exact diagonals so side sprites show while strafing.

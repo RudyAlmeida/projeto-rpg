@@ -1,8 +1,37 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/test_map.gd" id="1_testmap"]
 [ext_resource type="Script" path="res://scripts/world/ascii_map.gd" id="2_ascii"]
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="4_npc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/characters/gerd/npc_gerd_ref.png" id="5_gerd"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_line.gd" id="6_line"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_gerd_neutral.png" id="7_por_gerd"]
+[ext_resource type="Texture2D" path="res://assets/portraits/por_kael_neutral.png" id="8_por_kael"]
+
+[sub_resource type="Resource" id="Line_gerd_1"]
+script = ExtResource("6_line")
+speaker = "Mestre Gerd"
+portrait = ExtResource("7_por_gerd")
+text = "Kael! Até que enfim. A caldeira da senhora Brisa voltou a assobiar."
+
+[sub_resource type="Resource" id="Line_kael_1"]
+script = ExtResource("6_line")
+speaker = "Kael"
+portrait = ExtResource("8_por_kael")
+text = "De novo? Mas eu troquei a válvula ontem, mestre!"
+
+[sub_resource type="Resource" id="Line_gerd_2"]
+script = ExtResource("6_line")
+speaker = "Mestre Gerd"
+portrait = ExtResource("7_por_gerd")
+text = "Hmpf. As máquinas não mentem, garoto. Se ela assobia, é porque quer dizer alguma coisa."
+
+[sub_resource type="Resource" id="Line_gerd_3"]
+script = ExtResource("6_line")
+speaker = "Mestre Gerd"
+portrait = ExtResource("7_por_gerd")
+text = "E fique longe do Ferro-Velho do Sul. Ouvi barulhos estranhos por lá esta noite..."
 
 [node name="TestMap" type="Node2D"]
 y_sort_enabled = true
@@ -38,6 +67,12 @@ layout = "################################################
 #.......~~~~~..................##,###..........#
 #..............................................#
 ################################################"
+
+[node name="Gerd" parent="." instance=ExtResource("4_npc")]
+position = Vector2(424, 232)
+idle_sheet = ExtResource("5_gerd")
+facing = 1
+dialogue = Array[ExtResource("6_line")]([SubResource("Line_gerd_1"), SubResource("Line_kael_1"), SubResource("Line_gerd_2"), SubResource("Line_gerd_3")])
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
 

@@ -17,6 +17,11 @@ run/main_scene="res://scenes/maps/test_map.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DialogueManager="*res://autoload/dialogue_manager.gd"
+SceneManager="*res://autoload/scene_manager.gd"
+
 [display]
 
 window/size/viewport_width=640

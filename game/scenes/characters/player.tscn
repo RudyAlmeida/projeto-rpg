@@ -23,6 +23,10 @@ offset = Vector2(0, -32)
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_feet")
 
+[node name="InteractRay" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+target_position = Vector2(0, 20)
+
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, -24)
 position_smoothing_enabled = true
