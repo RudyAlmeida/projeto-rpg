@@ -96,14 +96,14 @@ children.push(
 children.push(table(
   ['Campo', 'Valor'],
   [
-    ['Versão do documento', '0.9 — primeira música e núcleo do combate'],
+    ['Versão do documento', '1.0 — Fase 0 concluída'],
     ['Data de criação', created],
     ['Última atualização', today],
     ['Pasta do projeto', 'D:\\Projeto RPG'],
     ['Repositório', 'github.com/RudyAlmeida/projeto-rpg'],
     ['Engine', 'D:\\Godot\\Godot_v4.7.2-stable_win64.exe'],
-    ['Fase atual', 'Fase 0 — Pré-produção'],
-    ['Status geral', 'Em planejamento'],
+    ['Fase atual', 'Fase 1 — Protótipo técnico'],
+    ['Status geral', 'Fase 0 concluída em 24/09/2026'],
   ],
   [35, 65],
 ));
@@ -415,8 +415,8 @@ children.push(
 children.push(
   H1('10. Fases do projeto — controle'),
   table(['Fase', 'Nome', 'Resultado', 'Status'], [
-    ['0', 'Pré-produção', 'Decisões, documentos de design, guia de estilo, projeto Godot criado', '◐ Em andamento'],
-    ['1', 'Protótipo técnico', 'Andar em um mapa, falar com NPC, entrar em batalha, vencer', '☐ Pendente'],
+    ['0', 'Pré-produção', 'Decisões, documentos de design, guia de estilo, projeto Godot criado', '☑ Concluída'],
+    ['1', 'Protótipo técnico', 'Andar em um mapa, falar com NPC, entrar em batalha, vencer', '◐ Em andamento'],
     ['2', 'Sistemas centrais', 'Todos os sistemas principais funcionando com conteúdo de teste', '☐ Pendente'],
     ['3', 'Vertical slice', '30–60 min jogáveis com qualidade final', '☐ Pendente'],
     ['4', 'Produção de conteúdo', 'Jogo completo do início ao fim (Alpha)', '☐ Pendente'],
@@ -454,9 +454,9 @@ children.push(...phase(1, 'Protótipo técnico',
   'Provar o ciclo básico do jogo o mais cedo possível, com arte provisória.',
   'Build jogável: explorar um mapa, conversar, iniciar batalha, vencer/perder, voltar ao mapa.',
   [
-    ['Personagem controlável com animação de andar', 'Claude', ''],
-    ['TileMap de teste com colisão', 'Claude', ''],
-    ['Câmera seguindo o jogador com limites', 'Claude', ''],
+    ['Personagem controlável com animação de andar', 'Claude', 'Movimento em 8 direções e corrida prontos; animação provisória (balanço) até existirem quadros de caminhada', WIP],
+    ['TileMap de teste com colisão', 'Claude', 'AsciiMap + tiles provisórios na paleta Velmora', DONE],
+    ['Câmera seguindo o jogador com limites', 'Claude', 'Suavizada, presa às bordas do mapa', DONE],
     ['Interação com NPC + caixa de diálogo simples', 'Claude', ''],
     ['SceneManager com transições (fade)', 'Claude', ''],
     ['Inimigo visível no mapa que inicia batalha', 'Claude', ''],
@@ -570,8 +570,8 @@ children.push(
     ['A-005', 'assets/sprites/characters/eco/chr_eco_ref.png', 'Sprite', 'F0', DONE, '4 quadros 64×64; pedra levemente pêssego'],
     ['A-006', 'assets/_source/chr_lyra_ref_raw_v1.png', 'Referência (bruta)', 'F0', DONE, 'Lyra; gerada pelo gen_image.ps1'],
     ['A-007', 'assets/sprites/characters/lyra/chr_lyra_ref.png', 'Sprite', 'F0', DONE, '4 quadros 64×64'],
-    ['A-008', 'assets/audio/music/bgm_vila_caldeira_test_a.mp3', 'Música (teste)', 'F0', WIP, 'Suno chirp-v5-5, 60 s; aguardando avaliação do Diretor'],
-    ['A-009', 'assets/audio/music/bgm_vila_caldeira_test_b.mp3', 'Música (teste)', 'F0', WIP, 'Variação B, 55 s'],
+    ['A-008', 'assets/audio/music/bgm_vila_caldeira_test_a.mp3', 'Música', 'F0', DONE, 'Aprovada: tema de Vila Caldeira (Suno chirp-v5-5, 60 s)'],
+    ['A-009', 'assets/audio/music/bgm_vila_caldeira_test_b.mp3', 'Música (reserva)', 'F0', DONE, 'Variação B (55 s), guardada para uso futuro'],
   ], [9, 30, 14, 9, 15, 23]),
 );
 
@@ -618,14 +618,14 @@ children.push(
     ['0.7', today, 'GDD do combate aprovado (v1.0); input map com 12 ações (teclado + gamepad); GUT 9.7.1 instalado com testes rodando.'],
     ['0.8', today, 'Referências oficiais do Eco e da Lyra (3 personagens no total); ponte MCP do Codex testada; Suno MCP conectado e token validado.'],
     ['0.9', today, 'Licença do áudio confirmada (conta paga); primeira música de teste (Vila Caldeira, 2 variações); TurnQueue e DamageFormula implementados com 25 testes novos.'],
+    ['1.0', today, 'Fase 0 concluída: tema de Vila Caldeira aprovado (versão A; B guardada como reserva). CLAUDE.md criado. Início da Fase 1: Kael andando no mapa de teste com colisão e câmera (39 testes).'],
   ], [12, 18, 70]),
   gap(),
   H2('Próximos passos'),
-  N('Detalhar a história de O Coração de Éter: protagonista, grupo principal, antagonista e estrutura em atos.', 'next'),
-  N('Criar o Guia de Estilo: paleta fixa, tamanhos de sprite, prompt-base steampunk.', 'next'),
-  N('Escrever o GDD do combate híbrido (fórmulas, fila CTB, janelas de timing).', 'next'),
-  N('Configurar input map e framework de testes; iniciar a Fase 1.', 'next'),
-  N('Escolher a ferramenta de IA de áudio.', 'next'),
+  N('Fase 1: Kael andando num mapa de teste com colisão e câmera (F1.01–F1.03).', 'next'),
+  N('Fase 1: conversa com NPC e transições de cena (F1.04–F1.05).', 'next'),
+  N('Fase 1: inimigo no mapa, batalha mínima com fila CTB e timing, vitória/derrota (F1.06–F1.10).', 'next'),
+  N('Playtest do protótipo com o Diretor (F1.12).', 'next'),
 );
 
 // ---------- document ----------

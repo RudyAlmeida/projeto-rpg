@@ -71,7 +71,8 @@ cd tools/docs; node build_planning.js "D:\Projeto RPG\docs\Planejamento_Projeto_
   - `scripts/battle/combat_balance.gd` (`CombatBalance`) — every tunable number, defaults = approved GDD. Change numbers here, not in formulas.
 - Combat is **hybrid CTB + timed button presses** (Perfect ×1.3 / Good ×1.1 attack; ×0.5 / ×0.75 damage taken on defense; missing never penalises), fought **on the field map** (no separate battle screen), 3 active + reserves.
 - Input actions (keyboard + gamepad, device -1) are defined in `game/tools/setup_input_map.gd`; `confirm` and `action_timing` share keys by default but stay separate for remapping.
-- `scenes/main/main.tscn` is a temporary asset-preview scene (character sheets + test music), not the real game entry point.
+- Main scene is `scenes/maps/test_map.tscn` (Phase 1 prototype: `AsciiMap` builds a TileMapLayer + collision from a text layout, `Player` walks with placeholder frames from the reference sheet). `scenes/main/main.tscn` is only an asset-preview scene (character sheets + test music).
+- Known engine quirk: any scene that played an MP3 prints "2 ObjectDB instances were leaked at exit" on quit (reproduced with a minimal probe even after stop()+free). Harmless; not our bug.
 - GDScript: static typing everywhere, `class_name` for reusable classes, signals named in past tense. Pixel-art rendering: nearest filter, integer scaling, snap to pixel.
 
 ## Current status
