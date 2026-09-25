@@ -47,3 +47,15 @@ func test_every_row_of_test_map_has_same_width() -> void:
 	assert_gt(rows.size(), 10)
 	for row in rows:
 		assert_eq(row.length(), rows[0].length(), "row: %s" % row)
+
+
+func test_big_props_are_double_size_sprites_on_a_solid_cell() -> void:
+	var village := AsciiMap.new()
+	village.legend = "vila"
+	village.layout = "....\n.x..\n.f.."
+	add_child_autofree(village)
+	assert_eq(village.prop_count(), 1, "the crate is a big prop, the fence stays a tile")
+	assert_true(village.is_solid_at(Vector2i(1, 1)))
+	var crate: Sprite2D = village.get_node("Props").get_child(0)
+	assert_eq(crate.scale, Vector2(2, 2))
+	assert_eq(crate.position, Vector2(24, 32), "stands on the bottom edge of its cell")

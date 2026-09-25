@@ -5,7 +5,9 @@ extends RefCounted
 ##
 ## Entry keys: "tile" (atlas cell), "solid", and "decor": true for props drawn on a second
 ## layer over the ground of the nearest non-decor symbol on the same row (left first).
-## "spawn": true marks the default player spawn.
+## "spawn": true marks the default player spawn. "big": true props are drawn at 2× as sprites
+## standing on their cell (chests, barrels, lamps, trees...), so they read well next to the
+## 56 px characters; tiling pieces (fences, pipes, giant gears) stay at tile size.
 
 const PLACEHOLDER := {
 	"texture": "res://assets/tilesets/til_placeholder.png",
@@ -58,22 +60,24 @@ const VILA := {
 		"|": {"tile": Vector2i(6, 3), "solid": true, "decor": true},
 		"L": {"tile": Vector2i(7, 3), "solid": true, "decor": true},
 		# props
-		"x": {"tile": Vector2i(0, 4), "solid": true, "decor": true},
-		"o": {"tile": Vector2i(1, 4), "solid": true, "decor": true},
-		"g": {"tile": Vector2i(2, 4), "solid": true, "decor": true},
-		"l": {"tile": Vector2i(3, 4), "solid": true, "decor": true},
-		"k": {"tile": Vector2i(4, 4), "solid": true, "decor": true},
-		"v": {"tile": Vector2i(5, 4), "solid": true, "decor": true},
-		"n": {"tile": Vector2i(6, 4), "solid": true, "decor": true},
-		"m": {"tile": Vector2i(7, 4), "solid": true, "decor": true},
-		"t": {"tile": Vector2i(0, 5), "solid": true, "decor": true},
-		"B": {"tile": Vector2i(1, 5), "solid": true, "decor": true},
-		"c": {"tile": Vector2i(2, 5), "solid": true, "decor": true},
-		"K": {"tile": Vector2i(3, 5), "solid": true, "decor": true},
-		"S": {"tile": Vector2i(4, 5), "solid": true, "decor": true},
-		"w": {"tile": Vector2i(5, 5), "solid": true, "decor": true},
-		"T": {"tile": Vector2i(6, 5), "solid": true, "decor": true},
+		"x": {"tile": Vector2i(0, 4), "solid": true, "decor": true, "big": true},
+		"o": {"tile": Vector2i(1, 4), "solid": true, "decor": true, "big": true},
+		"g": {"tile": Vector2i(2, 4), "solid": true, "decor": true, "big": true},
+		"l": {"tile": Vector2i(3, 4), "solid": true, "decor": true, "big": true},
+		"k": {"tile": Vector2i(4, 4), "solid": true, "decor": true, "big": true},
+		"v": {"tile": Vector2i(5, 4), "solid": true, "decor": true, "big": true},
+		"n": {"tile": Vector2i(6, 4), "solid": true, "decor": true, "big": true},
+		"m": {"tile": Vector2i(7, 4), "solid": true, "decor": true, "big": true},
+		"t": {"tile": Vector2i(0, 5), "solid": true, "decor": true, "big": true},
+		"B": {"tile": Vector2i(1, 5), "solid": true, "decor": true, "big": true},
+		"c": {"tile": Vector2i(2, 5), "solid": true, "decor": true, "big": true},
+		"K": {"tile": Vector2i(3, 5), "solid": true, "decor": true, "big": true},
+		"S": {"tile": Vector2i(4, 5), "solid": true, "decor": true, "big": true},
+		"w": {"tile": Vector2i(5, 5), "solid": true, "decor": true, "big": true},
+		"T": {"tile": Vector2i(6, 5), "solid": true, "decor": true, "big": true},
 		"Y": {"tile": Vector2i(7, 5), "solid": true, "decor": true},
+		# small crate for counters and tables (a row of big crates would overlap)
+		"q": {"tile": Vector2i(0, 4), "solid": true, "decor": true},
 		"P": {"decor": true, "spawn": true},
 	},
 }
@@ -103,9 +107,9 @@ const JUNKYARD := {
 		# machinery
 		"c": {"tile": Vector2i(0, 2), "solid": true},
 		"e": {"tile": Vector2i(1, 2), "solid": true},
-		"X": {"tile": Vector2i(2, 2), "solid": true, "decor": true},
-		"k": {"tile": Vector2i(5, 2), "solid": true, "decor": true},
-		"h": {"tile": Vector2i(6, 2), "solid": true, "decor": true},
+		"X": {"tile": Vector2i(2, 2), "solid": true, "decor": true, "big": true},
+		"k": {"tile": Vector2i(5, 2), "solid": true, "decor": true, "big": true},
+		"h": {"tile": Vector2i(6, 2), "solid": true, "decor": true, "big": true},
 		"v": {"tile": Vector2i(7, 2), "decor": true},
 		# giant gear (2×2) and pipes
 		"1": {"tile": Vector2i(0, 3), "solid": true, "decor": true},
@@ -116,19 +120,19 @@ const JUNKYARD := {
 		"|": {"tile": Vector2i(5, 3), "solid": true, "decor": true},
 		"L": {"tile": Vector2i(6, 3), "solid": true, "decor": true},
 		# props
-		"t": {"tile": Vector2i(0, 4), "solid": true, "decor": true},
-		"W": {"tile": Vector2i(1, 4), "solid": true, "decor": true},
-		"g": {"tile": Vector2i(2, 4), "solid": true, "decor": true},
-		"b": {"tile": Vector2i(3, 4), "solid": true, "decor": true},
-		"x": {"tile": Vector2i(4, 4), "solid": true, "decor": true},
-		"K": {"tile": Vector2i(7, 4), "solid": true, "decor": true},
-		"a": {"tile": Vector2i(0, 5), "solid": true, "decor": true},
+		"t": {"tile": Vector2i(0, 4), "solid": true, "decor": true, "big": true},
+		"W": {"tile": Vector2i(1, 4), "solid": true, "decor": true, "big": true},
+		"g": {"tile": Vector2i(2, 4), "solid": true, "decor": true, "big": true},
+		"b": {"tile": Vector2i(3, 4), "solid": true, "decor": true, "big": true},
+		"x": {"tile": Vector2i(4, 4), "solid": true, "decor": true, "big": true},
+		"K": {"tile": Vector2i(7, 4), "solid": true, "decor": true, "big": true},
+		"a": {"tile": Vector2i(0, 5), "solid": true, "decor": true, "big": true},
 		"n": {"tile": Vector2i(1, 5), "decor": true},
-		"l": {"tile": Vector2i(2, 5), "solid": true, "decor": true},
-		"!": {"tile": Vector2i(3, 5), "solid": true, "decor": true},
+		"l": {"tile": Vector2i(2, 5), "solid": true, "decor": true, "big": true},
+		"!": {"tile": Vector2i(3, 5), "solid": true, "decor": true, "big": true},
 		"y": {"tile": Vector2i(4, 5), "decor": true},
 		"j": {"tile": Vector2i(5, 5), "decor": true},
-		"i": {"tile": Vector2i(6, 5), "solid": true, "decor": true},
+		"i": {"tile": Vector2i(6, 5), "solid": true, "decor": true, "big": true},
 		"O": {"tile": Vector2i(7, 5), "decor": true},
 		"P": {"decor": true, "spawn": true},
 	},

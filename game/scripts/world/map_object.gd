@@ -29,6 +29,9 @@ enum Kind { INSPECT, CHEST, SAVE_POINT, LEVER, BLOCK }
 @export var hide_if_flag: StringName
 
 const TILE := 16
+## Drawn at double size so chests, save points and levers read well next to the 56 px
+## characters; the sprite stands on the bottom of its cell and grows upwards.
+const SCALE := 2.0
 
 var _sprite: Sprite2D
 var _shape: CollisionShape2D
@@ -38,6 +41,8 @@ func _ready() -> void:
 	_sprite = Sprite2D.new()
 	_sprite.texture = texture
 	_sprite.region_enabled = true
+	_sprite.scale = Vector2(SCALE, SCALE)
+	_sprite.position = Vector2(0, TILE / 2.0 - TILE * SCALE / 2.0)
 	add_child(_sprite)
 	_shape = CollisionShape2D.new()
 	var rect := RectangleShape2D.new()

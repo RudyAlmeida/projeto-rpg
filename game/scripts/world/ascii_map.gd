@@ -9,6 +9,8 @@ extends TileMapLayer
 ## "P" / "p" player spawn on grass / floor.
 
 const TILE_SIZE := 16
+## "big" props are drawn at this scale (see TileLegends).
+const PROP_SCALE := 2.0
 
 ## TileLegends name: "placeholder", "vila" or "junkyard".
 @export var legend := "placeholder"
@@ -18,6 +20,9 @@ const TILE_SIZE := 16
 var spawn_position := Vector2.ZERO
 
 var _decor: TileMapLayer
+## Big props: 2× sprites, y-sorted with the player (added next to the map when the parent
+## y-sorts, so the player can walk behind a lamp or a tree).
+var _props: Node2D
 var _solid := {}  # Vector2i -> true
 var _symbols := {}
 
@@ -61,6 +66,8 @@ func build(text: String) -> void:
 	clear()
 	_decor.clear()
 	_solid.clear()
+	_reset_props()
+	var texture: Texture2D = tile_set.get_source(0).texture
 	var rows := text.strip_edges().split("\n")
 	for y in rows.size():
 		var row := rows[y].strip_edges(false, true)
@@ -74,7 +81,9 @@ func build(text: String) -> void:
 				var ground := _ground_tile(row, x)
 				if ground.x >= 0:
 					set_cell(cell, 0, ground)
-				if entry.has("tile"):
+				if entry.has("tile") and entry.get("big", false):
+					_add_prop(texture, entry["tile"], cell)
+				elif entry.has("tile"):
 					_decor.set_cell(cell, 0, entry["tile"])
 			else:
 				set_cell(cell, 0, entry["tile"])
@@ -82,6 +91,38 @@ func build(text: String) -> void:
 				_solid[cell] = true
 			if entry.get("spawn", false):
 				spawn_position = map_to_local(cell)
+
+
+func _reset_props() -> void:
+	if _props and is_instance_valid(_props):
+		for child in _props.get_children():
+			child.queue_free()
+		return
+	_props = Node2D.new()
+	_props.name = "Props"
+	_props.y_sort_enabled = true
+	var parent := get_parent() as CanvasItem
+	if parent and parent.y_sort_enabled:
+		parent.add_child.call_deferred(_props)
+	else:
+		add_child(_props)
+
+
+## A big prop standing on the bottom edge of its cell, growing upwards.
+func _add_prop(texture: Texture2D, tile: Vector2i, cell: Vector2i) -> void:
+	var sprite := Sprite2D.new()
+	sprite.texture = texture
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(tile * TILE_SIZE, Vector2(TILE_SIZE, TILE_SIZE))
+	sprite.scale = Vector2(PROP_SCALE, PROP_SCALE)
+	sprite.offset = Vector2(0, -TILE_SIZE / 2.0)
+	sprite.position = Vector2(cell.x * TILE_SIZE + TILE_SIZE / 2.0, (cell.y + 1) * TILE_SIZE)
+	_props.add_child(sprite)
+
+
+## Number of big props (tests).
+func prop_count() -> int:
+	return _props.get_child_count() if _props else 0
 
 
 ## Ground under a prop: the nearest walkable ground symbol on the row (left first, then

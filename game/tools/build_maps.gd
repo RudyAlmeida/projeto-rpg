@@ -292,7 +292,7 @@ const VOSS_SHEET := "res://assets/sprites/characters/voss/chr_voss_map.png"
 func _oficina() -> void:
 	_room(16, 11, "#", "_", 7, [2, 7, 12])
 	_cell_set(15, 5, "D")  # back door
-	_put("5,2:K 1,9:o 14,9:x 1,2:c 14,2:g 8,6:x 9,6:x")
+	_put("5,2:K 1,9:o 14,9:x 1,2:c 14,2:g 8,6:q 9,6:q")
 	_begin("Oficina", "vila", MUSIC_VILA)
 	# New game (title screen): Kael alone, a little money and two potions.
 	_root.party = [load("res://data/characters/kael.tres")] as Array[CombatantData]
@@ -343,7 +343,7 @@ func _oficina() -> void:
 
 func _loja() -> void:
 	_room(12, 9, "H", "_", 6, [2, 9])
-	_put("4,4:x 5,4:x 7,4:x 8,4:x 1,2:o 10,2:o 1,7:g 10,7:c")
+	_put("4,4:q 5,4:q 7,4:q 8,4:q 1,2:o 10,2:o 1,7:g 10,7:c")
 	_begin("Loja", "vila", MUSIC_VILA)
 	_npc("Tobias", Vector2(6, 3), VILLAGERS, 0, F.DOWN, {"display_name": "Engrenagem Dourada",
 		"dialogue_set": _dialogue("p_tobias"), "role": NPC.Role.SHOP,
@@ -356,7 +356,7 @@ func _loja() -> void:
 
 func _estalagem() -> void:
 	_room(14, 10, "#", "=", 7, [2, 5, 9, 12])
-	_put("5,4:x 6,4:x 8,4:x 9,4:x 2,6:B 11,6:B 2,8:v 11,8:v 1,2:o")
+	_put("5,4:q 6,4:q 8,4:q 9,4:q 2,6:B 11,6:B 2,8:v 11,8:v 1,2:o")
 	_begin("Estalagem", "vila", MUSIC_VILA)
 	_npc("Berta", Vector2(7, 3), VILLAGERS, 1, F.DOWN, {"display_name": "Dona Berta",
 		"dialogue_set": _dialogue("p_berta"), "role": NPC.Role.INN, "inn_price": 20})
@@ -367,7 +367,7 @@ func _estalagem() -> void:
 
 func _relojoaria() -> void:
 	_room(10, 8, "H", "_", 5, [2, 7])
-	_put("1,2:g 8,2:g 3,4:x 4,4:x 6,4:x 1,6:K")
+	_put("1,2:g 8,2:g 3,4:q 4,4:q 6,4:q 1,6:K")
 	_begin("Relojoaria", "vila", MUSIC_VILA)
 	_npc("Anselmo", Vector2(5, 3), VILLAGERS2, 3, F.DOWN, {"display_name": "Sr. Anselmo",
 		"dialogue_set": _dialogue("p_anselmo")})
